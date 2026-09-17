@@ -18,10 +18,26 @@ const barlowCondensed = Barlow_Condensed({
   display: "swap",
 });
 
+const title = "SSS Wheels & Tyres | Australian Trade Wheel Supply";
+const description =
+  "SSS Wheels & Tyres supplies the SSS D-Locker and SSS D-Hole wheels to Australian trade accounts — panel shops, workshops, fleets and resellers. Apply for a dealer account or find your fitment.";
+
 export const metadata: Metadata = {
-  title: "SSS Wheels & Tyres | Australian Trade Wheel Supply",
-  description:
-    "SSS Wheels & Tyres supplies the SSS D-Locker and SSS D-Hole wheels to Australian trade accounts — panel shops, workshops, fleets and resellers. Apply for a dealer account or find your fitment.",
+  metadataBase: new URL("https://www.ssstyres.com.au"),
+  title: {
+    default: title,
+    template: "%s",
+  },
+  description,
+  openGraph: {
+    title,
+    description,
+    url: "/",
+    siteName: "SSS Wheels & Tyres",
+    images: [{ url: "/assets/hero.png", width: 1881, height: 836 }],
+    locale: "en_AU",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

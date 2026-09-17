@@ -8,12 +8,27 @@ import styles from "./SiteHeader.module.css";
 
 type Menu = "wheels" | "more" | null;
 
+// Touchscreens (and touch-emulated browsers) synthesize mouseenter/mouseleave
+// around a tap, which fights with hover-to-open and closes the dropdown
+// before its links can be tapped. Only wire up hover on devices that report
+// real hover support — click-to-toggle still works everywhere.
+const supportsHover = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
 export default function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggle = (m: Exclude<Menu, null>) =>
     setMenu((cur) => (cur === m ? null : m));
+
+  const hoverOpen = (m: Exclude<Menu, null>) => () => {
+    if (supportsHover()) setMenu(m);
+  };
+  const hoverClose = () => {
+    if (supportsHover()) setMenu(null);
+  };
 
   return (
     <header className={styles.wrap}>
@@ -41,11 +56,21 @@ export default function SiteHeader() {
           />
         </Link>
 
-        <nav className={`${styles.nav} ${mobileOpen ? styles.open : ""}`}>
+        <nav
+          className={`${styles.nav} ${mobileOpen ? styles.open : ""}`}
+          onClick={(e) => {
+            // Close the mobile menu on an actual navigation, but not when
+            // tapping the Wheels/More toggle buttons (which aren't links).
+            if ((e.target as HTMLElement).closest("a")) {
+              setMobileOpen(false);
+              setMenu(null);
+            }
+          }}
+        >
           <div
             className={styles.navMenu}
-            onMouseEnter={() => setMenu("wheels")}
-            onMouseLeave={() => setMenu(null)}
+            onMouseEnter={hoverOpen("wheels")}
+            onMouseLeave={hoverClose}
           >
             <button
               type="button"
@@ -90,8 +115,8 @@ export default function SiteHeader() {
 
           <div
             className={styles.navMenu}
-            onMouseEnter={() => setMenu("more")}
-            onMouseLeave={() => setMenu(null)}
+            onMouseEnter={hoverOpen("more")}
+            onMouseLeave={hoverClose}
           >
             <button
               type="button"
