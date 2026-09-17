@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}</style>
+</helmet>
+<div data-screen-label="Types of wheels" style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="SiteHeader" hint-size="100%,110px" style="position:sticky;top:0;z-index:50"></dc-import>
+  <section style="background:#0A0A0A;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-60px;width:220px;height:140%;background:#D80009;transform:skewX(-18deg);pointer-events:none"></div>
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(39px,4.3vw,76px) clamp(20px,3vw,56px);position:relative;width:100%;box-sizing:border-box">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#BDBDBD;margin-bottom:10px">Know your wheels</div>
+      <h1 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;text-transform:uppercase;margin:0 0 14px">Types of wheels, explained</h1>
+      <p style="font-size:17px;line-height:1.6;color:#CFCFCF;max-width:620px;margin:0">Steel or alloy? Beadlock or simulated? Here's what each type is built for, what it weighs up, and which vehicles it suits — so you order the right wheel first time.</p>
+    </div>
+  </section>
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(17px,1.8vw,32px) clamp(20px,3vw,56px) clamp(67px,7.4vw,130px);width:100%;box-sizing:border-box;flex:1">
+    <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+      <div style="{{ c.rowStyle }}">
+        <div style="{{ c.imgWrapStyle }}">
+          <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="SSS {{ c.name }} wheel" style="{{ c.imgStyle }}"></div></sc-if>
+          <sc-if value="{{ c.noImg }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0"><image-slot id="types-{{ c.id }}" shape="rect" fit="contain" placeholder="{{ c.name }} wheel photo"></image-slot></div></sc-if>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px"><span style="font-family:Barlow,sans-serif;font-weight:800;font-size:18px;color:#fff;background:#D80009;padding:4px 12px;border-radius:999px">{{ c.num }}</span><span style="font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7A7A7A">SSS {{ c.name }} Series</span></div>
+          <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(30px,3.6vw,42px);line-height:1;text-transform:uppercase;margin:0 0 6px">{{ c.name }} wheels</h2>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;color:#D80009;text-transform:uppercase;letter-spacing:.04em;margin-bottom:14px">{{ c.tag }}</div>
+          <p style="font-size:16px;line-height:1.65;color:#444;margin:0 0 18px;max-width:520px">{{ c.blurb }}</p>
+          <div style="display:grid;gap:9px;margin-bottom:24px">
+            <sc-for list="{{ c.bullets }}" as="b" hint-placeholder-count="3"><div style="display:flex;gap:10px;align-items:center;font-weight:600;font-size:15px"><span style="width:9px;height:16px;background:#D80009;transform:skewX(-18deg);flex:none"></span>{{ b }}</div></sc-for>
+          </div>
+          <a href="Wheels.dc.html?cat={{ c.id }}" style="display:inline-flex;align-items:center;background:#0E0E0E;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.07em;text-transform:uppercase;padding:0 24px;height:46px;border-radius:999px" style-hover="background:#D80009;color:#fff">Browse {{ c.name }} range</a>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,480px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() {
+    import(new URL('wheels-data.js', document.baseURI).href).then(d => this.setState({ d }));
+  }
+  renderVals() {
+    const { d } = this.state;
+    if (!d) return { cats: [] };
+    const cats = d.CATEGORIES.map((c, i) => ({
+      ...c, num: String(i + 1).padStart(2, '0'), noImg: !c.img,
+      imgStyle: c.img ? "position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;background-image:url('" + c.img + "')" : '',
+      rowStyle: 'display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;padding:52px 0;border-bottom:1px solid #ECECEC',
+      imgWrapStyle: 'position:relative;aspect-ratio:1;max-width:440px;width:100%;margin:0 auto;background:#F7F7F7;' + (i % 2 ? 'order:2' : 'order:0')
+    }));
+    return { cats };
+  }
+}
+</script>
+</body>
+</html>

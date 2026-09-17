@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}</style>
+</helmet>
+<div data-screen-label="About us" style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="SiteHeader" hint-size="100%,110px" style="position:sticky;top:0;z-index:50"></dc-import>
+  <section style="background:#0A0A0A;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-60px;width:220px;height:140%;background:#D80009;transform:skewX(-18deg);pointer-events:none"></div>
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(39px,4.3vw,76px) clamp(20px,3vw,56px);position:relative;width:100%;box-sizing:border-box">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#BDBDBD;margin-bottom:10px">About us</div>
+      <h1 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;text-transform:uppercase;margin:0 0 14px">Ten years of keeping the trade rolling</h1>
+      <p style="font-size:17px;line-height:1.6;color:#CFCFCF;max-width:640px;margin:0">SSS Wheels &amp; Tyres started as a two-person operation supplying tyres to local workshops. Today we supply wheels and tyres wholesale to panel shops, workshops, fleets and resellers across Australia — with our own wheel range built for the way Australians actually drive.</p>
+    </div>
+  </section>
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(45px,4.9vw,86px) clamp(20px,3vw,56px) 0;width:100%;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center">
+    <div style="position:relative;aspect-ratio:4/3;background:#161616;overflow:hidden"><image-slot id="about-warehouse" shape="rect" placeholder="Warehouse / team photo — Dandenong South"></image-slot></div>
+    <div>
+      <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(30px,4vw,42px);line-height:1;text-transform:uppercase;margin:0 0 18px">Built on straight answers and fast dispatch</h2>
+      <p style="font-size:16px;line-height:1.7;color:#444;margin:0 0 14px">We're not a marketplace and we're not a middleman. We hold our own stock in our Dandenong South warehouse, answer the phone with someone who knows fitment, and dispatch same-day on orders placed before 2pm.</p>
+      <p style="font-size:16px;line-height:1.7;color:#444;margin:0 0 24px">That's why 2,500 of our 3,500+ customers keep coming back — and why our Google rating sits at 5.0.</p>
+      <div style="display:flex;gap:26px;flex-wrap:wrap">
+        <div style="border-left:4px solid #D80009;padding-left:14px"><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:34px;line-height:1">3,500+</div><div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#5F5F5F">Customers</div></div>
+        <div style="border-left:4px solid #D80009;padding-left:14px"><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:34px;line-height:1">10 yrs</div><div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#5F5F5F">Trade supply</div></div>
+        <div style="border-left:4px solid #D80009;padding-left:14px"><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:34px;line-height:1">5.0 <span style="color:#D80009;font-size:22px">★</span></div><div style="font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#5F5F5F">Google rating</div></div>
+      </div>
+    </div>
+  </section>
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(50px,5.5vw,97px) clamp(20px,3vw,56px) clamp(67px,7.4vw,130px);width:100%;box-sizing:border-box;flex:1">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px">
+      <div style="background:#0E0E0E;color:#fff;padding:28px"><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;margin-bottom:10px">Who we supply</div><p style="color:#BDBDBD;font-size:15px;line-height:1.65;margin:0">Panel shops, mechanical workshops, taxi and rideshare fleets, 4x4 fitters and approved tyre resellers — wholesale first, with retail customers pointed to our dealer network.</p></div>
+      <div style="background:#0E0E0E;color:#fff;padding:28px"><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;margin-bottom:10px">Where we are</div><p style="color:#BDBDBD;font-size:15px;line-height:1.65;margin:0">Melbourne — 13 Advantage Drive, Dandenong South VIC 3175. Sydney, Brisbane and Adelaide branches opening soon.</p></div>
+      <div style="background:#D80009;color:#fff;padding:28px"><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;margin-bottom:10px">Work with us</div><p style="font-size:15px;line-height:1.65;margin:0 0 16px;color:#fff">Apply for a trade account and get wholesale pricing on the full SSS range.</p><a href="Dealer.dc.html" style="display:inline-flex;align-items:center;background:#0E0E0E;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.07em;text-transform:uppercase;padding:0 20px;height:44px;border-radius:999px" style-hover="background:#fff;color:#0E0E0E">Become a dealer</a></div>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,480px"></dc-import>
+</div>
+</x-dc>
+</body>
+</html>

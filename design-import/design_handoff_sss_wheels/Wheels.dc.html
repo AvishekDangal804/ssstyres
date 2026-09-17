@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}button{font-family:inherit}</style>
+</helmet>
+<div data-screen-label="Wheels catalogue" style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="SiteHeader" hint-size="100%,110px" style="position:sticky;top:0;z-index:50"></dc-import>
+  <section style="background:#0A0A0A;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-60px;width:220px;height:140%;background:#D80009;transform:skewX(-18deg);pointer-events:none"></div>
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(39px,4.3vw,76px) clamp(20px,3vw,56px);position:relative;width:100%;box-sizing:border-box">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#BDBDBD;margin-bottom:10px">SSS Wheels · The range</div>
+      <h1 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;text-transform:uppercase;margin:0">{{ pageTitle }}</h1>
+    </div>
+  </section>
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(20px,2.2vw,38px) clamp(20px,3vw,56px) 0;width:100%;box-sizing:border-box">
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="7"><button onClick="{{ f.pick }}" style="{{ f.style }}">{{ f.name }}</button></sc-for>
+    </div>
+  </section>
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(21px,2.3vw,41px) clamp(20px,3vw,56px) clamp(67px,7.4vw,130px);width:100%;box-sizing:border-box;flex:1">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(280px,18vw,340px),1fr));gap:clamp(18px,1.4vw,28px)">
+      <sc-for list="{{ wheels }}" as="w" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;background:#fff;border:1px solid #E4E4E4;transition:border-color .2s,box-shadow .2s" style-hover="border-color:#D80009;box-shadow:0 14px 34px rgba(0,0,0,.12)">
+          <div style="position:relative;aspect-ratio:1;background:#fff;overflow:hidden;border-bottom:1px solid #F0F0F0">
+            <sc-if value="{{ w.img }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="SSS {{ w.name }} {{ w.variant }}" style="{{ w.imgStyle }}" style-hover="transform:scale(1.07)"></div></sc-if>
+            <sc-if value="{{ w.noImg }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0"><image-slot id="cat-wheel-{{ w.id }}" shape="rect" fit="contain" placeholder="Wheel photo — SSS {{ w.name }}"></image-slot></div></sc-if>
+            <sc-if value="{{ w.badge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:12px;top:12px;background:#D80009;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:999px">{{ w.badge }}</span></sc-if>
+          </div>
+          <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:7px">
+            <div style="font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#7A7A7A">{{ w.catLabel }}</div>
+            <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:27px;line-height:1;text-transform:uppercase">{{ w.name }} <span style="color:#D80009">{{ w.variant }}</span></div>
+            <div style="font-size:14px;color:#5F5F5F">{{ w.size }} · {{ w.pcd }} · {{ w.offset }}</div>
+            <div style="font-size:13px;color:#7A7A7A">{{ w.build }} · Load {{ w.load }}</div>
+            <a href="http://orders.ssswheels.com.au/WebOrder" target="_blank" style="margin-top:8px;display:inline-flex;align-items:center;justify-content:center;background:#0E0E0E;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.07em;text-transform:uppercase;height:42px;border-radius:999px" style-hover="background:#D80009;color:#fff">Order via dealer portal</a>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="margin-top:36px;background:#F5F5F5;padding:24px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap">
+      <div style="font-size:15px;color:#444;max-width:640px"><strong>Not a dealer yet?</strong> Ordering is available to approved trade accounts. Apply to become a dealer, or call <a href="tel:0391165787" style="color:#D80009;font-weight:700">03 9116 5787</a> for stock and fitment advice.</div>
+      <a href="Dealer.dc.html" style="display:inline-flex;align-items:center;background:#D80009;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.07em;text-transform:uppercase;padding:0 22px;height:46px;border-radius:999px" style-hover="background:#A80007;color:#fff">Become a dealer</a>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,480px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null, cat: 'all' };
+  componentDidMount() {
+    const qs = new URLSearchParams(window.location.search);
+    const q = qs.get('cat'), qm = qs.get('model'), qz = qs.get('size');
+    import(new URL('wheels-data.js', document.baseURI).href).then(d => {
+      const cat = qz ? 'size:' + qz : qm && d.MODELS.some(m => m.id === qm) ? 'model:' + qm : q && d.CATEGORIES.some(c => c.id === q) ? q : 'all';
+      this.setState({ d, cat });
+    });
+  }
+  renderVals() {
+    const { d, cat } = this.state;
+    if (!d) return { pageTitle: 'All Wheels', filters: [], wheels: [] };
+    const fBase = "border:2px solid #0E0E0E;background:#fff;color:#0E0E0E;cursor:pointer;border-radius:999px;padding:10px 20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase;transition:background .15s,color .15s";
+    const fAct = "border:2px solid #D80009;background:#D80009;color:#fff;cursor:pointer;border-radius:999px;padding:10px 20px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.06em;text-transform:uppercase";
+    const filters = [{ id: 'all', name: 'All' }, ...['15', '16', '17'].map(z => ({ id: 'size:' + z, name: z + '"' })), ...d.MODELS.map(m => ({ id: 'model:' + m.id, name: m.name })), ...d.CATEGORIES].map(c => ({
+      ...c, pick: () => this.setState({ cat: c.id }), style: c.id === cat ? fAct : fBase
+    }));
+    const isModel = cat.indexOf('model:') === 0, isSize = cat.indexOf('size:') === 0;
+    const list = cat === 'all' ? d.WHEELS : isSize ? d.WHEELS.filter(w => w.size.indexOf(cat.slice(5)) === 0) : isModel ? d.WHEELS.filter(w => w.model === cat.slice(6)) : d.WHEELS.filter(w => w.cat === cat || w.cat2 === cat);
+    const IMGS = "position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;transition:transform .35s ease;background-image:url('";
+    const wheels = list.map(w => ({ ...w, noImg: !w.img, catLabel: 'SSS ' + d.catName(w.cat) + ' Series', imgStyle: w.img ? IMGS + w.img + "')" : '' }));
+    const ac = d.CATEGORIES.find(c => c.id === cat);
+    const am = isModel ? d.MODELS.find(m => m.id === cat.slice(6)) : null;
+    return { pageTitle: isSize ? cat.slice(5) + '" Wheels' : am ? am.name : ac ? ac.name + ' Wheels' : 'All Wheels', filters, wheels };
+  }
+}
+</script>
+</body>
+</html>

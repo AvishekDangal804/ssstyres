@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>body{margin:0;font-family:Barlow,system-ui,sans-serif}a{text-decoration:none;color:#161616}a:hover{color:#D80009}</style>
+</helmet>
+<div style="background:rgba(255,255,255,.58);backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(0,0,0,.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 30px rgba(0,0,0,.06);font-family:Barlow,system-ui,sans-serif">
+  <div style="background:rgba(10,10,10,.72);color:#C8C8C8;font-size:13px;backdrop-filter:blur(24px) saturate(1.8);-webkit-backdrop-filter:blur(24px) saturate(1.8);border-bottom:1px solid rgba(255,255,255,.06)">
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:0 clamp(20px,3vw,56px);min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;width:100%;box-sizing:border-box">
+      <span>Melbourne — 13 Advantage Drive, Dandenong South · Sydney, Brisbane &amp; Adelaide opening soon</span>
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><a href="tel:0391165787" style="color:#fff">03 9116 5787</a><a href="mailto:info@ssswheels.com.au" style="color:#fff">info@ssswheels.com.au</a></div>
+    </div>
+  </div>
+  <div style="max-width:min(1600px,94vw);margin:0 auto;padding:0 clamp(20px,3vw,56px);min-height:74px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;width:100%;box-sizing:border-box">
+    <a href="Home.dc.html" style="display:flex;padding:12px 0;order:1;flex:none"><img src="assets/logo.png" alt="SSS Wheels &amp; Tyres" style="height:36px;width:auto;display:block"></a>
+    <nav style="{{ navStyle }}">
+      <div style="position:relative" onMouseEnter="{{ openWheels }}" onMouseLeave="{{ closeMenus }}">
+        <button onClick="{{ toggleWheels }}" style="background:none;border:0;cursor:pointer;padding:26px 0;font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#161616;display:flex;align-items:center;gap:6px" style-hover="color:#D80009">Wheels <span style="font-size:11px;color:#D80009">▼</span></button>
+        <sc-if value="{{ wheelsOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:100%;left:-18px;background:rgba(14,14,14,.78);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);min-width:230px;padding:10px 0;box-shadow:0 24px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.1);z-index:80;border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;margin-top:-6px">
+            <a href="Wheels.dc.html?model=d-locker" style="display:block;color:#fff;padding:11px 22px;font-weight:700;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">SSS D-Locker</a>
+            <a href="Wheels.dc.html?model=d-hole" style="display:block;color:#fff;padding:11px 22px;font-weight:700;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">SSS D-Hole</a>
+            <div style="padding:12px 22px 4px;margin-top:6px;border-top:1px solid #2a2a2a;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8A8A8A">By type</div>
+            <a href="Wheels.dc.html?cat=steel" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Steel</a>
+            <a href="Wheels.dc.html?cat=offroad" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Off Road</a>
+            <a href="Wheels.dc.html?cat=beadlock" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Beadlocks</a>
+            <a href="Wheels.dc.html?cat=street" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Street</a>
+            <a href="Wheels.dc.html?cat=commercial" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Commercial</a>
+            <a href="Wheels.dc.html?cat=trailer" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Trailer</a>
+            <a href="Wheels.dc.html" style="display:block;color:#fff;padding:11px 22px;font-weight:700;font-size:15px;border-top:1px solid #2a2a2a;margin-top:6px" style-hover="background:rgba(216,0,9,.9);color:#fff">All wheels →</a>
+          </div>
+        </sc-if>
+      </div>
+      <a href="Accessories.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Accessories</a>
+      <a href="Fitment.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Fitment Guide</a>
+      <a href="Media.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Media</a>
+      <div style="position:relative" onMouseEnter="{{ openMore }}" onMouseLeave="{{ closeMenus }}">
+        <button onClick="{{ toggleMore }}" style="background:none;border:0;cursor:pointer;padding:26px 0;font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#161616;display:flex;align-items:center;gap:6px" style-hover="color:#D80009">More <span style="font-size:11px;color:#D80009">▼</span></button>
+        <sc-if value="{{ moreOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="position:absolute;top:100%;right:-10px;background:rgba(14,14,14,.78);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);min-width:250px;padding:10px 0;box-shadow:0 24px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.1);z-index:80;border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden;margin-top:-6px">
+            <a href="About.dc.html" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">About Us</a>
+            <a href="Legal.dc.html#terms" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Terms &amp; Conditions</a>
+            <a href="Legal.dc.html#warranty" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Warranty &amp; Returns</a>
+            <a href="Legal.dc.html#privacy" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Privacy Policy</a>
+            <a href="Contact.dc.html" style="display:block;color:#E8E8E8;padding:11px 22px;font-weight:600;font-size:15px" style-hover="background:rgba(216,0,9,.9);color:#fff">Contact Us</a>
+          </div>
+        </sc-if>
+      </div>
+    </nav>
+    <div style="{{ ctaWrapStyle }}">
+      <a href="Dealer.dc.html" style="display:inline-flex;align-items:center;border:2px solid #0E0E0E;color:#0E0E0E;font-family:Barlow,sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:0 18px;height:42px;box-sizing:border-box;white-space:nowrap;border-radius:999px" style-hover="background:#0E0E0E;color:#fff">Become a Dealer</a>
+      <a href="http://orders.ssswheels.com.au/WebOrder" target="_blank" style="display:inline-flex;align-items:center;background:#D80009;color:#fff;font-family:Barlow,sans-serif;font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding:0 20px;height:42px;border-radius:999px;white-space:nowrap" style-hover="background:#A80007;color:#fff">Dealer Portal</a>
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { menu: null, narrow: typeof window !== 'undefined' && window.innerWidth < 1280 };
+  componentDidMount() {
+    this._onResize = () => this.setState({ narrow: window.innerWidth < 1280 });
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+  renderVals() {
+    const { menu, narrow } = this.state;
+    const navBase = "display:flex;align-items:center;column-gap:22px;flex-wrap:wrap";
+    return {
+      wheelsOpen: menu === 'wheels', moreOpen: menu === 'more',
+      openWheels: () => this.setState({ menu: 'wheels' }),
+      openMore: () => this.setState({ menu: 'more' }),
+      closeMenus: () => this.setState({ menu: null }),
+      toggleWheels: () => this.setState(s => ({ menu: s.menu === 'wheels' ? null : 'wheels' })),
+      toggleMore: () => this.setState(s => ({ menu: s.menu === 'more' ? null : 'more' })),
+      navStyle: narrow
+        ? navBase + ';order:3;flex:0 0 100%;border-top:1px solid #E4E4E4;column-gap:18px'
+        : navBase + ';order:2;margin-left:auto',
+      ctaWrapStyle: narrow
+        ? 'display:flex;gap:10px;align-items:center;order:2;margin-left:auto;flex-wrap:wrap'
+        : 'display:flex;gap:10px;align-items:center;order:3;flex:none'
+    };
+  }
+}
+</script>
+</body>
+</html>

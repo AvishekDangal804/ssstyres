@@ -1,0 +1,248 @@
+.layout {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-pad-header) var(--gutter) var(--section-pad-lg);
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 52px;
+  align-items: start;
+}
+
+.howTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 24px;
+}
+
+.steps {
+  display: grid;
+  gap: 22px;
+  margin-bottom: 36px;
+}
+
+.step {
+  display: flex;
+  gap: 16px;
+}
+
+.stepNum {
+  flex: none;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: #fff;
+  background: var(--red);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+}
+
+.stepTitle {
+  font-weight: 700;
+  font-size: 17px;
+  margin-bottom: 4px;
+}
+
+.stepBody {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.alreadyCard {
+  background: var(--black);
+  color: #fff;
+  padding: 26px 28px;
+}
+
+.alreadyTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.alreadyBody {
+  color: var(--on-dark-2);
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 18px;
+}
+
+.alreadyBtn {
+  display: inline-flex;
+  align-items: center;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0 24px;
+  height: 46px;
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+
+.alreadyBtn:hover {
+  background: var(--red-hover);
+}
+
+.formCard {
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.formTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.field input,
+.field select,
+.field textarea {
+  height: 46px;
+  border: 1px solid #cfcfcf;
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--ink);
+  font-family: var(--font-barlow), system-ui, sans-serif;
+  background: #fff;
+}
+
+.field textarea {
+  height: auto;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formError {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.submitBtn {
+  height: 52px;
+  border: 0;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--red-hover);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.legalLine {
+  font-size: 13px;
+  color: #7a7a7a;
+  line-height: 1.5;
+}
+
+.legalLine a {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.successWrap {
+  text-align: center;
+  padding: 34px 10px;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.successTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.successBody {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0 0 8px;
+}
+
+.successSub {
+  font-size: 15px;
+  color: #7a7a7a;
+  margin: 0;
+}
+
+.successSub a {
+  color: var(--red);
+  font-weight: 700;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}</style>
+</helmet>
+<div data-screen-label="Wheel collections" style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="SiteHeader" hint-size="100%,110px" style="position:sticky;top:0;z-index:50"></dc-import>
+  <section style="background:#0A0A0A;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-60px;width:220px;height:140%;background:#D80009;transform:skewX(-18deg);pointer-events:none"></div>
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(39px,4.3vw,76px) clamp(20px,3vw,56px);position:relative;width:100%;box-sizing:border-box">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#BDBDBD;margin-bottom:10px">SSS Wheels</div>
+      <h1 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;text-transform:uppercase;letter-spacing:-.02em;margin:0 0 14px">Wheel collections</h1>
+      <p style="font-size:17px;line-height:1.6;color:#CFCFCF;max-width:620px;margin:0">Two pressed-steel wheels, every fitment that matters. The beadlock-style D-Locker for touring and off-road builds, and the classic D-Hole for utes, vans, fleets and trailers.</p>
+    </div>
+  </section>
+  <section style="flex:1">
+    <sc-for list="{{ collections }}" as="c" hint-placeholder-count="2">
+      <div id="{{ c.id }}" style="{{ c.bandStyle }}">
+        <div style="{{ c.bgWordStyle }}">{{ c.short }}</div>
+        <div style="position:relative;max-width:min(1600px,94vw);margin:0 auto;padding:clamp(62px,6.8vw,119px) clamp(20px,3vw,56px);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:48px;align-items:center;width:100%;box-sizing:border-box">
+          <div style="{{ c.mediaWrapStyle }}">
+            <div style="position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:22px;background:#111;box-shadow:0 40px 90px rgba(0,0,0,.35)">
+              <div role="img" aria-label="{{ c.name }} in the warehouse" style="{{ c.boxStyle }}"></div>
+            </div>
+            <div style="{{ c.floatStyle }}"></div>
+          </div>
+          <div style="position:relative;z-index:1">
+            <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#D80009;margin-bottom:14px"><span style="width:28px;height:3px;background:#D80009;display:inline-block"></span>{{ c.tag }}</div>
+            <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(40px,5.4vw,76px);line-height:.92;text-transform:uppercase;letter-spacing:-.02em;margin:0 0 18px">{{ c.name }}</h2>
+            <p style="font-size:17px;line-height:1.65;margin:0 0 26px;max-width:520px;color:inherit;opacity:.85">{{ c.blurb }}</p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px">
+              <sc-for list="{{ c.chips }}" as="k" hint-placeholder-count="3"><span style="{{ c.chipStyle }}">{{ k }}</span></sc-for>
+            </div>
+            <div style="display:flex;gap:12px;flex-wrap:wrap">
+              <a href="{{ c.href }}" style="{{ c.btnStyle }}" style-hover="background:#D80009;border-color:#D80009;color:#fff">View fitments <span>→</span></a>
+              <a href="http://orders.ssswheels.com.au/WebOrder" target="_blank" style="{{ c.btn2Style }}">Order via portal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(62px,6.8vw,119px) clamp(20px,3vw,56px) clamp(67px,7.4vw,130px);width:100%;box-sizing:border-box">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:30px">
+        <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(28px,3.4vw,38px);line-height:1;text-transform:uppercase;letter-spacing:-.01em;margin:0">Every finish</h2>
+        <a href="Wheels.dc.html" style="display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 24px;border:1.5px solid #0E0E0E;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#0E0E0E;box-sizing:border-box;transition:background .2s,color .2s" style-hover="background:#0E0E0E;color:#fff">Full catalogue <span>→</span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px">
+        <sc-for list="{{ finishes }}" as="f" hint-placeholder-count="7">
+          <a href="{{ f.href }}" style="display:flex;flex-direction:column;gap:12px;padding:18px;border-radius:18px;background:#F4F4F4;color:#0E0E0E;transition:background .25s,transform .25s" style-hover="background:#EAEAEA;transform:translateY(-4px);color:#0E0E0E">
+            <div role="img" aria-label="{{ f.name }} {{ f.finish }}" style="{{ f.imgStyle }}" style-hover="transform:rotate(18deg)"></div>
+            <div><div style="font-family:Barlow,sans-serif;font-weight:800;font-size:17px;text-transform:uppercase;line-height:1">{{ f.name }}</div><div style="font-size:12px;color:#5F5F5F;margin-top:5px;line-height:1.35">{{ f.finish }}</div></div>
+          </a>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,900px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { d: null };
+  componentDidMount() {
+    import(new URL('wheels-data.js', document.baseURI).href).then(d => this.setState({ d }));
+  }
+  renderVals() {
+    const { d } = this.state;
+    if (!d) return { collections: [], finishes: [] };
+    const collections = d.MODELS.map((m, i) => {
+      const dark = i % 2 === 0;
+      const n = d.WHEELS.filter(w => w.model === m.id).length;
+      const fg = dark ? '#fff' : '#0E0E0E';
+      return {
+        ...m, href: 'Wheels.dc.html?model=' + m.id,
+        chips: [m.sizes.join(' · '), m.finishes[0].name, n + ' fitments'],
+        bandStyle: 'position:relative;overflow:hidden;background:' + (dark ? '#0B0B0B' : '#F4F4F4') + ';color:' + fg,
+        bgWordStyle: 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(120px,24vw,420px);line-height:1;letter-spacing:-.04em;text-transform:uppercase;white-space:nowrap;color:' + (dark ? 'rgba(255,255,255,.04)' : 'rgba(0,0,0,.045)') + ';pointer-events:none',
+        mediaWrapStyle: 'position:relative;' + (i % 2 ? 'order:2' : ''),
+        boxStyle: "position:absolute;inset:0;background:url('" + d.BOX_SHOTS[i % d.BOX_SHOTS.length] + "') center/cover no-repeat;transition:transform .6s",
+        floatStyle: "position:absolute;right:-8%;bottom:-14%;width:46%;aspect-ratio:1;background:url('" + (i % 2 ? 'assets/wheels/replica/w6.png' : 'assets/wheels/replica/black-angle.png') + "') center/contain no-repeat;filter:drop-shadow(0 30px 40px rgba(0,0,0,.5))",
+        chipStyle: 'border:1.5px solid ' + (dark ? 'rgba(255,255,255,.3)' : 'rgba(0,0,0,.25)') + ';border-radius:999px;padding:8px 14px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:' + fg,
+        btnStyle: 'display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border-radius:999px;border:1.5px solid ' + fg + ';background:' + fg + ';color:' + (dark ? '#0E0E0E' : '#fff') + ';font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;box-sizing:border-box;transition:background .2s,border-color .2s,color .2s',
+        btn2Style: 'display:inline-flex;align-items:center;height:50px;padding:0 24px;border-radius:999px;border:1.5px solid ' + (dark ? 'rgba(255,255,255,.5)' : 'rgba(0,0,0,.4)') + ';color:' + fg + ';font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;box-sizing:border-box'
+      };
+    });
+    const finishes = d.REPLICA.map(r => ({
+      ...r, href: 'Wheels.dc.html?model=' + (r.name.indexOf('Hole') > 0 ? 'd-hole' : 'd-locker'),
+      imgStyle: "aspect-ratio:1;width:100%;background:url('" + r.img + "') center/contain no-repeat;transition:transform .6s cubic-bezier(.2,.8,.2,1)"
+    }));
+    return { collections, finishes };
+  }
+}
+</script>
+</body>
+</html>

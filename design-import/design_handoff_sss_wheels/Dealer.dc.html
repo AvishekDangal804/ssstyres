@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}input,select,textarea,button{font-family:inherit}</style>
+</helmet>
+<div data-screen-label="Become a dealer" style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="SiteHeader" hint-size="100%,110px" style="position:sticky;top:0;z-index:50"></dc-import>
+  <section style="background:#0A0A0A;color:#fff;position:relative;overflow:hidden">
+    <div style="position:absolute;right:-40px;top:-60px;width:220px;height:140%;background:#D80009;transform:skewX(-18deg);pointer-events:none"></div>
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(39px,4.3vw,76px) clamp(20px,3vw,56px);position:relative;width:100%;box-sizing:border-box">
+      <div style="font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#BDBDBD;margin-bottom:10px">Wholesale</div>
+      <h1 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(40px,6vw,64px);line-height:.95;text-transform:uppercase;margin:0 0 14px">Become an SSS dealer</h1>
+      <p style="font-size:17px;line-height:1.6;color:#CFCFCF;max-width:620px;margin:0">Panel shops, mechanical workshops, fleets and tyre resellers — apply for a trade account and order at wholesale pricing through the dealer portal.</p>
+    </div>
+  </section>
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(39px,4.3vw,76px) clamp(20px,3vw,56px) clamp(67px,7.4vw,130px);width:100%;box-sizing:border-box;flex:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:52px;align-items:start">
+    <div>
+      <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:34px;line-height:1;text-transform:uppercase;margin:0 0 24px">How it works</h2>
+      <div style="display:grid;gap:22px;margin-bottom:36px">
+        <div style="display:flex;gap:16px"><span style="flex:none;font-family:Barlow,sans-serif;font-weight:800;font-size:20px;color:#fff;background:#D80009;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:999px">1</span><div><div style="font-weight:700;font-size:17px;margin-bottom:4px">Apply</div><div style="font-size:15px;line-height:1.6;color:#444">Tell us about your business — takes two minutes. We review every application within one business day.</div></div></div>
+        <div style="display:flex;gap:16px"><span style="flex:none;font-family:Barlow,sans-serif;font-weight:800;font-size:20px;color:#fff;background:#D80009;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:999px">2</span><div><div style="font-weight:700;font-size:17px;margin-bottom:4px">Get approved</div><div style="font-size:15px;line-height:1.6;color:#444">Your account manager sets up wholesale pricing and walks you through the range and lead times.</div></div></div>
+        <div style="display:flex;gap:16px"><span style="flex:none;font-family:Barlow,sans-serif;font-weight:800;font-size:20px;color:#fff;background:#D80009;width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:999px">3</span><div><div style="font-weight:700;font-size:17px;margin-bottom:4px">Order online, any time</div><div style="font-size:15px;line-height:1.6;color:#444">Log in to the dealer portal for live stock and 24/7 ordering, dispatched from Dandenong South.</div></div></div>
+      </div>
+      <div style="background:#0E0E0E;color:#fff;padding:26px 28px">
+        <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:24px;text-transform:uppercase;margin-bottom:8px">Already a dealer?</div>
+        <p style="color:#BDBDBD;font-size:15px;line-height:1.6;margin:0 0 18px">Head straight to the portal to check stock and place orders.</p>
+        <a href="http://orders.ssswheels.com.au/WebOrder" target="_blank" style="display:inline-flex;align-items:center;background:#D80009;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.07em;text-transform:uppercase;padding:0 24px;height:46px;border-radius:999px" style-hover="background:#A80007;color:#fff">Wholesale login →</a>
+      </div>
+    </div>
+    <div style="border:1px solid #E4E4E4;border-top:4px solid #D80009;padding:32px;box-sizing:border-box">
+      <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+        <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:30px;line-height:1;text-transform:uppercase;margin:0 0 20px">Trade account application</h2>
+        <form onSubmit="{{ submit }}" style="display:grid;gap:16px">
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">Business name<input required placeholder="e.g. Southside Tyre & Auto" style="height:46px;border:1px solid #CFCFCF;padding:0 14px;font-size:16px;color:#161616"></label>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px">
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">ABN<input required placeholder="00 000 000 000" style="height:46px;border:1px solid #CFCFCF;padding:0 14px;font-size:16px;color:#161616"></label>
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">Business type<select style="height:46px;border:1px solid #CFCFCF;padding:0 10px;font-size:16px;color:#161616;background:#fff"><option>Tyre reseller</option><option>Mechanical workshop</option><option>Panel shop</option><option>Fleet / rideshare operator</option><option>4x4 / accessory fitter</option><option>Other</option></select></label>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px">
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">Contact name<input required placeholder="Full name" style="height:46px;border:1px solid #CFCFCF;padding:0 14px;font-size:16px;color:#161616"></label>
+            <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">Phone<input required type="tel" placeholder="04xx xxx xxx" style="height:46px;border:1px solid #CFCFCF;padding:0 14px;font-size:16px;color:#161616"></label>
+          </div>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">Email<input required type="email" placeholder="you@business.com.au" style="height:46px;border:1px solid #CFCFCF;padding:0 14px;font-size:16px;color:#161616"></label>
+          <label style="display:grid;gap:6px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#5F5F5F">Anything we should know?<textarea rows="3" placeholder="Volumes, brands you fit, locations…" style="border:1px solid #CFCFCF;padding:12px 14px;font-size:16px;color:#161616;resize:vertical"></textarea></label>
+          <button type="submit" style="height:52px;border:0;background:#D80009;color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;border-radius:999px" style-hover="background:#A80007">Submit application</button>
+          <div style="font-size:13px;color:#7A7A7A;line-height:1.5">By applying you agree to our <a href="Legal.dc.html#terms" style="color:#D80009;font-weight:600">Terms &amp; Conditions</a>. We'll only use your details as described in our <a href="Legal.dc.html#privacy" style="color:#D80009;font-weight:600">Privacy Policy</a>.</div>
+        </form>
+      </sc-if>
+      <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:34px 10px">
+          <div style="width:64px;height:64px;border-radius:50%;background:#D80009;color:#fff;font-size:30px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px">✓</div>
+          <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:30px;text-transform:uppercase;margin-bottom:10px">Application received</div>
+          <p style="font-size:16px;line-height:1.6;color:#444;margin:0 0 8px">Thanks — our trade team will be in touch within one business day.</p>
+          <p style="font-size:15px;color:#7A7A7A;margin:0">Need it sooner? Call <a href="tel:0391165787" style="color:#D80009;font-weight:700">03 9116 5787</a>.</p>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+  <dc-import name="SiteFooter" hint-size="100%,480px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { sent: false };
+  renderVals() {
+    return {
+      sent: this.state.sent, notSent: !this.state.sent,
+      submit: e => { e.preventDefault(); this.setState({ sent: true }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

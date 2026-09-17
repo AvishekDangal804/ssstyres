@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}button{font-family:inherit}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}</style>
+</helmet>
+<div data-screen-label="Media" style="min-height:100vh;display:flex;flex-direction:column">
+  <dc-import name="SiteHeader" hint-size="100%,110px" style="position:sticky;top:0;z-index:50"></dc-import>
+
+  <section style="position:relative;background:#0A0A0A;color:#fff;overflow:hidden;min-height:clamp(420px,60vh,720px);display:flex;align-items:flex-end">
+    <div style="position:absolute;inset:0;background:url('assets/vehicles/ranger.png') center 60%/cover no-repeat"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,10,.2) 0%,rgba(10,10,10,0) 35%,rgba(10,10,10,.85) 100%);pointer-events:none"></div>
+    <div style="position:relative;max-width:min(1600px,94vw);margin:0 auto;padding:clamp(60px,8vw,120px) clamp(20px,3vw,56px) clamp(40px,4vw,64px);width:100%;box-sizing:border-box;display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;animation:fadeUp .7s ease-out both">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px"><span style="width:28px;height:3px;background:#D80009;display:inline-block"></span>Media</div>
+        <h1 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(44px,6.4vw,88px);line-height:.92;text-transform:uppercase;letter-spacing:-.02em;margin:0 0 14px">SSS in the wild</h1>
+        <p style="font-size:clamp(15px,1.2vw,18px);line-height:1.6;color:#E6E6E6;max-width:560px;margin:0">Customer builds, fitment shots and behind-the-scenes from the warehouse. Tag <strong style="color:#fff">@ssswheels</strong> to be featured.</p>
+      </div>
+      <a href="Contact.dc.html" style="display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border:1.5px solid #fff;border-radius:999px;background:#fff;color:#0E0E0E;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;box-sizing:border-box;transition:background .2s,color .2s,border-color .2s;flex:none" style-hover="background:#D80009;border-color:#D80009;color:#fff">Submit your build <span>→</span></a>
+    </div>
+  </section>
+
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(28px,3vw,48px) clamp(20px,3vw,56px) 0;width:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <sc-for list="{{ filters }}" as="f" hint-placeholder-count="4"><button onClick="{{ f.pick }}" style="{{ f.style }}">{{ f.name }}</button></sc-for>
+    </div>
+    <div style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#7A7A7A">{{ countText }}</div>
+  </section>
+
+  <section style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(22px,2.4vw,40px) clamp(20px,3vw,56px) clamp(67px,7.4vw,130px);width:100%;box-sizing:border-box;flex:1">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(clamp(220px,15vw,300px),1fr));grid-auto-rows:clamp(200px,14vw,280px);grid-auto-flow:dense;gap:clamp(12px,1.2vw,20px)">
+      <sc-for list="{{ tiles }}" as="t" hint-placeholder-count="8">
+        <a href="{{ t.href }}" style="{{ t.cardStyle }}">
+          <sc-if value="{{ t.hasImg }}" hint-placeholder-val="{{ false }}"><div role="img" aria-label="{{ t.label }}" style="{{ t.imgStyle }}" style-hover="transform:scale(1.06)"></div></sc-if>
+          <sc-if value="{{ t.noImg }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0"><image-slot id="media-{{ t.i }}" shape="rect" placeholder="{{ t.label }}"></image-slot></div></sc-if>
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.7) 100%);pointer-events:none"></div>
+          <div style="position:absolute;left:18px;right:18px;bottom:18px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;pointer-events:none">
+            <div style="display:flex;flex-direction:column;gap:5px;min-width:0"><span style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#D80009">{{ t.kind }}</span><span style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(18px,1.4vw,24px);line-height:1;text-transform:uppercase;letter-spacing:-.01em;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.5)">{{ t.label }}</span><span style="font-size:13px;color:#D4D4D4">{{ t.sub }}</span></div>
+            <span style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.14);border:1.5px solid rgba(255,255,255,.5);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:15px;flex:none">→</span>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:#0E0E0E;color:#fff">
+    <div style="max-width:min(1600px,94vw);margin:0 auto;padding:clamp(56px,6vw,96px) clamp(20px,3vw,56px);width:100%;box-sizing:border-box;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(28px,3vw,56px);align-items:center">
+      <div>
+        <div style="display:flex;align-items:center;gap:12px;font-size:12px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;margin-bottom:14px;color:#BDBDBD"><span style="width:28px;height:3px;background:#D80009;display:inline-block"></span>Get featured</div>
+        <h2 style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(32px,4vw,56px);line-height:.95;text-transform:uppercase;letter-spacing:-.02em;margin:0 0 16px">Running SSS wheels? Show us.</h2>
+        <p style="font-size:16px;line-height:1.65;color:#D4D4D4;margin:0 0 24px;max-width:520px">Send through a clean side-on shot with the vehicle, wheel and size — dealers and end customers both welcome. We credit every build we post.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="Contact.dc.html" style="display:inline-flex;align-items:center;gap:10px;height:50px;padding:0 26px;border-radius:999px;background:#D80009;color:#fff;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:background .2s" style-hover="background:#A80007;color:#fff">Submit a build <span>→</span></a>
+          <a href="Wheels.dc.html" style="display:inline-flex;align-items:center;height:50px;padding:0 26px;border:1.5px solid rgba(255,255,255,.6);border-radius:999px;color:#fff;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;box-sizing:border-box;transition:background .2s,color .2s" style-hover="background:#fff;color:#0E0E0E">Browse wheels</a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,1vw,16px)">
+        <div style="aspect-ratio:1;border-radius:14px;background:#fff url('assets/wheels/r7.png') center/78% no-repeat"></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:#fff url('assets/wheels/r4.png') center/78% no-repeat"></div>
+        <div style="aspect-ratio:1;border-radius:14px;background:#fff url('assets/wheels/r3.png') center/78% no-repeat"></div>
+      </div>
+    </div>
+  </section>
+
+  <dc-import name="SiteFooter" hint-size="100%,900px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { filter: 'all' };
+  renderVals() {
+    const { filter } = this.state;
+    const all = [
+      { kind: 'Build', label: 'Toyota HiLux', sub: 'SSS D-Locker 17x8 · Matte Black', img: 'assets/vehicles/hilux.png', fit: 'cover', span: 2, href: 'Wheels.dc.html?model=d-locker' },
+      { kind: 'Wheel', label: 'D-Locker', sub: 'Matte Black · beadlock style', img: 'assets/wheels/r7.png', fit: 'contain', href: 'Wheels.dc.html?model=d-locker' },
+      { kind: 'Build', label: 'Ford Ranger', sub: 'SSS D-Locker 17x8 · Matte Black', img: 'assets/vehicles/ranger.png', fit: 'cover', href: 'Wheels.dc.html?model=d-locker' },
+      { kind: 'Warehouse', label: 'Ready to ship', sub: 'Dandenong South, VIC', img: 'assets/lifestyle/black-boxes.png', fit: 'cover', tall: true, href: 'About.dc.html' },
+      { kind: 'Build', label: 'Toyota HiAce', sub: 'SSS D-Locker 16x8 · Matte Black', img: 'assets/vehicles/hiace.png', fit: 'cover', href: 'Wheels.dc.html?model=d-locker' },
+      { kind: 'Wheel', label: 'D-Hole', sub: 'Gloss Black · pressed steel', img: 'assets/wheels/r3.png', fit: 'contain', href: 'Wheels.dc.html?model=d-hole' },
+      { kind: 'Build', label: 'Toyota RAV4', sub: 'SSS D-Locker 17x8 · Machined Silver', img: 'assets/vehicles/rav4.png', fit: 'cover', span: 2, href: 'Wheels.dc.html?model=d-locker' },
+      { kind: 'Warehouse', label: 'Machined silver stock', sub: 'Dandenong South, VIC', img: 'assets/lifestyle/silver-boxes.png', fit: 'cover', href: 'About.dc.html' },
+      { kind: 'Wheel', label: 'D-Locker', sub: 'Machined Silver', img: 'assets/wheels/r4.png', fit: 'contain', href: 'Wheels.dc.html?model=d-locker' },
+      { kind: 'Warehouse', label: 'Fitting bay', sub: 'Photo to come', img: null, href: 'About.dc.html' }
+    ];
+    const kinds = ['all', 'Build', 'Wheel', 'Warehouse'];
+    const on = "border:1.5px solid #D80009;background:#D80009;color:#fff;cursor:pointer;border-radius:999px;padding:0 18px;height:40px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase";
+    const off = "border:1.5px solid #0E0E0E;background:#fff;color:#0E0E0E;cursor:pointer;border-radius:999px;padding:0 18px;height:40px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:background .15s,color .15s";
+    const filters = kinds.map(k => ({ name: k === 'all' ? 'All' : k + 's', pick: () => this.setState({ filter: k }), style: k === filter ? on : off }));
+    const list = filter === 'all' ? all : all.filter(t => t.kind === filter);
+    const tiles = list.map((t, i) => ({
+      ...t, i, hasImg: !!t.img, noImg: !t.img,
+      cardStyle: 'position:relative;display:block;overflow:hidden;border-radius:18px;background:' + (t.fit === 'contain' ? '#F2F2F2' : '#161616') + ';color:#fff;' + (t.span === 2 && filter === 'all' ? 'grid-column:span 2;' : '') + (t.tall && filter === 'all' ? 'grid-row:span 2;' : '') + 'transition:transform .4s cubic-bezier(.2,.8,.2,1),box-shadow .4s',
+      imgStyle: t.img ? "position:absolute;inset:0;background:url('" + t.img + "') center/" + (t.fit === 'contain' ? '74%' : 'cover') + " no-repeat;transition:transform .6s cubic-bezier(.2,.8,.2,1)" : ''
+    }));
+    return { filters, tiles, countText: list.length + (list.length === 1 ? ' post' : ' posts') };
+  }
+}
+</script>
+</body>
+</html>
