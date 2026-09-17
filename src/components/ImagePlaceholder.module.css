@@ -1,0 +1,29 @@
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #f2f2f2;
+  border: 1px dashed #d8d8d8;
+  box-sizing: border-box;
+  padding: 16px;
+  text-align: center;
+}
+
+.icon {
+  width: 34px;
+  height: 34px;
+  color: #b0b0b0;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #9a9a9a;
+  max-width: 220px;
+  line-height: 1.4;
+}

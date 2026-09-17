@@ -1,0 +1,142 @@
+.storySection {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(45px, 4.9vw, 86px) var(--gutter) 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 48px;
+  align-items: center;
+}
+
+.photoWrap {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #161616;
+  overflow: hidden;
+}
+
+.storyTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 18px;
+}
+
+.storyBody {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin: 0 0 14px;
+}
+
+.storyBody:last-of-type {
+  margin-bottom: 24px;
+}
+
+.stats {
+  display: flex;
+  gap: 26px;
+  flex-wrap: wrap;
+}
+
+.stat {
+  border-left: 4px solid var(--red);
+  padding-left: 14px;
+}
+
+.statNum {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1;
+}
+
+.statNum span {
+  color: var(--red);
+  font-size: 22px;
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #5f5f5f;
+}
+
+.tilesSection {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(50px, 5.5vw, 97px) var(--gutter) var(--section-pad-lg);
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.tilesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.tile {
+  padding: 28px;
+}
+
+.tile.dark {
+  background: var(--black);
+  color: #fff;
+}
+
+.tile.red {
+  background: var(--red);
+  color: #fff;
+}
+
+.tileTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.tileBody {
+  font-size: 15px;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.tile.dark .tileBody {
+  color: var(--on-dark-2);
+}
+
+.tile.red .tileBody {
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.tileCta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--black);
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0 20px;
+  height: 44px;
+  border-radius: 999px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tileCta:hover {
+  background: #fff;
+  color: var(--black);
+}

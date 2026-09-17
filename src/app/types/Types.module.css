@@ -1,0 +1,133 @@
+.section {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(17px, 1.8vw, 32px) var(--gutter) var(--section-pad-lg);
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  align-items: center;
+  padding: 52px 0;
+  border-bottom: 1px solid #ececec;
+}
+
+.imgWrap {
+  position: relative;
+  aspect-ratio: 1;
+  max-width: 440px;
+  width: 100%;
+  margin: 0 auto;
+  background: #f7f7f7;
+  order: 0;
+}
+
+.imgWrap.second {
+  order: 2;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.numRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.num {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  color: #fff;
+  background: var(--red);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.series {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+}
+
+.title {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 3.6vw, 42px);
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 6px;
+}
+
+.tag {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+}
+
+.blurb {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #444;
+  margin: 0 0 18px;
+  max-width: 520px;
+}
+
+.bullets {
+  display: grid;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+
+.bullet {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.bulletMark {
+  width: 9px;
+  height: 16px;
+  background: var(--red);
+  transform: skewX(-18deg);
+  flex: none;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--black);
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0 24px;
+  height: 46px;
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+
+.cta:hover {
+  background: var(--red);
+}

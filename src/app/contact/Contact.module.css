@@ -1,0 +1,254 @@
+.layout {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--section-pad-header) var(--gutter) var(--section-pad-lg);
+  width: 100%;
+  box-sizing: border-box;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 52px;
+  align-items: start;
+}
+
+.infoStack {
+  display: grid;
+  gap: 16px;
+}
+
+.infoCard {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--red);
+  padding: 22px 24px;
+}
+
+.infoLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7a7a7a;
+  margin-bottom: 6px;
+}
+
+.infoBig {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--black);
+}
+
+.infoBig.small {
+  font-size: 26px;
+}
+
+.infoBig.address {
+  font-size: 24px;
+  line-height: 1.15;
+}
+
+.infoSub {
+  font-size: 14px;
+  color: #5f5f5f;
+  margin-top: 4px;
+}
+
+.dealersCard {
+  background: var(--black);
+  color: #fff;
+  padding: 22px 24px;
+}
+
+.dealersLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--on-dark-2);
+  margin-bottom: 6px;
+}
+
+.dealersBody {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--on-dark-2);
+  margin-bottom: 14px;
+}
+
+.dealersCtas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btnRed {
+  display: inline-flex;
+  align-items: center;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 18px;
+  height: 42px;
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+
+.btnRed:hover {
+  background: var(--red-hover);
+}
+
+.btnGhostDark {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid #4a4a4a;
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 16px;
+  height: 42px;
+  box-sizing: border-box;
+  border-radius: 999px;
+  transition: border-color 0.15s;
+}
+
+.btnGhostDark:hover {
+  border-color: #fff;
+}
+
+.formCard {
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--red);
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+.formTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 20px;
+}
+
+.form {
+  display: grid;
+  gap: 16px;
+}
+
+.row2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.field {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.field input,
+.field select,
+.field textarea {
+  height: 46px;
+  border: 1px solid #cfcfcf;
+  padding: 0 14px;
+  font-size: 16px;
+  color: var(--ink);
+  font-family: var(--font-barlow), system-ui, sans-serif;
+  background: #fff;
+}
+
+.field textarea {
+  height: auto;
+  padding: 12px 14px;
+  resize: vertical;
+}
+
+.honeypot {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.formError {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.submitBtn {
+  height: 52px;
+  border: 0;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: background 0.15s;
+}
+
+.submitBtn:hover:not(:disabled) {
+  background: var(--red-hover);
+}
+
+.submitBtn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.successWrap {
+  text-align: center;
+  padding: 34px 10px;
+}
+
+.successIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 18px;
+}
+
+.successTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 30px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.successBody {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  margin: 0;
+}
+
+.successBody a {
+  color: var(--red);
+  font-weight: 700;
+}

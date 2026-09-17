@@ -22,16 +22,15 @@ npm run lint    # ESLint
 - `src/components/` — shared layout pieces: `SiteHeader`, `SiteFooter`, `PageHeader` (the dark/red-slash header used by most inner pages).
 - `src/lib/wheels-data.ts` — the product/vehicle/category data (SSS D-Locker, SSS D-Hole, fitments, stats). Treat this as the CMS schema.
 - `src/lib/useScrollProgress.ts` — shared hook for scroll-driven parallax effects.
-- `design-import/design_handoff_sss_wheels/` — the original high-fidelity design handoff (`.dc.html` reference files + `README.md` with the full design-token/motion spec). Not production code — read it when building a page that isn't done yet.
+- `src/components/ImagePlaceholder.tsx` — grey placeholder tile for photography the business hasn't supplied yet (warehouse shots, accessory product photos). Swap for a real `<Image>` once the photo exists.
+- `design-import/design_handoff_sss_wheels/` — the original high-fidelity design handoff (`.dc.html` reference files + `README.md` with the full design-token/motion spec). Not production code — read it if you need the original spec for a page.
 
-## Pages built so far
+## Pages
 
-Home, Wheels catalogue, Dealer application, Fitment guide, Legal (Terms/Warranty/Privacy).
+All pages from the design handoff are built: Home, Wheels catalogue, Collections, Types, Fitment guide, Dealer application, Contact, About, Accessories, Media, Legal (Terms/Warranty/Privacy).
 
-## Pages not yet built
-
-Collections, Types, Contact, About, Accessories, Media — all specced in `design-import/design_handoff_sss_wheels/README.md`, not yet ported.
+Note: the Collections page's original design script referenced data fields (`BOX_SHOTS`, `REPLICA`) and assets (`assets/wheels/replica/*`) that don't exist anywhere in the handoff bundle — likely left over from an earlier data schema. It was rebuilt using the real per-model `lifestyle` and `finishes` fields already in `wheels-data.ts` instead.
 
 ## Known open item
 
-The Dealer application form validates server-side but only logs submissions — no email/CRM delivery is wired up yet. Needs a provider decision (e.g. Resend) and credentials before go-live. Same gap applies once the Contact form is built.
+Both the Dealer application and Contact forms validate server-side (including a real ABN checksum on the Dealer form) but only `console.log` submissions — no email/CRM delivery is wired up yet. Needs a provider decision (e.g. Resend) and credentials before go-live.
