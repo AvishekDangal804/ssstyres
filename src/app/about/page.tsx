@@ -7,7 +7,7 @@ import styles from "./About.module.css";
 export const metadata: Metadata = {
   title: "About Us | SSS Wheels & Tyres",
   description:
-    "Ten years of keeping the trade rolling — SSS Wheels & Tyres supplies wheels and tyres wholesale to panel shops, workshops, fleets and resellers across Australia.",
+    "SSS Wheels & Tyres is an Australian trade-only wholesale supplier of wheels and tyres to panel shops, workshops, fleets and resellers.",
 };
 
 export default function AboutPage() {
@@ -15,8 +15,8 @@ export default function AboutPage() {
     <>
       <PageHeader
         kicker="About us"
-        title="Ten years of keeping the trade rolling"
-        body="SSS Wheels & Tyres started as a two-person operation supplying tyres to local workshops. Today we supply wheels and tyres wholesale to panel shops, workshops, fleets and resellers across Australia — with our own wheel range built for the way Australians actually drive."
+        title="Keeping the trade rolling"
+        body="SSS Wheels & Tyres started as a small operation supplying tyres to local workshops. Today we supply wheels and tyres wholesale to panel shops, workshops, fleets and resellers across Australia — with our own wheel range built for the way Australians actually drive."
       />
 
       <section className={styles.storySection}>
@@ -25,32 +25,29 @@ export default function AboutPage() {
         </div>
         <div>
           <h2 className={styles.storyTitle}>
-            Built on straight answers and fast dispatch
+            Built on straight answers, not a marketplace
           </h2>
           <p className={styles.storyBody}>
             We&apos;re not a marketplace and we&apos;re not a middleman. We
-            hold our own stock in our Dandenong South warehouse, answer the
-            phone with someone who knows fitment, and dispatch same-day on
-            orders placed before 2pm.
+            hold our own stock in our Dandenong South warehouse and answer
+            the phone with someone who actually knows fitment.
           </p>
           <p className={styles.storyBody}>
-            That&apos;s why 2,500 of our 3,500+ customers keep coming back —
-            and why our Google rating sits at 5.0.
+            Trade accounts get wholesale pricing on the full SSS range and
+            order directly through our dealer portal.
           </p>
           <div className={styles.stats}>
             <div className={styles.stat}>
-              <div className={styles.statNum}>3,500+</div>
-              <div className={styles.statLabel}>Customers</div>
+              <div className={styles.statNum}>Own Warehouse</div>
+              <div className={styles.statLabel}>Dandenong South, VIC</div>
             </div>
             <div className={styles.stat}>
-              <div className={styles.statNum}>10 yrs</div>
-              <div className={styles.statLabel}>Trade supply</div>
+              <div className={styles.statNum}>Trade Only</div>
+              <div className={styles.statLabel}>Wholesale supply</div>
             </div>
             <div className={styles.stat}>
-              <div className={styles.statNum}>
-                5.0 <span>★</span>
-              </div>
-              <div className={styles.statLabel}>Google rating</div>
+              <div className={styles.statNum}>Own Range</div>
+              <div className={styles.statLabel}>SSS D-Locker &amp; D-Hole</div>
             </div>
           </div>
         </div>

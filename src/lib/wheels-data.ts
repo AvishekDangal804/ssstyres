@@ -23,12 +23,12 @@ export interface Category {
 }
 
 export const CATEGORIES: Category[] = [
-  { id: 'steel', name: 'Steel', tag: 'Work-ready. Trail-proof.', blurb: 'Pressed-steel construction that takes a hit and keeps rolling — repairable on the trail, rated for real loads, finished to shrug off kerbs, gravel and salt.', img: R.hole, bullets: ['Repairable on the trail', 'High load ratings', 'Classic D-hole design'] },
-  { id: 'offroad', name: 'Off Road', tag: 'Built to take a flogging.', blurb: 'The SSS D-Locker in zero and negative offsets for dual cabs, wagons and touring builds — aggressive stance, honest strength.', img: R.black, bullets: ['1250 kg load rating', 'Negative offset fitments', 'Tested on Australian corrugations'] },
-  { id: 'beadlock', name: 'Beadlocks', tag: 'Air down. Send it.', blurb: "The D-Locker's bolted beadlock-style ring gives comp looks that stay street-legal — the styling tourers ask for, without the paperwork.", img: R.silverGold, bullets: ['Simulated beadlock ring', 'Street-legal fitment', 'Comp-inspired styling'] },
+  { id: 'steel', name: 'Steel', tag: 'Durable and repairable.', blurb: 'Pressed-steel construction that takes a hit and keeps rolling — repairable, rated for real loads, finished to shrug off kerbs, gravel and salt.', img: R.hole, bullets: ['Repairable construction', 'High load ratings', 'Classic D-hole design'] },
+  { id: 'offroad', name: 'Off Road', tag: 'Engineered for off-road use.', blurb: 'The SSS D-Locker in zero and negative offsets for dual cabs, wagons and touring builds — aggressive stance, solid construction.', img: R.black, bullets: ['1250 kg load rating', 'Negative offset fitments', 'Tested on Australian corrugations'] },
+  { id: 'beadlock', name: 'Beadlocks', tag: 'Beadlock-style strength.', blurb: "The D-Locker's bolted beadlock-style ring gives comp-inspired looks — the styling tourers ask for. Check your state's rules on modified wheels before fitting.", img: R.silverGold, bullets: ['Simulated beadlock ring', 'Hub-centric fitment', 'Comp-inspired styling'] },
   { id: 'street', name: 'Street', tag: 'Clean. Every day.', blurb: 'Machined-silver D-Locker fitments for SUVs and daily drivers — RAV4, Prado, Everest — with OEM-friendly offsets that fill the guards properly.', img: R.silver, bullets: ['OEM-friendly offsets', 'Hub-centric fitment', 'Machined silver finish'] },
-  { id: 'commercial', name: 'Commercial', tag: 'Fleet tough.', blurb: 'The SSS D-Hole for vans, utes and fleets — high load ratings, a finish that hides kerb rash, and volume supply that keeps fleets moving.', img: R.holeAlt, bullets: ['Fleet volume supply', 'HiAce and LT fitments', 'Gloss black finish'] },
-  { id: 'trailer', name: 'Trailer', tag: 'Tow with confidence.', blurb: 'D-Hole fitments for box, boat and camper trailers — the common PCDs, always in stock, with a corrosion-resistant coating.', img: R.hole, bullets: ['15"–16" fitments', 'Multi-PCD options', 'Corrosion-resistant finish'] },
+  { id: 'commercial', name: 'Commercial', tag: 'Built for fleet use.', blurb: 'The SSS D-Hole for vans, utes and fleets — high load ratings, a finish that hides kerb rash, and volume supply for fleet accounts.', img: R.holeAlt, bullets: ['Fleet volume supply', 'HiAce and LT fitments', 'Gloss black finish'] },
+  { id: 'trailer', name: 'Trailer', tag: 'Tow with confidence.', blurb: 'D-Hole fitments for box, boat and camper trailers — the common PCDs, with a corrosion-resistant coating.', img: R.hole, bullets: ['15"–16" fitments', 'Multi-PCD options', 'Corrosion-resistant finish'] },
 ];
 
 export type ModelId = 'd-locker' | 'd-hole';
@@ -49,7 +49,8 @@ export interface Model {
   sizes: string[];
   badge: string;
   blurb: string;
-  lifestyle: string;
+  /** Real warehouse/stock photo for this model — null where none exists yet. */
+  lifestyle: string | null;
   finishes: Finish[];
 }
 
@@ -57,7 +58,7 @@ export const MODELS: Model[] = [
   {
     id: 'd-locker', name: 'SSS D-Locker', short: 'D-Locker', cat: 'offroad', tag: 'Beadlock-style · 4x4 off-road', sizes: ['16"', '17"'], badge: 'Best seller',
     blurb: "A 4x4 off-road wheel with a bolted beadlock-style ring — the tourer's favourite for HiLux, Ranger, Prado and Jimny builds. Hub-centric, rated for real loads, and shipped in the box you see on every trade counter.",
-    lifestyle: '/assets/lifestyle/black-boxes.png',
+    lifestyle: '/assets/lifestyle/silver-boxes.png',
     finishes: [
       { name: 'Matte Black', hex: '#1C1C1C', img: R.black, front: R.blackFront },
       { name: 'Machined Silver', hex: '#C6C8CB', img: R.silver, front: R.silver },
@@ -66,8 +67,8 @@ export const MODELS: Model[] = [
   },
   {
     id: 'd-hole', name: 'SSS D-Hole', short: 'D-Hole', cat: 'steel', tag: 'Classic steel', sizes: ['15"', '16"'], badge: 'Trade favourite',
-    blurb: 'The classic D-hole wheel, done properly. Gloss black, high load ratings and the common PCDs for utes, vans, fleets and trailers — always in stock.',
-    lifestyle: '/assets/lifestyle/silver-boxes.png',
+    blurb: 'The classic D-hole wheel, done properly. Gloss black, high load ratings and the common PCDs for utes, vans, fleets and trailers.',
+    lifestyle: null,
     finishes: [
       { name: 'Gloss Black', hex: '#0E0E0E', img: R.hole, front: R.holeAlt },
     ],
@@ -119,23 +120,6 @@ export const VEHICLES: Vehicle[] = [
   { make: 'Toyota', model: 'RAV4', pcd: '5x114.3', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Machined Silver', img: '/assets/vehicles/rav4.png' },
   { make: 'Suzuki', model: 'Jimny JB74', pcd: '5x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 15x7', wheelName: 'SSS D-Hole 15x7 Gloss Black', img: null },
   { make: 'Toyota', model: 'LandCruiser Prado 150', pcd: '6x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 16x7', wheelName: 'SSS D-Hole 16x7 Gloss Black', img: null },
-];
-
-export interface Stat {
-  n: number;
-  accent?: string;
-  suffix: string;
-  label: string;
-  tail?: string;
-  decimal?: boolean;
-  stars?: boolean;
-}
-
-export const STATS: Stat[] = [
-  { n: 3500, accent: '+', suffix: '+', label: 'Satisfied customers' },
-  { n: 2500, suffix: '', label: 'Returning customers' },
-  { n: 10, tail: ' yrs', suffix: ' yrs', label: 'Supplying trade customers' },
-  { n: 5, decimal: true, stars: true, suffix: '.0', label: 'Google rating' },
 ];
 
 export const byId = (id: string): Wheel => WHEELS.find((w) => w.id === id) ?? WHEELS[0];

@@ -49,7 +49,7 @@ export default function DealerForm() {
         <div className={styles.successIcon}>✓</div>
         <div className={styles.successTitle}>Application received</div>
         <p className={styles.successBody}>
-          Thanks — our trade team will be in touch within one business day.
+          Thanks — our trade team will be in touch soon.
         </p>
         <p className={styles.successSub}>
           Need it sooner? Call <a href="tel:0391165787">03 9116 5787</a>.

@@ -27,8 +27,8 @@ export default function DealerPage() {
               <div>
                 <div className={styles.stepTitle}>Apply</div>
                 <div className={styles.stepBody}>
-                  Tell us about your business — takes two minutes. We review
-                  every application within one business day.
+                  Tell us about your business — takes two minutes. We&apos;ll
+                  review your application and be in touch.
                 </div>
               </div>
             </div>
@@ -45,10 +45,10 @@ export default function DealerPage() {
             <div className={styles.step}>
               <span className={styles.stepNum}>3</span>
               <div>
-                <div className={styles.stepTitle}>Order online, any time</div>
+                <div className={styles.stepTitle}>Order online</div>
                 <div className={styles.stepBody}>
-                  Log in to the dealer portal for live stock and 24/7
-                  ordering, dispatched from Dandenong South.
+                  Log in to the dealer portal to place orders, dispatched
+                  from Dandenong South.
                 </div>
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function DealerPage() {
               rel="noopener noreferrer"
               className={styles.alreadyBtn}
             >
-              Wholesale login →
+              Wholesale Login →
             </a>
           </div>
         </div>

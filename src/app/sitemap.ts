@@ -1,6 +1,5 @@
 import type { MetadataRoute } from "next";
-
-const BASE_URL = "https://www.ssstyres.com.au";
+import { getBaseUrl } from "@/lib/site";
 
 const ROUTES = [
   "",
@@ -17,8 +16,9 @@ const ROUTES = [
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const base = getBaseUrl();
   return ROUTES.map((route) => ({
-    url: `${BASE_URL}${route}`,
+    url: `${base}${route}`,
     lastModified: new Date(),
   }));
 }

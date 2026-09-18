@@ -36,7 +36,7 @@ export default function ContactPage() {
             >
               info@ssswheels.com.au
             </a>
-            <div className={styles.infoSub}>We reply within one business day</div>
+            <div className={styles.infoSub}>We aim to reply promptly</div>
           </div>
           <div className={styles.infoCard}>
             <div className={styles.infoLabel}>Warehouse — Melbourne</div>
@@ -50,7 +50,7 @@ export default function ContactPage() {
           <div className={styles.dealersCard}>
             <div className={styles.dealersLabel}>Dealers</div>
             <div className={styles.dealersBody}>
-              Order 24/7 through the wholesale portal, or apply for a trade
+              Order through the wholesale portal, or apply for a trade
               account.
             </div>
             <div className={styles.dealersCtas}>
@@ -60,7 +60,7 @@ export default function ContactPage() {
                 rel="noopener noreferrer"
                 className={styles.btnRed}
               >
-                Wholesale login
+                Wholesale Login
               </a>
               <Link href="/dealer" className={styles.btnGhostDark}>
                 Become a dealer

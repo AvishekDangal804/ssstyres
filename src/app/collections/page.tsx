@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { MODELS, WHEELS, PORTAL } from "@/lib/wheels-data";
 import styles from "./Collections.module.css";
 
@@ -51,12 +52,16 @@ export default function CollectionsPage() {
             <div className={styles.bandInner}>
               <div className={`${styles.mediaWrap} ${i % 2 ? styles.second : ""}`}>
                 <div className={styles.mediaBox}>
-                  <Image
-                    src={c.lifestyle}
-                    alt={`${c.name} in the warehouse`}
-                    fill
-                    style={{ objectFit: "cover" }}
-                  />
+                  {c.lifestyle ? (
+                    <Image
+                      src={c.lifestyle}
+                      alt={`${c.name} in the warehouse`}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+                  ) : (
+                    <ImagePlaceholder label={`${c.name} warehouse photo`} />
+                  )}
                 </div>
                 <div
                   className={styles.mediaFloat}

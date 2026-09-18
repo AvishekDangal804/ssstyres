@@ -6,7 +6,7 @@ import Image from "next/image";
 import { PORTAL } from "@/lib/wheels-data";
 import styles from "./SiteHeader.module.css";
 
-type Menu = "wheels" | "more" | null;
+type Menu = "wheels" | null;
 
 // Touchscreens (and touch-emulated browsers) synthesize mouseenter/mouseleave
 // around a tap, which fights with hover-to-open and closes the dropdown
@@ -60,7 +60,7 @@ export default function SiteHeader() {
           className={`${styles.nav} ${mobileOpen ? styles.open : ""}`}
           onClick={(e) => {
             // Close the mobile menu on an actual navigation, but not when
-            // tapping the Wheels/More toggle buttons (which aren't links).
+            // tapping the Wheels toggle button (which isn't a link).
             if ((e.target as HTMLElement).closest("a")) {
               setMobileOpen(false);
               setMenu(null);
@@ -112,44 +112,26 @@ export default function SiteHeader() {
           <Link href="/media" className={styles.navItem}>
             Media
           </Link>
-
-          <div
-            className={styles.navMenu}
-            onMouseEnter={hoverOpen("more")}
-            onMouseLeave={hoverClose}
-          >
-            <button
-              type="button"
-              className={styles.navButton}
-              onClick={() => toggle("more")}
-              aria-expanded={menu === "more"}
-            >
-              More <span className={styles.caret}>▼</span>
-            </button>
-            {menu === "more" && (
-              <div className={`${styles.dropdown} ${styles.right}`}>
-                <Link href="/about">About Us</Link>
-                <Link href="/legal#terms">Terms &amp; Conditions</Link>
-                <Link href="/legal#warranty">Warranty &amp; Returns</Link>
-                <Link href="/legal#privacy">Privacy Policy</Link>
-                <Link href="/contact">Contact Us</Link>
-              </div>
-            )}
-          </div>
-        </nav>
-
-        <div className={styles.ctaWrap}>
-          <Link href="/dealer" className={styles.btnOutline}>
-            Become a Dealer
+          <Link href="/about" className={styles.navItem}>
+            About Us
+          </Link>
+          <Link href="/contact" className={styles.navItem}>
+            Contact Us
           </Link>
           <a
             href={PORTAL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.btnRed}
+            className={styles.navItem}
           >
-            Dealer Portal
+            Wholesale Login
           </a>
+        </nav>
+
+        <div className={styles.ctaWrap}>
+          <Link href="/dealer" className={styles.btnRed}>
+            Become a Dealer
+          </Link>
         </div>
 
         <button

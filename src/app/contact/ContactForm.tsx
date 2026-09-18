@@ -43,8 +43,8 @@ export default function ContactForm() {
         <div className={styles.successIcon}>✓</div>
         <div className={styles.successTitle}>Enquiry sent</div>
         <p className={styles.successBody}>
-          Thanks — we&apos;ll get back to you within one business day.
-          Urgent? Call <a href="tel:0391165787">03 9116 5787</a>.
+          Thanks — we&apos;ll get back to you as soon as we can. Urgent?
+          Call <a href="tel:0391165787">03 9116 5787</a>.
         </p>
       </div>
     );

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { getBaseUrl } from "@/lib/site";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -18,12 +19,12 @@ const barlowCondensed = Barlow_Condensed({
   display: "swap",
 });
 
-const title = "SSS Wheels & Tyres | Australian Trade Wheel Supply";
+const title = "SSS Wheels & Tyres | Australian Wholesale Wheel & Tyre Supplier";
 const description =
-  "SSS Wheels & Tyres supplies the SSS D-Locker and SSS D-Hole wheels to Australian trade accounts — panel shops, workshops, fleets and resellers. Apply for a dealer account or find your fitment.";
+  "SSS Wheels & Tyres is an Australian trade-only wholesale supplier of wheels and tyres — including the SSS D-Locker and SSS D-Hole wheel range — to panel shops, workshops, fleets and resellers.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.ssstyres.com.au"),
+  metadataBase: new URL(getBaseUrl()),
   title: {
     default: title,
     template: "%s",

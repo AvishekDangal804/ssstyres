@@ -21,8 +21,7 @@ interface Tile {
 const ALL_TILES: Tile[] = [
   { kind: "Build", label: "Toyota HiLux", sub: "SSS D-Locker 17x8 · Matte Black", img: "/assets/vehicles/hilux.png", fit: "cover", span: 2, href: "/wheels?model=d-locker" },
   { kind: "Wheel", label: "D-Locker", sub: "Matte Black · beadlock style", img: "/assets/wheels/r7.png", fit: "contain", href: "/wheels?model=d-locker" },
-  { kind: "Build", label: "Ford Ranger", sub: "SSS D-Locker 17x8 · Matte Black", img: "/assets/vehicles/ranger.png", fit: "cover", href: "/wheels?model=d-locker" },
-  { kind: "Warehouse", label: "Ready to ship", sub: "Dandenong South, VIC", img: "/assets/lifestyle/black-boxes.png", fit: "cover", tall: true, href: "/about" },
+  { kind: "Build", label: "Ford Ranger", sub: "SSS D-Locker 17x8 · Matte Black", img: "/assets/vehicles/ranger.png", fit: "cover", tall: true, href: "/wheels?model=d-locker" },
   { kind: "Build", label: "Toyota HiAce", sub: "SSS D-Locker 16x8 · Matte Black", img: "/assets/vehicles/hiace.png", fit: "cover", href: "/wheels?model=d-locker" },
   { kind: "Wheel", label: "D-Hole", sub: "Gloss Black · pressed steel", img: "/assets/wheels/r3.png", fit: "contain", href: "/wheels?model=d-hole" },
   { kind: "Build", label: "Toyota RAV4", sub: "SSS D-Locker 17x8 · Machined Silver", img: "/assets/vehicles/rav4.png", fit: "cover", span: 2, href: "/wheels?model=d-locker" },

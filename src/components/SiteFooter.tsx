@@ -24,8 +24,8 @@ export default function SiteFooter() {
           </div>
           <h2 className={styles.bandTitle}>Ready to stock SSS Wheels?</h2>
           <p className={styles.bandBody}>
-            Join 3,500+ workshops, fleets and resellers across Australia.
-            Apply online — approvals within one business day.
+            Join workshops, fleets and resellers across Australia. Apply
+            online to open a trade account.
           </p>
           <div className={styles.bandCtas}>
             <Link href="/dealer" className={styles.btnRed}>
@@ -37,7 +37,7 @@ export default function SiteFooter() {
               rel="noopener noreferrer"
               className={styles.btnOutline}
             >
-              Wholesale login
+              Wholesale Login
             </a>
           </div>
         </div>
@@ -55,8 +55,7 @@ export default function SiteFooter() {
             />
             <p>
               Wheels and tyres supplied wholesale to Australian dealers,
-              workshops, fleets and resellers — backed by 10 years of trade
-              supply and a 5.0 Google rating.
+              workshops, fleets and resellers.
             </p>
           </div>
           <div>
