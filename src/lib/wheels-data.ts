@@ -1,5 +1,4 @@
-export const RED = '#D80009';
-export const PORTAL = 'http://orders.ssswheels.com.au/WebOrder';
+export const PORTAL = 'https://orders.ssswheels.com.au/WebOrder';
 
 const R = {
   black: '/assets/wheels/r7.png',
@@ -24,9 +23,9 @@ export interface Category {
 
 export const CATEGORIES: Category[] = [
   { id: 'steel', name: 'Steel', tag: 'Durable and repairable.', blurb: 'Pressed-steel construction that takes a hit and keeps rolling — repairable, rated for real loads, finished to shrug off kerbs, gravel and salt.', img: R.hole, bullets: ['Repairable construction', 'High load ratings', 'Classic D-hole design'] },
-  { id: 'offroad', name: 'Off Road', tag: 'Engineered for off-road use.', blurb: 'The SSS D-Locker in zero and negative offsets for dual cabs, wagons and touring builds — aggressive stance, solid construction.', img: R.black, bullets: ['1250 kg load rating', 'Negative offset fitments', 'Tested on Australian corrugations'] },
+  { id: 'offroad', name: 'Off Road', tag: 'Engineered for off-road use.', blurb: 'The SSS D-Locker in zero and negative offsets for dual cabs, wagons and touring builds — aggressive stance, solid construction.', img: R.black, bullets: ['1250 kg load rating', 'Negative offset fitments', 'Bolted beadlock-style ring'] },
   { id: 'beadlock', name: 'Beadlocks', tag: 'Beadlock-style strength.', blurb: "The D-Locker's bolted beadlock-style ring gives comp-inspired looks — the styling tourers ask for. Check your state's rules on modified wheels before fitting.", img: R.silverGold, bullets: ['Simulated beadlock ring', 'Hub-centric fitment', 'Comp-inspired styling'] },
-  { id: 'street', name: 'Street', tag: 'Clean. Every day.', blurb: 'Machined-silver D-Locker fitments for SUVs and daily drivers — RAV4, Prado, Everest — with OEM-friendly offsets that fill the guards properly.', img: R.silver, bullets: ['OEM-friendly offsets', 'Hub-centric fitment', 'Machined silver finish'] },
+  { id: 'street', name: 'Street', tag: 'Clean. Every day.', blurb: 'Machined-silver D-Locker fitments for SUVs and daily drivers such as the RAV4, with OEM-friendly offsets.', img: R.silver, bullets: ['OEM-friendly offsets', 'Hub-centric fitment', 'Machined silver finish'] },
   { id: 'commercial', name: 'Commercial', tag: 'Built for fleet use.', blurb: 'The SSS D-Hole for vans, utes and fleets — high load ratings, a finish that hides kerb rash, and volume supply for fleet accounts.', img: R.holeAlt, bullets: ['Fleet volume supply', 'HiAce and LT fitments', 'Gloss black finish'] },
   { id: 'trailer', name: 'Trailer', tag: 'Tow with confidence.', blurb: 'D-Hole fitments for box, boat and camper trailers — the common PCDs, with a corrosion-resistant coating.', img: R.hole, bullets: ['15"–16" fitments', 'Multi-PCD options', 'Corrosion-resistant finish'] },
 ];
@@ -47,7 +46,6 @@ export interface Model {
   cat: CategoryId;
   tag: string;
   sizes: string[];
-  badge: string;
   blurb: string;
   /** Real warehouse/stock photo for this model — null where none exists yet. */
   lifestyle: string | null;
@@ -56,8 +54,8 @@ export interface Model {
 
 export const MODELS: Model[] = [
   {
-    id: 'd-locker', name: 'SSS D-Locker', short: 'D-Locker', cat: 'offroad', tag: 'Beadlock-style · 4x4 off-road', sizes: ['16"', '17"'], badge: 'Best seller',
-    blurb: "A 4x4 off-road wheel with a bolted beadlock-style ring — the tourer's favourite for HiLux, Ranger, Prado and Jimny builds. Hub-centric, rated for real loads, and shipped in the box you see on every trade counter.",
+    id: 'd-locker', name: 'SSS D-Locker', short: 'D-Locker', cat: 'offroad', tag: 'Beadlock-style · 4x4 off-road', sizes: ['16"', '17"'],
+    blurb: "A 4x4 off-road wheel with a bolted beadlock-style ring, offered for HiLux, Ranger, HiAce and RAV4 fitments. Hub-centric, with load ratings listed for each fitment.",
     lifestyle: '/assets/lifestyle/silver-boxes.png',
     finishes: [
       { name: 'Matte Black', hex: '#1C1C1C', img: R.black, front: R.blackFront },
@@ -66,7 +64,7 @@ export const MODELS: Model[] = [
     ],
   },
   {
-    id: 'd-hole', name: 'SSS D-Hole', short: 'D-Hole', cat: 'steel', tag: 'Classic steel', sizes: ['15"', '16"'], badge: 'Trade favourite',
+    id: 'd-hole', name: 'SSS D-Hole', short: 'D-Hole', cat: 'steel', tag: 'Classic steel', sizes: ['15"', '16"'],
     blurb: 'The classic D-hole wheel, done properly. Gloss black, high load ratings and the common PCDs for utes, vans, fleets and trailers.',
     lifestyle: null,
     finishes: [
@@ -89,16 +87,15 @@ export interface Wheel {
   build: string;
   load: string;
   img: string;
-  badge?: string;
 }
 
 export const WHEELS: Wheel[] = [
-  { id: 'dl-17x8-6x139-b', model: 'd-locker', name: 'SSS D-Locker', variant: 'Matte Black', hex: '#1C1C1C', cat: 'offroad', cat2: 'beadlock', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.black, badge: 'Best seller' },
-  { id: 'dl-17x8-6x139-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET20', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.silver, badge: 'New finish' },
+  { id: 'dl-17x8-6x139-b', model: 'd-locker', name: 'SSS D-Locker', variant: 'Matte Black', hex: '#1C1C1C', cat: 'offroad', cat2: 'beadlock', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.black },
+  { id: 'dl-17x8-6x139-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET20', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.silver },
   { id: 'dl-17x8-6x139-t', model: 'd-locker', name: 'SSS D-Locker', variant: 'Silver / Black Ring', hex: '#6C6F74', cat: 'beadlock', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.twoTone },
   { id: 'dl-16x8-6x139-b', model: 'd-locker', name: 'SSS D-Locker', variant: 'Matte Black', hex: '#1C1C1C', cat: 'offroad', cat2: 'beadlock', size: '16x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.blackFront },
   { id: 'dl-17x8-5x114-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '5x114.3', offset: 'ET35', build: 'Cast alloy · beadlock style', load: '900 kg', img: R.silver },
-  { id: 'dh-15x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.hole, badge: 'Trade favourite' },
+  { id: 'dh-15x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.hole },
   { id: 'dh-15x7-5x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'trailer', size: '15x7', pcd: '5x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.holeAlt },
   { id: 'dh-16x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: R.hole },
 ];

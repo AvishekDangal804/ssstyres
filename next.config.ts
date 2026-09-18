@@ -40,6 +40,15 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    // Source assets are 1.4–2.8 MB PNGs; serve WebP at responsive sizes.
+    // AVIF is deliberately off: encoding beadlock-exploded.png as AVIF hung
+    // for 60s+ (WebP: 0.4s) in testing, which would break the footer image
+    // on every page. Re-test before enabling AVIF.
+    formats: ["image/webp"],
+    // Only the shipped asset folder may be run through the optimizer.
+    localPatterns: [{ pathname: "/assets/**", search: "" }],
+  },
   async headers() {
     return [{ source: "/(.*)", headers: securityHeaders }];
   },

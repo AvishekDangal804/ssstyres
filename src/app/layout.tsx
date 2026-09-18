@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
-import { getBaseUrl } from "@/lib/site";
+import { getBaseUrl, ORGANIZATION_JSON_LD, SITE_NAME } from "@/lib/site";
 import "./globals.css";
 
 const barlow = Barlow({
@@ -19,35 +19,40 @@ const barlowCondensed = Barlow_Condensed({
   display: "swap",
 });
 
-const title = "SSS Wheels & Tyres | Australian Wholesale Wheel & Tyre Supplier";
-const description =
-  "SSS Wheels & Tyres is an Australian trade-only wholesale supplier of wheels and tyres — including the SSS D-Locker and SSS D-Hole wheel range — to panel shops, workshops, fleets and resellers.";
-
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseUrl()),
+  applicationName: SITE_NAME,
   title: {
-    default: title,
+    default: `${SITE_NAME} | Australian Wholesale Wheel & Tyre Supplier`,
     template: "%s",
   },
-  description,
-  openGraph: {
-    title,
-    description,
-    url: "/",
-    siteName: "SSS Wheels & Tyres",
-    images: [{ url: "/assets/hero.png", width: 1881, height: 836 }],
-    locale: "en_AU",
-    type: "website",
-  },
+  description:
+    "SSS Wheels & Tyres is an Australian trade-only wholesale supplier of wheels and tyres to panel shops, workshops, fleets and resellers.",
 };
+
+// Static, server-controlled JSON. "<" is escaped so the payload can never
+// close the script tag, whatever its contents.
+const organizationJsonLd = JSON.stringify(ORGANIZATION_JSON_LD).replace(
+  /</g,
+  "\\u003c"
+);
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-AU" className={`${barlow.variable} ${barlowCondensed.variable}`}>
       <body>
+        <a href="#main" className="skipLink">
+          Skip to main content
+        </a>
         <SiteHeader />
-        {children}
+        <main id="main" tabIndex={-1} className="main">
+          {children}
+        </main>
         <SiteFooter />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: organizationJsonLd }}
+        />
       </body>
     </html>
   );

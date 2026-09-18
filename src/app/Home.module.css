@@ -14,8 +14,12 @@
 .heroImg {
   position: absolute;
   inset: -10% 0 -10% 0;
-  background: url("/assets/hero.png") center 55% / cover no-repeat;
   will-change: transform;
+}
+
+.heroPhoto {
+  object-fit: cover;
+  object-position: 55% 55%;
 }
 
 .heroScrim {
@@ -127,6 +131,38 @@
 .btnGhostLight:hover {
   background: #fff;
   color: var(--black);
+}
+
+@media (max-width: 720px) {
+  /* Phones: photo on top, copy beneath on the dark base, so the headline
+     never sits over the wheel and the crop is chosen for a portrait screen. */
+  .hero {
+    position: relative;
+    display: block;
+    min-height: 0;
+  }
+
+  .heroImg {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: min(52vh, 112vw);
+  }
+
+  .heroPhoto {
+    object-position: 57% 62%;
+  }
+
+  .heroScrim {
+    inset: 0 0 auto 0;
+    height: min(52vh, 112vw);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, var(--black-deep) 100%);
+  }
+
+  .heroCopyWrap {
+    padding-top: 4px;
+    padding-bottom: 48px;
+  }
 }
 
 @keyframes fadeUp {
@@ -327,7 +363,12 @@
   aspect-ratio: 4 / 3;
   border-radius: 22px;
   overflow: hidden;
-  background: #161616 url("/assets/lifestyle/silver-boxes.png") center 42% / cover no-repeat;
+  background: #161616;
+}
+
+.warehousePhotoImg {
+  object-fit: cover;
+  object-position: center 42%;
 }
 
 .warehouseBody {

@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import styles from "./About.module.css";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "About Us | SSS Wheels & Tyres",
   description:
-    "SSS Wheels & Tyres is an Australian trade-only wholesale supplier of wheels and tyres to panel shops, workshops, fleets and resellers.",
-};
+    "About SSS Wheels & Tyres — a trade-only wholesale supplier holding its own stock in Dandenong South, Melbourne, and supplying the SSS wheel range to dealers across Australia.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

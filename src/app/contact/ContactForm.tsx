@@ -68,6 +68,8 @@ export default function ContactForm() {
             <input
               required
               name="name"
+              maxLength={100}
+              autoComplete="name"
               placeholder="Full name"
               value={values.name}
               onChange={field("name")}
@@ -78,6 +80,8 @@ export default function ContactForm() {
             <input
               type="tel"
               name="phone"
+              maxLength={30}
+              autoComplete="tel"
               placeholder="04xx xxx xxx"
               value={values.phone}
               onChange={field("phone")}
@@ -90,6 +94,8 @@ export default function ContactForm() {
             required
             type="email"
             name="email"
+            maxLength={254}
+            autoComplete="email"
             placeholder="you@example.com"
             value={values.email}
             onChange={field("email")}
@@ -109,6 +115,7 @@ export default function ContactForm() {
             required
             rows={4}
             name="message"
+            maxLength={5000}
             placeholder="Vehicle, sizes, quantities — the more detail the better"
             value={values.message}
             onChange={field("message")}

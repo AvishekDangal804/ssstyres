@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
@@ -69,12 +70,13 @@ export default function WheelsCatalogue() {
       <PageHeader kicker="SSS Wheels · The range" title={pageTitle} />
 
       <section className={styles.filtersSection}>
-        <div className={styles.filters}>
+        <div className={styles.filters} role="group" aria-label="Filter wheels">
           {filters.map((f) => (
             <button
               key={f.id}
               type="button"
               onClick={() => setCat(f.id)}
+              aria-pressed={cat === f.id}
               className={`${styles.filterBtn} ${cat === f.id ? styles.active : ""}`}
             >
               {f.name}
@@ -88,13 +90,15 @@ export default function WheelsCatalogue() {
           {wheels.map((w) => (
             <div key={w.id} className={styles.card}>
               <div className={styles.cardImgWrap}>
-                <div
-                  role="img"
-                  aria-label={`SSS ${w.name} ${w.variant}`}
-                  className={styles.cardImg}
-                  style={{ backgroundImage: `url('${w.img}')` }}
-                />
-                {w.badge && <span className={styles.cardBadge}>{w.badge}</span>}
+                <div className={styles.cardImg}>
+                  <Image
+                    src={w.img}
+                    alt={`${w.name} ${w.size} in ${w.variant}`}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 25vw"
+                    className={styles.cardPhoto}
+                  />
+                </div>
               </div>
               <div className={styles.cardBody}>
                 <div className={styles.cardCat}>{w.catLabel}</div>

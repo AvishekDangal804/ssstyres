@@ -75,6 +75,8 @@ export default function DealerForm() {
           <input
             required
             name="businessName"
+            maxLength={120}
+            autoComplete="organization"
             placeholder="e.g. Southside Tyre & Auto"
             value={values.businessName}
             onChange={field("businessName")}
@@ -86,6 +88,7 @@ export default function DealerForm() {
             <input
               required
               name="abn"
+              maxLength={20}
               placeholder="00 000 000 000"
               value={values.abn}
               onChange={field("abn")}
@@ -110,6 +113,8 @@ export default function DealerForm() {
             <input
               required
               name="contactName"
+              maxLength={100}
+              autoComplete="name"
               placeholder="Full name"
               value={values.contactName}
               onChange={field("contactName")}
@@ -121,6 +126,8 @@ export default function DealerForm() {
               required
               type="tel"
               name="phone"
+              maxLength={30}
+              autoComplete="tel"
               placeholder="04xx xxx xxx"
               value={values.phone}
               onChange={field("phone")}
@@ -133,6 +140,8 @@ export default function DealerForm() {
             required
             type="email"
             name="email"
+            maxLength={254}
+            autoComplete="email"
             placeholder="you@business.com.au"
             value={values.email}
             onChange={field("email")}
@@ -143,6 +152,7 @@ export default function DealerForm() {
           <textarea
             rows={3}
             name="notes"
+            maxLength={2000}
             placeholder="Volumes, brands you fit, locations…"
             value={values.notes}
             onChange={field("notes")}

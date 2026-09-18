@@ -1,5 +1,11 @@
 "use server";
 
+import {
+  cleanText,
+  deliverLead,
+  DELIVERY_FAILURE_MESSAGE,
+  isValidEmail,
+} from "@/lib/lead-delivery";
 import { BUSINESS_TYPES } from "./constants";
 
 export type DealerApplicationState = {
@@ -20,10 +26,6 @@ function isValidAbn(raw: string): boolean {
   return sum % 89 === 0;
 }
 
-function isValidEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
 function isValidPhone(value: string): boolean {
   const digits = value.replace(/\D/g, "");
   return digits.length >= 8 && digits.length <= 12;
@@ -34,17 +36,17 @@ export async function submitDealerApplication(
   formData: FormData
 ): Promise<DealerApplicationState> {
   // Honeypot: real visitors never fill this hidden field.
-  if (String(formData.get("company_website") ?? "").trim() !== "") {
+  if (cleanText(formData.get("company_website"), 200) !== "") {
     return { status: "success" };
   }
 
-  const businessName = String(formData.get("businessName") ?? "").trim();
-  const abn = String(formData.get("abn") ?? "").trim();
-  const businessType = String(formData.get("businessType") ?? "").trim();
-  const contactName = String(formData.get("contactName") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const notes = String(formData.get("notes") ?? "").trim();
+  const businessName = cleanText(formData.get("businessName"), 120);
+  const abn = cleanText(formData.get("abn"), 20);
+  const businessType = cleanText(formData.get("businessType"), 60);
+  const contactName = cleanText(formData.get("contactName"), 100);
+  const phone = cleanText(formData.get("phone"), 30);
+  const email = cleanText(formData.get("email"), 254);
+  const notes = cleanText(formData.get("notes"), 2000);
 
   if (!businessName || !contactName) {
     return { status: "error", message: "Please fill in all required fields." };
@@ -62,19 +64,23 @@ export async function submitDealerApplication(
     return { status: "error", message: "Enter a valid email address." };
   }
 
-  // TODO(go-live): wire this up to a real delivery channel (transactional
-  // email or CRM webhook) — nothing is sent anywhere yet, this just logs
-  // the validated application server-side.
-  console.log("[dealer-application]", {
+  const result = await deliverLead(
+    "Dealer application",
     businessName,
-    abn,
-    businessType,
-    contactName,
-    phone,
-    email,
-    notes,
-    receivedAt: new Date().toISOString(),
-  });
+    [
+      ["Business name", businessName],
+      ["ABN", abn],
+      ["Business type", businessType],
+      ["Contact name", contactName],
+      ["Phone", phone],
+      ["Email", email],
+      ["Notes", notes],
+    ],
+    email
+  );
+  if (!result.ok) {
+    return { status: "error", message: DELIVERY_FAILURE_MESSAGE };
+  }
 
   return { status: "success" };
 }

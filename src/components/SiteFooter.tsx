@@ -15,7 +15,15 @@ export default function SiteFooter() {
   return (
     <footer>
       <section ref={bandRef} className={styles.band}>
-        <div data-band-img className={styles.bandImg} aria-hidden="true" />
+        <div data-band-img className={styles.bandImg} aria-hidden="true">
+          <Image
+            src="/assets/beadlock-exploded.png"
+            alt=""
+            fill
+            sizes="(max-width: 900px) 100vw, 60vw"
+            className={styles.bandPhoto}
+          />
+        </div>
         <div className={styles.bandScrim} />
         <div className={styles.bandInner}>
           <div className={styles.bandKicker}>
@@ -53,13 +61,16 @@ export default function SiteFooter() {
               height={32}
               style={{ height: 32, width: "auto" }}
             />
+            <p className={styles.tagline}>
+              Wholesale Wheels &amp; Tyres for Australian Trade
+            </p>
             <p>
               Wheels and tyres supplied wholesale to Australian dealers,
               workshops, fleets and resellers.
             </p>
           </div>
           <div>
-            <div className={styles.colTitle}>Wheels</div>
+            <h2 className={styles.colTitle}>Wheels</h2>
             <div className={styles.colLinks}>
               <Link href="/wheels?cat=steel">Steel</Link>
               <Link href="/wheels?cat=offroad">Off Road</Link>
@@ -71,8 +82,9 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <div className={styles.colTitle}>Company</div>
+            <h2 className={styles.colTitle}>Company</h2>
             <div className={styles.colLinks}>
+              <Link href="/dealer">Become a Dealer</Link>
               <Link href="/about">About Us</Link>
               <Link href="/accessories">Accessories</Link>
               <Link href="/fitment">Fitment Guide</Link>
@@ -81,7 +93,7 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <div className={styles.colTitle}>Warehouse</div>
+            <h2 className={styles.colTitle}>Warehouse</h2>
             <div className={styles.colLinks}>
               <span>
                 13 Advantage Drive

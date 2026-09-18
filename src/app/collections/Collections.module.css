@@ -80,9 +80,6 @@
   bottom: -14%;
   width: 46%;
   aspect-ratio: 1;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5));
 }
 
@@ -101,6 +98,10 @@
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 14px;
+}
+
+.band.dark .tag {
+  color: #fff;
 }
 
 .tag .bar {
@@ -287,12 +288,14 @@
   transform: translateY(-4px);
 }
 
+.contain {
+  object-fit: contain;
+}
+
 .finishImg {
+  position: relative;
   aspect-ratio: 1;
   width: 100%;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 

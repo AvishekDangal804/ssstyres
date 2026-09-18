@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PORTAL } from "@/lib/wheels-data";
@@ -19,6 +19,7 @@ const supportsHover = () =>
 export default function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const wheelsBtnRef = useRef<HTMLButtonElement | null>(null);
 
   const toggle = (m: Exclude<Menu, null>) =>
     setMenu((cur) => (cur === m ? null : m));
@@ -34,7 +35,7 @@ export default function SiteHeader() {
     <header className={styles.wrap}>
       <div className={styles.topbar}>
         <div className={styles.topbarInner}>
-          <span>
+          <span className={styles.topbarAddress}>
             Melbourne — 13 Advantage Drive, Dandenong South · Sydney,
             Brisbane &amp; Adelaide opening soon
           </span>
@@ -52,11 +53,13 @@ export default function SiteHeader() {
             width={234}
             height={36}
             style={{ height: 36, width: "auto" }}
-            priority
+            preload
           />
         </Link>
 
         <nav
+          id="site-nav"
+          aria-label="Main"
           className={`${styles.nav} ${mobileOpen ? styles.open : ""}`}
           onClick={(e) => {
             // Close the mobile menu on an actual navigation, but not when
@@ -71,17 +74,25 @@ export default function SiteHeader() {
             className={styles.navMenu}
             onMouseEnter={hoverOpen("wheels")}
             onMouseLeave={hoverClose}
+            onKeyDown={(e) => {
+              if (e.key === "Escape" && menu === "wheels") {
+                setMenu(null);
+                wheelsBtnRef.current?.focus();
+              }
+            }}
           >
             <button
+              ref={wheelsBtnRef}
               type="button"
               className={styles.navButton}
               onClick={() => toggle("wheels")}
               aria-expanded={menu === "wheels"}
+              aria-controls="menu-wheels"
             >
               Wheels <span className={styles.caret}>▼</span>
             </button>
             {menu === "wheels" && (
-              <div className={styles.dropdown}>
+              <div className={styles.dropdown} id="menu-wheels">
                 <Link href="/wheels?model=d-locker" className={styles.strong}>
                   SSS D-Locker
                 </Link>
@@ -139,6 +150,7 @@ export default function SiteHeader() {
           className={styles.burger}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
+          aria-controls="site-nav"
           onClick={() => setMobileOpen((v) => !v)}
         >
           <span />

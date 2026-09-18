@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import { PORTAL } from "@/lib/wheels-data";
 import DealerForm from "./DealerForm";
 import styles from "./Dealer.module.css";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Become a Dealer | SSS Wheels & Tyres",
   description:
     "Apply for an SSS Wheels trade account — panel shops, mechanical workshops, fleets and tyre resellers order at wholesale pricing through the dealer portal.",
-};
+  path: "/dealer",
+});
 
 export default function DealerPage() {
   return (

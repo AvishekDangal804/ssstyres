@@ -1,8 +1,9 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { VEHICLES, WHEELS } from "@/lib/wheels-data";
+import { VEHICLES, WHEELS, PORTAL } from "@/lib/wheels-data";
 import styles from "./Fitment.module.css";
 
 const SPECS = [
@@ -76,7 +77,16 @@ export default function FitmentGuide() {
   return (
     <>
       <section className={styles.hero}>
-        <div className={styles.heroWheel} />
+        <div className={styles.heroWheel} aria-hidden="true">
+          <Image
+            src="/assets/wheels/r7.png"
+            alt=""
+            fill
+            loading="eager"
+            sizes="(max-width: 900px) 52vw, 760px"
+            className={styles.contain}
+          />
+        </div>
         <div className={styles.heroScrim} />
         <div className={styles.heroInner}>
           <div className={styles.kickerRow}>
@@ -144,6 +154,7 @@ export default function FitmentGuide() {
                     key={`${v.make}-${v.model}`}
                     type="button"
                     onClick={() => selectVehicle(v)}
+                    aria-pressed={v.make === make && v.model === model}
                     className={`${styles.pill} ${v.make === make && v.model === model ? styles.active : ""}`}
                   >
                     {v.make} {v.model}
@@ -158,10 +169,15 @@ export default function FitmentGuide() {
             </div>
 
             <div className={styles.resultCard}>
-              <div
-                className={styles.resultImg}
-                style={{ backgroundImage: `url('${wheel.img}')` }}
-              />
+              <div className={styles.resultImg}>
+                <Image
+                  src={wheel.img}
+                  alt={`${wheel.name} ${wheel.size} in ${wheel.variant}`}
+                  fill
+                  sizes="(max-width: 700px) 60vw, 30vw"
+                  className={styles.contain}
+                />
+              </div>
               <div className={styles.resultBody}>
                 <div>
                   <div className={styles.stepKicker}>Step 2 — Your fitment</div>
@@ -192,7 +208,7 @@ export default function FitmentGuide() {
                     View this wheel <span>→</span>
                   </Link>
                   <a
-                    href="http://orders.ssswheels.com.au/WebOrder"
+                    href={PORTAL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={styles.btnGhostLightSm}
@@ -245,12 +261,13 @@ export default function FitmentGuide() {
             <div className={styles.eyebrow}>Quick reference</div>
             <h2 className={styles.h2}>Common vehicle fitments</h2>
           </div>
-          <div className={styles.pcdFilters}>
+          <div className={styles.pcdFilters} role="group" aria-label="Filter by PCD">
             {pcds.map((p) => (
               <button
                 key={p}
                 type="button"
                 onClick={() => setPcd(p)}
+                aria-pressed={pcd === p}
                 className={`${styles.pill} ${pcd === p ? styles.active : ""}`}
               >
                 {p === "all" ? "All PCDs" : p}
@@ -270,12 +287,20 @@ export default function FitmentGuide() {
                   selectVehicle(v);
                   jumpToFinder();
                 }}
+                aria-pressed={on}
                 className={`${styles.row} ${on ? styles.active : ""}`}
               >
-                <div
-                  className={styles.rowThumb}
-                  style={{ backgroundImage: `url('${w.img}')` }}
-                />
+                <div className={styles.rowThumb} aria-hidden="true">
+                  <div className={styles.rowThumbInner}>
+                    <Image
+                      src={w.img}
+                      alt=""
+                      fill
+                      sizes="64px"
+                      className={styles.contain}
+                    />
+                  </div>
+                </div>
                 <div className={styles.rowText}>
                   <span className={styles.rowMake}>{v.make}</span>
                   <span className={styles.rowModel}>{v.model}</span>

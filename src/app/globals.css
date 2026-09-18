@@ -1,6 +1,6 @@
 :root {
-  --red: #d80009;
-  --red-hover: #a80007;
+  --red: #da020b;
+  --red-hover: #aa0209;
   --black: #0e0e0e;
   --black-deep: #0a0a0a;
   --charcoal: #121212;
@@ -84,8 +84,45 @@ img {
   font-family: var(--font-barlow-condensed), var(--font-barlow), system-ui, sans-serif;
 }
 
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+.skipLink {
+  position: absolute;
+  left: 16px;
+  top: -80px;
+  z-index: 100;
+  background: var(--black);
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: top 0.15s;
+}
+
+.skipLink:focus {
+  top: 12px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
 }

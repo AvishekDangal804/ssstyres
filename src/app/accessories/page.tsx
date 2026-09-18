@@ -1,14 +1,15 @@
-import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { PORTAL } from "@/lib/wheels-data";
 import styles from "./Accessories.module.css";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Accessories | SSS Wheels & Tyres",
   description:
     "Wheel nuts, lock nut sets, centre caps, hub-centric rings, valves & TPMS, and beadlock hardware — stocked alongside the wheels.",
-};
+  path: "/accessories",
+});
 
 const ITEMS = [
   {

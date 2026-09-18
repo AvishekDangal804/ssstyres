@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { PORTAL } from "@/lib/wheels-data";
 import ContactForm from "./ContactForm";
 import styles from "./Contact.module.css";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Contact | SSS Wheels & Tyres",
   description:
     "Stock, fitment, warranty or trade accounts — call, email or drop in to SSS Wheels & Tyres in Dandenong South.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

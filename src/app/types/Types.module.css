@@ -33,9 +33,10 @@
 .img {
   position: absolute;
   inset: 0;
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
+}
+
+.photo {
+  object-fit: contain;
 }
 
 .numRow {
@@ -60,7 +61,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #7a7a7a;
+  color: #6b6b6b;
 }
 
 .title {

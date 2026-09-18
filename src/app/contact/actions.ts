@@ -1,5 +1,11 @@
 "use server";
 
+import {
+  cleanText,
+  deliverLead,
+  DELIVERY_FAILURE_MESSAGE,
+  isValidEmail,
+} from "@/lib/lead-delivery";
 import { ENQUIRY_TOPICS } from "./constants";
 
 export type ContactEnquiryState = {
@@ -7,24 +13,20 @@ export type ContactEnquiryState = {
   message?: string;
 };
 
-function isValidEmail(value: string): boolean {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-}
-
 export async function submitContactEnquiry(
   _prev: ContactEnquiryState,
   formData: FormData
 ): Promise<ContactEnquiryState> {
   // Honeypot: real visitors never fill this hidden field.
-  if (String(formData.get("company_website") ?? "").trim() !== "") {
+  if (cleanText(formData.get("company_website"), 200) !== "") {
     return { status: "success" };
   }
 
-  const name = String(formData.get("name") ?? "").trim();
-  const phone = String(formData.get("phone") ?? "").trim();
-  const email = String(formData.get("email") ?? "").trim();
-  const topic = String(formData.get("topic") ?? "").trim();
-  const message = String(formData.get("message") ?? "").trim();
+  const name = cleanText(formData.get("name"), 100);
+  const phone = cleanText(formData.get("phone"), 30);
+  const email = cleanText(formData.get("email"), 254);
+  const topic = cleanText(formData.get("topic"), 60);
+  const message = cleanText(formData.get("message"), 5000);
 
   if (!name) {
     return { status: "error", message: "Please enter your name." };
@@ -39,17 +41,21 @@ export async function submitContactEnquiry(
     return { status: "error", message: "Enter a message." };
   }
 
-  // TODO(go-live): wire this up to a real delivery channel (transactional
-  // email or CRM webhook) — nothing is sent anywhere yet, this just logs
-  // the validated enquiry server-side.
-  console.log("[contact-enquiry]", {
-    name,
-    phone,
-    email,
-    topic,
-    message,
-    receivedAt: new Date().toISOString(),
-  });
+  const result = await deliverLead(
+    "Contact enquiry",
+    `${topic} — ${name}`,
+    [
+      ["Name", name],
+      ["Phone", phone],
+      ["Email", email],
+      ["Topic", topic],
+      ["Message", message],
+    ],
+    email
+  );
+  if (!result.ok) {
+    return { status: "error", message: DELIVERY_FAILURE_MESSAGE };
+  }
 
   return { status: "success" };
 }

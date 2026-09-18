@@ -53,11 +53,25 @@ export default function LegalTabs() {
 
   return (
     <section className={styles.section}>
-      <div className={styles.tabs}>
+      <div className={styles.tabs} role="tablist" aria-label="Legal documents">
         {TABS.map((t) => (
           <button
             key={t.id}
             type="button"
+            role="tab"
+            id={`tab-${t.id}`}
+            aria-selected={tab === t.id}
+            aria-controls={`panel-${t.id}`}
+            tabIndex={tab === t.id ? 0 : -1}
+            onKeyDown={(e) => {
+              const i = TABS.findIndex((x) => x.id === t.id);
+              if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+                e.preventDefault();
+                const next = TABS[(i + (e.key === "ArrowRight" ? 1 : TABS.length - 1)) % TABS.length];
+                pick(next.id);
+                document.getElementById(`tab-${next.id}`)?.focus();
+              }
+            }}
             onClick={() => pick(t.id)}
             className={`${styles.tabBtn} ${tab === t.id ? styles.active : ""}`}
           >
@@ -67,7 +81,7 @@ export default function LegalTabs() {
       </div>
 
       {tab === "terms" && (
-        <div className={styles.entries}>
+        <div className={styles.entries} role="tabpanel" id="panel-terms" aria-labelledby="tab-terms">
           <Entry num="01" title="Who These Terms Apply To">
             <p>
               These Terms govern your use of ssswheels.com.au and any
@@ -245,7 +259,7 @@ export default function LegalTabs() {
       )}
 
       {tab === "warranty" && (
-        <div className={styles.entries}>
+        <div className={styles.entries} role="tabpanel" id="panel-warranty" aria-labelledby="tab-warranty">
           <Entry num="01" title="Your Rights Under Australian Consumer Law">
             <p>
               Our goods come with guarantees that cannot be excluded under
@@ -333,7 +347,7 @@ export default function LegalTabs() {
       )}
 
       {tab === "privacy" && (
-        <div className={styles.entries}>
+        <div className={styles.entries} role="tabpanel" id="panel-privacy" aria-labelledby="tab-privacy">
           <Entry num="01" title="Who We Are">
             <p>
               This policy explains how SSS Wheels &amp; Tyres Pty Ltd

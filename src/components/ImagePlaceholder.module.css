@@ -16,14 +16,14 @@
 .icon {
   width: 34px;
   height: 34px;
-  color: #b0b0b0;
+  color: #8a8a8a;
 }
 
 .label {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.04em;
-  color: #9a9a9a;
+  color: #6b6b6b;
   max-width: 220px;
   line-height: 1.4;
 }

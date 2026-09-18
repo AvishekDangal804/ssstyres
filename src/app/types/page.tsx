@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { CATEGORIES } from "@/lib/wheels-data";
 import styles from "./Types.module.css";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Types of Wheels | SSS Wheels & Tyres",
   description:
     "Steel or alloy? Beadlock or simulated? What each SSS wheel type is built for, and which vehicles it suits.",
-};
+  path: "/types",
+});
 
 export default function TypesPage() {
   return (
@@ -24,12 +26,15 @@ export default function TypesPage() {
           return (
             <div key={c.id} className={styles.row}>
               <div className={`${styles.imgWrap} ${i % 2 ? styles.second : ""}`}>
-                <div
-                  role="img"
-                  aria-label={`SSS ${c.name} wheel`}
-                  className={styles.img}
-                  style={{ backgroundImage: `url('${c.img}')` }}
-                />
+                <div className={styles.img}>
+                  <Image
+                    src={c.img}
+                    alt={`SSS ${c.name} series wheel`}
+                    fill
+                    sizes="(max-width: 700px) 100vw, 440px"
+                    className={styles.photo}
+                  />
+                </div>
               </div>
               <div>
                 <div className={styles.numRow}>

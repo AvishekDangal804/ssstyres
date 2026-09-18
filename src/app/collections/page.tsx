@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { MODELS, WHEELS, PORTAL } from "@/lib/wheels-data";
 import styles from "./Collections.module.css";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Wheel Collections | SSS Wheels & Tyres",
   description:
     "The SSS D-Locker and SSS D-Hole collections — every size, finish and fitment.",
-};
+  path: "/collections",
+});
 
 const collections = MODELS.map((m, i) => {
   const dark = i % 2 === 0;
@@ -48,25 +49,31 @@ export default function CollectionsPage() {
             id={c.id}
             className={`${styles.band} ${c.dark ? styles.dark : styles.light}`}
           >
-            <div className={styles.bgWord}>{c.short}</div>
+            <div className={styles.bgWord} aria-hidden="true">{c.short}</div>
             <div className={styles.bandInner}>
               <div className={`${styles.mediaWrap} ${i % 2 ? styles.second : ""}`}>
                 <div className={styles.mediaBox}>
                   {c.lifestyle ? (
                     <Image
                       src={c.lifestyle}
-                      alt={`${c.name} in the warehouse`}
+                      alt={`${c.name} wheel on SSS-branded boxes in a warehouse`}
                       fill
+                      sizes="(max-width: 700px) 100vw, 45vw"
                       style={{ objectFit: "cover" }}
                     />
                   ) : (
                     <ImagePlaceholder label={`${c.name} warehouse photo`} />
                   )}
                 </div>
-                <div
-                  className={styles.mediaFloat}
-                  style={{ backgroundImage: `url('${c.floatImg}')` }}
-                />
+                <div className={styles.mediaFloat} aria-hidden="true">
+                  <Image
+                    src={c.floatImg}
+                    alt=""
+                    fill
+                    sizes="(max-width: 700px) 60vw, 25vw"
+                    className={styles.contain}
+                  />
+                </div>
               </div>
               <div className={styles.content}>
                 <div className={styles.tag}>
@@ -114,12 +121,15 @@ export default function CollectionsPage() {
                 href={`/wheels?model=${f.modelId}`}
                 className={styles.finishCard}
               >
-                <div
-                  role="img"
-                  aria-label={`${f.name} ${f.finish}`}
-                  className={styles.finishImg}
-                  style={{ backgroundImage: `url('${f.img}')` }}
-                />
+                <div className={styles.finishImg}>
+                  <Image
+                    src={f.img}
+                    alt={`${f.name} in ${f.finish}`}
+                    fill
+                    sizes="(max-width: 500px) 45vw, 220px"
+                    className={styles.contain}
+                  />
+                </div>
                 <div>
                   <div className={styles.finishName}>{f.name}</div>
                   <div className={styles.finishFinish}>{f.finish}</div>

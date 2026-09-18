@@ -1,9 +1,15 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { PORTAL } from "@/lib/wheels-data";
+import { pageMetadata } from "@/lib/site";
+import HomeHero from "./HomeHero";
 import styles from "./Home.module.css";
+
+export const metadata = pageMetadata({
+  title: "SSS Wheels & Tyres | Australian Wholesale Wheel & Tyre Supplier",
+  description:
+    "SSS Wheels & Tyres is an Australian trade-only wholesale supplier of wheels and tyres to panel shops, workshops, fleets and resellers.",
+  path: "/",
+});
 
 const WHO_WE_SUPPLY = [
   {
@@ -48,93 +54,11 @@ const BUILT_FOR_TRADE = [
 ];
 
 export default function Home() {
-  const heroRef = useRef<HTMLElement | null>(null);
-  const heroImgRef = useRef<HTMLDivElement | null>(null);
-  const heroCopyRef = useRef<HTMLDivElement | null>(null);
-  const contentRef = useRef<HTMLDivElement | null>(null);
-
-  // Hero pin/reveal parallax: the content wrapper slides over the pinned
-  // hero as the page scrolls past it.
-  useEffect(() => {
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    let raf = 0;
-    const run = () => {
-      raf = 0;
-      const hero = heroRef.current;
-      const content = contentRef.current;
-      if (!hero || !content) return;
-      const H = hero.offsetHeight || 1;
-      const p = Math.max(
-        0,
-        Math.min(1, (H - content.getBoundingClientRect().top) / H)
-      );
-      if (heroImgRef.current) {
-        heroImgRef.current.style.transform = reduced
-          ? ""
-          : `translate3d(0, ${(p * 110).toFixed(1)}px, 0) scale(${(1 + p * 0.08).toFixed(3)})`;
-      }
-      if (heroCopyRef.current) {
-        heroCopyRef.current.style.opacity = String(Math.max(0, 1 - p * 1.5));
-        heroCopyRef.current.style.transform = reduced
-          ? ""
-          : `translate3d(0, ${(-p * 60).toFixed(1)}px, 0)`;
-      }
-    };
-    const onScroll = () => {
-      if (raf) return;
-      raf = requestAnimationFrame(run);
-    };
-    document.addEventListener("scroll", onScroll, true);
-    window.addEventListener("resize", onScroll);
-    run();
-    return () => {
-      document.removeEventListener("scroll", onScroll, true);
-      window.removeEventListener("resize", onScroll);
-      if (raf) cancelAnimationFrame(raf);
-    };
-  }, []);
-
   return (
     <>
-      <section ref={heroRef} className={styles.hero}>
-        <div ref={heroImgRef} className={styles.heroImg} />
-        <div className={styles.heroScrim} />
-        <div ref={heroCopyRef} className={styles.heroCopyWrap}>
-          <div className={styles.heroCopy}>
-            <div className={styles.kickerRow}>
-              <span className={styles.bar} />
-              SSS Wheels &amp; Tyres · Australian Trade Supply
-            </div>
-            <h1 className={styles.heroH1}>
-              Wholesale Wheels &amp; Tyres.
-              <br />
-              Built for the Trade.
-            </h1>
-            <p className={styles.heroBody}>
-              Supplying quality wheels and tyres to dealers, workshops,
-              fleets and resellers across Australia.
-            </p>
-            <div className={styles.ctaRow}>
-              <Link href="/dealer" className={styles.btnWhite}>
-                Become a Dealer <span>→</span>
-              </Link>
-              <a
-                href={PORTAL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnGhostLight}
-              >
-                Wholesale Login
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HomeHero />
 
-      <div ref={contentRef} className={styles.content}>
+      <div className={styles.content}>
         <section className={styles.trust}>
           <div className={styles.trustInner}>
             <div className={styles.trustKicker}>Who we are</div>
@@ -155,7 +79,7 @@ export default function Home() {
           <div className={styles.supplyGrid}>
             {WHO_WE_SUPPLY.map((c) => (
               <div key={c.name} className={styles.supplyCard}>
-                <div className={styles.supplyName}>{c.name}</div>
+                <h3 className={styles.supplyName}>{c.name}</h3>
                 <p className={styles.supplyBody}>{c.body}</p>
               </div>
             ))}
@@ -173,7 +97,7 @@ export default function Home() {
               {BUILT_FOR_TRADE.map((c) => (
                 <div key={c.name} className={styles.tradeCard}>
                   <span className={styles.tradeBar} />
-                  <div className={styles.tradeName}>{c.name}</div>
+                  <h3 className={styles.tradeName}>{c.name}</h3>
                   <p className={styles.tradeBody}>{c.body}</p>
                 </div>
               ))}
@@ -182,13 +106,22 @@ export default function Home() {
         </section>
 
         <section className={styles.warehouseSection}>
-          <div className={styles.warehousePhoto} />
+          <div className={styles.warehousePhoto}>
+            <Image
+              src="/assets/lifestyle/silver-boxes.png"
+              alt="SSS Wheels-branded boxes stacked in a warehouse, with a machined-silver beadlock-style wheel displayed in front"
+              fill
+              sizes="(max-width: 720px) 100vw, 50vw"
+              className={styles.warehousePhotoImg}
+            />
+          </div>
           <div className={styles.warehouseContent}>
             <div className={styles.trustKicker}>Warehouse &amp; distribution</div>
-            <h2 className={styles.sectionH2}>Melbourne Warehouse</h2>
+            <h2 className={styles.sectionH2}>Stocked in Melbourne</h2>
             <p className={styles.warehouseBody}>
-              13 Advantage Drive, Dandenong South VIC 3175. Sydney, Brisbane
-              and Adelaide opening soon.
+              Our Melbourne warehouse is at 13 Advantage Drive, Dandenong
+              South VIC 3175. Sydney, Brisbane and Adelaide are opening
+              soon.
             </p>
             <Link href="/contact" className={styles.btnOutlineDark}>
               Get in touch <span>→</span>
