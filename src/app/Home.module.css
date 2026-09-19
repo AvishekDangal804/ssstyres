@@ -12,15 +12,42 @@
   overflow: hidden;
 }
 
+/* A little extra height top and bottom so the scroll drift never shows an edge. */
 .heroImg {
   position: absolute;
-  inset: -10% 0 -10% 0;
+  inset: -4% 0 -4% 0;
   will-change: transform;
 }
 
-.heroPhoto {
+/* Blurred copy of the picture behind the whole picture; scaled up so the blur
+   never leaves a transparent fringe. */
+.heroBackdrop {
   object-fit: cover;
-  object-position: 55% 55%;
+  filter: blur(28px) brightness(0.5) saturate(1.2);
+  transform: scale(1.25);
+}
+
+/* The whole picture, uncropped, its side edges feathered into the backdrop. */
+.heroPhoto {
+  object-fit: contain;
+  object-position: center;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
+}
+
+/* Tall or near-square screens (portrait tablets) would leave a thin strip of
+   picture: crop to the centre instead. */
+@media (max-aspect-ratio: 5/4) {
+  .heroBackdrop {
+    display: none;
+  }
+
+  .heroPhoto {
+    object-fit: cover;
+    object-position: 55% 55%;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
 }
 
 .heroScrim {
@@ -151,8 +178,16 @@
     height: min(36.4vh, 78.4vw);
   }
 
+  /* Phones: an art-directed crop on the centre wheel and logo. */
+  .heroBackdrop {
+    display: none;
+  }
+
   .heroPhoto {
+    object-fit: cover;
     object-position: 57% 62%;
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 
   .heroScrim {

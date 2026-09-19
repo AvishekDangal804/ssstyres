@@ -43,7 +43,7 @@ export default function HomeHero() {
       if (heroImgRef.current) {
         heroImgRef.current.style.transform = reduced
           ? ""
-          : `translate3d(0, ${(p * 110).toFixed(1)}px, 0) scale(${(1 + p * 0.08).toFixed(3)})`;
+          : `translate3d(0, ${(p * 40).toFixed(1)}px, 0) scale(${(1 + p * 0.08).toFixed(3)})`;
       }
       if (heroCopyRef.current) {
         heroCopyRef.current.style.opacity = String(Math.max(0, 1 - p * 1.5));
@@ -69,12 +69,23 @@ export default function HomeHero() {
   return (
     <section ref={heroRef} className={styles.hero}>
       <div ref={heroImgRef} className={styles.heroImg}>
+        {/* The whole picture is shown (all three wheels, nothing cropped); a
+            blurred copy fills the room either side of it. On phones the
+            picture is cropped to the centre instead — see the CSS. */}
+        <Image
+          src="/assets/hero.png"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="160px"
+          className={styles.heroBackdrop}
+        />
         <Image
           src="/assets/hero.png"
           alt="Three SSS beadlock-style wheels in front of a large illuminated SSS logo"
           fill
           preload
-          sizes="(max-width: 1100px) 300vw, 150vw"
+          sizes="(max-width: 720px) 300vw, 100vw"
           className={styles.heroPhoto}
         />
       </div>
