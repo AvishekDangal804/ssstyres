@@ -31,6 +31,15 @@ All pages from the design handoff are built: Home, Wheels catalogue, Collections
 
 Note: the Collections page's original design script referenced data fields (`BOX_SHOTS`, `REPLICA`) and assets (`assets/wheels/replica/*`) that don't exist anywhere in the handoff bundle — likely left over from an earlier data schema. It was rebuilt using the real per-model `lifestyle` and `finishes` fields already in `wheels-data.ts` instead.
 
+## Header and home page
+
+The header (grey contact bar; Wheels / Accessories / Fitment Guide / Media / More menus; outlined "Become a Dealer" and red "Dealer Portal" buttons) and the image-led home page (fact strip, statement, wheel range slider, size collections, wheel types, featured vehicle, vehicle grid) follow the version the manager approved. Two deliberate differences from the original:
+
+- Claims that couldn't be verified were left out — "for 10 years", the customer / returning-customer / Google-rating numbers, and "Best seller" badges. The fact strip states only what the site already says elsewhere (trade only, own range, own warehouse, dealer portal). Add numbers back only once the business can back them up.
+- The statement section reads "Wholesale. Wheels & tyres. For the trade." instead of "Any road. Any load. Anywhere." — "any load" reads as a load-capacity claim.
+
+On phones the header is a single row (logo + menu button); "Become a Dealer" and "Dealer Portal" sit at the foot of the menu.
+
 ## Form delivery (Dealer + Contact)
 
 Both forms validate server-side (ABN checksum, email/phone format, length limits, honeypot) and then email the submission via the Resend REST API. Set these in Vercel (see `.env.example`):
@@ -51,4 +60,6 @@ Source assets in `public/assets` are large PNGs; everything is rendered through 
 - Warranty (12 months structural / 6 months finish), returns and refund terms in the Legal page were pre-drafted copy and are unverified.
 - The warehouse photo (`lifestyle/silver-boxes.png`) shows SSS-branded stock in a warehouse; where it was taken is unconfirmed, so the site does not caption it as a specific location.
 - The vehicle images in `public/assets/vehicles` may be renders; the Media page describes them as "vehicle fitment imagery", not customer builds.
+- Company narrative carried over verbatim from the design handoff and not verifiable from this codebase: "started as a … operation supplying tyres to local workshops" (About), "answer the phone with someone who actually knows fitment" (About), and "Sydney, Brisbane & Adelaide opening soon" (top bar, Home, Contact, Footer, About). Confirm each is accurate, or remove/reword it, before launch — the branch line in particular is a forward-looking claim.
+- The black D-Locker render (`public/assets/wheels/r7.png`, used wherever the Matte Black D-Locker appears) shows a small embossed "MH" mark on the beadlock ring. Confirm the mark is SSS's own / a factory mark and that these renders are SSS's to use.
 - No tyre content, tyre brands or third-party wheel brands exist in this project; the Brands / Services / Knowledge pages are deliberately not built.

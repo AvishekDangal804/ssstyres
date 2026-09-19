@@ -6,7 +6,7 @@ import Image from "next/image";
 import { PORTAL } from "@/lib/wheels-data";
 import styles from "./SiteHeader.module.css";
 
-type Menu = "wheels" | null;
+type Menu = "wheels" | "more" | null;
 
 // Touchscreens (and touch-emulated browsers) synthesize mouseenter/mouseleave
 // around a tap, which fights with hover-to-open and closes the dropdown
@@ -19,7 +19,7 @@ const supportsHover = () =>
 export default function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const wheelsBtnRef = useRef<HTMLButtonElement | null>(null);
+  const menuBtns = useRef<Record<string, HTMLButtonElement | null>>({});
 
   const toggle = (m: Exclude<Menu, null>) =>
     setMenu((cur) => (cur === m ? null : m));
@@ -30,6 +30,15 @@ export default function SiteHeader() {
   const hoverClose = () => {
     if (supportsHover()) setMenu(null);
   };
+
+  // Escape closes the open dropdown and returns focus to its button.
+  const escapeClose =
+    (m: Exclude<Menu, null>) => (e: React.KeyboardEvent) => {
+      if (e.key === "Escape" && menu === m) {
+        setMenu(null);
+        menuBtns.current[m]?.focus();
+      }
+    };
 
   return (
     <header className={styles.wrap}>
@@ -63,7 +72,7 @@ export default function SiteHeader() {
           className={`${styles.nav} ${mobileOpen ? styles.open : ""}`}
           onClick={(e) => {
             // Close the mobile menu on an actual navigation, but not when
-            // tapping the Wheels toggle button (which isn't a link).
+            // tapping the Wheels/More toggle buttons (which aren't links).
             if ((e.target as HTMLElement).closest("a")) {
               setMobileOpen(false);
               setMenu(null);
@@ -74,15 +83,12 @@ export default function SiteHeader() {
             className={styles.navMenu}
             onMouseEnter={hoverOpen("wheels")}
             onMouseLeave={hoverClose}
-            onKeyDown={(e) => {
-              if (e.key === "Escape" && menu === "wheels") {
-                setMenu(null);
-                wheelsBtnRef.current?.focus();
-              }
-            }}
+            onKeyDown={escapeClose("wheels")}
           >
             <button
-              ref={wheelsBtnRef}
+              ref={(el) => {
+                menuBtns.current.wheels = el;
+              }}
               type="button"
               className={styles.navButton}
               onClick={() => toggle("wheels")}
@@ -123,26 +129,68 @@ export default function SiteHeader() {
           <Link href="/media" className={styles.navItem}>
             Media
           </Link>
-          <Link href="/about" className={styles.navItem}>
-            About Us
-          </Link>
-          <Link href="/contact" className={styles.navItem}>
-            Contact Us
+
+          <div
+            className={styles.navMenu}
+            onMouseEnter={hoverOpen("more")}
+            onMouseLeave={hoverClose}
+            onKeyDown={escapeClose("more")}
+          >
+            <button
+              ref={(el) => {
+                menuBtns.current.more = el;
+              }}
+              type="button"
+              className={styles.navButton}
+              onClick={() => toggle("more")}
+              aria-expanded={menu === "more"}
+              aria-controls="menu-more"
+            >
+              More <span className={styles.caret}>▼</span>
+            </button>
+            {menu === "more" && (
+              <div
+                className={`${styles.dropdown} ${styles.right}`}
+                id="menu-more"
+              >
+                <Link href="/about">About Us</Link>
+                <Link href="/legal#terms">Terms &amp; Conditions</Link>
+                <Link href="/legal#warranty">Warranty &amp; Returns</Link>
+                <Link href="/legal#privacy">Privacy Policy</Link>
+                <Link href="/contact">Contact Us</Link>
+              </div>
+            )}
+          </div>
+
+          {/* Phones hide the header buttons to keep the bar to one row, so
+              both live at the foot of the menu there instead. */}
+          <div className={styles.navMobileCtas}>
+            <Link href="/dealer" className={styles.btnOutline}>
+              Become a Dealer
+            </Link>
+            <a
+              href={PORTAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnRed}
+            >
+              Dealer Portal
+            </a>
+          </div>
+        </nav>
+
+        <div className={styles.ctaWrap}>
+          <Link href="/dealer" className={styles.btnOutline}>
+            Become a Dealer
           </Link>
           <a
             href={PORTAL}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.navItem}
+            className={styles.btnRed}
           >
-            Wholesale Login
+            Dealer Portal
           </a>
-        </nav>
-
-        <div className={styles.ctaWrap}>
-          <Link href="/dealer" className={styles.btnRed}>
-            Become a Dealer
-          </Link>
         </div>
 
         <button

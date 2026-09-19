@@ -1,0 +1,463 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import {
+  CATEGORIES,
+  WHEELS,
+  VEHICLES,
+  type CategoryId,
+} from "@/lib/wheels-data";
+import styles from "./HomeShowcase.module.css";
+
+// Plain-fact strip. Only things that are true of the business and already
+// stated elsewhere on the site — no counts, ratings or years.
+const FACTS = [
+  { title: "Trade Only", label: "Wholesale supply" },
+  { title: "Own Range", label: "SSS D-Locker & D-Hole" },
+  { title: "Own Warehouse", label: "Dandenong South, VIC" },
+  { title: "Dealer Portal", label: "Online trade ordering" },
+];
+
+const SIZE_DEFS = [
+  {
+    size: "15",
+    kicker: "Compact & trailer",
+    fits: "Jimny · trailers · light utes",
+  },
+  { size: "16", kicker: "Fleet & touring", fits: "HiAce · HiLux · Prado" },
+  { size: "17", kicker: "4x4 off-road", fits: "Ranger · HiLux · RAV4" },
+] as const;
+
+function prevalentImg(size: string) {
+  return WHEELS.find((w) => w.size.startsWith(size))?.img ?? WHEELS[0].img;
+}
+
+function sizeCount(size: string) {
+  return WHEELS.filter((w) => w.size.startsWith(size)).length;
+}
+
+// The image-led sections of the home page: fact strip, statement, wheel
+// slider, size collections, wheel types, featured vehicle and vehicle grid.
+export default function HomeShowcase() {
+  const stmtRef = useRef<HTMLElement | null>(null);
+  const stmtWheelRef = useRef<HTMLDivElement | null>(null);
+  const featRef = useRef<HTMLElement | null>(null);
+  const featImgWrapRef = useRef<HTMLDivElement | null>(null);
+  const sliderRef = useRef<HTMLDivElement | null>(null);
+
+  const [hoverCat, setHoverCat] = useState<string | null>(null);
+  const [activeCat, setActiveCat] = useState<CategoryId>("offroad");
+  const [feat, setFeat] = useState(0);
+  const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
+
+  // Scroll-driven parallax: statement wheel + featured vehicle image
+  useEffect(() => {
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    if (reduced) return;
+
+    const sectionProgress = (el: HTMLElement) => {
+      const r = el.getBoundingClientRect();
+      const vh = window.innerHeight || 800;
+      return Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+    };
+
+    let raf = 0;
+    const run = () => {
+      raf = 0;
+      if (stmtRef.current && stmtWheelRef.current) {
+        const q = sectionProgress(stmtRef.current);
+        stmtWheelRef.current.style.transform = `translate3d(0, ${((q - 0.5) * 160).toFixed(1)}px, 0) rotate(${(q * 70).toFixed(1)}deg)`;
+      }
+      if (featRef.current && featImgWrapRef.current) {
+        const q = sectionProgress(featRef.current);
+        featImgWrapRef.current.style.transform = `translate3d(0, ${((q - 0.5) * -40).toFixed(1)}px, 0)`;
+      }
+    };
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(run);
+    };
+    document.addEventListener("scroll", onScroll, true);
+    window.addEventListener("resize", onScroll);
+    run();
+    return () => {
+      document.removeEventListener("scroll", onScroll, true);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  // Slider progress thumb
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+    const measure = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      const sw = el.scrollWidth ? Math.min(1, el.clientWidth / el.scrollWidth) : 1;
+      const sp = max > 0 ? Math.min(1, el.scrollLeft / max) : 0;
+      setTrack((cur) =>
+        Math.abs(sw - cur.sw) > 0.002 || Math.abs(sp - cur.sp) > 0.002
+          ? { sp, sw }
+          : cur
+      );
+    };
+    measure();
+    const t = setTimeout(measure, 300);
+    el.addEventListener("scroll", measure);
+    window.addEventListener("resize", measure);
+    return () => {
+      clearTimeout(t);
+      el.removeEventListener("scroll", measure);
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  const slideBy = (dx: number) =>
+    sliderRef.current?.scrollBy({ left: dx, behavior: "smooth" });
+
+  const featList = VEHICLES.filter((v) => v.img);
+  const fv = featList[feat % featList.length] ?? featList[0];
+  const gridVehicles = VEHICLES.slice(0, 4);
+
+  return (
+    <div className={styles.showcase}>
+      <section className={styles.stats} aria-label="At a glance">
+        <div className={styles.statsGlow} />
+        <div className={styles.statsGrid}>
+          {FACTS.map((f) => (
+            <div key={f.title} className={styles.statCell}>
+              <span className={styles.statBar} />
+              <div className={styles.statNum}>{f.title}</div>
+              <div className={styles.statLabel}>{f.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section ref={stmtRef} className={styles.statement}>
+        <div ref={stmtWheelRef} className={styles.statementWheel} aria-hidden="true">
+          <Image
+            src="/assets/wheels/r4.png"
+            alt=""
+            fill
+            sizes="760px"
+            className={styles.contain}
+          />
+        </div>
+        <div className={styles.statementInner}>
+          <div className={styles.statementLine} style={{ color: "#0E0E0E" }}>
+            Wholesale<span>.</span>
+          </div>
+          <div className={styles.statementLine} style={{ color: "#5C5C5C" }}>
+            Wheels &amp; tyres<span>.</span>
+          </div>
+          <div className={styles.statementLine} style={{ color: "#8A8A8A" }}>
+            For the trade<span>.</span>
+          </div>
+          <div className={styles.statementSub}>Australian trade supply</div>
+          <Link href="/wheels" className={styles.statementBtn}>
+            <span className={styles.statementBtnIcon} aria-hidden="true">
+              +
+            </span>
+            View wheels
+          </Link>
+        </div>
+      </section>
+
+      <section className={styles.sliderSection} aria-labelledby="home-range">
+        <div className={styles.sectionHead}>
+          <h2 id="home-range" className={styles.sectionH2}>
+            Wheel range
+          </h2>
+          <Link href="/wheels" className={styles.btnOutlineDark}>
+            All wheels <span>→</span>
+          </Link>
+        </div>
+        <div ref={sliderRef} className={styles.slider}>
+          {WHEELS.map((w) => (
+            <div key={w.id} className={styles.slideCard}>
+              <Link
+                href={`/wheels?model=${w.model}`}
+                className={styles.slideImgLink}
+                tabIndex={-1}
+                aria-hidden="true"
+              >
+                <Image
+                  src={w.img}
+                  alt=""
+                  fill
+                  sizes="(max-width: 720px) 80vw, 300px"
+                  className={`${styles.contain} ${styles.slideImg}`}
+                />
+              </Link>
+              <div className={styles.slideInfo}>
+                <Link
+                  href={`/wheels?model=${w.model}`}
+                  className={styles.slideName}
+                >
+                  {w.name}
+                </Link>
+                <div className={styles.slideFit}>
+                  {w.size} · {w.pcd} · {w.offset}
+                </div>
+                <div className={styles.slideVariant}>
+                  <span className={styles.swatch} style={{ background: w.hex }} />
+                  <span className={styles.variantLabel}>{w.variant}</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className={styles.sliderControls}>
+          <button
+            type="button"
+            aria-label="Previous wheels"
+            className={styles.arrowBtn}
+            onClick={() => slideBy(-384)}
+          >
+            ←
+          </button>
+          <div className={styles.track} aria-hidden="true">
+            <div
+              className={styles.thumb}
+              style={{
+                width: `${(track.sw * 100).toFixed(2)}%`,
+                left: `${(track.sp * (1 - track.sw) * 100).toFixed(2)}%`,
+              }}
+            />
+          </div>
+          <button
+            type="button"
+            aria-label="Next wheels"
+            className={styles.arrowBtn}
+            onClick={() => slideBy(384)}
+          >
+            →
+          </button>
+        </div>
+      </section>
+
+      <section className={styles.collectionsSection} aria-labelledby="home-collections">
+        <div className={styles.sectionHead}>
+          <h2 id="home-collections" className={styles.sectionH2}>
+            Wheel collections
+          </h2>
+          <Link href="/collections" className={styles.btnOutlineDark}>
+            All collections <span>→</span>
+          </Link>
+        </div>
+        <div className={styles.collectionsGrid}>
+          {SIZE_DEFS.map((sd) => {
+            const key = `size${sd.size}`;
+            const on = hoverCat === key;
+            const n = sizeCount(sd.size);
+            return (
+              <Link
+                key={sd.size}
+                href={`/wheels?size=${sd.size}`}
+                onMouseEnter={() => setHoverCat(key)}
+                onMouseLeave={() => setHoverCat(null)}
+                onFocus={() => setHoverCat(key)}
+                onBlur={() => setHoverCat(null)}
+                className={`${styles.collCard} ${on ? styles.on : ""}`}
+              >
+                <div aria-hidden="true" className={styles.collBig}>
+                  {sd.size}&quot;
+                </div>
+                <div className={styles.collRing} />
+                <div className={styles.collImg} aria-hidden="true">
+                  <Image
+                    src={prevalentImg(sd.size)}
+                    alt=""
+                    fill
+                    sizes="(max-width: 720px) 70vw, 24vw"
+                    className={styles.contain}
+                  />
+                </div>
+                <div className={styles.collTopText}>
+                  <span className={styles.collKicker}>{sd.kicker}</span>
+                  <span className={styles.collSize}>{sd.size}&quot;</span>
+                </div>
+                <div className={styles.collBottomRow}>
+                  <div className={styles.collFits}>
+                    <span>{sd.fits}</span>
+                    <span>
+                      {n} {n === 1 ? "fitment" : "fitments"}
+                    </span>
+                  </div>
+                  <span className={styles.collArrow} aria-hidden="true">
+                    →
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className={styles.types} aria-labelledby="home-types">
+        <div className={styles.typesGlowRed} />
+        <div className={styles.typesGlowWhite} />
+        <div className={styles.typesInner}>
+          <div className={styles.typesHead}>
+            <div>
+              <div className={styles.typesKicker}>
+                <span className={styles.bar} />
+                Know your wheels
+              </div>
+              <h2 id="home-types" className={styles.sectionH2}>
+                Types of wheels
+              </h2>
+            </div>
+            <Link href="/types" className={styles.btnOutlineLight}>
+              Wheel guide <span>→</span>
+            </Link>
+          </div>
+          <div className={styles.typesStrip}>
+            {CATEGORIES.map((c, i) => {
+              const on = activeCat === c.id;
+              const num = String(i + 1).padStart(2, "0");
+              return (
+                <div
+                  key={c.id}
+                  role="group"
+                  aria-label={c.name}
+                  tabIndex={0}
+                  onMouseEnter={() => setActiveCat(c.id)}
+                  onFocus={() => setActiveCat(c.id)}
+                  onClick={() => setActiveCat(c.id)}
+                  className={`${styles.panel} ${on ? styles.active : ""}`}
+                >
+                  <div className={styles.panelGlow} />
+                  <div className={styles.panelImg} aria-hidden="true">
+                    <Image
+                      src={c.img}
+                      alt=""
+                      fill
+                      sizes="(max-width: 1040px) 60vw, 520px"
+                      className={styles.contain}
+                    />
+                  </div>
+                  <div className={styles.panelLabel} aria-hidden="true">
+                    <span className={styles.panelLabelNum}>{num}</span>
+                    <span className={styles.panelLabelName}>{c.name}</span>
+                  </div>
+                  <div className={styles.panelBody}>
+                    <div className={styles.panelBodyKicker}>
+                      {num} — {c.tag}
+                    </div>
+                    <h3 className={styles.panelBodyName}>{c.name}</h3>
+                    <p className={styles.panelBlurb}>{c.blurb}</p>
+                    <div className={styles.panelChips}>
+                      {c.bullets.map((b) => (
+                        <span key={b} className={styles.panelChip}>
+                          {b}
+                        </span>
+                      ))}
+                    </div>
+                    <Link
+                      href={`/wheels?cat=${c.id}`}
+                      className={styles.panelCta}
+                      tabIndex={on ? 0 : -1}
+                    >
+                      View {c.name} wheels <span>→</span>
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section ref={featRef} className={styles.feat} aria-labelledby="home-feat">
+        <div className={styles.featInner}>
+          <div ref={featImgWrapRef} className={styles.featImgWrap}>
+            <Image
+              key={fv.img}
+              src={fv.img as string}
+              alt=""
+              fill
+              sizes="100vw"
+              className={styles.featImg}
+            />
+            <div className={styles.featScrim1} />
+            <div className={styles.featScrim2} />
+          </div>
+          <div className={styles.featContent}>
+            <div>
+              <div className={styles.kickerRow}>
+                <span className={styles.bar} />
+                Vehicle fitment
+              </div>
+              <h2 id="home-feat" className={styles.featTitle}>
+                {fv.make} {fv.model}
+              </h2>
+              <div className={styles.featSub}>Recommended: {fv.wheelName}</div>
+            </div>
+            <div className={styles.featTabs}>
+              {featList.map((v, i) => (
+                <button
+                  key={v.model}
+                  type="button"
+                  aria-pressed={i === feat % featList.length}
+                  onClick={() => setFeat(i)}
+                  className={`${styles.featTab} ${i === feat % featList.length ? styles.active : ""}`}
+                >
+                  {v.model}
+                </button>
+              ))}
+              <Link href={`/wheels?model=${fv.wheel}`} className={styles.featCta}>
+                View wheel <span>→</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.vehiclesSection} aria-labelledby="home-vehicles">
+        <div className={styles.sectionHead}>
+          <h2 id="home-vehicles" className={styles.sectionH2}>
+            Vehicle fitments
+          </h2>
+          <Link href="/fitment" className={styles.btnOutlineDark}>
+            Fitment guide <span>→</span>
+          </Link>
+        </div>
+        <div className={styles.vehiclesGrid}>
+          {gridVehicles.map((v) => (
+            <Link
+              key={`${v.make}-${v.model}`}
+              href={`/wheels?model=${v.wheel}`}
+              className={styles.vehCard}
+            >
+              {v.img && (
+                <Image
+                  src={v.img}
+                  alt=""
+                  fill
+                  sizes="(max-width: 900px) 100vw, 50vw"
+                  className={styles.vehImg}
+                />
+              )}
+              <div className={styles.vehScrim} />
+              <div className={styles.vehRow}>
+                <div className={styles.vehText}>
+                  <span className={styles.vehMake}>{v.make}</span>
+                  <span className={styles.vehModel}>{v.model}</span>
+                </div>
+                <span className={styles.vehPill}>
+                  {v.wheelShort} <span aria-hidden="true">→</span>
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}

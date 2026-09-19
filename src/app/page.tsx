@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/site";
 import HomeHero from "./HomeHero";
+import HomeShowcase from "./HomeShowcase";
 import styles from "./Home.module.css";
 
 export const metadata = pageMetadata({
@@ -59,18 +60,7 @@ export default function Home() {
       <HomeHero />
 
       <div className={styles.content}>
-        <section className={styles.trust}>
-          <div className={styles.trustInner}>
-            <div className={styles.trustKicker}>Who we are</div>
-            <p className={styles.trustText}>
-              SSS Wheels &amp; Tyres is an Australian trade supplier of
-              wheels and tyres — not a retailer. We hold our own stock at
-              our Dandenong South warehouse and supply panel shops,
-              mechanical workshops, fleets and resellers directly, with our
-              own SSS wheel range built for local conditions.
-            </p>
-          </div>
-        </section>
+        <HomeShowcase />
 
         <section className={styles.supplySection}>
           <div className={styles.sectionHead}>

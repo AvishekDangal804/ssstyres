@@ -230,18 +230,7 @@
   color: #fff;
 }
 
-/* Trust / value proposition */
-.trust {
-  background: var(--surface-2);
-  padding: clamp(56px, 6vw, 96px) var(--gutter);
-}
-
-.trustInner {
-  max-width: 780px;
-  margin: 0 auto;
-  text-align: center;
-}
-
+/* Section kicker (warehouse block) */
 .trustKicker {
   font-size: 12px;
   font-weight: 700;
@@ -249,14 +238,6 @@
   text-transform: uppercase;
   color: var(--red);
   margin-bottom: 14px;
-}
-
-.trustText {
-  font-size: clamp(19px, 2.1vw, 25px);
-  line-height: 1.55;
-  color: var(--ink);
-  font-weight: 500;
-  margin: 0;
 }
 
 /* Who We Supply */
