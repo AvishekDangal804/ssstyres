@@ -222,10 +222,56 @@
   font-family: var(--font-barlow), system-ui, sans-serif;
 }
 
+/* Vehicle photo buttons: each image is the photo's own 3:2, so the whole
+   vehicle shows. */
 .quickPicks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.pick {
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  flex-wrap: wrap;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  color: var(--black);
+}
+
+.pickImg {
+  position: relative;
+  display: block;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #161616;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: outline-color 0.15s, transform 0.3s var(--ease);
+}
+
+.pick:hover .pickImg {
+  transform: translateY(-2px);
+}
+
+.pick.active .pickImg {
+  outline-color: var(--red);
+}
+
+.pickLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pick.active .pickLabel {
+  color: var(--red);
 }
 
 .pill {
@@ -261,21 +307,29 @@
   overflow: hidden;
   background: linear-gradient(160deg, #1c1c1c, #0a0a0a);
   border-radius: 22px;
-  padding: clamp(24px, 2.6vw, 40px);
   min-height: 360px;
   color: #fff;
+  display: flex;
+  flex-direction: column;
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
 }
 
-.resultImg {
+/* The chosen vehicle, whole, above the specs (the photo is fitted, never
+   cropped; spare width is filled by a blurred copy). */
+.resultMedia {
+  position: relative;
+  flex: none;
+  height: clamp(220px, 21vw, 320px);
+  background: #0a0a0a;
+}
+
+/* Fallback for models without a vehicle photo: the recommended wheel,
+   centred on the same band. */
+.resultWheel {
   position: absolute;
-  right: -8%;
-  bottom: -14%;
-  width: 58%;
-  aspect-ratio: 1;
-  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.55));
+  inset: 8% 0;
+  filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55));
   pointer-events: none;
-  transition: transform 0.8s var(--ease);
 }
 
 .resultCard .stepKicker {
@@ -287,8 +341,9 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 18px;
-  height: 100%;
+  padding: clamp(24px, 2.6vw, 36px);
   box-sizing: border-box;
 }
 
@@ -575,6 +630,10 @@
 
 .contain {
   object-fit: contain;
+}
+
+.cover {
+  object-fit: cover;
 }
 
 .rowThumb {

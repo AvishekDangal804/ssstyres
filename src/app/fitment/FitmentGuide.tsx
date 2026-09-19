@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import FullVehicleImage from "@/components/FullVehicleImage";
 import { VEHICLES, WHEELS, PORTAL } from "@/lib/wheels-data";
 import styles from "./Fitment.module.css";
 
@@ -149,17 +150,33 @@ export default function FitmentGuide() {
                 </label>
               </div>
               <div className={styles.quickPicks}>
-                {VEHICLES.slice(0, 4).map((v) => (
-                  <button
-                    key={`${v.make}-${v.model}`}
-                    type="button"
-                    onClick={() => selectVehicle(v)}
-                    aria-pressed={v.make === make && v.model === model}
-                    className={`${styles.pill} ${v.make === make && v.model === model ? styles.active : ""}`}
-                  >
-                    {v.make} {v.model}
-                  </button>
-                ))}
+                {VEHICLES.filter((v) => v.img)
+                  .slice(0, 4)
+                  .map((v) => {
+                    const on = v.make === make && v.model === model;
+                    return (
+                      <button
+                        key={`${v.make}-${v.model}`}
+                        type="button"
+                        onClick={() => selectVehicle(v)}
+                        aria-pressed={on}
+                        className={`${styles.pick} ${on ? styles.active : ""}`}
+                      >
+                        <span className={styles.pickImg}>
+                          <Image
+                            src={v.img as string}
+                            alt=""
+                            fill
+                            sizes="(max-width: 700px) 45vw, 18vw"
+                            className={styles.cover}
+                          />
+                        </span>
+                        <span className={styles.pickLabel}>
+                          {v.make} {v.model}
+                        </span>
+                      </button>
+                    );
+                  })}
               </div>
               <div className={styles.finderNote}>
                 Not listed? Send us your rego or vehicle details and
@@ -169,14 +186,26 @@ export default function FitmentGuide() {
             </div>
 
             <div className={styles.resultCard}>
-              <div className={styles.resultImg}>
-                <Image
-                  src={wheel.img}
-                  alt={`${wheel.name} ${wheel.size} in ${wheel.variant}`}
-                  fill
-                  sizes="(max-width: 700px) 60vw, 30vw"
-                  className={styles.contain}
-                />
+              <div className={styles.resultMedia}>
+                {cur.img ? (
+                  <FullVehicleImage
+                    key={cur.img}
+                    src={cur.img}
+                    alt={`${cur.make} ${cur.model} with SSS wheels`}
+                    sizes="(max-width: 700px) 100vw, 45vw"
+                  />
+                ) : (
+                  // No vehicle photo for this model yet: show the recommended wheel.
+                  <div className={styles.resultWheel}>
+                    <Image
+                      src={wheel.img}
+                      alt={`${wheel.name} ${wheel.size} in ${wheel.variant}`}
+                      fill
+                      sizes="(max-width: 700px) 60vw, 30vw"
+                      className={styles.contain}
+                    />
+                  </div>
+                )}
               </div>
               <div className={styles.resultBody}>
                 <div>

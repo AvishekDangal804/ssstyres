@@ -1,4 +1,4 @@
-import Image from "next/image";
+import FullVehicleImage from "@/components/FullVehicleImage";
 import MediaGallery from "./MediaGallery";
 import styles from "./Media.module.css";
 import { pageMetadata } from "@/lib/site";
@@ -15,18 +15,16 @@ export default function MediaPage() {
     <>
       <section className={styles.hero}>
         <div className={styles.heroImg}>
-          <Image
+          <FullVehicleImage
             src="/assets/vehicles/ranger.png"
             alt="Ford Ranger fitted with SSS wheels on a lakeside gravel track"
-            fill
+            sizes="(max-width: 1100px) 100vw, 60vw"
             preload
-            sizes="100vw"
-            className={styles.heroPhoto}
           />
         </div>
         <div className={styles.heroScrim} />
         <div className={styles.heroInner}>
-          <div>
+          <div className={styles.heroText}>
             <div className={styles.kickerRow}>
               <span className={styles.bar} />
               Media

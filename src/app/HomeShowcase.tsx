@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import FullVehicleImage from "@/components/FullVehicleImage";
 import {
   CATEGORIES,
   WHEELS,
@@ -377,13 +378,11 @@ export default function HomeShowcase() {
       <section ref={featRef} className={styles.feat} aria-labelledby="home-feat">
         <div className={styles.featInner}>
           <div ref={featImgWrapRef} className={styles.featImgWrap}>
-            <Image
+            <FullVehicleImage
               key={fv.img}
               src={fv.img as string}
-              alt=""
-              fill
-              sizes="100vw"
-              className={styles.featImg}
+              alt={`${fv.make} ${fv.model} with SSS wheels`}
+              sizes="(max-width: 720px) 100vw, 75vw"
             />
             <div className={styles.featScrim1} />
             <div className={styles.featScrim2} />
