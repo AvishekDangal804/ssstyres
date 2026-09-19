@@ -87,7 +87,7 @@ export default function SiteFooter() {
               <Link href="/dealer">Become a Dealer</Link>
               <Link href="/about">About Us</Link>
               <Link href="/accessories">Accessories</Link>
-              <Link href="/fitment">Fitment Guide</Link>
+              <Link href="/fitment">Guide</Link>
               <Link href="/media">Media</Link>
               <Link href="/contact">Contact Us</Link>
             </div>

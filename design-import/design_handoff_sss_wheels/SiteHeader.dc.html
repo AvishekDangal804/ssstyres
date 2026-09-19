@@ -22,6 +22,7 @@
   <div style="max-width:min(1600px,94vw);margin:0 auto;padding:0 clamp(20px,3vw,56px);min-height:74px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;width:100%;box-sizing:border-box">
     <a href="Home.dc.html" style="display:flex;padding:12px 0;order:1;flex:none"><img src="assets/logo.png" alt="SSS Wheels &amp; Tyres" style="height:36px;width:auto;display:block"></a>
     <nav style="{{ navStyle }}">
+      <a href="Home.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Home</a>
       <div style="position:relative" onMouseEnter="{{ openWheels }}" onMouseLeave="{{ closeMenus }}">
         <button onClick="{{ toggleWheels }}" style="background:none;border:0;cursor:pointer;padding:26px 0;font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#161616;display:flex;align-items:center;gap:6px" style-hover="color:#D80009">Wheels <span style="font-size:11px;color:#D80009">▼</span></button>
         <sc-if value="{{ wheelsOpen }}" hint-placeholder-val="{{ false }}">
@@ -40,7 +41,7 @@
         </sc-if>
       </div>
       <a href="Accessories.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Accessories</a>
-      <a href="Fitment.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Fitment Guide</a>
+      <a href="Fitment.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Guide</a>
       <a href="Media.dc.html" style="font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;padding:26px 0">Media</a>
       <div style="position:relative" onMouseEnter="{{ openMore }}" onMouseLeave="{{ closeMenus }}">
         <button onClick="{{ toggleMore }}" style="background:none;border:0;cursor:pointer;padding:26px 0;font-family:Barlow,sans-serif;font-weight:700;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:#161616;display:flex;align-items:center;gap:6px" style-hover="color:#D80009">More <span style="font-size:11px;color:#D80009">▼</span></button>

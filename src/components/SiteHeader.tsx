@@ -79,6 +79,10 @@ export default function SiteHeader() {
             }
           }}
         >
+          <Link href="/" className={styles.navItem}>
+            Home
+          </Link>
+
           <div
             className={styles.navMenu}
             onMouseEnter={hoverOpen("wheels")}
@@ -124,7 +128,7 @@ export default function SiteHeader() {
             Accessories
           </Link>
           <Link href="/fitment" className={styles.navItem}>
-            Fitment Guide
+            Guide
           </Link>
           <Link href="/media" className={styles.navItem}>
             Media

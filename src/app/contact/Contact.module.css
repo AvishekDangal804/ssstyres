@@ -6,7 +6,7 @@
   box-sizing: border-box;
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 52px;
   align-items: start;
 }
@@ -14,6 +14,7 @@
 .infoStack {
   display: grid;
   gap: 16px;
+  min-width: 0;
 }
 
 .infoCard {
@@ -36,10 +37,13 @@
   font-weight: 800;
   font-size: 28px;
   color: var(--black);
+  overflow-wrap: anywhere;
 }
 
+/* The email address is one long unbreakable word: scale it down on narrow
+   phones so it fits the card instead of widening the page. */
 .infoBig.small {
-  font-size: 26px;
+  font-size: clamp(18px, 5.6vw, 26px);
 }
 
 .infoBig.address {

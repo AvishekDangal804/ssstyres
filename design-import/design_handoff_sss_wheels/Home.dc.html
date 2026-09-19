@@ -14,6 +14,7 @@
 <script src="./image-slot.js"></script>
 <style>body{margin:0;background:#fff;color:#161616;font-family:Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#161616;text-decoration:none}a:hover{color:#D80009}button{font-family:inherit}
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes stmtKen{from{transform:scale(1.04)}to{transform:scale(1.14)}}
 [data-slider]::-webkit-scrollbar{display:none}</style>
 </helmet>
 <div data-screen-label="Home" style="min-height:100vh;display:flex;flex-direction:column;background:#fff">
@@ -50,14 +51,22 @@
     </div>
   </section>
 
-  <section ref="{{ stmtRef }}" style="background:#F4F4F4;padding:112px 28px 108px;text-align:center;position:relative;overflow:hidden">
-    <div ref="{{ stmtWheelRef }}" style="position:absolute;left:50%;top:50%;width:min(760px,110vw);aspect-ratio:1;margin:-55vw 0 0 -55vw;max-width:760px;background:url('assets/wheels/r4.png') center/contain no-repeat;opacity:.09;pointer-events:none;will-change:transform"></div>
-    <div style="position:relative;max-width:1100px;margin:0 auto">
-      <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.9;text-transform:uppercase;letter-spacing:-.03em;color:#0E0E0E">Any road<span style="color:#D80009">.</span></div>
-      <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.9;text-transform:uppercase;letter-spacing:-.03em;color:#6E6E6E">Any load<span style="color:#D80009">.</span></div>
-      <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.9;text-transform:uppercase;letter-spacing:-.03em;color:#B8B8B8">Anywhere<span style="color:#D80009">.</span></div>
-      <div style="margin-top:28px;font-size:clamp(15px,1.6vw,22px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#3A3A3A">Australian trade wheels</div>
-      <a href="Wheels.dc.html" style="display:inline-flex;align-items:center;gap:12px;margin-top:36px;height:58px;padding:0 32px;background:#0E0E0E;color:#fff;border-radius:999px;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:background .2s" style-hover="background:#D80009;color:#fff"><span style="width:20px;height:20px;border:2px solid #fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1;box-sizing:border-box">+</span>View wheels</a>
+  <section ref="{{ stmtRef }}" style="position:relative;overflow:hidden;text-align:center;min-height:clamp(560px,86vh,880px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:clamp(80px,9vw,140px) 28px">
+    <div style="position:absolute;inset:0;z-index:0">
+      <sc-for list="{{ bgs }}" as="b" hint-placeholder-count="5">
+        <div style="{{ b.style }}"></div>
+      </sc-for>
+    </div>
+    <div style="position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,8,8,.62) 0%,rgba(8,8,8,.5) 45%,rgba(8,8,8,.72) 100%);pointer-events:none"></div>
+    <div ref="{{ stmtCopyRef }}" style="position:relative;z-index:2;max-width:1100px;margin:0 auto;width:100%;box-sizing:border-box;will-change:transform">
+      <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.9;text-transform:uppercase;letter-spacing:-.03em;color:#fff;text-shadow:0 4px 30px rgba(0,0,0,.5)">Any road<span style="color:#D80009">.</span></div>
+      <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.9;text-transform:uppercase;letter-spacing:-.03em;color:rgba(255,255,255,.72);text-shadow:0 4px 30px rgba(0,0,0,.5)">Any load<span style="color:#D80009">.</span></div>
+      <div style="font-family:Barlow,sans-serif;font-weight:800;font-size:clamp(46px,8.6vw,124px);line-height:.9;text-transform:uppercase;letter-spacing:-.03em;color:rgba(255,255,255,.42);text-shadow:0 4px 30px rgba(0,0,0,.5)">Anywhere<span style="color:#D80009">.</span></div>
+      <div style="margin-top:28px;font-size:clamp(15px,1.6vw,22px);font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#E6E6E6">Australian trade wheels</div>
+      <a href="Wheels.dc.html" style="display:inline-flex;align-items:center;gap:12px;margin-top:36px;height:58px;padding:0 32px;background:#fff;color:#0E0E0E;border-radius:999px;font-size:14px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:background .2s,color .2s" style-hover="background:#D80009;color:#fff"><span style="width:20px;height:20px;border:2px solid currentColor;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:15px;line-height:1;box-sizing:border-box">+</span>View wheels</a>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:40px">
+        <sc-for list="{{ dots }}" as="d" hint-placeholder-count="5"><span style="{{ d.style }}"></span></sc-for>
+      </div>
     </div>
   </section>
 
@@ -189,7 +198,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
-  state = { d: null, prog: 0, hoverCat: null, activeCat: 'offroad', feat: 0, s1: { sp: 0, sw: 0.3 }, narrow: typeof window !== 'undefined' && window.innerWidth < 1040 };
+  state = { d: null, prog: 0, hoverCat: null, activeCat: 'offroad', feat: 0, s1: { sp: 0, sw: 0.3 }, stmtBg: 0, narrow: typeof window !== 'undefined' && window.innerWidth < 1040 };
   _sl = {};
   componentDidMount() {
     import(new URL('wheels-data.js', document.baseURI).href).then(d => {
@@ -202,6 +211,7 @@ class Component extends DCLogic {
       this.setState({ prog: 1 - Math.pow(1 - p, 3) });
       if (p >= 1) clearInterval(this._iv);
     }, 40);
+    this._bgIv = setInterval(() => this.setState(s => ({ stmtBg: (s.stmtBg + 1) % 5 })), 4200);
     this._onScroll = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = 0; this.parallax(); }); };
     document.addEventListener('scroll', this._onScroll, true);
     this._onResize = () => { this.measureAll(); this.parallax(); const n = window.innerWidth < 1040; if (n !== this.state.narrow) this.setState({ narrow: n }); };
@@ -210,6 +220,7 @@ class Component extends DCLogic {
   }
   componentWillUnmount() {
     clearInterval(this._iv);
+    clearInterval(this._bgIv);
     document.removeEventListener('scroll', this._onScroll, true);
     window.removeEventListener('resize', this._onResize);
   }
@@ -234,20 +245,30 @@ class Component extends DCLogic {
     }
     const vh = window.innerHeight || 800;
     const prog = el => { const r = el.getBoundingClientRect(); return Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height))); };
-    if (this._stmt && this._stmtWheel) { const q = prog(this._stmt); this._stmtWheel.style.transform = 'translate3d(0,' + ((q - .5) * 160).toFixed(1) + 'px,0) rotate(' + (q * 70).toFixed(1) + 'deg)'; }
+    if (this._stmt && this._stmtCopy) {
+      const r = this._stmt.getBoundingClientRect();
+      const t = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+      this._stmtCopy.style.transform = 'translateY(' + ((t - 0.5) * -50).toFixed(1) + 'px)';
+    }
     if (this._feat) {
       const q = prog(this._feat);
       if (this._featImg) this._featImg.style.transform = 'translate3d(0,' + ((q - .5) * -40).toFixed(1) + 'px,0)';
     }
   };
   renderVals() {
-    const { d, prog, hoverCat, activeCat, feat, narrow } = this.state;
+    const { d, prog, hoverCat, activeCat, feat, stmtBg, narrow } = this.state;
     const IMG = "position:absolute;inset:0;background-size:contain;background-position:center;background-repeat:no-repeat;";
     const slideBy = (k, dx) => { const el = this._sl[k]; if (el) el.scrollBy({ left: dx, behavior: 'smooth' }); };
     const thumb = k => { const { sp, sw } = this.state[k]; return 'position:absolute;top:0;height:100%;background:#B5B5B5;border-radius:2px;width:' + (sw * 100).toFixed(2) + '%;left:' + (sp * (1 - sw) * 100).toFixed(2) + '%'; };
     const base = {
       heroRef: el => { this._hero = el; }, heroImgRef: el => { this._heroImg = el; }, heroCopyRef: el => { this._heroCopy = el; }, contentRef: el => { this._content = el; },
-      stmtRef: el => { this._stmt = el; }, stmtWheelRef: el => { this._stmtWheel = el; },
+      stmtRef: el => { this._stmt = el; }, stmtCopyRef: el => { this._stmtCopy = el; },
+      bgs: [1, 2, 3, 4, 5].map((n, i) => ({
+        style: "position:absolute;inset:0;background:url('assets/statement/s" + n + ".png') center/cover no-repeat;opacity:" + (i === stmtBg ? '1' : '0') + ";transition:opacity 1.2s ease-in-out;animation:stmtKen 7s ease-out both" + (i === stmtBg ? '' : ';animation-play-state:paused')
+      })),
+      dots: [0, 1, 2, 3, 4].map(i => ({
+        style: 'width:' + (i === stmtBg ? '26px' : '8px') + ';height:8px;border-radius:999px;background:' + (i === stmtBg ? '#D80009' : 'rgba(255,255,255,.55)') + ';transition:width .3s,background .3s'
+      })),
       featRef: el => { this._feat = el; }, featImgRef: el => { this._featImg = el; },
       sliderRef: el => { this._sl.s1 = el; }, onScroll1: () => this.measure('s1'),
       slideLeft1: () => slideBy('s1', -384), slideRight1: () => slideBy('s1', 384), thumb1: thumb('s1')

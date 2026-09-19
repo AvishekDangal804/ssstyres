@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import FullVehicleImage from "@/components/FullVehicleImage";
@@ -39,11 +39,35 @@ function sizeCount(size: string) {
   return WHEELS.filter((w) => w.size.startsWith(size)).length;
 }
 
+// Statement band backdrop: SSS wheels in five settings, cross-fading. Decorative.
+const STATEMENT_SLIDES = [
+  "/assets/statement/s1.jpg",
+  "/assets/statement/s2.jpg",
+  "/assets/statement/s3.jpg",
+  "/assets/statement/s4.jpg",
+  "/assets/statement/s5.jpg",
+];
+const SLIDE_MS = 4200;
+const LAST_SLIDE = STATEMENT_SLIDES.length - 1;
+
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
+function useReducedMotion() {
+  return useSyncExternalStore(
+    (notify) => {
+      const mq = window.matchMedia(REDUCED_MOTION);
+      mq.addEventListener("change", notify);
+      return () => mq.removeEventListener("change", notify);
+    },
+    () => window.matchMedia(REDUCED_MOTION).matches,
+    () => false
+  );
+}
+
 // The image-led sections of the home page: fact strip, statement, wheel
 // slider, size collections, wheel types, featured vehicle and vehicle grid.
 export default function HomeShowcase() {
   const stmtRef = useRef<HTMLElement | null>(null);
-  const stmtWheelRef = useRef<HTMLDivElement | null>(null);
+  const stmtCopyRef = useRef<HTMLDivElement | null>(null);
   const featRef = useRef<HTMLElement | null>(null);
   const featImgWrapRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
@@ -53,7 +77,45 @@ export default function HomeShowcase() {
   const [feat, setFeat] = useState(0);
   const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
 
-  // Scroll-driven parallax: statement wheel + featured vehicle image
+  // Statement slideshow. `reach` is the highest slide mounted so far: slides
+  // are added just before they're needed so the page doesn't load all five up
+  // front. It never auto-advances for visitors who prefer reduced motion, and
+  // anyone can pause it.
+  const reducedMotion = useReducedMotion();
+  const [paused, setPaused] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [show, setShow] = useState({ slide: 0, reach: 1 });
+  // `advancing` is the slideshow actually moving: not paused, not reduced
+  // motion, and the band on screen (so it always starts on the first image and
+  // does no work while off-screen).
+  const advancing = !paused && !reducedMotion && inView;
+
+  const goToSlide = (i: number) =>
+    setShow((s) => ({ slide: i, reach: Math.max(s.reach, Math.min(LAST_SLIDE, i + 1)) }));
+
+  useEffect(() => {
+    const el = stmtRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!advancing) return;
+    const id = setInterval(() => {
+      setShow((s) => {
+        const next = s.slide === LAST_SLIDE ? 0 : s.slide + 1;
+        return { slide: next, reach: Math.max(s.reach, Math.min(LAST_SLIDE, next + 1)) };
+      });
+    }, SLIDE_MS);
+    return () => clearInterval(id);
+  }, [advancing]);
+
+  // Scroll-driven parallax: statement copy + featured vehicle image
   useEffect(() => {
     const reduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
@@ -69,9 +131,9 @@ export default function HomeShowcase() {
     let raf = 0;
     const run = () => {
       raf = 0;
-      if (stmtRef.current && stmtWheelRef.current) {
+      if (stmtRef.current && stmtCopyRef.current) {
         const q = sectionProgress(stmtRef.current);
-        stmtWheelRef.current.style.transform = `translate3d(0, ${((q - 0.5) * 160).toFixed(1)}px, 0) rotate(${(q * 70).toFixed(1)}deg)`;
+        stmtCopyRef.current.style.transform = `translate3d(0, ${((q - 0.5) * -50).toFixed(1)}px, 0)`;
       }
       if (featRef.current && featImgWrapRef.current) {
         const q = sectionProgress(featRef.current);
@@ -140,23 +202,33 @@ export default function HomeShowcase() {
       </section>
 
       <section ref={stmtRef} className={styles.statement}>
-        <div ref={stmtWheelRef} className={styles.statementWheel} aria-hidden="true">
-          <Image
-            src="/assets/wheels/r4.png"
-            alt=""
-            fill
-            sizes="760px"
-            className={styles.contain}
-          />
+        <div className={styles.statementBg} aria-hidden="true">
+          {STATEMENT_SLIDES.map((src, i) =>
+            i <= show.reach ? (
+              <div
+                key={src}
+                className={`${styles.slide} ${i === show.slide ? styles.slideOn : ""}`}
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  fill
+                  sizes="100vw"
+                  className={`${styles.slideImg} ${advancing ? "" : styles.slidePaused}`}
+                />
+              </div>
+            ) : null
+          )}
         </div>
-        <div className={styles.statementInner}>
-          <div className={styles.statementLine} style={{ color: "#0E0E0E" }}>
+        <div className={styles.statementShade} />
+        <div ref={stmtCopyRef} className={styles.statementCopy}>
+          <div className={`${styles.statementLine} ${styles.line1}`}>
             Wholesale<span>.</span>
           </div>
-          <div className={styles.statementLine} style={{ color: "#5C5C5C" }}>
+          <div className={`${styles.statementLine} ${styles.line2}`}>
             Wheels &amp; tyres<span>.</span>
           </div>
-          <div className={styles.statementLine} style={{ color: "#8A8A8A" }}>
+          <div className={`${styles.statementLine} ${styles.line3}`}>
             For the trade<span>.</span>
           </div>
           <div className={styles.statementSub}>Australian trade supply</div>
@@ -166,6 +238,28 @@ export default function HomeShowcase() {
             </span>
             View wheels
           </Link>
+          <div className={styles.statementControls}>
+            {STATEMENT_SLIDES.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                className={`${styles.dot} ${i === show.slide ? styles.dotOn : ""}`}
+                aria-label={`Show image ${i + 1} of ${STATEMENT_SLIDES.length}`}
+                aria-current={i === show.slide}
+                onClick={() => goToSlide(i)}
+              />
+            ))}
+            {!reducedMotion && (
+              <button
+                type="button"
+                className={styles.playBtn}
+                aria-label={paused ? "Play slideshow" : "Pause slideshow"}
+                onClick={() => setPaused((p) => !p)}
+              >
+                <span aria-hidden="true">{paused ? "▶" : "❚❚"}</span>
+              </button>
+            )}
+          </div>
         </div>
       </section>
 
@@ -424,7 +518,7 @@ export default function HomeShowcase() {
             Vehicle fitments
           </h2>
           <Link href="/fitment" className={styles.btnOutlineDark}>
-            Fitment guide <span>→</span>
+            Guide <span>→</span>
           </Link>
         </div>
         <div className={styles.vehiclesGrid}>

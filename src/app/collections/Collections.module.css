@@ -42,7 +42,7 @@
   margin: 0 auto;
   padding: clamp(62px, 6.8vw, 119px) var(--gutter);
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 48px;
   align-items: center;
   width: 100%;
