@@ -5,7 +5,8 @@
   z-index: 0;
   background: var(--black-deep);
   color: #fff;
-  min-height: clamp(520px, 84vh, 1000px);
+  /* 30% shorter than the original clamp(520px, 84vh, 1000px). */
+  min-height: clamp(364px, 58.8vh, 700px);
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -35,7 +36,7 @@
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(91px, 10vw, 176px) var(--gutter) clamp(50px, 5.5vw, 97px);
+  padding: clamp(64px, 7vw, 123px) var(--gutter) clamp(35px, 3.85vw, 68px);
   width: 100%;
   box-sizing: border-box;
   will-change: transform, opacity;
@@ -43,7 +44,8 @@
 
 .heroCopy {
   animation: fadeUp 0.8s ease-out both;
-  max-width: 640px;
+  /* Wide enough for the two-line headline; body copy keeps its own narrower cap. */
+  max-width: min(100%, 1000px);
 }
 
 .kickerRow {
@@ -146,7 +148,7 @@
     position: relative;
     inset: auto;
     width: 100%;
-    height: min(52vh, 112vw);
+    height: min(36.4vh, 78.4vw);
   }
 
   .heroPhoto {
@@ -155,7 +157,7 @@
 
   .heroScrim {
     inset: 0 0 auto 0;
-    height: min(52vh, 112vw);
+    height: min(36.4vh, 78.4vw);
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, var(--black-deep) 100%);
   }
 
