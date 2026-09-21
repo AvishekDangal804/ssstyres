@@ -41,7 +41,7 @@ export default function SiteHeader() {
     };
 
   return (
-    <header className={styles.wrap}>
+    <header className={`${styles.wrap} ${mobileOpen ? styles.wrapOpen : ""}`}>
       <div className={styles.topbar}>
         <div className={styles.topbarInner}>
           <span className={styles.topbarAddress}>

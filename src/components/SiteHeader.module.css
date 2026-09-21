@@ -1,14 +1,33 @@
+/* Only the main navbar stays pinned: the header sticks once the contact bar
+   above it (34px + its 1px border) has scrolled out of view. */
 .wrap {
+  --topbar-h: 35px;
   position: sticky;
-  top: 0;
+  top: calc(var(--topbar-h) * -1);
   z-index: 50;
   background: rgba(255, 255, 255, 0.58);
   backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.6),
     0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* With the phone menu open the bar covers a lot of page: make it near-opaque so
+   the content behind can't bleed through the menu. */
+.wrapOpen {
+  background: rgba(255, 255, 255, 0.97);
+}
+
+/* No blur support: a translucent bar over busy content would be hard to read. */
+@supports not (backdrop-filter: blur(1px)) {
+  .wrap {
+    background: rgba(255, 255, 255, 0.94);
+  }
+
+  .topbar {
+    background: rgba(10, 10, 10, 0.9);
+  }
 }
 
 .topbar {
@@ -16,7 +35,6 @@
   color: #c8c8c8;
   font-size: 13px;
   backdrop-filter: blur(24px) saturate(1.8);
-  -webkit-backdrop-filter: blur(24px) saturate(1.8);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -24,12 +42,14 @@
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 var(--gutter);
-  min-height: 34px;
+  /* Fixed single line, so the pin offset above is always exact. */
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   width: 100%;
   box-sizing: border-box;
 }
@@ -38,7 +58,6 @@
   display: flex;
   gap: 18px;
   align-items: center;
-  flex-wrap: wrap;
 }
 
 .topbarLinks a {
@@ -126,7 +145,6 @@
   left: -18px;
   background: rgba(14, 14, 14, 0.78);
   backdrop-filter: blur(24px) saturate(1.6);
-  -webkit-backdrop-filter: blur(24px) saturate(1.6);
   min-width: 230px;
   padding: 10px 0;
   box-shadow:
@@ -271,13 +289,16 @@
   }
 }
 
-@media (max-width: 719px) {
-  /* The address is repeated in the footer and on the contact page; on phones
-     it wrapped the top bar to two lines and pushed the page content down. */
+@media (max-width: 900px) {
+  /* The address is repeated in the footer and on the contact page. Below this
+     width it no longer fits on one line beside the phone and email, and the
+     contact bar must stay a single line (the navbar pins beneath it). */
   .topbarAddress {
     display: none;
   }
+}
 
+@media (max-width: 719px) {
   .nav {
     order: 5;
     display: none;
@@ -290,6 +311,13 @@
 
   .nav.open {
     display: flex;
+    flex-wrap: nowrap;
+    /* The header is pinned, so a long menu must scroll inside itself rather
+       than run off the bottom of a short screen. */
+    max-height: calc(100vh - 100px);
+    max-height: calc(100dvh - 100px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
 
   .navButton,
