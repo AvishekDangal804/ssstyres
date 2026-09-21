@@ -21,6 +21,20 @@ export default function TypesPage() {
         body="Steel or alloy? Beadlock or simulated? Here's what each type is built for, what it weighs up, and which vehicles it suits — so you order the right wheel first time."
       />
       <section className={styles.section}>
+        <figure className={styles.banner}>
+          <div className={styles.bannerImg}>
+            <Image
+              src="/assets/lifestyle/wheel-styles.jpg"
+              alt="Four alloy wheels in black, white and bronze finishes lined up on a reflective floor"
+              fill
+              sizes="(max-width: 1100px) 94vw, 1268px"
+              className={styles.bannerPhoto}
+            />
+          </div>
+          <figcaption className={styles.bannerCaption}>
+            Illustrative image of wheel styles.
+          </figcaption>
+        </figure>
         {CATEGORIES.map((c, i) => {
           const num = String(i + 1).padStart(2, "0");
           return (

@@ -8,6 +8,7 @@ const ROUTES = [
   "/types",
   "/fitment",
   "/dealer",
+  "/trade",
   "/contact",
   "/about",
   "/accessories",

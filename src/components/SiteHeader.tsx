@@ -158,6 +158,7 @@ export default function SiteHeader() {
                 id="menu-more"
               >
                 <Link href="/about">About Us</Link>
+                <Link href="/trade">Built for the Trade</Link>
                 <Link href="/legal#terms">Terms &amp; Conditions</Link>
                 <Link href="/legal#warranty">Warranty &amp; Returns</Link>
                 <Link href="/legal#privacy">Privacy Policy</Link>

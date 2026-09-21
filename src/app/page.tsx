@@ -39,18 +39,22 @@ const BUILT_FOR_TRADE = [
   {
     name: "Own Warehouse Stock",
     body: "We hold our own stock at our Dandenong South warehouse.",
+    href: "/trade#warehouse",
   },
   {
     name: "Online Ordering",
     body: "Place orders directly through our dealer portal.",
+    href: "/trade#ordering",
   },
   {
     name: "Dealer Support",
     body: "An account manager for pricing, range and lead times.",
+    href: "/trade#support",
   },
   {
     name: "Trade Pricing",
     body: "Wholesale pricing for approved trade accounts.",
+    href: "/trade#pricing",
   },
 ];
 
@@ -82,14 +86,20 @@ export default function Home() {
               <h2 className={`${styles.sectionH2} ${styles.onDark}`}>
                 Built for the Trade
               </h2>
+              <Link href="/trade" className={styles.btnOutlineLight}>
+                How it works <span>→</span>
+              </Link>
             </div>
             <div className={styles.tradeGrid}>
               {BUILT_FOR_TRADE.map((c) => (
-                <div key={c.name} className={styles.tradeCard}>
+                <Link key={c.name} href={c.href} className={styles.tradeCard}>
                   <span className={styles.tradeBar} />
                   <h3 className={styles.tradeName}>{c.name}</h3>
                   <p className={styles.tradeBody}>{c.body}</p>
-                </div>
+                  <span className={styles.tradeMore}>
+                    Learn more <span aria-hidden="true">→</span>
+                  </span>
+                </Link>
               ))}
             </div>
           </div>

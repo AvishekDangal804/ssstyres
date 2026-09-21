@@ -335,7 +335,54 @@
 }
 
 .tradeCard {
+  display: flex;
+  flex-direction: column;
   padding: 4px 0;
+  color: inherit;
+}
+
+.tradeCard:hover .tradeName,
+.tradeCard:focus-visible .tradeName {
+  color: var(--red-text, #ff6b71);
+}
+
+.tradeCard:hover .tradeMore,
+.tradeCard:focus-visible .tradeMore {
+  color: #fff;
+}
+
+.tradeMore {
+  display: inline-block;
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+  transition: color 0.2s;
+}
+
+.btnOutlineLight {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 46px;
+  padding: 0 24px;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  box-sizing: border-box;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btnOutlineLight:hover {
+  background: #fff;
+  color: var(--black);
 }
 
 .tradeBar {

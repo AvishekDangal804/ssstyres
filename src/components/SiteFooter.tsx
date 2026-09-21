@@ -85,6 +85,7 @@ export default function SiteFooter() {
             <h2 className={styles.colTitle}>Company</h2>
             <div className={styles.colLinks}>
               <Link href="/dealer">Become a Dealer</Link>
+              <Link href="/trade">Built for the Trade</Link>
               <Link href="/about">About Us</Link>
               <Link href="/accessories">Accessories</Link>
               <Link href="/fitment">Guide</Link>

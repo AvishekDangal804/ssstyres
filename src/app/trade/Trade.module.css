@@ -1,0 +1,357 @@
+/* Jump bar */
+.jumpBar {
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.jumpInner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 18px var(--gutter);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.jump {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 18px;
+  border: 1.5px solid #dadada;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.jump:hover {
+  background: var(--black);
+  border-color: var(--black);
+  color: #fff;
+}
+
+/* Content blocks: text on one side, a photo or card on the other */
+.block {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(48px, 5.5vw, 88px) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+  border-bottom: 1px solid #ececec;
+}
+
+.flip .aside {
+  order: 2;
+}
+
+.text {
+  min-width: 0;
+}
+
+.aside {
+  min-width: 0;
+}
+
+.num {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  letter-spacing: 0.06em;
+  color: var(--red);
+  margin-bottom: 10px;
+}
+
+.h2 {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(34px, 4.2vw, 52px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.015em;
+  margin: 0 0 16px;
+}
+
+.lead {
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.45;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 14px;
+  max-width: 560px;
+}
+
+.body {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #444;
+  margin: 0 0 14px;
+  max-width: 560px;
+}
+
+.inlineLink {
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.inlineLink:hover {
+  color: var(--red);
+}
+
+.facts {
+  margin: 20px 0 0;
+  display: grid;
+  gap: 12px;
+  max-width: 560px;
+}
+
+.facts > div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #ececec;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.facts dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  padding-top: 2px;
+}
+
+.facts dd {
+  margin: 0;
+  color: var(--ink);
+}
+
+.facts a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.facts a:hover {
+  color: var(--red);
+}
+
+.links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 26px;
+}
+
+.btnDark,
+.btnRed,
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.btnDark {
+  background: var(--black);
+  border: 1.5px solid var(--black);
+  color: #fff;
+}
+
+.btnDark:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.btnRed {
+  background: var(--red);
+  border: 1.5px solid var(--red);
+  color: #fff;
+}
+
+.btnRed:hover {
+  background: var(--red-hover);
+  border-color: var(--red-hover);
+  color: #fff;
+}
+
+.btnOutline {
+  border: 1.5px solid var(--black);
+  color: var(--black);
+}
+
+.btnOutline:hover {
+  background: var(--black);
+  color: #fff;
+}
+
+/* Aside: photo and cards */
+.photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #161616;
+}
+
+.photoImg {
+  object-fit: cover;
+  object-position: center 42%;
+}
+
+.darkCard,
+.lightCard {
+  border-radius: 22px;
+  padding: clamp(24px, 2.8vw, 40px);
+}
+
+.darkCard {
+  background: var(--black);
+  color: #fff;
+}
+
+.lightCard {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+
+.cardLabel {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 18px;
+}
+
+.darkCard .cardLabel {
+  color: var(--red-text, #ff6b71);
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 22px;
+}
+
+.step {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.stepNum {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  margin-bottom: 6px;
+}
+
+.stepBody {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--on-dark);
+}
+
+.big {
+  display: block;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1;
+  color: var(--black);
+}
+
+.big:hover {
+  color: var(--red);
+}
+
+.cardSub {
+  font-size: 14px;
+  color: #5f5f5f;
+  margin: 8px 0 18px;
+}
+
+.mail {
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.mail:hover {
+  color: var(--red);
+}
+
+.notes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.notes li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #333;
+}
+
+.notes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 10px;
+  height: 3px;
+  background: var(--red);
+}
+
+@media (max-width: 520px) {
+  .facts > div {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+}

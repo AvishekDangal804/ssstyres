@@ -208,19 +208,35 @@ export default function GuidePage() {
       </section>
 
       <section className={styles.care} aria-labelledby="guide-care">
-        <div className={styles.sectionHeadTight}>
-          <div className={styles.eyebrow}>Part 4 — Fitting &amp; aftercare</div>
-          <h2 id="guide-care" className={styles.h2}>
-            Fit them right, keep them right
-          </h2>
-          <p className={styles.lead}>
-            A wheel is only as good as its fitting. These steps apply to every
-            SSS wheel and line up with the conditions in our{" "}
-            <Link href="/legal#warranty" className={styles.inlineLink}>
-              warranty terms
-            </Link>
-            .
-          </p>
+        <div className={styles.careTop}>
+          <div className={styles.sectionHeadTight}>
+            <div className={styles.eyebrow}>Part 4 — Fitting &amp; aftercare</div>
+            <h2 id="guide-care" className={styles.h2}>
+              Fit them right, keep them right
+            </h2>
+            <p className={styles.lead}>
+              A wheel is only as good as its fitting. These steps apply to
+              every SSS wheel and line up with the conditions in our{" "}
+              <Link href="/legal#warranty" className={styles.inlineLink}>
+                warranty terms
+              </Link>
+              .
+            </p>
+          </div>
+          <figure className={styles.careFig}>
+            <div className={styles.careImg}>
+              <Image
+                src="/assets/lifestyle/care-products.jpg"
+                alt="Black car-care bottles — engine oil, wheel cleaner, interior detailer, car shampoo and tyre dressing — with a detailing brush, a sponge and microfibre towels"
+                fill
+                sizes="(max-width: 900px) 94vw, 620px"
+                className={styles.careShot}
+              />
+            </div>
+            <figcaption className={styles.figCaption}>
+              Illustrative image.
+            </figcaption>
+          </figure>
         </div>
         <div className={styles.careGrid}>
           {CARE.map((c) => (
