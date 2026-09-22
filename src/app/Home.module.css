@@ -286,6 +286,29 @@
   box-sizing: border-box;
 }
 
+.supplyIntro {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(24px, 3vw, 48px);
+  align-items: center;
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.supplyPhoto {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.supplyLead {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink-2);
+  margin: 0 0 22px;
+  max-width: 480px;
+}
+
 .supplyGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -293,9 +316,23 @@
 }
 
 .supplyCard {
+  display: flex;
+  flex-direction: column;
   background: var(--surface-2);
   border-radius: 16px;
   padding: 24px 22px;
+  color: inherit;
+  transition: background 0.2s;
+}
+
+.supplyCard:hover,
+.supplyCard:focus-visible {
+  background: #ececec;
+}
+
+.supplyCard:hover .supplyName,
+.supplyCard:focus-visible .supplyName {
+  color: var(--red);
 }
 
 .supplyName {
@@ -306,6 +343,7 @@
   letter-spacing: -0.005em;
   margin-bottom: 8px;
   color: var(--black);
+  transition: color 0.2s;
 }
 
 .supplyBody {
@@ -313,6 +351,17 @@
   line-height: 1.55;
   color: var(--ink-2);
   margin: 0;
+}
+
+.supplyMore {
+  display: inline-block;
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
 }
 
 /* Built for the Trade */

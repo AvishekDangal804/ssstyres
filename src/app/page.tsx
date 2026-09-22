@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { pageMetadata } from "@/lib/site";
 import HomeHero from "./HomeHero";
 import HomeShowcase from "./HomeShowcase";
@@ -15,23 +16,33 @@ export const metadata = pageMetadata({
 const WHO_WE_SUPPLY = [
   {
     name: "Tyre Resellers",
-    body: "Wholesale tyre and wheel stock for your shopfront.",
+    body: "Wholesale tyre and wheel stock for your shopfront, ordered through our dealer portal.",
+    href: "/dealer",
+    linkLabel: "Become a dealer",
   },
   {
     name: "Mechanical Workshops",
-    body: "Wheels and tyres for service and repair work.",
+    body: "Wheels and tyres for service and repair work, with our fitment guide to confirm the spec.",
+    href: "/fitment",
+    linkLabel: "Wheel guide",
   },
   {
     name: "Panel Shops",
-    body: "Replacement wheels for repair and insurance work.",
+    body: "Replacement wheels for repair and insurance work, matched to the vehicle.",
+    href: "/wheels",
+    linkLabel: "Browse wheels",
   },
   {
     name: "Fleet & Rideshare Operators",
-    body: "Volume supply for fleet vehicles.",
+    body: "Volume supply for fleet vehicles, with an account manager for pricing and lead times.",
+    href: "/trade#pricing",
+    linkLabel: "Trade pricing",
   },
   {
     name: "4x4 & Accessory Fitters",
-    body: "Off-road wheels and fitment support.",
+    body: "Off-road wheels and fitment support, plus the accessories that go with them.",
+    href: "/accessories",
+    linkLabel: "Accessories",
   },
 ];
 
@@ -67,15 +78,34 @@ export default function Home() {
         <HomeShowcase />
 
         <section className={styles.supplySection}>
-          <div className={styles.sectionHead}>
-            <h2 className={styles.sectionH2}>Who We Supply</h2>
+          <div className={styles.supplyIntro}>
+            <div className={styles.supplyPhoto}>
+              <ImagePlaceholder label="Trade customers / workshop photo — to be supplied" />
+            </div>
+            <div>
+              <div className={styles.sectionHead}>
+                <h2 className={styles.sectionH2}>Who We Supply</h2>
+              </div>
+              <p className={styles.supplyLead}>
+                SSS Wheels &amp; Tyres is a trade-only wholesale supplier —
+                not a retailer. We hold our own stock at our Dandenong South
+                warehouse and supply the businesses below directly, with
+                wholesale pricing for approved trade accounts.
+              </p>
+              <Link href="/dealer" className={styles.btnOutlineDark}>
+                Become a dealer <span>→</span>
+              </Link>
+            </div>
           </div>
           <div className={styles.supplyGrid}>
             {WHO_WE_SUPPLY.map((c) => (
-              <div key={c.name} className={styles.supplyCard}>
+              <Link key={c.name} href={c.href} className={styles.supplyCard}>
                 <h3 className={styles.supplyName}>{c.name}</h3>
                 <p className={styles.supplyBody}>{c.body}</p>
-              </div>
+                <span className={styles.supplyMore}>
+                  {c.linkLabel} <span aria-hidden="true">→</span>
+                </span>
+              </Link>
             ))}
           </div>
         </section>
