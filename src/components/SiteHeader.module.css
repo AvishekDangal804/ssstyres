@@ -54,6 +54,20 @@
   box-sizing: border-box;
 }
 
+.topbarAddress {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.topbarDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex: none;
+}
+
 .topbarLinks {
   display: flex;
   gap: 18px;
@@ -61,6 +75,9 @@
 }
 
 .topbarLinks a {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   color: #fff;
 }
 
@@ -71,7 +88,7 @@
   min-height: 74px;
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 18px;
   flex-wrap: wrap;
   width: 100%;
   box-sizing: border-box;
@@ -92,7 +109,7 @@
 .nav {
   display: flex;
   align-items: center;
-  column-gap: 22px;
+  column-gap: 18px;
   flex-wrap: wrap;
   order: 2;
   margin-left: auto;
@@ -205,28 +222,6 @@
   flex: none;
 }
 
-.btnOutline {
-  display: inline-flex;
-  align-items: center;
-  border: 2px solid var(--black);
-  color: var(--black);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0 18px;
-  height: 42px;
-  box-sizing: border-box;
-  white-space: nowrap;
-  border-radius: 999px;
-  transition: background 0.2s, color 0.2s;
-}
-
-.btnOutline:hover {
-  background: var(--black);
-  color: #fff;
-}
-
 .navMobileCtas {
   display: none;
 }
@@ -337,7 +332,6 @@
     padding-top: 10px;
   }
 
-  .navMobileCtas .btnOutline,
   .navMobileCtas .btnRed {
     justify-content: center;
   }

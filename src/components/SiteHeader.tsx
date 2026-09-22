@@ -16,6 +16,45 @@ const supportsHover = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
+// Small generic line icons for the contact bar, matching the manager's
+// reference. Decorative only — the link text is the accessible name.
+function PhoneIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      width="14"
+      height="14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M5 3h3l1.4 3.5-2 1.5a9 9 0 0 0 4.6 4.6l1.5-2L17 12v3a1.5 1.5 0 0 1-1.6 1.5A13 13 0 0 1 3.5 4.6 1.5 1.5 0 0 1 5 3z" />
+    </svg>
+  );
+}
+
+function MailIcon() {
+  return (
+    <svg
+      viewBox="0 0 20 20"
+      width="14"
+      height="14"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
+      <path d="M3 5.5l7 5.5 7-5.5" />
+    </svg>
+  );
+}
+
 export default function SiteHeader() {
   const [menu, setMenu] = useState<Menu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -45,12 +84,19 @@ export default function SiteHeader() {
       <div className={styles.topbar}>
         <div className={styles.topbarInner}>
           <span className={styles.topbarAddress}>
+            <span className={styles.topbarDot} aria-hidden="true" />
             Melbourne — 13 Advantage Drive, Dandenong South · Sydney,
             Brisbane &amp; Adelaide opening soon
           </span>
           <div className={styles.topbarLinks}>
-            <a href="tel:0391165787">03 9116 5787</a>
-            <a href="mailto:info@ssswheels.com.au">info@ssswheels.com.au</a>
+            <a href="tel:0391165787">
+              <PhoneIcon />
+              03 9116 5787
+            </a>
+            <a href="mailto:info@ssswheels.com.au">
+              <MailIcon />
+              info@ssswheels.com.au
+            </a>
           </div>
         </div>
       </div>
@@ -170,7 +216,7 @@ export default function SiteHeader() {
           {/* Phones hide the header buttons to keep the bar to one row, so
               both live at the foot of the menu there instead. */}
           <div className={styles.navMobileCtas}>
-            <Link href="/dealer" className={styles.btnOutline}>
+            <Link href="/dealer" className={styles.btnRed}>
               Become a Dealer
             </Link>
             <a
@@ -179,13 +225,13 @@ export default function SiteHeader() {
               rel="noopener noreferrer"
               className={styles.btnRed}
             >
-              Dealer Portal
+              Wholesale Login
             </a>
           </div>
         </nav>
 
         <div className={styles.ctaWrap}>
-          <Link href="/dealer" className={styles.btnOutline}>
+          <Link href="/dealer" className={styles.btnRed}>
             Become a Dealer
           </Link>
           <a
@@ -194,7 +240,7 @@ export default function SiteHeader() {
             rel="noopener noreferrer"
             className={styles.btnRed}
           >
-            Dealer Portal
+            Wholesale Login
           </a>
         </div>
 
