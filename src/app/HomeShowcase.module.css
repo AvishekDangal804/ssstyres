@@ -988,18 +988,16 @@
   align-items: flex-end;
 }
 
-/* The whole vehicle is shown (never cropped); the band along the bottom is
-   left for the title and tabs. Extra height top and bottom stops the parallax
-   nudge from ever exposing an edge. */
 .featImgWrap {
-  --photo-bottom: 205px;
-  --photo-mask:
-    linear-gradient(90deg, transparent 0, #000 2.5%, #000 97.5%, transparent 100%),
-    linear-gradient(180deg, #000 0, #000 90%, transparent 100%);
   position: absolute;
-  inset: -24px 0;
+  inset: 0;
   z-index: 1;
   will-change: transform;
+}
+
+.featImg {
+  object-fit: cover;
+  object-position: center 60%;
 }
 
 .featScrim1 {
@@ -1098,34 +1096,6 @@
 .featCta:hover {
   background: var(--red);
   color: #fff;
-}
-
-@media (max-width: 720px) {
-  /* Phones: vehicle on top at its natural 3:2, title and tabs beneath it on
-     the dark base — nothing overlaps the vehicle. */
-  .featInner {
-    min-height: 0;
-    display: block;
-  }
-
-  .featImgWrap {
-    --photo-bottom: 0px;
-    --photo-mask: none;
-    position: relative;
-    inset: auto;
-    aspect-ratio: 3 / 2;
-    transform: none !important;
-  }
-
-  .featScrim1,
-  .featScrim2 {
-    display: none;
-  }
-
-  .featContent {
-    padding-top: 24px;
-    padding-bottom: 40px;
-  }
 }
 
 /* Vehicle grid */
