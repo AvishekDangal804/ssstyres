@@ -3,8 +3,14 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { PORTAL } from "@/lib/wheels-data";
 import styles from "./SiteHeader.module.css";
+
+// Groups of routes that fall under one nav item, for the "you are here" red
+// underline. Home is deliberately exact-match only — every path starts with
+// "/", so a prefix match there would light up on every page.
+const MORE_ROUTES = ["/about", "/trade", "/legal", "/contact"];
 
 type Menu = "wheels" | "more" | null;
 
@@ -56,9 +62,15 @@ function MailIcon() {
 }
 
 export default function SiteHeader() {
+  const pathname = usePathname();
   const [menu, setMenu] = useState<Menu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuBtns = useRef<Record<string, HTMLButtonElement | null>>({});
+
+  const navCls = (active: boolean) =>
+    `${styles.navItem} ${active ? styles.navActive : ""}`;
+  const navBtnCls = (active: boolean) =>
+    `${styles.navButton} ${active ? styles.navActive : ""}`;
 
   const toggle = (m: Exclude<Menu, null>) =>
     setMenu((cur) => (cur === m ? null : m));
@@ -125,7 +137,7 @@ export default function SiteHeader() {
             }
           }}
         >
-          <Link href="/" className={styles.navItem}>
+          <Link href="/" className={navCls(pathname === "/")}>
             Home
           </Link>
 
@@ -140,7 +152,7 @@ export default function SiteHeader() {
                 menuBtns.current.wheels = el;
               }}
               type="button"
-              className={styles.navButton}
+              className={navBtnCls(pathname.startsWith("/wheels"))}
               onClick={() => toggle("wheels")}
               aria-expanded={menu === "wheels"}
               aria-controls="menu-wheels"
@@ -170,13 +182,13 @@ export default function SiteHeader() {
             )}
           </div>
 
-          <Link href="/accessories" className={styles.navItem}>
+          <Link href="/accessories" className={navCls(pathname === "/accessories")}>
             Accessories
           </Link>
-          <Link href="/fitment" className={styles.navItem}>
+          <Link href="/fitment" className={navCls(pathname === "/fitment")}>
             Guide
           </Link>
-          <Link href="/media" className={styles.navItem}>
+          <Link href="/media" className={navCls(pathname === "/media")}>
             Media
           </Link>
 
@@ -191,7 +203,7 @@ export default function SiteHeader() {
                 menuBtns.current.more = el;
               }}
               type="button"
-              className={styles.navButton}
+              className={navBtnCls(MORE_ROUTES.includes(pathname))}
               onClick={() => toggle("more")}
               aria-expanded={menu === "more"}
               aria-controls="menu-more"

@@ -121,10 +121,19 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding: 26px 0;
+  /* Reserved even when inactive, so gaining it on the current page doesn't
+     shift anything. */
+  border-bottom: 2px solid transparent;
 }
 
 .navItem:hover {
   color: var(--red);
+}
+
+/* The current page's nav item, red underline. */
+.navActive {
+  color: var(--black);
+  border-bottom-color: var(--red);
 }
 
 .navMenu {
@@ -134,6 +143,7 @@
 .navButton {
   background: none;
   border: 0;
+  border-bottom: 2px solid transparent;
   cursor: pointer;
   padding: 26px 0;
   font-family: inherit;
