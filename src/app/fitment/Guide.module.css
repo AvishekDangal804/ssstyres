@@ -629,6 +629,20 @@
   margin: 0;
 }
 
+.stepTip {
+  margin-top: auto;
+  padding-top: 16px;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #6b6b6b;
+}
+
+.stepTipLabel {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--red);
+}
+
 .rule {
   margin-top: clamp(18px, 2vw, 28px);
   background: #fff;

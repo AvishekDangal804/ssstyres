@@ -45,14 +45,17 @@ const STEPS = [
   {
     title: "Check the tyre placard",
     body: "Open the driver's door and look at the placard on the door jamb (or in the owner's manual). It lists the factory rim size, tyre size and recommended pressures — your safe starting point.",
+    tip: "The placard shows the original factory fitment. If the vehicle's tyres or wheels have been changed since it left the factory, what's actually fitted may not match it.",
   },
   {
     title: "Count studs & measure PCD",
     body: "Count the wheel studs. For an even count (6), measure centre-to-centre across two opposite studs. For 5-stud, measure from the back of one hole to the centre of the second one along. That's your bolt pattern, e.g. 6x139.7.",
+    tip: 'A 6-stud pattern is also written 6x5.5" (same spacing, imperial). Most Australian dual cabs and 4x4 wagons run 6x139.7; many SUVs and passenger cars run 5x114.3 — useful to sanity-check your measurement against.',
   },
   {
     title: "Read the back of the wheel",
     body: "Most wheels are stamped on the inner barrel or spoke with the size and offset — look for markings like 17x8 and ET0 (or +0). Note them down along with your bolt pattern and you have a full spec.",
+    tip: "Can't find a stamp? It's sometimes on a sticker instead, or hidden behind the tyre bead. Call us with what you can read and we'll help confirm the rest.",
   },
 ];
 
@@ -192,6 +195,9 @@ export default function GuidePage() {
                 <div className={styles.stepNum}>{i + 1}</div>
                 <h3 className={styles.stepTitle}>{st.title}</h3>
                 <p className={styles.stepBody}>{st.body}</p>
+                <div className={styles.stepTip}>
+                  <span className={styles.stepTipLabel}>Tip —</span> {st.tip}
+                </div>
               </div>
             ))}
           </div>
