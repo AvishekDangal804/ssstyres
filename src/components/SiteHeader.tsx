@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -22,50 +22,12 @@ const supportsHover = () =>
   typeof window !== "undefined" &&
   window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-// Small generic line icons for the contact bar, matching the manager's
-// reference. Decorative only — the link text is the accessible name.
-function PhoneIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      width="14"
-      height="14"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M5 3h3l1.4 3.5-2 1.5a9 9 0 0 0 4.6 4.6l1.5-2L17 12v3a1.5 1.5 0 0 1-1.6 1.5A13 13 0 0 1 3.5 4.6 1.5 1.5 0 0 1 5 3z" />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg
-      viewBox="0 0 20 20"
-      width="14"
-      height="14"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <rect x="2.5" y="4.5" width="15" height="11" rx="1.5" />
-      <path d="M3 5.5l7 5.5 7-5.5" />
-    </svg>
-  );
-}
-
 export default function SiteHeader() {
   const pathname = usePathname();
   const [menu, setMenu] = useState<Menu>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuBtns = useRef<Record<string, HTMLButtonElement | null>>({});
+  const headerRef = useRef<HTMLElement | null>(null);
 
   const navCls = (active: boolean) =>
     `${styles.navItem} ${active ? styles.navActive : ""}`;
@@ -91,24 +53,33 @@ export default function SiteHeader() {
       }
     };
 
+  // Clicking anywhere outside the header closes an open dropdown (the mobile
+  // menu itself, opened by the burger, is untouched by this).
+  useEffect(() => {
+    if (!menu) return;
+    const onClick = (e: MouseEvent) => {
+      if (headerRef.current && !headerRef.current.contains(e.target as Node)) {
+        setMenu(null);
+      }
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, [menu]);
+
   return (
-    <header className={`${styles.wrap} ${mobileOpen ? styles.wrapOpen : ""}`}>
+    <header
+      ref={headerRef}
+      className={`${styles.wrap} ${mobileOpen ? styles.wrapOpen : ""}`}
+    >
       <div className={styles.topbar}>
         <div className={styles.topbarInner}>
           <span className={styles.topbarAddress}>
-            <span className={styles.topbarDot} aria-hidden="true" />
             Melbourne — 13 Advantage Drive, Dandenong South · Sydney,
             Brisbane &amp; Adelaide opening soon
           </span>
           <div className={styles.topbarLinks}>
-            <a href="tel:0391165787">
-              <PhoneIcon />
-              03 9116 5787
-            </a>
-            <a href="mailto:info@ssswheels.com.au">
-              <MailIcon />
-              info@ssswheels.com.au
-            </a>
+            <a href="tel:0391165787">03 9116 5787</a>
+            <a href="mailto:info@ssswheels.com.au">info@ssswheels.com.au</a>
           </div>
         </div>
       </div>
@@ -123,6 +94,19 @@ export default function SiteHeader() {
             preload
           />
         </Link>
+
+        <button
+          type="button"
+          className={`${styles.burger} ${mobileOpen ? styles.burgerOpen : ""}`}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="site-nav"
+          onClick={() => setMobileOpen((v) => !v)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
 
         <nav
           id="site-nav"
@@ -154,32 +138,40 @@ export default function SiteHeader() {
               type="button"
               className={navBtnCls(pathname.startsWith("/wheels"))}
               onClick={() => toggle("wheels")}
+              aria-haspopup="true"
               aria-expanded={menu === "wheels"}
               aria-controls="menu-wheels"
             >
-              Wheels <span className={styles.caret}>▼</span>
+              Wheels{" "}
+              <span
+                className={`${styles.caret} ${menu === "wheels" ? styles.caretOpen : ""}`}
+              >
+                ▼
+              </span>
             </button>
-            {menu === "wheels" && (
-              <div className={styles.dropdown} id="menu-wheels">
-                <Link href="/wheels?model=d-locker" className={styles.strong}>
-                  SSS D-Locker
-                </Link>
-                <Link href="/wheels?model=d-hole" className={styles.strong}>
-                  SSS D-Hole
-                </Link>
-                <div className={styles.dropdownLabel}>By type</div>
-                <Link href="/wheels?cat=steel">Steel</Link>
-                <Link href="/wheels?cat=offroad">Off Road</Link>
-                <Link href="/wheels?cat=beadlock">Beadlocks</Link>
-                <Link href="/wheels?cat=street">Street</Link>
-                <Link href="/wheels?cat=commercial">Commercial</Link>
-                <Link href="/wheels?cat=trailer">Trailer</Link>
-                <div className={styles.dropdownDivider} />
-                <Link href="/wheels" className={styles.strong}>
-                  All wheels →
-                </Link>
-              </div>
-            )}
+            <div
+              className={`${styles.dropdown} ${menu === "wheels" ? styles.dropdownOpen : ""}`}
+              id="menu-wheels"
+              role="menu"
+            >
+              <Link href="/wheels?model=d-locker" className={styles.strong}>
+                SSS D-Locker
+              </Link>
+              <Link href="/wheels?model=d-hole" className={styles.strong}>
+                SSS D-Hole
+              </Link>
+              <div className={styles.dropdownLabel}>By type</div>
+              <Link href="/wheels?cat=steel">Steel</Link>
+              <Link href="/wheels?cat=offroad">Off Road</Link>
+              <Link href="/wheels?cat=beadlock">Beadlocks</Link>
+              <Link href="/wheels?cat=street">Street</Link>
+              <Link href="/wheels?cat=commercial">Commercial</Link>
+              <Link href="/wheels?cat=trailer">Trailer</Link>
+              <div className={styles.dropdownDivider} />
+              <Link href="/wheels" className={styles.strong}>
+                All wheels →
+              </Link>
+            </div>
           </div>
 
           <Link href="/accessories" className={navCls(pathname === "/accessories")}>
@@ -205,30 +197,35 @@ export default function SiteHeader() {
               type="button"
               className={navBtnCls(MORE_ROUTES.includes(pathname))}
               onClick={() => toggle("more")}
+              aria-haspopup="true"
               aria-expanded={menu === "more"}
               aria-controls="menu-more"
             >
-              More <span className={styles.caret}>▼</span>
-            </button>
-            {menu === "more" && (
-              <div
-                className={`${styles.dropdown} ${styles.right}`}
-                id="menu-more"
+              More{" "}
+              <span
+                className={`${styles.caret} ${menu === "more" ? styles.caretOpen : ""}`}
               >
-                <Link href="/about">About Us</Link>
-                <Link href="/trade">Built for the Trade</Link>
-                <Link href="/legal#terms">Terms &amp; Conditions</Link>
-                <Link href="/legal#warranty">Warranty &amp; Returns</Link>
-                <Link href="/legal#privacy">Privacy Policy</Link>
-                <Link href="/contact">Contact Us</Link>
-              </div>
-            )}
+                ▼
+              </span>
+            </button>
+            <div
+              className={`${styles.dropdown} ${styles.right} ${menu === "more" ? styles.dropdownOpen : ""}`}
+              id="menu-more"
+              role="menu"
+            >
+              <Link href="/about">About Us</Link>
+              <Link href="/trade">Built for the Trade</Link>
+              <Link href="/legal#terms">Terms &amp; Conditions</Link>
+              <Link href="/legal#warranty">Warranty &amp; Returns</Link>
+              <Link href="/legal#privacy">Privacy Policy</Link>
+              <Link href="/contact">Contact Us</Link>
+            </div>
           </div>
 
           {/* Phones hide the header buttons to keep the bar to one row, so
               both live at the foot of the menu there instead. */}
           <div className={styles.navMobileCtas}>
-            <Link href="/dealer" className={styles.btnRed}>
+            <Link href="/dealer" className={styles.btnOutline}>
               Become a Dealer
             </Link>
             <a
@@ -237,13 +234,13 @@ export default function SiteHeader() {
               rel="noopener noreferrer"
               className={styles.btnRed}
             >
-              Wholesale Login
+              Dealer Portal
             </a>
           </div>
         </nav>
 
         <div className={styles.ctaWrap}>
-          <Link href="/dealer" className={styles.btnRed}>
+          <Link href="/dealer" className={styles.btnOutline}>
             Become a Dealer
           </Link>
           <a
@@ -252,22 +249,9 @@ export default function SiteHeader() {
             rel="noopener noreferrer"
             className={styles.btnRed}
           >
-            Wholesale Login
+            Dealer Portal
           </a>
         </div>
-
-        <button
-          type="button"
-          className={styles.burger}
-          aria-label="Toggle menu"
-          aria-expanded={mobileOpen}
-          aria-controls="site-nav"
-          onClick={() => setMobileOpen((v) => !v)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
       </div>
     </header>
   );

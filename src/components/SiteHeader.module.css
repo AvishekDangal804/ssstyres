@@ -1,5 +1,8 @@
 /* Only the main navbar stays pinned: the header sticks once the contact bar
-   above it (34px + its 1px border) has scrolled out of view. */
+   above it (34px + its 1px border) has scrolled out of view. This is a
+   deliberate departure from the manager's navbar file (which pins the whole
+   header including the contact bar) — the manager separately approved this
+   exact "contact bar scrolls away, nav bar stays" behaviour by screenshot. */
 .wrap {
   --topbar-h: 35px;
   position: sticky;
@@ -54,20 +57,6 @@
   box-sizing: border-box;
 }
 
-.topbarAddress {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.topbarDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--red);
-  flex: none;
-}
-
 .topbarLinks {
   display: flex;
   gap: 18px;
@@ -75,9 +64,6 @@
 }
 
 .topbarLinks a {
-  display: flex;
-  align-items: center;
-  gap: 6px;
   color: #fff;
 }
 
@@ -106,13 +92,17 @@
   width: auto;
 }
 
+/* Centred in the bar: `margin: 0 auto` on a non-growing flex item splits the
+   row's leftover space evenly either side of it, which centres it relative to
+   the whole bar even though the logo and the CTAs aren't the same width. */
 .nav {
   display: flex;
   align-items: center;
   column-gap: 18px;
+  flex: none;
   flex-wrap: wrap;
   order: 2;
-  margin-left: auto;
+  margin: 0 auto;
 }
 
 .navItem {
@@ -164,8 +154,17 @@
 .caret {
   font-size: 11px;
   color: var(--red);
+  display: inline-block;
+  transition: transform 0.2s;
 }
 
+.caretOpen {
+  transform: rotate(180deg);
+}
+
+/* Always mounted (not conditionally rendered) so it can transition closed as
+   well as open. `visibility` (not just opacity) keeps it out of the tab order
+   and out of screen readers while hidden, without extra bookkeeping. */
 .dropdown {
   position: absolute;
   top: 100%;
@@ -182,6 +181,16 @@
   border-radius: 16px;
   overflow: hidden;
   margin-top: -6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: opacity 0.2s, transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0.2s;
+}
+
+.dropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
 }
 
 .dropdown.right {
@@ -236,6 +245,28 @@
   display: none;
 }
 
+.btnOutline {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--black);
+  color: var(--black);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0 18px;
+  height: 42px;
+  box-sizing: border-box;
+  white-space: nowrap;
+  border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btnOutline:hover {
+  background: var(--black);
+  color: #fff;
+}
+
 .btnRed {
   display: inline-flex;
   align-items: center;
@@ -256,19 +287,21 @@
   background: var(--red-hover);
 }
 
+/* Glass pill; the three bars morph into a close (✕) when open. */
 .burger {
   display: none;
-  order: 4;
-  background: none;
-  border: 2px solid var(--black);
-  border-radius: 10px;
-  width: 42px;
-  height: 42px;
+  order: 2;
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .burger span {
@@ -276,6 +309,19 @@
   width: 18px;
   height: 2px;
   background: var(--black);
+  transition: transform 0.25s, opacity 0.2s;
+}
+
+.burgerOpen span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.burgerOpen span:nth-child(2) {
+  opacity: 0;
+}
+
+.burgerOpen span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 @media (max-width: 1279px) {
@@ -284,7 +330,7 @@
     flex: 0 0 100%;
     border-top: 1px solid #e4e4e4;
     column-gap: 18px;
-    margin-left: 0;
+    margin: 0;
   }
 
   .ctaWrap {
@@ -308,9 +354,9 @@
     order: 5;
     display: none;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
     column-gap: 0;
-    row-gap: 4px;
+    row-gap: 0;
     padding: 10px 0 16px;
   }
 
@@ -327,7 +373,27 @@
 
   .navButton,
   .navItem {
-    padding: 12px 0;
+    padding: 16px 0;
+    border-bottom: 1px solid #e4e4e4;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .navActive {
+    border-bottom: 1px solid #e4e4e4;
+    position: relative;
+  }
+
+  /* On the stacked list the "current page" mark is a short red rule at the
+     left rather than a full-width underline, which is already the divider. */
+  .navActive::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 28px;
+    height: 2px;
+    background: var(--red);
   }
 
   .ctaWrap {
@@ -336,26 +402,44 @@
 
   .navMobileCtas {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 10px;
     align-self: stretch;
-    padding-top: 10px;
+    padding-top: 16px;
   }
 
+  .navMobileCtas .btnOutline,
   .navMobileCtas .btnRed {
+    flex: 1 1 140px;
     justify-content: center;
   }
 
+  /* Inline in the stacked list, not an overlay: shown/hidden, not faded. */
   .dropdown,
   .dropdown.right {
     position: static;
-    margin: 0 0 4px;
+    margin: 8px 0;
     left: auto;
     right: auto;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    display: none;
+  }
+
+  .dropdownOpen {
+    display: block;
   }
 
   .burger {
     display: flex;
-    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .caret,
+  .dropdown,
+  .burger span {
+    transition: none;
   }
 }
