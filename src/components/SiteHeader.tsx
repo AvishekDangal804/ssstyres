@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { PORTAL } from "@/lib/wheels-data";
+import { PORTAL, CATEGORIES, MODELS } from "@/lib/wheels-data";
 import styles from "./SiteHeader.module.css";
 
 // Groups of routes that fall under one nav item, for the "you are here" red
@@ -150,23 +150,40 @@ export default function SiteHeader() {
               </span>
             </button>
             <div
-              className={`${styles.dropdown} ${menu === "wheels" ? styles.dropdownOpen : ""}`}
+              className={`${styles.dropdown} ${styles.wheelsMenu} ${menu === "wheels" ? styles.dropdownOpen : ""}`}
               id="menu-wheels"
               role="menu"
             >
-              <Link href="/wheels?model=d-locker" className={styles.strong}>
-                SSS D-Locker
-              </Link>
-              <Link href="/wheels?model=d-hole" className={styles.strong}>
-                SSS D-Hole
-              </Link>
-              <div className={styles.dropdownLabel}>By type</div>
-              <Link href="/wheels?cat=steel">Steel</Link>
-              <Link href="/wheels?cat=offroad">Off Road</Link>
-              <Link href="/wheels?cat=beadlock">Beadlocks</Link>
-              <Link href="/wheels?cat=street">Street</Link>
-              <Link href="/wheels?cat=commercial">Commercial</Link>
-              <Link href="/wheels?cat=trailer">Trailer</Link>
+              <div className={styles.tileGrid}>
+                {MODELS.map((m) => {
+                  const finish =
+                    m.finishes.find((f) => !/black/i.test(f.name)) ?? m.finishes[0];
+                  return (
+                    <Link
+                      key={m.id}
+                      href={`/wheels?model=${m.id}`}
+                      className={styles.tile}
+                    >
+                      <span className={styles.tileImg}>
+                        <Image src={finish.img} alt="" fill sizes="90px" />
+                      </span>
+                      <span className={styles.tileLabel}>{m.name}</span>
+                    </Link>
+                  );
+                })}
+                {CATEGORIES.map((c) => (
+                  <Link
+                    key={c.id}
+                    href={`/wheels?cat=${c.id}`}
+                    className={styles.tile}
+                  >
+                    <span className={styles.tileImg}>
+                      <Image src={c.img} alt="" fill sizes="90px" />
+                    </span>
+                    <span className={styles.tileLabel}>{c.name}</span>
+                  </Link>
+                ))}
+              </div>
               <div className={styles.dropdownDivider} />
               <Link href="/wheels" className={styles.strong}>
                 All wheels →
