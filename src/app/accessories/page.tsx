@@ -166,7 +166,6 @@ export default function AccessoriesPage() {
               style={{ "--i": i } as CSSProperties}
             >
               <CardLink tile={t}>
-                <span className={styles.cardBar} />
                 <div
                   className={`${styles.panel} ${t.img ? "" : styles.panelDark}`}
                 >

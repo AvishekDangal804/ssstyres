@@ -159,34 +159,14 @@
   flex-direction: column;
   height: 100%;
   background: #fff;
-  border: 1.5px solid #e6e6e6;
-  border-radius: 20px;
   overflow: hidden;
   color: inherit;
-  transition: transform 0.4s var(--ease), box-shadow 0.4s;
+  transition: transform 0.4s var(--ease);
 }
 
 .card:hover,
 .card:focus-visible {
   transform: translateY(-6px);
-  box-shadow: 0 24px 46px rgba(0, 0, 0, 0.12);
-}
-
-/* Red bar wipes across the top on hover / keyboard focus. */
-.cardBar {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 4px;
-  width: 0;
-  background: var(--red);
-  z-index: 3;
-  transition: width 0.4s var(--ease);
-}
-
-.card:hover .cardBar,
-.card:focus-visible .cardBar {
-  width: 100%;
 }
 
 .panel {

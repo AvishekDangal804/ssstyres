@@ -411,14 +411,13 @@
   aspect-ratio: 1;
   overflow: hidden;
   background: #fff;
+  transition: box-shadow 0.25s;
 }
 
-.slideImg {
-  transition: transform 0.35s ease;
-}
-
-.slideImgLink:hover .slideImg {
-  transform: scale(1.06);
+/* Lifts with a shadow rather than zooming the photo — zooming a contain-fit
+   image inside its clipped box made the wheel look cropped at the edges. */
+.slideImgLink:hover {
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
 }
 
 .slideInfo {

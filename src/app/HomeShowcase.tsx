@@ -285,7 +285,7 @@ export default function HomeShowcase() {
                   alt=""
                   fill
                   sizes="(max-width: 720px) 80vw, 300px"
-                  className={`${styles.contain} ${styles.slideImg}`}
+                  className={styles.contain}
                 />
               </Link>
               <div className={styles.slideInfo}>
