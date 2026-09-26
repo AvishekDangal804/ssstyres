@@ -210,7 +210,7 @@
   aspect-ratio: 4 / 3;
   border-radius: 22px;
   overflow: hidden;
-  background: #161616;
+  background: var(--black-deep);
 }
 
 .photoImg {
@@ -225,7 +225,7 @@
 }
 
 .darkCard {
-  background: var(--black);
+  background: var(--charcoal);
   color: #fff;
 }
 

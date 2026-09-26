@@ -25,7 +25,7 @@
 .heroScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #0a0a0a 44%, rgba(10, 10, 10, 0.55) 66%, rgba(10, 10, 10, 0) 100%);
+  background: linear-gradient(90deg, #0b1f33 44%, rgba(11, 31, 51, 0.55) 66%, rgba(11, 31, 51, 0) 100%);
   pointer-events: none;
 }
 
@@ -180,7 +180,7 @@
 }
 
 .panelDark {
-  background: linear-gradient(160deg, #1e1e1e, #0b0b0b);
+  background: var(--panel-active);
 }
 
 .glow {

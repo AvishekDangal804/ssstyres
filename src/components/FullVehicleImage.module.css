@@ -2,7 +2,7 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #0b0b0b;
+  background: var(--black-deep);
 }
 
 /* Scaled up so the blur never leaves a transparent fringe at the edges. */

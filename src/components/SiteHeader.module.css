@@ -29,12 +29,12 @@
   }
 
   .topbar {
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(11, 31, 51, 0.92);
   }
 }
 
 .topbar {
-  background: rgba(10, 10, 10, 0.72);
+  background: rgba(11, 31, 51, 0.78);
   color: #c8c8c8;
   font-size: 13px;
   backdrop-filter: blur(24px) saturate(1.8);
@@ -169,7 +169,7 @@
   position: absolute;
   top: 100%;
   left: -18px;
-  background: rgba(14, 14, 14, 0.78);
+  background: rgba(20, 44, 67, 0.9);
   backdrop-filter: blur(24px) saturate(1.6);
   min-width: 230px;
   padding: 10px 0;

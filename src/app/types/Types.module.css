@@ -20,7 +20,7 @@
   max-height: 560px;
   border-radius: 22px;
   overflow: hidden;
-  background: #0d0d0d;
+  background: var(--black-deep);
 }
 
 .bannerPhoto {

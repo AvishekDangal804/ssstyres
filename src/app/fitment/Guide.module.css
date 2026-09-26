@@ -37,7 +37,7 @@
 .heroScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #0a0a0a 42%, rgba(10, 10, 10, 0.6) 65%, rgba(10, 10, 10, 0) 100%);
+  background: linear-gradient(90deg, #0b1f33 42%, rgba(11, 31, 51, 0.6) 65%, rgba(11, 31, 51, 0) 100%);
   pointer-events: none;
 }
 
@@ -322,7 +322,7 @@
 }
 
 .detail {
-  background: var(--black);
+  background: var(--charcoal);
   color: #fff;
   border-radius: 20px;
   padding: clamp(24px, 2.6vw, 36px);
@@ -454,7 +454,7 @@
 
 .sizeDark {
   border-color: transparent;
-  background: linear-gradient(165deg, #1c1c1c, #0a0a0a);
+  background: var(--panel-active);
   color: #fff;
 }
 
@@ -701,7 +701,7 @@
   aspect-ratio: 16 / 9;
   border-radius: 22px;
   overflow: hidden;
-  background: #0a0a0a;
+  background: var(--black-deep);
 }
 
 .careShot {
@@ -771,7 +771,7 @@
 }
 
 .askCard {
-  background: var(--black);
+  background: var(--charcoal);
   color: #fff;
   border-radius: 22px;
   padding: clamp(28px, 3vw, 48px);
