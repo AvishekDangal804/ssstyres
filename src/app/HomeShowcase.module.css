@@ -135,6 +135,12 @@
   }
 }
 
+.statIcon {
+  display: block;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
 .statBar {
   display: block;
   width: 44px;

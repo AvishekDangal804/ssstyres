@@ -19,43 +19,17 @@
   will-change: transform;
 }
 
-/* Blurred copy of the picture behind the whole picture; scaled up so the blur
-   never leaves a transparent fringe. */
-.heroBackdrop {
-  object-fit: cover;
-  filter: blur(28px) brightness(0.5) saturate(1.2);
-  transform: scale(1.25);
-}
-
-/* The whole picture, uncropped, its side edges feathered into the backdrop. */
 .heroPhoto {
-  object-fit: contain;
-  object-position: center;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 9%, #000 91%, transparent 100%);
-}
-
-/* Tall or near-square screens (portrait tablets) would leave a thin strip of
-   picture: crop to the centre instead. */
-@media (max-aspect-ratio: 5/4) {
-  .heroBackdrop {
-    display: none;
-  }
-
-  .heroPhoto {
-    object-fit: cover;
-    object-position: 55% 55%;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
+  object-fit: cover;
+  object-position: 40% center;
 }
 
 .heroScrim {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 38%, rgba(0, 0, 0, 0) 62%),
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.78) 100%);
+    linear-gradient(90deg, rgba(11, 31, 51, 0.75) 0%, rgba(11, 31, 51, 0.32) 38%, rgba(11, 31, 51, 0) 62%),
+    linear-gradient(180deg, rgba(11, 31, 51, 0) 40%, rgba(11, 31, 51, 0.8) 100%);
   pointer-events: none;
 }
 
@@ -100,6 +74,10 @@
   line-height: var(--h1-line);
   letter-spacing: var(--h1-tracking);
   margin: 0 0 20px;
+}
+
+.heroH1Accent {
+  color: var(--red);
 }
 
 .heroBody {
@@ -179,22 +157,15 @@
     height: min(36.4vh, 78.4vw);
   }
 
-  /* Phones: an art-directed crop on the centre wheel and logo. */
-  .heroBackdrop {
-    display: none;
-  }
-
+  /* Phones: an art-directed crop centred on the wheels. */
   .heroPhoto {
-    object-fit: cover;
-    object-position: 57% 62%;
-    -webkit-mask-image: none;
-    mask-image: none;
+    object-position: 38% 50%;
   }
 
   .heroScrim {
     inset: 0 0 auto 0;
     height: min(36.4vh, 78.4vw);
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 60%, var(--black-deep) 100%);
+    background: linear-gradient(180deg, rgba(11, 31, 51, 0) 60%, var(--black-deep) 100%);
   }
 
   .heroCopyWrap {

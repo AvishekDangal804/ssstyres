@@ -69,23 +69,12 @@ export default function HomeHero() {
   return (
     <section ref={heroRef} className={styles.hero}>
       <div ref={heroImgRef} className={styles.heroImg}>
-        {/* The whole picture is shown (all three wheels, nothing cropped); a
-            blurred copy fills the room either side of it. On phones the
-            picture is cropped to the centre instead — see the CSS. */}
         <Image
-          src="/assets/hero.png"
-          alt=""
-          aria-hidden="true"
-          fill
-          sizes="160px"
-          className={styles.heroBackdrop}
-        />
-        <Image
-          src="/assets/hero.png"
-          alt="Three SSS beadlock-style wheels in front of a large illuminated SSS logo"
+          src="/assets/hero/hero-warehouse.jpg"
+          alt="SSS wheels and tyres stacked in the Dandenong South warehouse"
           fill
           preload
-          sizes="(max-width: 720px) 300vw, 100vw"
+          sizes="100vw"
           className={styles.heroPhoto}
         />
       </div>
@@ -94,12 +83,12 @@ export default function HomeHero() {
         <div className={styles.heroCopy}>
           <div className={styles.kickerRow}>
             <span className={styles.bar} />
-            SSS Wheels &amp; Tyres · Australian Trade Supply
+            Premium wheels &amp; tyres
           </div>
           <h1 className={styles.heroH1}>
-            Wholesale Wheels &amp; Tyres.
+            Built for
             <br />
-            Built for the Trade.
+            <span className={styles.heroH1Accent}>the long run</span>
           </h1>
           <p className={styles.heroBody}>
             Supplying quality wheels and tyres to dealers, workshops, fleets
