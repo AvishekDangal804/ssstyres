@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
   CATEGORIES,
   WHEELS,
   VEHICLES,
+  groupWheels,
+  defaultVariantIndex,
   type CategoryId,
+  type WheelGroup,
 } from "@/lib/wheels-data";
 import styles from "./HomeShowcase.module.css";
 
@@ -75,6 +78,7 @@ export default function HomeShowcase() {
   const [activeCat, setActiveCat] = useState<CategoryId>("offroad");
   const [feat, setFeat] = useState(0);
   const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
+  const wheelGroups = useMemo(() => groupWheels(WHEELS), []);
 
   // Statement slideshow. `reach` is the highest slide mounted so far: slides
   // are added just before they're needed so the page doesn't load all five up
@@ -272,38 +276,8 @@ export default function HomeShowcase() {
           </Link>
         </div>
         <div ref={sliderRef} className={styles.slider}>
-          {WHEELS.map((w) => (
-            <div key={w.id} className={styles.slideCard}>
-              <Link
-                href={`/wheels?model=${w.model}`}
-                className={styles.slideImgLink}
-                tabIndex={-1}
-                aria-hidden="true"
-              >
-                <Image
-                  src={w.img}
-                  alt=""
-                  fill
-                  sizes="(max-width: 720px) 80vw, 300px"
-                  className={styles.contain}
-                />
-              </Link>
-              <div className={styles.slideInfo}>
-                <Link
-                  href={`/wheels?model=${w.model}`}
-                  className={styles.slideName}
-                >
-                  {w.name}
-                </Link>
-                <div className={styles.slideFit}>
-                  {w.size} · {w.pcd} · {w.offset}
-                </div>
-                <div className={styles.slideVariant}>
-                  <span className={styles.swatch} style={{ background: w.hex }} />
-                  <span className={styles.variantLabel}>{w.variant}</span>
-                </div>
-              </div>
-            </div>
+          {wheelGroups.map((g) => (
+            <RangeCard key={g.key} group={g} />
           ))}
         </div>
         <div className={styles.sliderControls}>
@@ -552,6 +526,63 @@ export default function HomeShowcase() {
           ))}
         </div>
       </section>
+    </div>
+  );
+}
+
+function RangeCard({ group }: { group: WheelGroup }) {
+  const initial = useMemo(() => defaultVariantIndex(group.variants), [group.variants]);
+  const [active, setActive] = useState(initial);
+  const w = group.variants[active];
+
+  return (
+    <div className={styles.slideCard}>
+      <Link
+        href={`/wheels?model=${w.model}`}
+        className={styles.slideImgLink}
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        <Image
+          src={w.img}
+          alt=""
+          fill
+          sizes="(max-width: 720px) 80vw, 300px"
+          className={styles.contain}
+        />
+      </Link>
+      <div className={styles.slideInfo}>
+        <Link href={`/wheels?model=${w.model}`} className={styles.slideName}>
+          {w.name}
+        </Link>
+        <div className={styles.slideFit}>
+          {w.size} · {w.pcd} · {w.offset}
+        </div>
+
+        {group.variants.length > 1 ? (
+          <div className={styles.slideSwatches} role="radiogroup" aria-label="Colour">
+            {group.variants.map((v, i) => (
+              <button
+                key={v.id}
+                type="button"
+                role="radio"
+                aria-checked={i === active}
+                aria-label={v.variant}
+                title={v.variant}
+                className={`${styles.dot} ${i === active ? styles.dotActive : ""}`}
+                style={{ background: v.hex }}
+                onClick={() => setActive(i)}
+              />
+            ))}
+            <span className={styles.variantLabel}>{w.variant}</span>
+          </div>
+        ) : (
+          <div className={styles.slideVariant}>
+            <span className={styles.swatch} style={{ background: w.hex }} />
+            <span className={styles.variantLabel}>{w.variant}</span>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

@@ -119,6 +119,31 @@ export const VEHICLES: Vehicle[] = [
   { make: 'Toyota', model: 'LandCruiser Prado 150', pcd: '6x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 16x7', wheelName: 'SSS D-Hole 16x7 Gloss Black', img: null },
 ];
 
+export interface WheelGroup {
+  key: string;
+  variants: Wheel[];
+}
+
+// Wheels that share a model, size and PCD are the same physical wheel offered
+// in different finishes — group them so a card can offer colour swatches
+// instead of listing every finish as its own card.
+export function groupWheels(list: Wheel[]): WheelGroup[] {
+  const groups = new Map<string, WheelGroup>();
+  for (const w of list) {
+    const key = `${w.model}|${w.size}|${w.pcd}`;
+    const existing = groups.get(key);
+    if (existing) existing.variants.push(w);
+    else groups.set(key, { key, variants: [w] });
+  }
+  return [...groups.values()];
+}
+
+// Leads with a non-black finish where the wheel actually comes in one.
+export function defaultVariantIndex(variants: Wheel[]): number {
+  const idx = variants.findIndex((v) => !/black/i.test(v.variant));
+  return idx >= 0 ? idx : 0;
+}
+
 export const byId = (id: string): Wheel => WHEELS.find((w) => w.id === id) ?? WHEELS[0];
 export const catName = (id: string): string => CATEGORIES.find((c) => c.id === id)?.name ?? '';
 export const modelName = (id: string): string => MODELS.find((m) => m.id === id)?.name ?? '';

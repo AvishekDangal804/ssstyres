@@ -10,32 +10,14 @@ import {
   WHEELS,
   PORTAL,
   catName,
-  type Wheel,
+  groupWheels,
+  defaultVariantIndex,
+  type WheelGroup,
 } from "@/lib/wheels-data";
 import PageHeader from "@/components/PageHeader";
 import styles from "./Wheels.module.css";
 
 const SIZES = ["15", "16", "17"];
-
-interface WheelGroup {
-  key: string;
-  catLabel: string;
-  variants: Wheel[];
-}
-
-// Wheels that share a model, size and PCD are the same physical wheel offered
-// in different finishes — group them into one card with colour swatches
-// instead of a separate card per colour.
-function groupWheels(list: (Wheel & { catLabel: string })[]): WheelGroup[] {
-  const groups = new Map<string, WheelGroup>();
-  for (const w of list) {
-    const key = `${w.model}|${w.size}|${w.pcd}`;
-    const existing = groups.get(key);
-    if (existing) existing.variants.push(w);
-    else groups.set(key, { key, catLabel: w.catLabel, variants: [w] });
-  }
-  return [...groups.values()];
-}
 
 function initialCat(qs: URLSearchParams): string {
   const cat = qs.get("cat");
@@ -65,15 +47,13 @@ export default function WheelsCatalogue() {
   const isModel = cat.startsWith("model:");
 
   const wheels = useMemo(() => {
-    const list =
-      cat === "all"
-        ? WHEELS
-        : isSize
-          ? WHEELS.filter((w) => w.size.startsWith(cat.slice(5)))
-          : isModel
-            ? WHEELS.filter((w) => w.model === cat.slice(6))
-            : WHEELS.filter((w) => w.cat === cat || w.cat2 === cat);
-    return list.map((w) => ({ ...w, catLabel: `SSS ${catName(w.cat)} Series` }));
+    return cat === "all"
+      ? WHEELS
+      : isSize
+        ? WHEELS.filter((w) => w.size.startsWith(cat.slice(5)))
+        : isModel
+          ? WHEELS.filter((w) => w.model === cat.slice(6))
+          : WHEELS.filter((w) => w.cat === cat || w.cat2 === cat);
   }, [cat, isSize, isModel]);
 
   const groups = useMemo(() => groupWheels(wheels), [wheels]);
@@ -134,12 +114,12 @@ export default function WheelsCatalogue() {
 function WheelCard({ group }: { group: WheelGroup }) {
   // Lead with a non-black finish where the wheel actually comes in one —
   // matte black is real stock, just not the first thing shown.
-  const initial = useMemo(() => {
-    const idx = group.variants.findIndex((v) => !/black/i.test(v.variant));
-    return idx >= 0 ? idx : 0;
-  }, [group.variants]);
+  const initial = useMemo(() => defaultVariantIndex(group.variants), [group.variants]);
   const [active, setActive] = useState(initial);
   const w = group.variants[active];
+  // Recomputed per active variant, not fixed at group creation — a swatch
+  // change can genuinely put the wheel in a different real category.
+  const catLabel = `SSS ${catName(w.cat)} Series`;
 
   return (
     <div className={styles.card}>
@@ -175,7 +155,7 @@ function WheelCard({ group }: { group: WheelGroup }) {
       )}
 
       <div className={styles.cardBody}>
-        <div className={styles.cardCat}>{group.catLabel}</div>
+        <div className={styles.cardCat}>{catLabel}</div>
         <div className={styles.cardName}>
           {w.name} <span>{w.variant}</span>
         </div>

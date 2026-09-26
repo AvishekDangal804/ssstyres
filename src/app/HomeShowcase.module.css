@@ -472,6 +472,38 @@
   color: var(--ink-3);
 }
 
+.slideSwatches {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 2px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 2px solid #fff;
+  box-sizing: border-box;
+  box-shadow: 0 0 0 1.5px rgba(14, 14, 14, 0.35), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  cursor: pointer;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.dot:hover {
+  transform: scale(1.1);
+}
+
+.dotActive {
+  box-shadow: 0 0 0 2px var(--red);
+}
+
+.slideSwatches .variantLabel {
+  margin-left: 2px;
+}
+
 .sliderControls {
   display: flex;
   align-items: center;
