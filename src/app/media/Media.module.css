@@ -72,10 +72,9 @@
 .heroH1 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(40px, 4.6vw, 76px);
-  line-height: 0.92;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+  font-size: var(--h1-size);
+  line-height: var(--h1-line);
+  letter-spacing: var(--h1-tracking);
   margin: 0 0 14px;
 }
 
@@ -127,9 +126,6 @@
     max-width: 640px;
   }
 
-  .heroH1 {
-    font-size: clamp(40px, 8vw, 64px);
-  }
 }
 
 /* Filter row */
@@ -160,9 +156,10 @@
   border-radius: 999px;
   padding: 0 18px;
   height: 40px;
-  font-size: 12px;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: background 0.15s, color 0.15s;
 }

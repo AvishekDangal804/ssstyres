@@ -20,6 +20,23 @@
   --on-dark-2: #bdbdbd;
   --white: #ffffff;
 
+  /* Shared type scale. H1/H2 are sentence case (see body{} below) — weight
+     and size carry the hierarchy, not shouting in caps. H3 and labels stay
+     upper­case: they're short, label-like, not full sentences. */
+  --h1-size: clamp(38px, 5vw, 68px);
+  --h1-line: 1.04;
+  --h1-tracking: -0.015em;
+  --h2-size: clamp(28px, 3vw, 44px);
+  --h2-line: 1.1;
+  --h2-tracking: -0.01em;
+  --h3-size: clamp(20px, 1.7vw, 26px);
+  --h3-line: 1.15;
+  --body-size: clamp(15px, 1vw, 17px);
+  --body-line: 1.6;
+  --small-size: 13px;
+  --eyebrow-tracking: 0.2em;
+  --nav-tracking: 0.08em;
+
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --gutter: clamp(20px, 3vw, 56px);
   --container: min(1600px, 94vw);

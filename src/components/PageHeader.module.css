@@ -39,9 +39,9 @@
 .h1 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(40px, 6vw, 64px);
-  line-height: 0.95;
-  text-transform: uppercase;
+  font-size: var(--h1-size);
+  line-height: var(--h1-line);
+  letter-spacing: var(--h1-tracking);
   margin: 0;
 }
 

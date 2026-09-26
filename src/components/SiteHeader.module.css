@@ -306,9 +306,10 @@
   align-items: center;
   border: 2px solid var(--black);
   color: var(--black);
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
   font-size: 13px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 0 18px;
   height: 42px;
@@ -328,9 +329,10 @@
   align-items: center;
   background: var(--red);
   color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
   font-size: 13px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 0 20px;
   height: 42px;

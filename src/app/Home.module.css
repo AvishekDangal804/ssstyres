@@ -96,15 +96,14 @@
 .heroH1 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(38px, 5.4vw, 72px);
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: -0.02em;
+  font-size: var(--h1-size);
+  line-height: var(--h1-line);
+  letter-spacing: var(--h1-tracking);
   margin: 0 0 20px;
 }
 
 .heroBody {
-  font-size: 18px;
+  font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.6;
   color: #e6e6e6;
   max-width: 520px;
@@ -127,6 +126,7 @@
   border-radius: 999px;
   background: #fff;
   color: var(--black);
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -149,6 +149,7 @@
   border: 1.5px solid rgba(255, 255, 255, 0.7);
   border-radius: 999px;
   color: #fff;
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -233,11 +234,10 @@
 
 .sectionH2 {
   font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: clamp(30px, 3.6vw, 42px);
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: -0.015em;
+  font-weight: 700;
+  font-size: var(--h2-size);
+  line-height: var(--h2-line);
+  letter-spacing: var(--h2-tracking);
   margin: 0;
 }
 
@@ -253,6 +253,7 @@
   padding: 0 24px;
   border: 1.5px solid var(--black);
   border-radius: 999px;
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;

@@ -225,15 +225,6 @@ export default function HomeShowcase() {
         </div>
         <div className={styles.statementShade} />
         <div ref={stmtCopyRef} className={styles.statementCopy}>
-          <div className={`${styles.statementLine} ${styles.line1}`}>
-            Wholesale<span>.</span>
-          </div>
-          <div className={`${styles.statementLine} ${styles.line2}`}>
-            Wheels &amp; tyres<span>.</span>
-          </div>
-          <div className={`${styles.statementLine} ${styles.line3}`}>
-            For the trade<span>.</span>
-          </div>
           <div className={styles.statementSub}>Australian trade supply</div>
           <Link href="/wheels" className={styles.statementBtn}>
             <span className={styles.statementBtnIcon} aria-hidden="true">

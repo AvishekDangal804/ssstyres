@@ -92,10 +92,10 @@
   color: #fff;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0 18px;
+  padding: 0 20px;
   height: 42px;
   border-radius: 999px;
   transition: background 0.15s;
@@ -112,10 +112,10 @@
   color: #fff;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  padding: 0 16px;
+  padding: 0 18px;
   height: 42px;
   box-sizing: border-box;
   border-radius: 999px;
@@ -135,10 +135,9 @@
 
 .formTitle {
   font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: 30px;
-  line-height: 1;
-  text-transform: uppercase;
+  font-weight: 700;
+  font-size: var(--h3-size);
+  line-height: var(--h3-line);
   margin: 0 0 20px;
 }
 
@@ -196,14 +195,14 @@
 }
 
 .submitBtn {
-  height: 52px;
+  height: 50px;
   border: 0;
   background: var(--red);
   color: #fff;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
-  font-size: 18px;
-  letter-spacing: 0.08em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
   border-radius: 999px;

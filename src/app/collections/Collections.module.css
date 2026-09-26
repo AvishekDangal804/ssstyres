@@ -168,6 +168,7 @@
   height: 50px;
   padding: 0 26px;
   border-radius: 999px;
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -200,6 +201,7 @@
   height: 50px;
   padding: 0 24px;
   border-radius: 999px;
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -236,11 +238,10 @@
 
 .finishH2 {
   font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: clamp(28px, 3.4vw, 38px);
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  font-size: var(--h2-size);
+  line-height: var(--h2-line);
+  letter-spacing: var(--h2-tracking);
   margin: 0;
 }
 
@@ -252,6 +253,7 @@
   padding: 0 24px;
   border: 1.5px solid var(--black);
   border-radius: 999px;
+  font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;

@@ -21,8 +21,8 @@
   padding: 10px 20px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.06em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   transition: background 0.15s, color 0.15s;
 }
@@ -157,8 +157,8 @@
   color: #fff;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.07em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   height: 42px;
   border-radius: 999px;
@@ -198,8 +198,8 @@
   color: #fff;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  letter-spacing: 0.07em;
+  font-size: 13px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   padding: 0 22px;
   height: 46px;
