@@ -116,7 +116,11 @@ function WheelCard({ group }: { group: WheelGroup }) {
   // matte black is real stock, just not the first thing shown.
   const initial = useMemo(() => defaultVariantIndex(group.variants), [group.variants]);
   const [active, setActive] = useState(initial);
-  const w = group.variants[active];
+  // `active` is state keyed on the group's model|size|pcd, which React reuses
+  // across a filter change even when the new group (same key) has fewer
+  // variants — clamp instead of indexing straight in, or switching filters
+  // with a non-default swatch already selected throws reading `undefined.cat`.
+  const w = group.variants[active] ?? group.variants[0];
   // Recomputed per active variant, not fixed at group creation — a swatch
   // change can genuinely put the wheel in a different real category.
   const catLabel = `SSS ${catName(w.cat)} Series`;
@@ -136,15 +140,15 @@ function WheelCard({ group }: { group: WheelGroup }) {
       </div>
 
       {group.variants.length > 1 && (
-        <div className={styles.swatchRow} role="radiogroup" aria-label="Colour">
+        <div className={styles.swatchRow} role="radiogroup" aria-label="Size and finish">
           {group.variants.map((v, i) => (
             <button
               key={v.id}
               type="button"
               role="radio"
               aria-checked={i === active}
-              aria-label={v.variant}
-              title={v.variant}
+              aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
+              title={`${v.variant} — ${v.size} · ${v.pcd}`}
               className={`${styles.swatch} ${i === active ? styles.swatchActive : ""}`}
               onClick={() => setActive(i)}
             >

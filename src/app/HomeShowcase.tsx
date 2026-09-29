@@ -578,7 +578,10 @@ export default function HomeShowcase() {
 function RangeCard({ group }: { group: WheelGroup }) {
   const initial = useMemo(() => defaultVariantIndex(group.variants), [group.variants]);
   const [active, setActive] = useState(initial);
-  const w = group.variants[active];
+  // See the same guard in WheelsCatalogue.tsx's WheelCard: `active` is state
+  // keyed on the group, so a shorter variants array for the same key can
+  // leave it pointing past the end.
+  const w = group.variants[active] ?? group.variants[0];
 
   return (
     <div className={styles.slideCard}>
@@ -605,15 +608,15 @@ function RangeCard({ group }: { group: WheelGroup }) {
         </div>
 
         {group.variants.length > 1 ? (
-          <div className={styles.slideSwatches} role="radiogroup" aria-label="Colour">
+          <div className={styles.slideSwatches} role="radiogroup" aria-label="Size and finish">
             {group.variants.map((v, i) => (
               <button
                 key={v.id}
                 type="button"
                 role="radio"
                 aria-checked={i === active}
-                aria-label={v.variant}
-                title={v.variant}
+                aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
+                title={`${v.variant} — ${v.size} · ${v.pcd}`}
                 className={`${styles.dot} ${i === active ? styles.dotActive : ""}`}
                 style={{ background: v.hex }}
                 onClick={() => setActive(i)}

@@ -124,13 +124,14 @@ export interface WheelGroup {
   variants: Wheel[];
 }
 
-// Wheels that share a model, size and PCD are the same physical wheel offered
-// in different finishes — group them so a card can offer colour swatches
-// instead of listing every finish as its own card.
+// Grouped by model only, so every finish/size/PCD of a wheel is one card with
+// colour swatches rather than a card per size/finish combination. A swatch
+// can therefore change the size/PCD shown, not just the colour — the active
+// variant's own spec line is what's authoritative, not the group.
 export function groupWheels(list: Wheel[]): WheelGroup[] {
   const groups = new Map<string, WheelGroup>();
   for (const w of list) {
-    const key = `${w.model}|${w.size}|${w.pcd}`;
+    const key = w.model;
     const existing = groups.get(key);
     if (existing) existing.variants.push(w);
     else groups.set(key, { key, variants: [w] });
