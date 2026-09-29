@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import { pageMetadata } from "@/lib/site";
 import HomeHero from "./HomeHero";
 import HomeShowcase from "./HomeShowcase";
@@ -80,7 +79,13 @@ export default function Home() {
         <section className={styles.supplySection}>
           <div className={styles.supplyIntro}>
             <div className={styles.supplyPhoto}>
-              <ImagePlaceholder label="Trade customers / workshop photo — to be supplied" />
+              <Image
+                src="/assets/lifestyle/workshop.jpg"
+                alt="An SSS Wheels & Tyres technician fitting a wheel and tyre on a lift in a mechanical workshop"
+                fill
+                sizes="(max-width: 720px) 100vw, 50vw"
+                className={styles.supplyPhotoImg}
+              />
             </div>
             <div>
               <div className={styles.sectionHead}>
