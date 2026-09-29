@@ -3,19 +3,69 @@
   overflow: hidden;
   background: var(--light-gray);
   color: var(--black);
-  min-height: clamp(480px, 64vh, 780px);
-  display: flex;
-  align-items: center;
 }
 
-.bandImg {
-  position: absolute;
-  right: -4%;
-  top: -16%;
-  width: 60%;
-  height: 132%;
+.bandGrid {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(50px, 5.5vw, 97px) var(--gutter);
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.bandText {
+  flex: 1 1 420px;
+  min-width: 0;
+}
+
+.bandLine {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.05em;
+}
+
+.bandLineInner {
+  display: inline-block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 1, 1);
+}
+
+.bandLineIn {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.bandLineB.bandLineIn {
+  transition-delay: 90ms;
+}
+
+.bandQ {
+  color: var(--red);
+}
+
+.bandPhotoCol {
+  flex: 1 1 380px;
+  min-width: 0;
+}
+
+.bandPhotoWrap {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1268 / 1241;
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 0.7s ease;
   will-change: transform;
-  pointer-events: none;
+}
+
+.bandPhotoWrap.inView {
+  opacity: 1;
 }
 
 .bandPhoto {
@@ -23,20 +73,70 @@
   object-position: center;
 }
 
-.bandScrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, var(--light-gray) 36%, rgba(236, 238, 239, 0) 60%);
-  pointer-events: none;
+.bandSpecs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 44px;
+  border-top: 2px solid var(--black);
+  max-width: 520px;
 }
 
-.bandInner {
+.bandSpec {
   position: relative;
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: clamp(50px, 5.5vw, 97px) var(--gutter);
-  width: 100%;
-  box-sizing: border-box;
+  padding: 16px 16px 0 0;
+  border-right: 1px solid var(--border-gray);
+}
+
+.bandSpec:not(:first-child) {
+  padding-left: 16px;
+}
+
+.bandSpec:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+
+.bandSpecRule {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 28px;
+  height: 2px;
+  background: var(--red);
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 150ms;
+}
+
+.bandSpec:not(:first-child) .bandSpecRule {
+  left: 16px;
+}
+
+.bandText.inView .bandSpecRule {
+  transform: scaleX(1);
+}
+
+.bandSpecKicker {
+  display: block;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+.bandSpecValue {
+  display: block;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 700;
+  font-size: clamp(18px, 1.6vw, 24px);
+  letter-spacing: -0.01em;
+  line-height: 1;
+  color: var(--black);
+  white-space: nowrap;
 }
 
 .bandKicker {

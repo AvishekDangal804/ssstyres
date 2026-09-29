@@ -1,52 +1,106 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { PORTAL } from "@/lib/wheels-data";
 import { useScrollProgress } from "@/lib/useScrollProgress";
 import styles from "./SiteFooter.module.css";
 
+// Specs for SSS's beadlock-style range — the wheel pictured alongside it.
+const TRADE_SPECS = [
+  { kicker: "Ring", value: "Beadlock-style" },
+  { kicker: "Load rating", value: "1250 kg" },
+  { kicker: "Sizes", value: "15″ · 16″ · 17″" },
+] as const;
+
 export default function SiteFooter() {
   const bandRef = useScrollProgress<HTMLDivElement>((p, el) => {
     const img = el.querySelector<HTMLElement>("[data-band-img]");
-    if (img) img.style.transform = `translate3d(0, ${((p - 0.5) * 140).toFixed(1)}px, 0)`;
+    if (img) img.style.transform = `translate3d(0, ${((p - 0.5) * 36).toFixed(1)}px, 0)`;
   });
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = bandRef.current;
+    if (!el) return;
+    // No reduced-motion bypass needed: the global reduced-motion query
+    // already collapses these transitions to ~instant (see globals.css).
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [bandRef]);
 
   return (
     <footer>
       <section ref={bandRef} className={styles.band}>
-        <div data-band-img className={styles.bandImg} aria-hidden="true">
-          <Image
-            src="/assets/beadlock-exploded.png"
-            alt=""
-            fill
-            sizes="(max-width: 900px) 100vw, 60vw"
-            className={styles.bandPhoto}
-          />
-        </div>
-        <div className={styles.bandScrim} />
-        <div className={styles.bandInner}>
-          <div className={styles.bandKicker}>
-            <span />
-            Trade accounts
+        <div className={styles.bandGrid}>
+          <div className={`${styles.bandText} ${revealed ? styles.inView : ""}`}>
+            <div className={styles.bandKicker}>
+              <span />
+              Trade accounts
+            </div>
+            <h2 className={styles.bandTitle}>
+              <span className={styles.bandLine}>
+                <span className={`${styles.bandLineInner} ${revealed ? styles.bandLineIn : ""}`}>
+                  Ready to stock
+                </span>
+              </span>
+              <span className={styles.bandLine}>
+                <span
+                  className={`${styles.bandLineInner} ${styles.bandLineB} ${
+                    revealed ? styles.bandLineIn : ""
+                  }`}
+                >
+                  SSS Wheels<span className={styles.bandQ}>?</span>
+                </span>
+              </span>
+            </h2>
+            <p className={styles.bandBody}>
+              Join workshops, fleets and resellers across Australia. Apply
+              online to open a trade account.
+            </p>
+            <div className={styles.bandCtas}>
+              <Link href="/dealer" className={styles.btnRed}>
+                Apply to become a dealer <span>→</span>
+              </Link>
+              <a
+                href={PORTAL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnOutline}
+              >
+                Wholesale login
+              </a>
+            </div>
+            <div className={styles.bandSpecs}>
+              {TRADE_SPECS.map((s) => (
+                <div key={s.kicker} className={styles.bandSpec}>
+                  <span className={styles.bandSpecRule} aria-hidden="true" />
+                  <span className={styles.bandSpecKicker}>{s.kicker}</span>
+                  <span className={styles.bandSpecValue}>{s.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
-          <h2 className={styles.bandTitle}>Ready to stock SSS Wheels?</h2>
-          <p className={styles.bandBody}>
-            Join workshops, fleets and resellers across Australia. Apply
-            online to open a trade account.
-          </p>
-          <div className={styles.bandCtas}>
-            <Link href="/dealer" className={styles.btnRed}>
-              Apply to become a dealer <span>→</span>
-            </Link>
-            <a
-              href={PORTAL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnOutline}
-            >
-              Wholesale Login
-            </a>
+          <div className={styles.bandPhotoCol}>
+            <div data-band-img className={`${styles.bandPhotoWrap} ${revealed ? styles.inView : ""}`}>
+              <Image
+                src="/assets/hero/scene-wheel.png"
+                alt="SSS beadlock-style wheel fitted with a mud-terrain tyre"
+                fill
+                sizes="(max-width: 900px) 70vw, 40vw"
+                className={styles.bandPhoto}
+              />
+            </div>
           </div>
         </div>
       </section>
