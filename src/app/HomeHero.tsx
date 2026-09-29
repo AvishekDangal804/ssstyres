@@ -5,10 +5,10 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./Home.module.css";
 
-// Three scenes auto-cycle behind the copy; the copy text swaps mid-fade so it
-// never visibly jump-cuts. All facts here must already be true and stated
-// elsewhere on the site (fitments match wheels-data.ts; no age/tenure claims
-// that aren't published anywhere else).
+// Split hero: copy pane cycles alongside a stage of three studio scenes.
+// All facts here must already be true and stated elsewhere on the site
+// (fitments match wheels-data.ts; no age/tenure claims that aren't
+// published anywhere else).
 const SCENES = [
   {
     img: "/assets/hero/scene-truck.png",
@@ -103,48 +103,32 @@ export default function HomeHero() {
 
   return (
     <section className={styles.hero}>
-      <div className={styles.heroStage}>
-        <div className={styles.heroGlow} aria-hidden="true" />
-
-        {SCENES.map((s, i) => (
-          <div
-            key={s.img}
-            className={`${styles.scene} ${styles[s.sceneClass]} ${
-              started && i === cur ? styles.sceneActive : ""
-            } ${started && i === prev && i !== cur ? styles.sceneOut : ""}`}
-          >
-            {s.sceneClass === "scenePair" ? (
-              <div className={styles.scenePairImg} role="img" aria-label={s.alt} />
-            ) : (
-              <Image
-                src={s.img}
-                alt={s.alt}
-                width={1600}
-                height={1600}
-                sizes="(max-width: 720px) 120vw, 90vw"
-                priority={i === 0}
-                className={styles.sceneImg}
-              />
-            )}
-          </div>
-        ))}
-
-        <div className={styles.heroScrim} aria-hidden="true" />
-
-        <div className={`${styles.heroCopyWrap} ${copyHidden ? styles.copyHidden : ""}`}>
-          <div className={styles.heroCopy}>
+      <div className={styles.heroSplit}>
+        <div className={styles.heroCopyPane}>
+          <div className={styles.heroCopyInner}>
             <div className={styles.kickerRow}>
               <span className={styles.bar} />
               SSS Wheels &amp; Tyres · Australian trade supply
             </div>
-            <h1 className={styles.heroH1}>
-              {active.a}
-              <span className={styles.heroDot}>.</span>
-              <br />
-              {active.b}
-              <span className={styles.heroDot}>.</span>
+            <h1 className={styles.heroH1} aria-live="polite">
+              <span className={styles.heroLine}>
+                <span className={`${styles.heroLineInner} ${!copyHidden ? styles.heroLineIn : ""}`}>
+                  {active.a}
+                  <span className={styles.heroDot}>.</span>
+                </span>
+              </span>
+              <span className={styles.heroLine}>
+                <span
+                  className={`${styles.heroLineInner} ${styles.heroLineB} ${
+                    !copyHidden ? styles.heroLineIn : ""
+                  }`}
+                >
+                  {active.b}
+                  <span className={styles.heroDot}>.</span>
+                </span>
+              </span>
             </h1>
-            <p className={styles.heroBody}>{active.body}</p>
+            <p className={`${styles.heroBody} ${!copyHidden ? styles.heroBodyIn : ""}`}>{active.body}</p>
             <div className={styles.ctaRow}>
               <Link href="/wheels" className={styles.btnWhite}>
                 Explore wheels <span>→</span>
@@ -154,23 +138,58 @@ export default function HomeHero() {
               </Link>
             </div>
           </div>
+
+          <div className={styles.heroTabs} role="tablist" aria-label="Hero scenes">
+            {SCENES.map((s, i) => (
+              <button
+                key={s.img}
+                type="button"
+                role="tab"
+                aria-selected={started && i === cur}
+                aria-label={`Scene ${i + 1}: ${s.a}`}
+                className={styles.heroTabBtn}
+                onClick={() => handleDot(i)}
+              >
+                <span className={`${styles.heroTabNum} ${started && i === cur ? styles.heroTabNumActive : ""}`}>
+                  0{i + 1}
+                </span>
+                <span className={`${styles.heroTabBar} ${started && i === cur ? styles.heroTabBarActive : ""}`} />
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className={styles.heroDots} role="tablist" aria-label="Hero scenes">
+        <div className={styles.heroStagePane}>
+          <div className={styles.heroGlow} aria-hidden="true" />
+
           {SCENES.map((s, i) => (
-            <button
+            <div
               key={s.img}
-              type="button"
-              role="tab"
-              aria-selected={started && i === cur}
-              aria-label={`Scene ${i + 1}`}
-              className={`${styles.heroDotBtn} ${started && i === cur ? styles.heroDotActive : ""}`}
-              onClick={() => handleDot(i)}
-            />
+              className={`${styles.scene} ${styles[s.sceneClass]} ${
+                started && i === cur ? styles.sceneActive : ""
+              } ${started && i === prev && i !== cur ? styles.sceneOut : ""}`}
+            >
+              {s.sceneClass === "scenePair" ? (
+                <div className={styles.scenePairImg} role="img" aria-label={s.alt} />
+              ) : (
+                <Image
+                  src={s.img}
+                  alt={s.alt}
+                  width={1600}
+                  height={1600}
+                  sizes="(max-width: 900px) 100vw, 58vw"
+                  priority={i === 0}
+                  className={styles.sceneImg}
+                />
+              )}
+            </div>
           ))}
-        </div>
 
-        <div className={styles.heroVignette} aria-hidden="true" />
+          <div className={styles.heroVignette} aria-hidden="true" />
+          <div className={styles.heroProgressTrack} aria-hidden="true">
+            <div className={`${styles.heroProgressFill} ${!copyHidden ? styles.heroProgressFillIn : ""}`} />
+          </div>
+        </div>
       </div>
     </section>
   );
