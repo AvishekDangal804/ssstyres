@@ -5,7 +5,7 @@
 
 .band.dark {
   background: var(--black-deep);
-  color: #fff;
+  color: var(--white);
 }
 
 .band.light {
@@ -101,7 +101,7 @@
 }
 
 .band.dark .tag {
-  color: #fff;
+  color: var(--white);
 }
 
 .tag .bar {
@@ -167,7 +167,7 @@
   gap: 10px;
   height: 50px;
   padding: 0 26px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -178,21 +178,21 @@
 }
 
 .band.dark .btnPrimary {
-  border: 1.5px solid #fff;
-  background: #fff;
+  border: 1.5px solid var(--white);
+  background: var(--white);
   color: var(--black);
 }
 
 .band.light .btnPrimary {
   border: 1.5px solid var(--black);
   background: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnPrimary:hover {
   background: var(--red) !important;
   border-color: var(--red) !important;
-  color: #fff !important;
+  color: var(--white) !important;
 }
 
 .btnSecondary {
@@ -200,7 +200,7 @@
   align-items: center;
   height: 50px;
   padding: 0 24px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -252,7 +252,7 @@
   height: 46px;
   padding: 0 24px;
   border: 1.5px solid var(--black);
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -265,7 +265,7 @@
 
 .btnOutlineDark:hover {
   background: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 .finishGrid {
@@ -286,7 +286,7 @@
 }
 
 .finishCard:hover {
-  background: #eaeaea;
+  background: var(--light-gray);
   transform: translateY(-4px);
 }
 
@@ -315,7 +315,7 @@
 
 .finishFinish {
   font-size: 12px;
-  color: #5f5f5f;
+  color: var(--ink);
   margin-top: 5px;
   line-height: 1.35;
 }

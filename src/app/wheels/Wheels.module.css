@@ -14,7 +14,7 @@
 
 .filterBtn {
   border: 2px solid var(--black);
-  background: #fff;
+  background: var(--white);
   color: var(--black);
   cursor: pointer;
   border-radius: 999px;
@@ -30,7 +30,7 @@
 .filterBtn.active {
   border-color: var(--red);
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .gridSection {
@@ -51,7 +51,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: #fff;
+  background: var(--white);
   transition: box-shadow 0.2s, transform 0.2s;
 }
 
@@ -123,7 +123,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #6b6b6b;
+  color: var(--ink-3);
 }
 
 .cardName {
@@ -145,7 +145,7 @@
 
 .cardBuild {
   font-size: 13px;
-  color: #6b6b6b;
+  color: var(--ink-3);
 }
 
 .cardCta {
@@ -154,14 +154,14 @@
   align-items: center;
   justify-content: center;
   background: var(--black);
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
   font-size: 13px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   height: 42px;
-  border-radius: 999px;
+  border-radius: 10px;
   transition: background 0.15s;
 }
 
@@ -182,7 +182,7 @@
 
 .ctaStripText {
   font-size: 15px;
-  color: #444;
+  color: var(--ink);
   max-width: 640px;
 }
 
@@ -195,7 +195,7 @@
   display: inline-flex;
   align-items: center;
   background: var(--red);
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
   font-size: 13px;
@@ -203,7 +203,7 @@
   text-transform: uppercase;
   padding: 0 22px;
   height: 46px;
-  border-radius: 999px;
+  border-radius: 10px;
   transition: background 0.15s;
 }
 

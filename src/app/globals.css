@@ -1,24 +1,32 @@
 :root {
   --red: #da020b;
-  --red-hover: #aa0209;
-  /* Premium deep-navy identity. --black/--black-deep are the primary navy
-     (headings, chrome, hero/section fills); --charcoal/--panel are the
-     secondary navy used for nested dark cards, so a card reads as a step
-     lighter than the section it sits in. Kept the original token names so
-     every existing consumer picks this up without being touched. */
-  --black: #0b1f33;
-  --black-deep: #0b1f33;
-  --charcoal: #142c43;
-  --panel: #142c43;
-  --panel-active: linear-gradient(160deg, #1a3a56, #0b1f33);
-  --ink: #3f4a55;
+  --red-hover: #a80008;
+  /* Premium near-black identity. --black/--black-deep are the primary dark
+     neutral (headings, chrome, hero/section fills); --charcoal/--panel are
+     the secondary dark neutral used for nested dark cards, so a card reads
+     as a step lighter than the section it sits in. Kept the original token
+     names so every existing consumer picks this up without being touched. */
+  --black: #111214;
+  --black-deep: #111214;
+  --charcoal: #151719;
+  --panel: #151719;
+  --panel-active: linear-gradient(160deg, #1c1e21, #111214);
+  --graphite: #55585c;
+  --ink: #55585c;
   --ink-2: #3a3a3a;
   --ink-3: #6b6b6b;
-  --line: #e6e6e6;
-  --surface-2: #f5f5f3;
+  --off-white: #f7f7f5;
+  --light-gray: #eceeef;
+  --border-gray: #d9dadc;
+  --line: #d9dadc;
+  --surface-2: #f7f7f5;
   --on-dark: #d4d4d4;
   --on-dark-2: #bdbdbd;
   --white: #ffffff;
+  /* Lighter red for small text/links on near-black backgrounds — plain
+     --red fails contrast at small sizes there. Was redefined ad hoc as
+     --red-text in a few page modules; consolidated here. */
+  --red-on-dark: #ff6b71;
 
   /* Shared type scale. H1/H2 are sentence case (see body{} below) — weight
      and size carry the hierarchy, not shouting in caps. H3 and labels stay
@@ -124,7 +132,7 @@ img {
   top: -80px;
   z-index: 100;
   background: var(--black);
-  color: #fff;
+  color: var(--white);
   padding: 12px 18px;
   border-radius: 8px;
   font-weight: 700;

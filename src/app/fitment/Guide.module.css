@@ -6,7 +6,7 @@
 .hero {
   position: relative;
   background: var(--black-deep);
-  color: #fff;
+  color: var(--white);
   overflow: hidden;
 }
 
@@ -37,7 +37,7 @@
 .heroScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #0b1f33 42%, rgba(11, 31, 51, 0.6) 65%, rgba(11, 31, 51, 0) 100%);
+  background: linear-gradient(90deg, var(--black-deep) 42%, rgba(17, 18, 20, 0.6) 65%, rgba(17, 18, 20, 0) 100%);
   pointer-events: none;
 }
 
@@ -93,7 +93,7 @@
 .heroBody {
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.6;
-  color: #e6e6e6;
+  color: var(--on-dark);
   max-width: 580px;
   margin: 0 0 30px;
 }
@@ -110,9 +110,9 @@
   gap: 10px;
   height: 50px;
   padding: 0 26px;
-  border: 1.5px solid #fff;
-  border-radius: 999px;
-  background: #fff;
+  border: 1.5px solid var(--white);
+  border-radius: 10px;
+  background: var(--white);
   color: var(--black);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
@@ -126,7 +126,7 @@
 .btnWhite:hover {
   background: var(--red);
   border-color: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnGhostLight {
@@ -136,8 +136,8 @@
   height: 50px;
   padding: 0 26px;
   border: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-radius: 999px;
-  color: #fff;
+  border-radius: 10px;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -148,7 +148,7 @@
 }
 
 .btnGhostLight:hover {
-  background: #fff;
+  background: var(--white);
   color: var(--black);
 }
 
@@ -164,7 +164,7 @@
   font-weight: 800;
   font-size: clamp(28px, 3vw, 40px);
   line-height: 1;
-  color: #fff;
+  color: var(--white);
 }
 
 .heroStatLabel {
@@ -198,7 +198,7 @@
 .lead {
   font-size: 16px;
   line-height: 1.6;
-  color: #444;
+  color: var(--ink);
   max-width: 660px;
   margin: 12px 0 0;
 }
@@ -240,7 +240,7 @@
   max-width: 560px;
   width: 100%;
   margin: 0 auto;
-  background: radial-gradient(circle at 50% 46%, #f4f4f4, #e4e4e4);
+  background: radial-gradient(circle at 50% 46%, var(--off-white), var(--light-gray));
   border-radius: 26px;
   overflow: hidden;
 }
@@ -258,9 +258,9 @@
   height: 38px;
   border-radius: 50%;
   cursor: pointer;
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
   background: var(--black);
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
   font-size: 16px;
@@ -309,8 +309,8 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: 1.5px solid #dadada;
-  background: #fff;
+  border: 1.5px solid var(--border-gray);
+  background: var(--white);
   color: var(--black);
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
@@ -318,12 +318,12 @@
 .chipOn {
   border-color: var(--red);
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .detail {
   background: var(--charcoal);
-  color: #fff;
+  color: var(--white);
   border-radius: 20px;
   padding: clamp(24px, 2.6vw, 36px);
   min-height: 220px;
@@ -374,7 +374,7 @@
 .detailBody {
   font-size: 15px;
   line-height: 1.7;
-  color: #e2e2e2;
+  color: var(--on-dark);
   margin: 0;
 }
 
@@ -382,7 +382,7 @@
   display: flex;
   align-items: center;
   gap: 14px;
-  background: #f5f5f5;
+  background: var(--off-white);
   border-radius: 16px;
   padding: 16px 20px;
   flex-wrap: wrap;
@@ -403,7 +403,7 @@
 
 .specNote {
   font-size: 13px;
-  color: #6b6b6b;
+  color: var(--ink-3);
   line-height: 1.4;
 }
 
@@ -427,7 +427,7 @@
 
 .sizesNote {
   font-size: 15px;
-  color: #6b6b6b;
+  color: var(--ink-3);
   max-width: 360px;
   text-align: right;
 }
@@ -447,15 +447,15 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  border: 1.5px solid #e6e6e6;
-  background: #fff;
+  border: 1.5px solid var(--border-gray);
+  background: var(--white);
   transition: transform 0.4s var(--ease), box-shadow 0.4s, border-color 0.25s;
 }
 
 .sizeDark {
   border-color: transparent;
   background: var(--panel-active);
-  color: #fff;
+  color: var(--white);
 }
 
 .sizeCard:hover {
@@ -503,7 +503,7 @@
 }
 
 .sizeDark .sizeNum {
-  color: #fff;
+  color: var(--white);
 }
 
 .sizeTag {
@@ -516,13 +516,13 @@
 }
 
 .sizeDark .sizeTag {
-  color: var(--red-text, #ff6b71);
+  color: var(--red-on-dark);
 }
 
 .sizeBody {
   font-size: 14px;
   line-height: 1.6;
-  color: #444;
+  color: var(--ink);
   margin: 0 0 18px;
 }
 
@@ -542,7 +542,7 @@
   justify-content: space-between;
   gap: 10px;
   font-size: 13px;
-  border-top: 1px solid #ececec;
+  border-top: 1px solid var(--line);
   padding-top: 10px;
 }
 
@@ -551,11 +551,11 @@
 }
 
 .sizeFacts dt {
-  color: #6b6b6b;
+  color: var(--ink-3);
 }
 
 .sizeDark .sizeFacts dt {
-  color: #b5b5b5;
+  color: var(--on-dark-2);
 }
 
 .sizeFacts dd {
@@ -566,7 +566,7 @@
 }
 
 .sizeDark .sizeFacts dd {
-  color: #fff;
+  color: var(--white);
 }
 
 /* Part 3 — Find your own fitment */
@@ -590,7 +590,7 @@
 }
 
 .step {
-  background: #fff;
+  background: var(--white);
   border-radius: 20px;
   padding: clamp(24px, 2.4vw, 34px);
   display: flex;
@@ -605,7 +605,7 @@
   height: 44px;
   border-radius: 50%;
   background: var(--black);
-  color: #fff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -625,7 +625,7 @@
 .stepBody {
   font-size: 14px;
   line-height: 1.65;
-  color: #444;
+  color: var(--ink);
   margin: 0;
 }
 
@@ -634,7 +634,7 @@
   padding-top: 16px;
   font-size: 13px;
   line-height: 1.55;
-  color: #6b6b6b;
+  color: var(--ink-3);
 }
 
 .stepTipLabel {
@@ -645,7 +645,7 @@
 
 .rule {
   margin-top: clamp(18px, 2vw, 28px);
-  background: #fff;
+  background: var(--white);
   border-radius: 20px;
   padding: clamp(20px, 2.2vw, 30px) clamp(24px, 2.6vw, 36px);
   display: flex;
@@ -666,7 +666,7 @@
 .ruleText {
   font-size: 15px;
   line-height: 1.6;
-  color: #333;
+  color: var(--ink);
 }
 
 /* Part 4 — Fitting & aftercare */
@@ -711,7 +711,7 @@
 .figCaption {
   margin-top: 10px;
   font-size: 12px;
-  color: #6b6b6b;
+  color: var(--ink-3);
 }
 
 .careGrid {
@@ -721,7 +721,7 @@
 }
 
 .careCard {
-  border: 1.5px solid #e6e6e6;
+  border: 1.5px solid var(--border-gray);
   border-radius: 20px;
   padding: clamp(22px, 2.2vw, 32px);
   display: flex;
@@ -756,7 +756,7 @@
 .careBody {
   font-size: 14px;
   line-height: 1.65;
-  color: #444;
+  color: var(--ink);
   margin: 0;
 }
 
@@ -772,7 +772,7 @@
 
 .askCard {
   background: var(--charcoal);
-  color: #fff;
+  color: var(--white);
   border-radius: 22px;
   padding: clamp(28px, 3vw, 48px);
   display: flex;
@@ -791,7 +791,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--red-text, #ff6b71);
+  color: var(--red-on-dark);
   margin-bottom: 12px;
 }
 
@@ -825,9 +825,9 @@
   gap: 10px;
   height: 50px;
   padding: 0 26px;
-  border-radius: 999px;
+  border-radius: 10px;
   background: var(--red);
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -838,5 +838,5 @@
 
 .btnRed:hover {
   background: var(--red-hover);
-  color: #fff;
+  color: var(--white);
 }

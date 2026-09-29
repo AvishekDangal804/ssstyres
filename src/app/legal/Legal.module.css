@@ -12,13 +12,13 @@
   gap: 10px;
   flex-wrap: wrap;
   padding: 26px 0;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid var(--line);
   margin-bottom: 34px;
 }
 
 .tabBtn {
   border: 2px solid var(--black);
-  background: #fff;
+  background: var(--white);
   color: var(--black);
   cursor: pointer;
   border-radius: 999px;
@@ -34,7 +34,7 @@
 .tabBtn.active {
   border-color: var(--red);
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .entries {
@@ -61,7 +61,7 @@
 .entryBody p {
   font-size: 16px;
   line-height: 1.7;
-  color: #333;
+  color: var(--ink);
   margin: 0 0 12px;
 }
 

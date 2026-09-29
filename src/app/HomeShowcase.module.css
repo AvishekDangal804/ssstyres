@@ -2,7 +2,7 @@
    background-image layers became next/image, and small red text on dark
    surfaces uses a lighter tint of the brand red so it stays readable. */
 .showcase {
-  --red-text: #ff6b71;
+  --red-text: var(--red-on-dark);
 }
 
 .contain {
@@ -54,7 +54,7 @@
   height: 46px;
   padding: 0 24px;
   border: 1.5px solid var(--black);
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
   font-size: 13px;
@@ -67,7 +67,7 @@
 
 .btnOutlineDark:hover {
   background: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnOutlineLight {
@@ -77,25 +77,25 @@
   height: 46px;
   padding: 0 24px;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white);
   box-sizing: border-box;
   transition: background 0.2s, color 0.2s;
 }
 
 .btnOutlineLight:hover {
-  background: #fff;
+  background: var(--white);
   color: var(--black);
 }
 
 /* Fact strip */
 .stats {
   background: var(--charcoal);
-  color: #fff;
+  color: var(--white);
   position: relative;
   overflow: hidden;
 }
@@ -125,7 +125,7 @@
 }
 
 .statCell:not(:first-child) {
-  border-left: 1px solid #2c2c2c;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 @media (max-width: 900px) {
@@ -137,7 +137,7 @@
 
 .statIcon {
   display: block;
-  color: #fff;
+  color: var(--white);
   margin-bottom: 14px;
 }
 
@@ -155,7 +155,7 @@
   font-size: clamp(32px, 3.2vw, 46px);
   line-height: 1;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--white);
   text-transform: uppercase;
 }
 
@@ -249,7 +249,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #e6e6e6;
+  color: var(--on-dark);
 }
 
 .statementBtn {
@@ -259,9 +259,9 @@
   margin-top: 24px;
   height: 48px;
   padding: 0 26px;
-  background: #fff;
+  background: var(--white);
   color: var(--black);
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -271,7 +271,7 @@
 
 .statementBtn:hover {
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .statementBtnIcon {
@@ -330,7 +330,7 @@
   border-radius: 50%;
   border: 1.5px solid rgba(255, 255, 255, 0.6);
   background: rgba(0, 0, 0, 0.25);
-  color: #fff;
+  color: var(--white);
   font-size: 10px;
   cursor: pointer;
   display: flex;
@@ -387,7 +387,7 @@
   display: block;
   aspect-ratio: 1;
   overflow: hidden;
-  background: #fff;
+  background: var(--white);
   transition: box-shadow 0.25s;
 }
 
@@ -436,7 +436,7 @@
   width: 22px;
   height: 22px;
   border-radius: 7px;
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
   box-sizing: border-box;
   box-shadow: 0 0 0 1.5px var(--black), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
@@ -461,9 +461,9 @@
   width: 22px;
   height: 22px;
   border-radius: 7px;
-  border: 2px solid #fff;
+  border: 2px solid var(--white);
   box-sizing: border-box;
-  box-shadow: 0 0 0 1.5px rgba(11, 31, 51, 0.4), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 0 1.5px rgba(17, 18, 20, 0.4), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
   padding: 0;
   cursor: pointer;
   transition: box-shadow 0.15s, transform 0.15s;
@@ -493,8 +493,8 @@
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1.5px solid #cfcfcf;
-  background: #fff;
+  border: 1.5px solid var(--border-gray);
+  background: var(--white);
   cursor: pointer;
   color: var(--black);
   font-size: 15px;
@@ -507,14 +507,14 @@
 .arrowBtn:hover {
   border-color: var(--black);
   background: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 .track {
   position: relative;
   width: min(460px, 60%);
   height: 4px;
-  background: #ececec;
+  background: var(--light-gray);
   border-radius: 2px;
   overflow: hidden;
 }
@@ -549,13 +549,13 @@
   display: block;
   border-radius: 22px;
   background: var(--panel-active);
-  color: #fff;
+  color: var(--white);
   border: 1px solid rgba(255, 255, 255, 0.07);
   transition: transform 0.5s var(--ease), border-color 0.4s, box-shadow 0.5s;
 }
 
 .collCard.on {
-  background: linear-gradient(160deg, #24476a, #0f2740);
+  background: linear-gradient(160deg, #26282b, #111214);
   border-color: rgba(255, 255, 255, 0.16);
   transform: translateY(-8px);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
@@ -641,7 +641,7 @@
   font-size: 44px;
   line-height: 0.9;
   letter-spacing: -0.03em;
-  color: #fff;
+  color: var(--white);
 }
 
 .collBottomRow {
@@ -673,7 +673,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white);
 }
 
 .collArrow {
@@ -698,7 +698,7 @@
 /* Types of wheels */
 .types {
   background: var(--black-deep);
-  color: #fff;
+  color: var(--white);
   margin-top: 96px;
   padding: 88px 0 96px;
   position: relative;
@@ -919,7 +919,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white);
 }
 
 .panelCta {
@@ -928,9 +928,9 @@
   gap: 10px;
   height: 46px;
   padding: 0 24px;
-  border: 1.5px solid #fff;
-  border-radius: 999px;
-  background: #fff;
+  border: 1.5px solid var(--white);
+  border-radius: 10px;
+  background: var(--white);
   color: var(--black);
   font-size: 13px;
   font-weight: 700;
@@ -943,7 +943,7 @@
 .panelCta:hover {
   background: var(--red);
   border-color: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 @media (max-width: 1040px) {
@@ -983,7 +983,7 @@
 .feat {
   position: relative;
   background: var(--black-deep);
-  color: #fff;
+  color: var(--white);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -1011,7 +1011,7 @@
 .featScrim1 {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(11, 31, 51, 0) 0%, rgba(11, 31, 51, 0) 55%, rgba(11, 31, 51, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(17, 18, 20, 0) 0%, rgba(17, 18, 20, 0) 55%, rgba(17, 18, 20, 0.6) 100%);
 }
 
 .featScrim2 {
@@ -1020,7 +1020,7 @@
   bottom: 0;
   width: min(760px, 100%);
   height: 62%;
-  background: radial-gradient(ellipse at 18% 100%, rgba(11, 31, 51, 0.82), rgba(11, 31, 51, 0.5) 45%, rgba(11, 31, 51, 0) 75%);
+  background: radial-gradient(ellipse at 18% 100%, rgba(17, 18, 20, 0.82), rgba(17, 18, 20, 0.5) 45%, rgba(17, 18, 20, 0) 75%);
   pointer-events: none;
 }
 
@@ -1053,7 +1053,7 @@
 .featSub {
   margin-top: 10px;
   font-size: 16px;
-  color: #fff;
+  color: var(--white);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.7);
 }
 
@@ -1077,7 +1077,7 @@
   transition: background 0.2s, color 0.2s, border-color 0.2s;
   background: rgba(255, 255, 255, 0.08);
   border: 1.5px solid rgba(255, 255, 255, 0.35);
-  color: #fff;
+  color: var(--white);
 }
 
 .featTab.active {
@@ -1091,9 +1091,9 @@
   gap: 10px;
   height: 46px;
   padding: 0 22px;
-  background: #fff;
+  background: var(--white);
   color: var(--black);
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1103,7 +1103,7 @@
 
 .featCta:hover {
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 /* Vehicle grid */
@@ -1128,7 +1128,7 @@
   background: var(--black-deep);
   overflow: hidden;
   display: block;
-  color: #fff;
+  color: var(--white);
   border-radius: 22px;
 }
 
@@ -1185,7 +1185,7 @@
   line-height: 0.92;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: #fff;
+  color: var(--white);
   text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
 }
 
@@ -1195,12 +1195,12 @@
   gap: 10px;
   height: 46px;
   padding: 0 22px;
-  background: #fff;
+  background: var(--white);
   color: var(--black);
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  border-radius: 999px;
+  border-radius: 10px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }

@@ -5,7 +5,7 @@
   --heroH: clamp(440px, 56vh, 640px);
   position: relative;
   background: var(--black-deep);
-  color: #fff;
+  color: var(--white);
   overflow: hidden;
   height: var(--heroH);
   display: flex;
@@ -81,13 +81,13 @@
 .heroBody {
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.6;
-  color: #e6e6e6;
+  color: var(--on-dark);
   max-width: 560px;
   margin: 0;
 }
 
 .heroBody strong {
-  color: #fff;
+  color: var(--white);
 }
 
 @media (max-width: 1100px) {
@@ -114,7 +114,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: min(66.667vw, 62vh);
-    background: linear-gradient(180deg, rgba(11, 31, 51, 0) 65%, var(--black-deep) 100%);
+    background: linear-gradient(180deg, rgba(17, 18, 20, 0) 65%, var(--black-deep) 100%);
     pointer-events: none;
   }
 
@@ -150,7 +150,7 @@
 
 .filterBtn {
   border: 1.5px solid var(--black);
-  background: #fff;
+  background: var(--white);
   color: var(--black);
   cursor: pointer;
   border-radius: 999px;
@@ -167,7 +167,7 @@
 .filterBtn.active {
   border-color: var(--red);
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .count {
@@ -175,7 +175,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6b6b6b;
+  color: var(--ink-3);
 }
 
 /* Gallery grid */
@@ -202,12 +202,12 @@
   aspect-ratio: 3 / 2;
   overflow: hidden;
   border-radius: 18px;
-  color: #fff;
+  color: var(--white);
   transition: transform 0.4s var(--ease), box-shadow 0.4s;
 }
 
 .tile.contain {
-  background: #f2f2f2;
+  background: var(--light-gray);
 }
 
 .tile.cover {
@@ -299,7 +299,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white);
 }
 
 .tileKind::before {
@@ -320,7 +320,7 @@
   line-height: 1;
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  color: #fff;
+  color: var(--white);
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 
@@ -339,7 +339,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--white);
   font-size: 15px;
   flex: none;
 }

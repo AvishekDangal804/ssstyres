@@ -29,7 +29,7 @@
 .storyBody {
   font-size: 16px;
   line-height: 1.7;
-  color: #444;
+  color: var(--ink);
   margin: 0 0 14px;
 }
 
@@ -67,7 +67,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #5f5f5f;
+  color: var(--ink);
 }
 
 .tilesSection {
@@ -91,12 +91,12 @@
 
 .tile.dark {
   background: var(--charcoal);
-  color: #fff;
+  color: var(--white);
 }
 
 .tile.red {
   background: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .tileTitle {
@@ -118,7 +118,7 @@
 }
 
 .tile.red .tileBody {
-  color: #fff;
+  color: var(--white);
   margin-bottom: 16px;
 }
 
@@ -126,7 +126,7 @@
   display: inline-flex;
   align-items: center;
   background: var(--black);
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-weight: 700;
   font-size: 13px;
@@ -134,11 +134,11 @@
   text-transform: uppercase;
   padding: 0 20px;
   height: 44px;
-  border-radius: 999px;
+  border-radius: 10px;
   transition: background 0.15s, color 0.15s;
 }
 
 .tileCta:hover {
-  background: #fff;
+  background: var(--white);
   color: var(--black);
 }

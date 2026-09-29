@@ -3,7 +3,7 @@
 .hero {
   position: relative;
   background: var(--black-deep);
-  color: #fff;
+  color: var(--white);
 }
 
 .heroSplit {
@@ -247,7 +247,7 @@
   padding: 8px 0;
   min-height: 44px;
   cursor: pointer;
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -321,7 +321,7 @@
 .heroBody {
   font-size: clamp(15px, 1.2vw, 18px);
   line-height: 1.6;
-  color: #e6e6e6;
+  color: var(--on-dark);
   max-width: 520px;
   margin: 0 0 30px;
 }
@@ -338,9 +338,9 @@
   gap: 10px;
   height: 50px;
   padding: 0 26px;
-  border: 1.5px solid #fff;
-  border-radius: 999px;
-  background: #fff;
+  border: 1.5px solid var(--white);
+  border-radius: 10px;
+  background: var(--white);
   color: var(--black);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
@@ -354,7 +354,7 @@
 .btnWhite:hover {
   background: var(--red);
   border-color: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnGhostLight {
@@ -363,8 +363,8 @@
   height: 50px;
   padding: 0 26px;
   border: 1.5px solid rgba(255, 255, 255, 0.7);
-  border-radius: 999px;
-  color: #fff;
+  border-radius: 10px;
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -375,14 +375,14 @@
 }
 
 .btnGhostLight:hover {
-  background: #fff;
+  background: var(--white);
   color: var(--black);
 }
 
 .content {
   position: relative;
   z-index: 1;
-  background: #fff;
+  background: var(--white);
   box-shadow: 0 -24px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -406,7 +406,7 @@
 }
 
 .sectionH2.onDark {
-  color: #fff;
+  color: var(--white);
 }
 
 .btnOutlineDark {
@@ -416,7 +416,7 @@
   height: 46px;
   padding: 0 24px;
   border: 1.5px solid var(--black);
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -429,7 +429,7 @@
 
 .btnOutlineDark:hover {
   background: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 /* Section kicker (warehouse block) */
@@ -492,7 +492,7 @@
 
 .supplyCard:hover,
 .supplyCard:focus-visible {
-  background: #ececec;
+  background: var(--light-gray);
 }
 
 .supplyCard:hover .supplyName,
@@ -557,12 +557,12 @@
 
 .tradeCard:hover .tradeName,
 .tradeCard:focus-visible .tradeName {
-  color: var(--red-text, #ff6b71);
+  color: var(--red-on-dark);
 }
 
 .tradeCard:hover .tradeMore,
 .tradeCard:focus-visible .tradeMore {
-  color: #fff;
+  color: var(--white);
 }
 
 .tradeMore {
@@ -584,18 +584,18 @@
   height: 46px;
   padding: 0 24px;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
-  border-radius: 999px;
+  border-radius: 10px;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #fff;
+  color: var(--white);
   box-sizing: border-box;
   transition: background 0.2s, color 0.2s;
 }
 
 .btnOutlineLight:hover {
-  background: #fff;
+  background: var(--white);
   color: var(--black);
 }
 
@@ -613,7 +613,7 @@
   font-size: 18px;
   text-transform: uppercase;
   letter-spacing: -0.005em;
-  color: #fff;
+  color: var(--white);
   margin-bottom: 8px;
 }
 

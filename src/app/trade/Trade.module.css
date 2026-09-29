@@ -1,7 +1,7 @@
 /* Jump bar */
 .jumpBar {
   border-bottom: 1px solid var(--line);
-  background: #fff;
+  background: var(--white);
 }
 
 .jumpInner {
@@ -18,7 +18,7 @@
   align-items: center;
   height: 40px;
   padding: 0 18px;
-  border: 1.5px solid #dadada;
+  border: 1.5px solid var(--border-gray);
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
@@ -31,7 +31,7 @@
 .jump:hover {
   background: var(--black);
   border-color: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 /* Content blocks: text on one side, a photo or card on the other */
@@ -45,7 +45,7 @@
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
   gap: clamp(28px, 4vw, 64px);
   align-items: center;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid var(--line);
 }
 
 .flip .aside {
@@ -90,7 +90,7 @@
 .body {
   font-size: 16px;
   line-height: 1.65;
-  color: #444;
+  color: var(--ink);
   margin: 0 0 14px;
   max-width: 560px;
 }
@@ -117,7 +117,7 @@
   grid-template-columns: 110px 1fr;
   gap: 12px;
   padding-top: 12px;
-  border-top: 1px solid #ececec;
+  border-top: 1px solid var(--line);
   font-size: 15px;
   line-height: 1.5;
 }
@@ -127,7 +127,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #6b6b6b;
+  color: var(--ink-3);
   padding-top: 2px;
 }
 
@@ -161,7 +161,7 @@
   gap: 10px;
   height: 50px;
   padding: 0 26px;
-  border-radius: 999px;
+  border-radius: 10px;
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -174,7 +174,7 @@
 .btnDark {
   background: var(--black);
   border: 1.5px solid var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnDark:hover {
@@ -185,13 +185,13 @@
 .btnRed {
   background: var(--red);
   border: 1.5px solid var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnRed:hover {
   background: var(--red-hover);
   border-color: var(--red-hover);
-  color: #fff;
+  color: var(--white);
 }
 
 .btnOutline {
@@ -201,7 +201,7 @@
 
 .btnOutline:hover {
   background: var(--black);
-  color: #fff;
+  color: var(--white);
 }
 
 /* Aside: photo and cards */
@@ -226,7 +226,7 @@
 
 .darkCard {
   background: var(--charcoal);
-  color: #fff;
+  color: var(--white);
 }
 
 .lightCard {
@@ -244,7 +244,7 @@
 }
 
 .darkCard .cardLabel {
-  color: var(--red-text, #ff6b71);
+  color: var(--red-on-dark);
 }
 
 .steps {
@@ -267,7 +267,7 @@
   height: 36px;
   border-radius: 50%;
   background: var(--red);
-  color: #fff;
+  color: var(--white);
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
   font-size: 17px;
@@ -307,7 +307,7 @@
 
 .cardSub {
   font-size: 14px;
-  color: #5f5f5f;
+  color: var(--ink);
   margin: 8px 0 18px;
 }
 
@@ -336,7 +336,7 @@
   padding-left: 22px;
   font-size: 15px;
   line-height: 1.55;
-  color: #333;
+  color: var(--ink);
 }
 
 .notes li::before {
