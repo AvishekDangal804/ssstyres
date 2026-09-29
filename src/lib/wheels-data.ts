@@ -124,19 +124,33 @@ export interface WheelGroup {
   variants: Wheel[];
 }
 
-// Grouped by model only, so every finish/size/PCD of a wheel is one card with
-// colour swatches rather than a card per size/finish combination. A swatch
-// can therefore change the size/PCD shown, not just the colour — the active
-// variant's own spec line is what's authoritative, not the group.
-export function groupWheels(list: Wheel[]): WheelGroup[] {
+function groupBy(list: Wheel[], keyOf: (w: Wheel) => string): WheelGroup[] {
   const groups = new Map<string, WheelGroup>();
   for (const w of list) {
-    const key = w.model;
+    const key = keyOf(w);
     const existing = groups.get(key);
     if (existing) existing.variants.push(w);
     else groups.set(key, { key, variants: [w] });
   }
   return [...groups.values()];
+}
+
+// Grouped by model only, so every finish/size/PCD of a wheel is one card with
+// colour swatches rather than a card per size/finish combination. A swatch
+// can therefore change the size/PCD shown, not just the colour — the active
+// variant's own spec line is what's authoritative, not the group. Used by the
+// /wheels catalogue grid.
+export function groupWheels(list: Wheel[]): WheelGroup[] {
+  return groupBy(list, (w) => w.model);
+}
+
+// Grouped by model + finish, so each real finish gets its own card instead of
+// collapsing every colour into one card per model. Every variant in a group
+// therefore already shares a hex — a swatch here can only change size/PCD,
+// never colour. Used by the Home "Wheel range" slider, which wants one
+// visually distinct card per finish rather than one per model.
+export function groupWheelsByFinish(list: Wheel[]): WheelGroup[] {
+  return groupBy(list, (w) => `${w.model}::${w.variant}`);
 }
 
 // Leads with a non-black finish where the wheel actually comes in one.

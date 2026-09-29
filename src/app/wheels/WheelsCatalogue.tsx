@@ -150,9 +150,11 @@ function WheelCard({ group }: { group: WheelGroup }) {
               aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
               title={`${v.variant} — ${v.size} · ${v.pcd}`}
               className={`${styles.swatch} ${i === active ? styles.swatchActive : ""}`}
+              onMouseEnter={() => setActive(i)}
+              onFocus={() => setActive(i)}
               onClick={() => setActive(i)}
             >
-              <Image src={v.img} alt="" fill sizes="48px" className={styles.swatchImg} />
+              <Image src={v.img} alt="" fill sizes="64px" className={styles.swatchImg} />
             </button>
           ))}
         </div>

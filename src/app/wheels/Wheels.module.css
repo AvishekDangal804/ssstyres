@@ -87,24 +87,26 @@
 
 .swatch {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 8px;
   border: 2px solid var(--line);
   background: var(--surface-2);
   overflow: hidden;
   padding: 0;
   cursor: pointer;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, transform 0.15s;
   flex: none;
 }
 
 .swatch:hover {
   border-color: #aaa;
+  transform: translateY(-2px);
 }
 
 .swatchActive {
   border-color: var(--black);
+  transform: translateY(-2px);
 }
 
 .swatchImg {

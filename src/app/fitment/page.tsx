@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/site";
 import WheelAnatomy from "./WheelAnatomy";
+import SizesGrid from "./SizesGrid";
 import styles from "./Guide.module.css";
 
 export const metadata = pageMetadata({
@@ -10,36 +11,6 @@ export const metadata = pageMetadata({
     "How to read a wheel spec, popular wheel sizes and how to find your own fitment — plain-language guidance before you order SSS wheels.",
   path: "/fitment",
 });
-
-const SIZES = [
-  {
-    size: '15"',
-    tag: "Steel & trailer",
-    tyre: '30–31"',
-    suits: "Jimny · trailers",
-    body: "The budget-friendly workhorse size. Maximum sidewall for airing down off-road, cheap to replace, and the go-to for box, boat and camper trailers.",
-    img: "/assets/wheels/r3.png",
-    dark: false,
-  },
-  {
-    size: '16"',
-    tag: "Touring & fleet",
-    tyre: '32–33"',
-    suits: "HiAce · Prado",
-    body: "The tourer's sweet spot. Enough sidewall to survive outback corrugations, light-truck load ratings, and a size most 4x4 tyres are made in.",
-    img: "/assets/wheels/r7.png",
-    dark: true,
-  },
-  {
-    size: '17"',
-    tag: "4x4 all-rounder",
-    tyre: '32–34"',
-    suits: "Ranger · HiLux · RAV4",
-    body: "A very common size on Australian dual cabs. Balances an aggressive look with real off-road sidewall.",
-    img: "/assets/wheels/r4.png",
-    dark: true,
-  },
-];
 
 const STEPS = [
   {
@@ -144,39 +115,7 @@ export default function GuidePage() {
             is used.
           </div>
         </div>
-        <div className={styles.sizeGrid}>
-          {SIZES.map((s) => (
-            <div
-              key={s.size}
-              className={`${styles.sizeCard} ${s.dark ? styles.sizeDark : ""}`}
-            >
-              <div className={styles.sizeArt} aria-hidden="true">
-                <Image
-                  src={s.img}
-                  alt=""
-                  fill
-                  sizes="150px"
-                  className={styles.contain}
-                />
-              </div>
-              <div className={styles.sizeInner}>
-                <div className={styles.sizeNum}>{s.size}</div>
-                <div className={styles.sizeTag}>{s.tag}</div>
-                <p className={styles.sizeBody}>{s.body}</p>
-                <dl className={styles.sizeFacts}>
-                  <div>
-                    <dt>Tyre</dt>
-                    <dd>{s.tyre}</dd>
-                  </div>
-                  <div>
-                    <dt>Suits</dt>
-                    <dd>{s.suits}</dd>
-                  </div>
-                </dl>
-              </div>
-            </div>
-          ))}
-        </div>
+        <SizesGrid />
       </section>
 
       <section id="finder" className={styles.finder}>

@@ -7,7 +7,7 @@ import {
   CATEGORIES,
   WHEELS,
   VEHICLES,
-  groupWheels,
+  groupWheelsByFinish,
   defaultVariantIndex,
   type CategoryId,
   type WheelGroup,
@@ -129,7 +129,7 @@ export default function HomeShowcase() {
   const [activeCat, setActiveCat] = useState<CategoryId>("offroad");
   const [feat, setFeat] = useState(0);
   const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
-  const wheelGroups = useMemo(() => groupWheels(WHEELS), []);
+  const wheelGroups = useMemo(() => groupWheelsByFinish(WHEELS), []);
 
   // Statement slideshow. `reach` is the highest slide mounted so far: slides
   // are added just before they're needed so the page doesn't load all five up
@@ -603,31 +603,28 @@ function RangeCard({ group }: { group: WheelGroup }) {
         <Link href={`/wheels?model=${w.model}`} className={styles.slideName}>
           {w.name}
         </Link>
+        <div className={styles.slideFinish}>{w.variant}</div>
         <div className={styles.slideFit}>
           {w.size} · {w.pcd} · {w.offset}
         </div>
 
-        {group.variants.length > 1 ? (
-          <div className={styles.slideSwatches} role="radiogroup" aria-label="Size and finish">
+        {group.variants.length > 1 && (
+          <div className={styles.sizeChips} role="radiogroup" aria-label="Size and bolt pattern">
             {group.variants.map((v, i) => (
               <button
                 key={v.id}
                 type="button"
                 role="radio"
                 aria-checked={i === active}
-                aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
-                title={`${v.variant} — ${v.size} · ${v.pcd}`}
-                className={`${styles.dot} ${i === active ? styles.dotActive : ""}`}
-                style={{ background: v.hex }}
+                aria-label={`${v.size} · ${v.pcd}`}
+                title={`${v.size} · ${v.pcd}`}
+                className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
                 onClick={() => setActive(i)}
-              />
+              >
+                <span className={styles.sizeChipSize}>{v.size}</span>
+                <span className={styles.sizeChipPcd}>{v.pcd}</span>
+              </button>
             ))}
-            <span className={styles.variantLabel}>{w.variant}</span>
-          </div>
-        ) : (
-          <div className={styles.slideVariant}>
-            <span className={styles.swatch} style={{ background: w.hex }} />
-            <span className={styles.variantLabel}>{w.variant}</span>
           </div>
         )}
       </div>
