@@ -619,10 +619,11 @@ function RangeCard({ group }: { group: WheelGroup }) {
                 aria-label={`${v.size} · ${v.pcd}`}
                 title={`${v.size} · ${v.pcd}`}
                 className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
               >
-                <span className={styles.sizeChipSize}>{v.size}</span>
-                <span className={styles.sizeChipPcd}>{v.pcd}</span>
+                <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
               </button>
             ))}
           </div>

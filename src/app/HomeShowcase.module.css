@@ -433,52 +433,37 @@
 
 .sizeChips {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   flex-wrap: wrap;
   padding-top: 4px;
 }
 
 .sizeChip {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-width: 58px;
-  padding: 6px 10px;
+  position: relative;
+  width: 56px;
+  height: 56px;
   border-radius: 8px;
-  border: 1.5px solid var(--border-gray);
-  background: var(--white);
+  border: 2px solid var(--border-gray);
+  background: var(--surface-2);
+  overflow: hidden;
+  padding: 0;
   box-sizing: border-box;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+  transition: border-color 0.15s, transform 0.15s;
 }
 
 .sizeChip:hover {
-  transform: translateY(-1px);
+  border-color: #aaa;
+  transform: translateY(-2px);
 }
 
 .sizeChipActive {
   border-color: var(--red);
-  background: var(--off-white);
+  transform: translateY(-2px);
 }
 
-.sizeChipSize {
-  font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: 13px;
-  line-height: 1.2;
-  color: var(--black);
-}
-
-.sizeChipActive .sizeChipSize {
-  color: var(--red);
-}
-
-.sizeChipPcd {
-  font-size: 10px;
-  letter-spacing: 0.02em;
-  color: var(--ink-3);
-  line-height: 1.2;
+.sizeChipImg {
+  object-fit: contain;
 }
 
 .sliderControls {
