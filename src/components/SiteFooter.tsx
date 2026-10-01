@@ -44,7 +44,7 @@ export default function SiteFooter() {
       <section ref={bandRef} className={styles.band}>
         <div data-band-img className={styles.bandBg} aria-hidden="true">
           <Image
-            src="/assets/statement/s1.jpg"
+            src="/assets/trade/band-photo.jpg"
             alt=""
             fill
             sizes="100vw"
