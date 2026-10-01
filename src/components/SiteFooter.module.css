@@ -1,26 +1,51 @@
 .band {
   position: relative;
   overflow: hidden;
-  background: var(--light-gray);
-  color: var(--black);
+  background: var(--black);
+  color: var(--white);
+  min-height: clamp(520px, 62vh, 760px);
+  display: flex;
+  align-items: center;
 }
 
-.bandGrid {
+.bandBg {
+  position: absolute;
+  top: -8%;
+  left: 0;
+  right: 0;
+  height: 116%;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bandBgImg {
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+.bandScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(8, 9, 11, 0.92) 0%,
+    rgba(8, 9, 11, 0.78) 34%,
+    rgba(8, 9, 11, 0.4) 60%,
+    rgba(8, 9, 11, 0.1) 82%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bandInner {
   position: relative;
+  z-index: 2;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(50px, 5.5vw, 97px) var(--gutter);
+  padding: clamp(60px, 7vw, 110px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: clamp(32px, 5vw, 72px);
-}
-
-.bandText {
-  flex: 1 1 420px;
-  min-width: 0;
 }
 
 .bandLine {
@@ -45,75 +70,45 @@
 }
 
 .bandQ {
-  color: var(--red);
-}
-
-.bandPhotoCol {
-  flex: 1 1 380px;
-  min-width: 0;
-}
-
-.bandPhotoWrap {
-  position: relative;
-  width: 100%;
-  max-width: 560px;
-  aspect-ratio: 1268 / 1241;
-  margin: 0 auto;
-  opacity: 0;
-  transition: opacity 0.7s ease;
-  will-change: transform;
-}
-
-.bandPhotoWrap.inView {
-  opacity: 1;
-}
-
-.bandPhoto {
-  object-fit: contain;
-  object-position: center;
+  color: var(--red-on-dark);
 }
 
 .bandSpecs {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: 44px;
-  border-top: 2px solid var(--black);
-  max-width: 520px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  max-width: 560px;
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.bandInner.inView .bandSpecs {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition-delay: 320ms;
 }
 
 .bandSpec {
   position: relative;
-  padding: 16px 16px 0 0;
-  border-right: 1px solid var(--border-gray);
+  padding-left: 20px;
 }
 
-.bandSpec:not(:first-child) {
-  padding-left: 16px;
+.bandSpec:first-child {
+  padding-left: 0;
 }
 
-.bandSpec:last-child {
-  border-right: none;
-  padding-right: 0;
-}
-
-.bandSpecRule {
+.bandSpec:not(:first-child)::before {
+  content: "";
   position: absolute;
-  top: -2px;
   left: 0;
-  width: 28px;
-  height: 2px;
-  background: var(--red);
-  transform-origin: left;
-  transform: scaleX(0);
-  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) 150ms;
-}
-
-.bandSpec:not(:first-child) .bandSpecRule {
-  left: 16px;
-}
-
-.bandText.inView .bandSpecRule {
-  transform: scaleX(1);
+  top: 2px;
+  bottom: 2px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.22);
 }
 
 .bandSpecKicker {
@@ -123,7 +118,7 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-on-dark);
   margin-bottom: 8px;
   white-space: nowrap;
 }
@@ -135,7 +130,7 @@
   font-size: clamp(18px, 1.6vw, 24px);
   letter-spacing: -0.01em;
   line-height: 1;
-  color: var(--black);
+  color: var(--white);
   white-space: nowrap;
 }
 
@@ -165,12 +160,13 @@
   letter-spacing: var(--h2-tracking);
   margin: 0 0 18px;
   max-width: 640px;
+  color: var(--white);
 }
 
 .bandBody {
   font-size: 17px;
   line-height: 1.6;
-  color: var(--ink-2);
+  color: var(--on-dark);
   max-width: 470px;
   margin: 0 0 30px;
 }
@@ -210,21 +206,22 @@
   align-items: center;
   height: 50px;
   padding: 0 26px;
-  border: 1.5px solid var(--black);
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 10px;
-  color: var(--black);
+  color: var(--white);
   font-family: var(--font-barlow-condensed), sans-serif;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   box-sizing: border-box;
-  transition: background 0.2s, color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .btnOutline:hover {
-  background: var(--black);
-  color: var(--white);
+  background: var(--white);
+  color: var(--black);
+  border-color: var(--white);
 }
 
 .dark {

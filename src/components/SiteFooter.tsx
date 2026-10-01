@@ -42,65 +42,61 @@ export default function SiteFooter() {
   return (
     <footer>
       <section ref={bandRef} className={styles.band}>
-        <div className={styles.bandGrid}>
-          <div className={`${styles.bandText} ${revealed ? styles.inView : ""}`}>
-            <div className={styles.bandKicker}>
-              <span />
-              Trade accounts
-            </div>
-            <h2 className={styles.bandTitle}>
-              <span className={styles.bandLine}>
-                <span className={`${styles.bandLineInner} ${revealed ? styles.bandLineIn : ""}`}>
-                  Ready to stock
-                </span>
-              </span>
-              <span className={styles.bandLine}>
-                <span
-                  className={`${styles.bandLineInner} ${styles.bandLineB} ${
-                    revealed ? styles.bandLineIn : ""
-                  }`}
-                >
-                  SSS Wheels<span className={styles.bandQ}>?</span>
-                </span>
-              </span>
-            </h2>
-            <p className={styles.bandBody}>
-              Join workshops, fleets and resellers across Australia. Apply
-              online to open a trade account.
-            </p>
-            <div className={styles.bandCtas}>
-              <Link href="/dealer" className={styles.btnRed}>
-                Apply to become a dealer <span>→</span>
-              </Link>
-              <a
-                href={PORTAL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnOutline}
-              >
-                Wholesale login
-              </a>
-            </div>
-            <div className={styles.bandSpecs}>
-              {TRADE_SPECS.map((s) => (
-                <div key={s.kicker} className={styles.bandSpec}>
-                  <span className={styles.bandSpecRule} aria-hidden="true" />
-                  <span className={styles.bandSpecKicker}>{s.kicker}</span>
-                  <span className={styles.bandSpecValue}>{s.value}</span>
-                </div>
-              ))}
-            </div>
+        <div data-band-img className={styles.bandBg} aria-hidden="true">
+          <Image
+            src="/assets/statement/s1.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className={styles.bandBgImg}
+          />
+        </div>
+        <div className={styles.bandScrim} />
+        <div className={`${styles.bandInner} ${revealed ? styles.inView : ""}`}>
+          <div className={styles.bandKicker}>
+            <span />
+            Trade accounts
           </div>
-          <div className={styles.bandPhotoCol}>
-            <div data-band-img className={`${styles.bandPhotoWrap} ${revealed ? styles.inView : ""}`}>
-              <Image
-                src="/assets/hero/scene-wheel.png"
-                alt="SSS beadlock-style wheel fitted with a mud-terrain tyre"
-                fill
-                sizes="(max-width: 900px) 70vw, 40vw"
-                className={styles.bandPhoto}
-              />
-            </div>
+          <h2 className={styles.bandTitle}>
+            <span className={styles.bandLine}>
+              <span className={`${styles.bandLineInner} ${revealed ? styles.bandLineIn : ""}`}>
+                Ready to stock
+              </span>
+            </span>
+            <span className={styles.bandLine}>
+              <span
+                className={`${styles.bandLineInner} ${styles.bandLineB} ${
+                  revealed ? styles.bandLineIn : ""
+                }`}
+              >
+                SSS Wheels<span className={styles.bandQ}>?</span>
+              </span>
+            </span>
+          </h2>
+          <p className={styles.bandBody}>
+            Join workshops, fleets and resellers across Australia. Apply
+            online to open a trade account.
+          </p>
+          <div className={styles.bandCtas}>
+            <Link href="/dealer" className={styles.btnRed}>
+              Apply to become a dealer <span>→</span>
+            </Link>
+            <a
+              href={PORTAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnOutline}
+            >
+              Wholesale login
+            </a>
+          </div>
+          <div className={styles.bandSpecs}>
+            {TRADE_SPECS.map((s) => (
+              <div key={s.kicker} className={styles.bandSpec}>
+                <span className={styles.bandSpecKicker}>{s.kicker}</span>
+                <span className={styles.bandSpecValue}>{s.value}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

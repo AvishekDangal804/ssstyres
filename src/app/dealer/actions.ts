@@ -52,7 +52,7 @@ export async function submitDealerApplication(
     return { status: "error", message: "Please fill in all required fields." };
   }
   if (!isValidAbn(abn)) {
-    return { status: "error", message: "Enter a valid 11-digit ABN." };
+    return { status: "error", message: "That ABN doesn't check out — double-check the 11 digits." };
   }
   if (!BUSINESS_TYPES.includes(businessType as (typeof BUSINESS_TYPES)[number])) {
     return { status: "error", message: "Select a business type." };
