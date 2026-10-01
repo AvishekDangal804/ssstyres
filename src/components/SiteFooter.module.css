@@ -3,7 +3,7 @@
   overflow: hidden;
   background: var(--black);
   color: var(--white);
-  min-height: clamp(520px, 62vh, 760px);
+  min-height: clamp(480px, 56vh, 700px);
   display: flex;
   align-items: center;
 }
