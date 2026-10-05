@@ -51,7 +51,39 @@ Both forms validate server-side (ABN checksum, email/phone format, length limits
 - `LEAD_TO_EMAIL` (comma-separate for several recipients)
 - `LEAD_FROM_EMAIL` (must be on a domain verified in Resend)
 
-If any are missing in **production**, the forms show a "please call or email us" message rather than pretending the submission worked. Previews and local dev log the submission and show success so the flow can still be exercised. The delivery path was tested end-to-end against a local mock of the provider (request shape, recipients, reply-to, sanitising, failure handling) but **not** against live Resend — do one real test submission after adding the variables.
+If any are missing in **production**, the forms show a "please call or email us" message rather than pretending the submission worked. Previews and local dev log the submission and show success so the flow can still be exercised.
+
+Each submission is one plain-text email to `LEAD_TO_EMAIL`, with the submitter's address as Reply-To (so "Reply" answers them). Transient provider failures (5xx, per-second rate limit, timeout) are retried once with the same `Idempotency-Key`, so a lost response can't put the same lead in the inbox twice. Anything else fails straight away and the visitor sees the "call or email us" message.
+
+### Setup
+
+1. Create a Resend account (https://resend.com).
+2. **Domains → Add Domain.** Resend recommends a sending subdomain (e.g. `mail.ssswheels.com.au`) so it stays separate from your normal mailboxes. Add the SPF, DKIM and return-path records it shows at whoever hosts DNS for the domain, exactly as given. Verification usually takes ~15 minutes (DNS can take up to 72 hours).
+3. **API Keys → Create**, with *Sending access* limited to that domain. Copy it — it's shown once.
+4. In Vercel (Project → Settings → Environment Variables, Production) add `RESEND_API_KEY`, `LEAD_TO_EMAIL` (e.g. `info@ssswheels.com.au`) and `LEAD_FROM_EMAIL` (e.g. `SSS Website <website@mail.ssswheels.com.au>`).
+5. **Redeploy** (Deployments → ⋯ → Redeploy). Variables only apply to deployments made after they were saved.
+6. Submit the Contact form and the Dealer form once on the live site and check the inbox arrives and Reply goes to the submitter.
+
+To try it before DNS is ready: until a domain is verified Resend only lets you send test emails to your own account address, so use that as `LEAD_TO_EMAIL` and Resend's test sender (`onboarding@resend.dev`) as `LEAD_FROM_EMAIL`. Locally, put the same three variables in `.env.local` and run `npm run dev`.
+
+### When a submission fails
+
+Vercel → Deployments → the deployment → Logs, search for `lead-delivery`. Applicant details are never written to the logs (anything email-shaped in a provider error is replaced with `[email]`).
+
+| Log line | Meaning |
+| --- | --- |
+| `missing RESEND_API_KEY, …` | That variable isn't set for Production, or you haven't redeployed since setting it. |
+| `403 validation_error — … domain is not verified` | The DNS records haven't verified yet, or `LEAD_FROM_EMAIL` is on a different domain than the one you verified. |
+| `403 validation_error — … only send testing emails to your own email address` | No verified domain yet: `LEAD_TO_EMAIL` must be your Resend account address until it is. |
+| `401 …` | Wrong, revoked or wrongly-scoped API key. |
+| `422 validation_error` | An address in `LEAD_TO_EMAIL` / `LEAD_FROM_EMAIL` is malformed. |
+| `429 daily_quota_exceeded` / `monthly_quota_exceeded` | Plan sending limit reached. |
+
+Form flooding can use up that quota. The forms have a honeypot and server-side validation; if spam shows up, add a rate-limit rule in the Vercel Firewall for the `/dealer` and `/contact` routes (if your plan includes it) before reaching for a CAPTCHA.
+
+### What has been tested
+
+The whole path (both forms → server action → provider request → success/failure message) was exercised in a browser against a scriptable local stand-in for Resend: request shape, recipients, Reply-To, plain-text body, success, one retry on 500 / rate limit / timeout with the same idempotency key, no retry on 403 / quota, honest failure message, and that provider error text is scrubbed of email addresses before logging. It has **not** been run against live Resend — do the real test submission in step 6.
 
 ## Images
 
