@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nova Tyres — Hero section (parallax)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#fff;font-family:'DM Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#076330}a:hover{color:#054A24}
+  /* spacer only so the parallax can be demonstrated on this reference page */
+  .scroll-demo{height:120vh;display:flex;align-items:center;justify-content:center;color:#8D8B85;font-size:14px}
+</style>
+</head>
+<body>
+
+<section data-screen-label="Collection hero" style="position:relative;overflow:hidden;background:#04331B;min-height:clamp(380px,46vw,560px);display:flex;align-items:flex-end">
+  <div data-parallax style="position:absolute;inset:-12% 0;will-change:transform">
+    <img src="uploads/hilux.webp" alt="Toyota HiLux on SSS off-road wheels" style="display:block;width:100%;height:100%;object-fit:cover">
+  </div>
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,20,9,.68) 0%,rgba(0,20,9,.58) 30%,rgba(0,22,10,.62) 55%,rgba(0,26,12,.9) 100%)"></div>
+  <div style="position:relative;width:100%;max-width:1600px;margin:0 auto;padding:clamp(28px,4vw,56px) clamp(16px,3vw,64px)">
+    <div style="font-size:13px;color:#EAF5EE;margin-bottom:12px"><a href="Home.dc.html" style="color:#fff;text-decoration:none;font-weight:600">Home</a> <span style="opacity:.5">›</span> <a href="FindWheels.dc.html" style="color:#fff;text-decoration:none;font-weight:600">Wheels</a> <span style="opacity:.5">›</span> Off Road</div>
+    <div>
+      <div style="max-width:56ch">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><span style="width:44px;height:4px;background:#fff"></span><span style="font-size:11.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#EAF5EE">Wheel categories</span></div>
+        <h1 style="font:800 clamp(32px,5vw,62px)/1.02 'DM Sans',sans-serif;color:#fff;margin:0;letter-spacing:.3px;text-transform:uppercase">Off Road Wheels</h1>
+        <p style="font-size:clamp(14.5px,1.5vw,17px);line-height:1.6;color:#D7E6DC;margin:14px 0 0">Built for utes, 4WDs and SUVs that actually leave the bitumen — load-rated beadlock-look and mesh designs, fitted and balanced free at any Nova Tyres store.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="scroll-demo">Scroll — the hero image drifts at 22% of scroll speed.</div>
+
+<script>
+/* PARALLAX — same logic as the production page.
+   Moves [data-parallax] at 22% of the host section's scroll offset.
+   rAF-throttled, skipped entirely for prefers-reduced-motion. */
+(function () {
+  var px = document.querySelector('[data-parallax]');
+  if (!px || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var raf = 0;
+  function update() {
+    if (raf) return;
+    raf = requestAnimationFrame(function () {
+      raf = 0;
+      var host = px.parentElement.getBoundingClientRect();
+      if (host.bottom < -200 || host.top > window.innerHeight + 200) return;
+      px.style.transform = 'translate3d(0,' + (-host.top * 0.22) + 'px,0)';
+    });
+  }
+  addEventListener('scroll', update, { passive: true });
+  addEventListener('resize', update, { passive: true });
+  update();
+})();
+</script>
+</body>
+</html>
