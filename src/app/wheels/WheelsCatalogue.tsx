@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -9,12 +9,11 @@ import {
   MODELS,
   WHEELS,
   PORTAL,
-  catName,
   groupWheels,
   defaultVariantIndex,
   type WheelGroup,
 } from "@/lib/wheels-data";
-import PageHeader from "@/components/PageHeader";
+import { useScrollProgress } from "@/lib/useScrollProgress";
 import styles from "./Wheels.module.css";
 
 const SIZES = ["15", "16", "17"];
@@ -68,9 +67,59 @@ export default function WheelsCatalogue() {
         ? `${activeCategory.name} Wheels`
         : "All Wheels";
 
+  const heroRef = useScrollProgress<HTMLDivElement>((p, el) => {
+    const img = el.querySelector<HTMLElement>("[data-hero-img]");
+    if (img) img.style.transform = `translate3d(0, ${((p - 0.5) * 40).toFixed(1)}px, 0)`;
+  });
+
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  useEffect(() => {
+    const el = gridRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <>
-      <PageHeader kicker="SSS Wheels · The range" title={pageTitle} />
+      <section ref={heroRef} className={styles.hero}>
+        <div data-hero-img className={styles.heroBg}>
+          <Image
+            src="/assets/statement/s3.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            priority
+            className={styles.heroBgImg}
+          />
+        </div>
+        <div className={styles.heroScrim} />
+        <div className={styles.heroInner}>
+          <div className={styles.breadcrumb}>
+            <Link href="/">Home</Link> <span>›</span> Wheels
+          </div>
+          <div className={styles.heroKicker}>
+            <span />
+            SSS Wheels · The range
+          </div>
+          <h1 className={styles.heroH1}>{pageTitle}</h1>
+          <p className={styles.heroBody}>
+            Wholesale wheels supplied to workshops, fleets and resellers
+            across Australia — beadlock-style and classic steel, in stock at
+            our Dandenong South warehouse.
+          </p>
+        </div>
+      </section>
 
       <section className={styles.filtersSection}>
         <div className={styles.filters} role="group" aria-label="Filter wheels">
@@ -89,7 +138,7 @@ export default function WheelsCatalogue() {
       </section>
 
       <section className={styles.gridSection}>
-        <div className={styles.grid}>
+        <div ref={gridRef} className={`${styles.grid} ${revealed ? styles.revealed : ""}`}>
           {groups.map((g) => (
             <WheelCard key={g.key} group={g} />
           ))}
@@ -121,14 +170,17 @@ function WheelCard({ group }: { group: WheelGroup }) {
   // variants — clamp instead of indexing straight in, or switching filters
   // with a non-default swatch already selected throws reading `undefined.cat`.
   const w = group.variants[active] ?? group.variants[0];
-  // Recomputed per active variant, not fixed at group creation — a swatch
-  // change can genuinely put the wheel in a different real category.
-  const catLabel = `SSS ${catName(w.cat)} Series`;
+  const model = MODELS.find((m) => m.id === w.model);
 
   return (
     <div className={styles.card}>
-      <div className={styles.cardImgWrap}>
-        <div className={styles.cardImg}>
+      <Link
+        href={`/wheels?model=${w.model}`}
+        className={styles.cardImgLink}
+        tabIndex={-1}
+        aria-hidden="true"
+      >
+        <div className={styles.cardImgWrap}>
           <Image
             src={w.img}
             alt={`${w.name} ${w.size} in ${w.variant}`}
@@ -137,7 +189,22 @@ function WheelCard({ group }: { group: WheelGroup }) {
             className={styles.cardPhoto}
           />
         </div>
-      </div>
+      </Link>
+
+      <Link href={`/wheels?model=${w.model}`} className={styles.cardName}>
+        {w.name}
+      </Link>
+
+      {model && (
+        <div className={styles.sizeRow}>
+          {model.sizes.map((s, i) => (
+            <Fragment key={s}>
+              {i > 0 && <span className={styles.sizePipe}>|</span>}
+              <span>{s}</span>
+            </Fragment>
+          ))}
+        </div>
+      )}
 
       {group.variants.length > 1 && (
         <div className={styles.swatchRow} role="radiogroup" aria-label="Size and finish">
@@ -160,26 +227,20 @@ function WheelCard({ group }: { group: WheelGroup }) {
         </div>
       )}
 
-      <div className={styles.cardBody}>
-        <div className={styles.cardCat}>{catLabel}</div>
-        <div className={styles.cardName}>
-          {w.name} <span>{w.variant}</span>
-        </div>
-        <div className={styles.cardSpec}>
-          {w.size} · {w.pcd} · {w.offset}
-        </div>
-        <div className={styles.cardBuild}>
-          {w.build} · Load {w.load}
-        </div>
-        <a
-          href={PORTAL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.cardCta}
-        >
-          Order via dealer portal
-        </a>
+      <div className={styles.finishLabel}>
+        {w.variant} · {w.build}
       </div>
+      <div className={styles.cardMeta}>
+        {w.size} · {w.pcd} · {w.offset} · Load {w.load}
+      </div>
+      <a
+        href={PORTAL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.cardCta}
+      >
+        Order via dealer portal
+      </a>
     </div>
   );
 }

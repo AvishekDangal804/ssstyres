@@ -1,3 +1,105 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--black);
+  min-height: clamp(360px, 42vw, 520px);
+  display: flex;
+  align-items: flex-end;
+}
+
+.heroBg {
+  position: absolute;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 120%;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroBgImg {
+  object-fit: cover;
+  object-position: center 55%;
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 10, 0.5) 0%,
+    rgba(10, 10, 10, 0.4) 32%,
+    rgba(10, 10, 10, 0.55) 60%,
+    rgba(10, 10, 10, 0.9) 100%
+  );
+  z-index: 1;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(28px, 4vw, 56px) var(--gutter) clamp(32px, 4vw, 48px);
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  color: var(--on-dark-2);
+  margin-bottom: 12px;
+}
+
+.breadcrumb a {
+  color: var(--white);
+  font-weight: 600;
+}
+
+.breadcrumb span {
+  opacity: 0.6;
+  margin: 0 2px;
+}
+
+.heroKicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+}
+
+.heroKicker span {
+  width: 44px;
+  height: 4px;
+  background: var(--red);
+  display: inline-block;
+}
+
+.heroH1 {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.02;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: var(--white);
+  margin: 0;
+}
+
+.heroBody {
+  font-size: clamp(14.5px, 1.5vw, 17px);
+  line-height: 1.6;
+  color: var(--on-dark);
+  max-width: 56ch;
+  margin: 14px 0 0;
+}
+
 .filtersSection {
   max-width: var(--container);
   margin: 0 auto;
@@ -51,38 +153,54 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: var(--white);
-  transition: box-shadow 0.2s, transform 0.2s;
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
 
-/* Lifts the whole card rather than zooming the photo — zooming a contain-fit
-   image inside its clipped box made the wheel look cropped at the edges. */
-.card:hover {
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
-  transform: translateY(-4px);
+.grid.revealed .card {
+  opacity: 1;
+  transform: none;
+}
+
+.grid.revealed .card:nth-child(2) {
+  transition-delay: 70ms;
+}
+
+.grid.revealed .card:nth-child(3) {
+  transition-delay: 140ms;
+}
+
+.grid.revealed .card:nth-child(4) {
+  transition-delay: 210ms;
+}
+
+.cardImgLink {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--surface-2);
 }
 
 .cardImgWrap {
   position: relative;
-  aspect-ratio: 1;
-  background: var(--surface-2);
-  overflow: hidden;
-}
-
-.cardImg {
-  position: absolute;
-  inset: 0;
+  aspect-ratio: 4 / 3;
 }
 
 .cardPhoto {
   object-fit: contain;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.cardImgLink:hover .cardPhoto {
+  transform: scale(1.07);
 }
 
 .swatchRow {
   display: flex;
   gap: 8px;
   flex-wrap: wrap;
-  padding: 12px 18px 0;
+  margin-top: 11px;
 }
 
 .swatch {
@@ -113,45 +231,53 @@
   object-fit: contain;
 }
 
-.cardBody {
-  padding: 16px 18px 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 7px;
-}
-
-.cardCat {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-
 .cardName {
+  display: block;
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 27px;
-  line-height: 1;
+  font-size: 18px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  margin-top: 14px;
+  transition: color 0.15s;
 }
 
-.cardName span {
+.cardName:hover {
   color: var(--red);
 }
 
-.cardSpec {
-  font-size: 14px;
+.sizeRow {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 7px;
+  font-size: 13.5px;
+  font-weight: 600;
   color: var(--ink-3);
 }
 
-.cardBuild {
+.sizePipe {
+  color: var(--line);
+  font-size: 13px;
+}
+
+.finishLabel {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-top: 10px;
+}
+
+.cardMeta {
   font-size: 13px;
   color: var(--ink-3);
+  margin-top: 4px;
 }
 
 .cardCta {
-  margin-top: 8px;
+  margin-top: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
