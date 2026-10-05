@@ -181,55 +181,59 @@ function WheelCard({ group }: { group: WheelGroup }) {
         aria-hidden="true"
       >
         <div className={styles.cardImgWrap}>
-          <Image
-            src={w.img}
-            alt={`${w.name} ${w.size} in ${w.variant}`}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 25vw"
-            className={styles.cardPhoto}
-          />
+          <div className={styles.cardImgInset}>
+            <Image
+              src={w.img}
+              alt={`${w.name} ${w.size} in ${w.variant}`}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 25vw"
+              className={styles.cardPhoto}
+            />
+          </div>
         </div>
       </Link>
 
-      <Link href={`/wheels?model=${w.model}`} className={styles.cardName}>
-        {w.name}
-      </Link>
-
-      {model && (
-        <div className={styles.sizeRow}>
-          {model.sizes.map((s, i) => (
-            <Fragment key={s}>
-              {i > 0 && <span className={styles.sizePipe}>|</span>}
-              <span>{s}</span>
-            </Fragment>
-          ))}
-        </div>
-      )}
-
-      {group.variants.length > 1 && (
-        <div className={styles.swatchRow} role="radiogroup" aria-label="Size and finish">
-          {group.variants.map((v, i) => (
-            <button
-              key={v.id}
-              type="button"
-              role="radio"
-              aria-checked={i === active}
-              aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
-              title={`${v.variant} — ${v.size} · ${v.pcd}`}
-              className={`${styles.swatch} ${i === active ? styles.swatchActive : ""}`}
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              onClick={() => setActive(i)}
-            >
-              <Image src={v.img} alt="" fill sizes="64px" className={styles.swatchImg} />
-            </button>
-          ))}
-        </div>
-      )}
-
-      <div className={styles.finishLabel}>
-        {w.variant} · {w.build}
+      <div className={styles.cardTextBlock}>
+        <span className={styles.cardCon}>{w.build}</span>
+        <Link href={`/wheels?model=${w.model}`} className={styles.cardName}>
+          {w.name}
+        </Link>
+        {model && (
+          <div className={styles.sizeRow}>
+            {model.sizes.map((s, i) => (
+              <Fragment key={s}>
+                {i > 0 && <span className={styles.sizePipe}>|</span>}
+                <span>{s}</span>
+              </Fragment>
+            ))}
+          </div>
+        )}
       </div>
+
+      <div className={styles.cardSwatchBlock}>
+        <span className={styles.finishLabel}>{w.variant}</span>
+        {group.variants.length > 1 && (
+          <div className={styles.swatchRow} role="radiogroup" aria-label="Size and finish">
+            {group.variants.map((v, i) => (
+              <button
+                key={v.id}
+                type="button"
+                role="radio"
+                aria-checked={i === active}
+                aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
+                title={`${v.variant} — ${v.size} · ${v.pcd}`}
+                className={`${styles.swatch} ${i === active ? styles.swatchActive : ""}`}
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                onClick={() => setActive(i)}
+              >
+                <Image src={v.img} alt="" fill sizes="64px" className={styles.swatchImg} />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
       <div className={styles.cardMeta}>
         {w.size} · {w.pcd} · {w.offset} · Load {w.load}
       </div>
