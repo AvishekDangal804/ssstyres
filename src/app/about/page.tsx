@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import ImagePlaceholder from "@/components/ImagePlaceholder";
 import styles from "./About.module.css";
 import { pageMetadata } from "@/lib/site";
 
@@ -22,7 +22,13 @@ export default function AboutPage() {
 
       <section className={styles.storySection}>
         <div className={styles.photoWrap}>
-          <ImagePlaceholder label="Warehouse / team photo — Dandenong South" />
+          <Image
+            src="/assets/about/warehouse.jpg"
+            alt="SSS Wheels & Tyres warehouse at 13 Advantage Drive, Dandenong South"
+            fill
+            sizes="(max-width: 900px) 100vw, 50vw"
+            className={styles.photoImg}
+          />
         </div>
         <div>
           <h2 className={styles.storyTitle}>

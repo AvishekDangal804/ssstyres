@@ -17,6 +17,10 @@
   overflow: hidden;
 }
 
+.photoImg {
+  object-fit: cover;
+}
+
 .storyTitle {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
