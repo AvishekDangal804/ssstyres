@@ -3,9 +3,7 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import {
-  CATEGORIES,
   MODELS,
   WHEELS,
   PORTAL,
@@ -16,56 +14,8 @@ import {
 import { useScrollProgress } from "@/lib/useScrollProgress";
 import styles from "./Wheels.module.css";
 
-const SIZES = ["15", "16", "17"];
-
-function initialCat(qs: URLSearchParams): string {
-  const cat = qs.get("cat");
-  const model = qs.get("model");
-  const size = qs.get("size");
-  if (size) return `size:${size}`;
-  if (model && MODELS.some((m) => m.id === model)) return `model:${model}`;
-  if (cat && CATEGORIES.some((c) => c.id === cat)) return cat;
-  return "all";
-}
-
 export default function WheelsCatalogue() {
-  const searchParams = useSearchParams();
-  const [cat, setCat] = useState(() => initialCat(searchParams));
-
-  const filters = useMemo(
-    () => [
-      { id: "all", name: "All" },
-      ...SIZES.map((z) => ({ id: `size:${z}`, name: `${z}"` })),
-      ...MODELS.map((m) => ({ id: `model:${m.id}`, name: m.name })),
-      ...CATEGORIES.map((c) => ({ id: c.id, name: c.name })),
-    ],
-    []
-  );
-
-  const isSize = cat.startsWith("size:");
-  const isModel = cat.startsWith("model:");
-
-  const wheels = useMemo(() => {
-    return cat === "all"
-      ? WHEELS
-      : isSize
-        ? WHEELS.filter((w) => w.size.startsWith(cat.slice(5)))
-        : isModel
-          ? WHEELS.filter((w) => w.model === cat.slice(6))
-          : WHEELS.filter((w) => w.cat === cat || w.cat2 === cat);
-  }, [cat, isSize, isModel]);
-
-  const groups = useMemo(() => groupWheels(wheels), [wheels]);
-
-  const activeModel = isModel ? MODELS.find((m) => m.id === cat.slice(6)) : null;
-  const activeCategory = CATEGORIES.find((c) => c.id === cat);
-  const pageTitle = isSize
-    ? `${cat.slice(5)}" Wheels`
-    : activeModel
-      ? activeModel.name
-      : activeCategory
-        ? `${activeCategory.name} Wheels`
-        : "All Wheels";
+  const groups = useMemo(() => groupWheels(WHEELS), []);
 
   const heroRef = useScrollProgress<HTMLDivElement>((p, el) => {
     const img = el.querySelector<HTMLElement>("[data-hero-img]");
@@ -112,28 +62,12 @@ export default function WheelsCatalogue() {
             <span />
             SSS Wheels · The range
           </div>
-          <h1 className={styles.heroH1}>{pageTitle}</h1>
+          <h1 className={styles.heroH1}>All Wheels</h1>
           <p className={styles.heroBody}>
             Wholesale wheels supplied to workshops, fleets and resellers
             across Australia — beadlock-style and classic steel, in stock at
             our Dandenong South warehouse.
           </p>
-        </div>
-      </section>
-
-      <section className={styles.filtersSection}>
-        <div className={styles.filters} role="group" aria-label="Filter wheels">
-          {filters.map((f) => (
-            <button
-              key={f.id}
-              type="button"
-              onClick={() => setCat(f.id)}
-              aria-pressed={cat === f.id}
-              className={`${styles.filterBtn} ${cat === f.id ? styles.active : ""}`}
-            >
-              {f.name}
-            </button>
-          ))}
         </div>
       </section>
 

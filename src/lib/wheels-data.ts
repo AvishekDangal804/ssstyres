@@ -59,8 +59,11 @@ export const MODELS: Model[] = [
     lifestyle: '/assets/lifestyle/silver-boxes.png',
     finishes: [
       { name: 'Matte Black', hex: '#1C1C1C', img: R.black, front: R.blackFront },
-      { name: 'Machined Silver', hex: '#C6C8CB', img: R.silver, front: R.silver },
+      { name: 'Full Machined', hex: '#C6C8CB', img: R.silver, front: R.silver },
       { name: 'Silver / Black Ring', hex: '#6C6F74', img: R.twoTone, front: R.twoTone },
+      { name: 'Machined Silver', hex: '#B6BAC0', img: R.hole, front: R.hole },
+      { name: 'Black & Machined', hex: '#2E3136', img: R.holeAlt, front: R.holeAlt },
+      { name: 'Machined · Gold Bolt', hex: '#C9A23A', img: R.silverGold, front: R.silverGold },
     ],
   },
   {
@@ -91,10 +94,13 @@ export interface Wheel {
 
 export const WHEELS: Wheel[] = [
   { id: 'dl-17x8-6x139-b', model: 'd-locker', name: 'SSS D-Locker', variant: 'Matte Black', hex: '#1C1C1C', cat: 'offroad', cat2: 'beadlock', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.black },
-  { id: 'dl-17x8-6x139-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET20', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.silver },
+  { id: 'dl-17x8-6x139-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Full Machined', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET20', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.silver },
   { id: 'dl-17x8-6x139-t', model: 'd-locker', name: 'SSS D-Locker', variant: 'Silver / Black Ring', hex: '#6C6F74', cat: 'beadlock', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.twoTone },
   { id: 'dl-16x8-6x139-b', model: 'd-locker', name: 'SSS D-Locker', variant: 'Matte Black', hex: '#1C1C1C', cat: 'offroad', cat2: 'beadlock', size: '16x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.blackFront },
-  { id: 'dl-17x8-5x114-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '5x114.3', offset: 'ET35', build: 'Cast alloy · beadlock style', load: '900 kg', img: R.silver },
+  { id: 'dl-17x8-5x114-s', model: 'd-locker', name: 'SSS D-Locker', variant: 'Full Machined', hex: '#C6C8CB', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '5x114.3', offset: 'ET35', build: 'Cast alloy · beadlock style', load: '900 kg', img: R.silver },
+  { id: 'dl-17x8-6x139-ms', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#B6BAC0', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.hole },
+  { id: 'dl-17x8-6x139-bm', model: 'd-locker', name: 'SSS D-Locker', variant: 'Black & Machined', hex: '#2E3136', cat: 'beadlock', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.holeAlt },
+  { id: 'dl-17x8-6x139-gold', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined · Gold Bolt', hex: '#C9A23A', cat: 'beadlock', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.silverGold },
   { id: 'dh-15x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.hole },
   { id: 'dh-15x7-5x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'trailer', size: '15x7', pcd: '5x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.holeAlt },
   { id: 'dh-16x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: R.hole },
@@ -114,7 +120,7 @@ export const VEHICLES: Vehicle[] = [
   { make: 'Toyota', model: 'HiLux', pcd: '6x139.7', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Matte Black', img: '/assets/vehicles/hilux.png' },
   { make: 'Ford', model: 'Ranger', pcd: '6x139.7', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Matte Black', img: '/assets/vehicles/ranger.png' },
   { make: 'Toyota', model: 'HiAce', pcd: '6x139.7', wheel: 'd-locker', wheelShort: 'D-Locker 16x8', wheelName: 'SSS D-Locker 16x8 Matte Black', img: '/assets/vehicles/hiace.png' },
-  { make: 'Toyota', model: 'RAV4', pcd: '5x114.3', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Machined Silver', img: '/assets/vehicles/rav4.png' },
+  { make: 'Toyota', model: 'RAV4', pcd: '5x114.3', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Full Machined', img: '/assets/vehicles/rav4.png' },
   { make: 'Suzuki', model: 'Jimny JB74', pcd: '5x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 15x7', wheelName: 'SSS D-Hole 15x7 Gloss Black', img: null },
   { make: 'Toyota', model: 'LandCruiser Prado 150', pcd: '6x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 16x7', wheelName: 'SSS D-Hole 16x7 Gloss Black', img: null },
 ];

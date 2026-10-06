@@ -22,9 +22,9 @@ const ALL_TILES: Tile[] = [
   { kind: "Vehicle", label: "Ford Ranger", sub: "SSS D-Locker 17x8 · Matte Black", img: "/assets/vehicles/ranger.png", fit: "cover", href: "/wheels?model=d-locker" },
   { kind: "Vehicle", label: "Toyota HiAce", sub: "SSS D-Locker 16x8 · Matte Black", img: "/assets/vehicles/hiace.png", fit: "cover", href: "/wheels?model=d-locker" },
   { kind: "Wheel", label: "D-Hole", sub: "Gloss Black · pressed steel", img: "/assets/wheels/r3.png", fit: "contain", href: "/wheels?model=d-hole" },
-  { kind: "Vehicle", label: "Toyota RAV4", sub: "SSS D-Locker 17x8 · Machined Silver", img: "/assets/vehicles/rav4.png", fit: "cover", href: "/wheels?model=d-locker" },
+  { kind: "Vehicle", label: "Toyota RAV4", sub: "SSS D-Locker 17x8 · Full Machined", img: "/assets/vehicles/rav4.png", fit: "cover", href: "/wheels?model=d-locker" },
   { kind: "Warehouse", label: "Machined silver stock", sub: "SSS Wheels boxed stock", img: "/assets/lifestyle/silver-boxes.png", fit: "cover", href: "/about" },
-  { kind: "Wheel", label: "D-Locker", sub: "Machined Silver", img: "/assets/wheels/r4.png", fit: "contain", href: "/wheels?model=d-locker" },
+  { kind: "Wheel", label: "D-Locker", sub: "Full Machined", img: "/assets/wheels/r4.png", fit: "contain", href: "/wheels?model=d-locker" },
   { kind: "Wheel", label: "D-Locker", sub: "Beadlock-style ring, exploded", img: "/assets/beadlock-exploded.png", fit: "contain", href: "/wheels?model=d-locker" },
 ];
 
