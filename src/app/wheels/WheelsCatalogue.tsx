@@ -79,18 +79,6 @@ export default function WheelsCatalogue() {
             <WheelCard key={g.key} group={g} />
           ))}
         </div>
-
-        <div className={styles.ctaStrip}>
-          <div className={styles.ctaStripText}>
-            <strong>Not a dealer yet?</strong> Ordering is available to
-            approved trade accounts. Apply to become a dealer, or call{" "}
-            <a href="tel:0391165787">03 9116 5787</a> for stock and fitment
-            advice.
-          </div>
-          <Link href="/dealer" className={styles.ctaStripBtn}>
-            Become a dealer
-          </Link>
-        </div>
       </section>
     </>
   );
@@ -163,8 +151,7 @@ function WheelCard({ group }: { group: WheelGroup }) {
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
               >
-                <span className={styles.sizeChipSize}>{v.size}</span>
-                <span className={styles.sizeChipPcd}>{v.pcd}</span>
+                <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
               </button>
             ))}
           </div>
