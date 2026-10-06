@@ -297,6 +297,7 @@
 
 /* 24px hit area around an 8px dot (26px for the current one). */
 .dot {
+  position: relative;
   width: 24px;
   height: 24px;
   padding: 0;
@@ -306,6 +307,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* Expands the tappable area to the 44px touch-target minimum without
+   changing the dot's visual size. */
+.dot::before {
+  content: "";
+  position: absolute;
+  inset: -10px;
 }
 
 .dot::after {
@@ -324,6 +333,7 @@
 }
 
 .playBtn {
+  position: relative;
   margin-left: 12px;
   width: 30px;
   height: 30px;
@@ -341,6 +351,12 @@
 
 .playBtn:hover {
   background: rgba(255, 255, 255, 0.2);
+}
+
+.playBtn::before {
+  content: "";
+  position: absolute;
+  inset: -7px;
 }
 
 /* Wheel slider */
@@ -475,6 +491,7 @@
 }
 
 .arrowBtn {
+  position: relative;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -487,6 +504,12 @@
   align-items: center;
   justify-content: center;
   transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.arrowBtn::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
 }
 
 .arrowBtn:hover {

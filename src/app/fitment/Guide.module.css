@@ -277,6 +277,12 @@
   animation: pulse 1.6s infinite;
 }
 
+.marker::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+}
+
 @keyframes pulse {
   0%,
   100% {
