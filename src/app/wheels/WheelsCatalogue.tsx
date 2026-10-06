@@ -7,7 +7,7 @@ import {
   MODELS,
   WHEELS,
   PORTAL,
-  groupWheels,
+  groupWheelsByFinish,
   defaultVariantIndex,
   type WheelGroup,
 } from "@/lib/wheels-data";
@@ -15,7 +15,9 @@ import { useScrollProgress } from "@/lib/useScrollProgress";
 import styles from "./Wheels.module.css";
 
 export default function WheelsCatalogue() {
-  const groups = useMemo(() => groupWheels(WHEELS), []);
+  // One card per real finish (not per model) -- shows every distinct colourway
+  // as its own card instead of burying them in one model card's swatch grid.
+  const groups = useMemo(() => groupWheelsByFinish(WHEELS), []);
 
   const heroRef = useScrollProgress<HTMLDivElement>((p, el) => {
     const img = el.querySelector<HTMLElement>("[data-hero-img]");
@@ -147,21 +149,22 @@ function WheelCard({ group }: { group: WheelGroup }) {
       <div className={styles.cardSwatchBlock}>
         <span className={styles.finishLabel}>{w.variant}</span>
         {group.variants.length > 1 && (
-          <div className={styles.swatchRow} role="radiogroup" aria-label="Size and finish">
+          <div className={styles.sizeChips} role="radiogroup" aria-label="Size and bolt pattern">
             {group.variants.map((v, i) => (
               <button
                 key={v.id}
                 type="button"
                 role="radio"
                 aria-checked={i === active}
-                aria-label={`${v.variant} — ${v.size} · ${v.pcd}`}
-                title={`${v.variant} — ${v.size} · ${v.pcd}`}
-                className={`${styles.swatch} ${i === active ? styles.swatchActive : ""}`}
+                aria-label={`${v.size} · ${v.pcd}`}
+                title={`${v.size} · ${v.pcd}`}
+                className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
               >
-                <Image src={v.img} alt="" fill sizes="64px" className={styles.swatchImg} />
+                <span className={styles.sizeChipSize}>{v.size}</span>
+                <span className={styles.sizeChipPcd}>{v.pcd}</span>
               </button>
             ))}
           </div>

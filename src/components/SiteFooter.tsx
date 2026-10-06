@@ -52,15 +52,6 @@ export default function SiteFooter() {
           />
         </div>
         <div className={styles.bandScrim} />
-        <div className={styles.bandLogoGlow} aria-hidden="true">
-          <Image
-            src="/assets/trade/sss-glow-mark.png"
-            alt=""
-            fill
-            sizes="330px"
-            className={styles.bandLogoGlowImg}
-          />
-        </div>
         <div className={`${styles.bandInner} ${revealed ? styles.inView : ""}`}>
           <div className={styles.bandKicker}>
             <span />
