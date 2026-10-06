@@ -7,7 +7,7 @@ import {
   CATEGORIES,
   WHEELS,
   VEHICLES,
-  groupWheelsByFinish,
+  groupWheels,
   defaultVariantIndex,
   type CategoryId,
   type WheelGroup,
@@ -129,7 +129,9 @@ export default function HomeShowcase() {
   const [activeCat, setActiveCat] = useState<CategoryId>("offroad");
   const [feat, setFeat] = useState(0);
   const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
-  const wheelGroups = useMemo(() => groupWheelsByFinish(WHEELS), []);
+  // One card per model, with every colour as a swatch inside it -- the Home
+  // slider wants a few rich cards you flip through, not one card per finish.
+  const wheelGroups = useMemo(() => groupWheels(WHEELS), []);
 
   // Statement slideshow. `reach` is the highest slide mounted so far: slides
   // are added just before they're needed so the page doesn't load all five up
