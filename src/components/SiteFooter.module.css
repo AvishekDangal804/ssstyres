@@ -38,6 +38,26 @@
   pointer-events: none;
 }
 
+.bandLogoGlow {
+  position: absolute;
+  left: 51%;
+  top: 16%;
+  width: clamp(180px, 20vw, 300px);
+  aspect-ratio: 330 / 220;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bandLogoGlowImg {
+  object-fit: contain;
+}
+
+@media (max-width: 860px) {
+  .bandLogoGlow {
+    display: none;
+  }
+}
+
 .bandInner {
   position: relative;
   z-index: 2;
