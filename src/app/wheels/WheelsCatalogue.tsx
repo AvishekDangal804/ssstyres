@@ -6,7 +6,6 @@ import Link from "next/link";
 import {
   MODELS,
   WHEELS,
-  PORTAL,
   groupWheelsByFinish,
   defaultVariantIndex,
   type WheelGroup,
@@ -134,6 +133,10 @@ function WheelCard({ group }: { group: WheelGroup }) {
         )}
       </div>
 
+      <div className={styles.cardMeta}>
+        {w.size} · {w.pcd} · {w.offset} · Load {w.load}
+      </div>
+
       <div className={styles.cardSwatchBlock}>
         <span className={styles.finishLabel}>{w.variant}</span>
         {group.variants.length > 1 && (
@@ -157,18 +160,6 @@ function WheelCard({ group }: { group: WheelGroup }) {
           </div>
         )}
       </div>
-
-      <div className={styles.cardMeta}>
-        {w.size} · {w.pcd} · {w.offset} · Load {w.load}
-      </div>
-      <a
-        href={PORTAL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={styles.cardCta}
-      >
-        Order via dealer portal
-      </a>
     </div>
   );
 }

@@ -269,24 +269,3 @@
   margin-top: 10px;
 }
 
-.cardCta {
-  margin-top: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--black);
-  color: var(--white);
-  font-family: var(--font-barlow-condensed), sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  height: 42px;
-  border-radius: 10px;
-  transition: background 0.15s;
-}
-
-.cardCta:hover {
-  background: var(--red);
-}
-
