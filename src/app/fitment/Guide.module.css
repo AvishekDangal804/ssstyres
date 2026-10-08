@@ -37,7 +37,7 @@
 .heroScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--black-deep) 42%, rgba(17, 18, 20, 0.6) 65%, rgba(17, 18, 20, 0) 100%);
+  background: linear-gradient(90deg, var(--black-deep) 42%, rgba(43, 46, 49, 0.6) 65%, rgba(43, 46, 49, 0) 100%);
   pointer-events: none;
 }
 
@@ -482,7 +482,7 @@
   width: 68%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(17, 18, 20, 0.14), rgba(17, 18, 20, 0) 65%);
+  background: radial-gradient(circle, rgba(43, 46, 49, 0.14), rgba(43, 46, 49, 0) 65%);
   opacity: 0;
   transition: opacity 0.8s var(--ease);
   pointer-events: none;
