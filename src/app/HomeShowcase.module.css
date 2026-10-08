@@ -1242,6 +1242,7 @@
    card/border/shadow. Not a big boxed "trust badge". */
 .reviewsSection {
   background: var(--white);
+  border-top: 1px solid var(--line);
 }
 
 .reviewsInner {
