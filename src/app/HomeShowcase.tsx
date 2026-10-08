@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,14 +13,14 @@ import {
   type CategoryId,
   type WheelGroup,
 } from "@/lib/wheels-data";
-import {
-  GOOGLE_RATING,
-  GOOGLE_REVIEWS_URL,
-  GOOGLE_WRITE_REVIEW_URL,
-  GOOGLE_DIRECTIONS_URL,
-  GOOGLE_MAPS_EMBED_SRC,
-} from "@/lib/site";
+import { GOOGLE_RATING, GOOGLE_REVIEWS_URL, GOOGLE_WRITE_REVIEW_URL } from "@/lib/site";
 import styles from "./HomeShowcase.module.css";
+
+// Leaflet touches window/document on import, so it can only ever run on the
+// client -- ssr:false keeps it out of the server render entirely.
+const DeliveryCoverageMap = dynamic(() => import("./DeliveryCoverageMap"), {
+  ssr: false,
+});
 
 // Official Google "G" mark (per Google's brand guidelines for identifying
 // content as coming from Google) -- not a stand-in icon.
@@ -644,64 +645,7 @@ export default function HomeShowcase() {
         </div>
       </section>
 
-      <section className={styles.locationSection} aria-labelledby="home-location">
-        <div className={styles.locationInner}>
-          <div className={styles.locationCopy}>
-            <div className={styles.kickerRow}>
-              <span className={styles.bar} />
-              Get in touch
-            </div>
-            <h2 id="home-location" className={styles.sectionH2}>
-              Melbourne
-            </h2>
-            <dl className={styles.locationFacts}>
-              <div>
-                <dt>Phone</dt>
-                <dd>
-                  <a href="tel:0391165787">03 9116 5787</a>
-                </dd>
-              </div>
-              <div>
-                <dt>Email</dt>
-                <dd>
-                  <a href="mailto:info@ssswheels.com.au">
-                    info@ssswheels.com.au
-                  </a>
-                </dd>
-              </div>
-              <div>
-                <dt>Address</dt>
-                <dd>
-                  13 Advantage Drive
-                  <br />
-                  Dandenong South, Victoria 3175
-                </dd>
-              </div>
-              <div>
-                <dt>Hours</dt>
-                <dd>Mon–Fri, business hours — call to confirm</dd>
-              </div>
-            </dl>
-            <a
-              href={GOOGLE_DIRECTIONS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.locationDirections}
-            >
-              Get directions <span>→</span>
-            </a>
-          </div>
-          <div className={styles.locationMapWrap}>
-            <iframe
-              src={GOOGLE_MAPS_EMBED_SRC}
-              title="SSS Wheels & Tyres location on Google Maps"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className={styles.locationMap}
-            />
-          </div>
-        </div>
-      </section>
+      <DeliveryCoverageMap />
     </div>
   );
 }

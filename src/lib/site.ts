@@ -89,7 +89,3 @@ export const GOOGLE_WRITE_REVIEW_URL =
   "https://www.google.com/maps/search/?api=1&query=SSS+Wheels+%26+Tyres%2C+13+Advantage+Drive%2C+Dandenong+South";
 export const GOOGLE_DIRECTIONS_URL =
   "https://www.google.com/maps/dir/?api=1&destination=13+Advantage+Drive%2C+Dandenong+South+VIC+3175";
-// No-API-key "share > embed a map" iframe URL -- works without any Google
-// Cloud credentials, unlike the Places/Maps JS APIs.
-export const GOOGLE_MAPS_EMBED_SRC =
-  "https://www.google.com/maps?q=SSS+Tyres+%26+Wheels+-+Wholesale%2C+13+Advantage+Dr%2C+Dandenong+South+VIC+3175%2C+Australia&output=embed";

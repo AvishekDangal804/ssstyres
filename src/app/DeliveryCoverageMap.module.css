@@ -1,0 +1,437 @@
+.section {
+  background: var(--off-white);
+  border-top: 1px solid var(--line);
+}
+
+.inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(56px, 6vw, 104px) var(--gutter);
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.kickerDot {
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+}
+
+.heading {
+  margin: 0;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: clamp(36px, 5.5vw, 76px);
+  line-height: 0.95;
+  letter-spacing: -0.005em;
+  color: var(--black);
+}
+
+.headingMuted {
+  color: var(--ink-3);
+}
+
+.intro {
+  margin: 0;
+  max-width: 380px;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.zoneList {
+  flex: 1 1 360px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.zoneCard {
+  border: 1px solid var(--line);
+  background: var(--light-gray);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.25s, background 0.25s;
+}
+
+.zoneCardActive {
+  border-color: var(--red);
+  background: var(--white);
+}
+
+.zoneButton {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+}
+
+.zoneNum {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+
+.zoneNumActive {
+  color: var(--red);
+}
+
+.zoneTitle {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: var(--black);
+}
+
+.zoneMeta {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.zoneDetail {
+  padding: 0 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.zoneDesc {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.zoneFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.zoneFact {
+  background: var(--white);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.zoneFactK {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.zoneFactV {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.zoneChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zoneChip {
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-2);
+  background: var(--white);
+}
+
+.helpLine {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-3);
+}
+
+.helpLine a {
+  color: var(--black);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Map panel */
+.mapPanel {
+  flex: 1.6 1 480px;
+  min-width: 0;
+  position: relative;
+  min-height: clamp(360px, 44vw, 560px);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.mapEl {
+  position: absolute;
+  inset: 0;
+  background: var(--black);
+}
+
+/* Recolours real OpenStreetMap tiles into a charcoal dark theme -- no paid/
+   keyed dark-tile provider needed. */
+.darkTiles {
+  filter: invert(1) hue-rotate(185deg) brightness(0.92) contrast(0.92) saturate(0.55);
+}
+
+.mapTopPill {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 14px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.mapPillDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  flex-shrink: 0;
+}
+
+.mapPillTitle {
+  color: var(--black);
+}
+
+.mapPillMeta {
+  color: var(--ink-3);
+}
+
+.mapBottomBar {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+}
+
+.mapBottomInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mapBadge {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--white);
+}
+
+.mapBottomText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.mapBottomName {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--black);
+}
+
+.mapBottomAddr {
+  font-size: 13px;
+  color: var(--ink);
+}
+
+.mapDirections {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  text-decoration: none;
+  padding: 10px 16px;
+  border: 1px solid var(--border-gray);
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.mapDirections:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--white);
+}
+
+/* Injected via Leaflet divIcon raw HTML, not React -- plain CSS classes. */
+.pointLabel {
+  transform: translate(-3.5px, -50%);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-family: var(--font-barlow), sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.pointDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #fff;
+  flex-shrink: 0;
+}
+
+.pointText {
+  padding: 3px 7px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.originMarker {
+  position: relative;
+  transform: translate(-50%, -50%);
+  width: 18px;
+  height: 18px;
+}
+
+.originPulse {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: sssPulse 2s ease-out infinite;
+}
+
+.originDot {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-sizing: border-box;
+}
+
+@keyframes sssPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(3.2);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .headRow {
+    align-items: flex-start;
+  }
+
+  .zoneMeta {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .originPulse {
+    animation: none;
+  }
+}

@@ -14,12 +14,12 @@ const csp = [
   `default-src 'self'`,
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
   `style-src 'self' 'unsafe-inline'`,
-  `img-src 'self' data:`,
+  // OpenStreetMap's free, keyless tiles for the Leaflet delivery-coverage
+  // map -- raster PNGs loaded as plain <img>s by Leaflet, so img-src is the
+  // only directive that needs opening (no script/connect host, no API key).
+  `img-src 'self' data: https://*.tile.openstreetmap.org`,
   `font-src 'self'`,
   `connect-src 'self'`,
-  // The warehouse location embed is a plain Google Maps iframe -- no API key,
-  // so no script/connect host needs opening, just the frame itself.
-  `frame-src https://www.google.com`,
   `form-action 'self'`,
   `frame-ancestors 'none'`,
   `base-uri 'self'`,
