@@ -71,3 +71,25 @@ export const ORGANIZATION_JSON_LD = {
     addressCountry: "AU",
   },
 };
+
+// Real Google Business Profile links, not invented ones -- resolved from the
+// "Read Our Reviews"/"Write a Review" links actually published on
+// ssswheels.com.au (the official site), which redirect to this business's
+// real Google Maps listing (ftid 0x6ad613c72ac0d1cb:0xc567250597c2d208).
+// There's no Google Places API key configured in this project, so these are
+// static facts rather than a live feed: the 5.0 rating is what
+// ssswheels.com.au itself displayed when checked (Oct 2026), and the review
+// count is what Google's own embedded map info card showed for this listing
+// on the same date. Re-verify both against the live listing before reusing
+// them much later.
+export const GOOGLE_RATING = "5.0";
+export const GOOGLE_REVIEW_COUNT = 7;
+export const GOOGLE_REVIEWS_URL = "https://maps.app.goo.gl/vpy9hU5MruXXstAU7";
+export const GOOGLE_WRITE_REVIEW_URL =
+  "https://www.google.com/maps/search/?api=1&query=SSS+Wheels+%26+Tyres%2C+13+Advantage+Drive%2C+Dandenong+South";
+export const GOOGLE_DIRECTIONS_URL =
+  "https://www.google.com/maps/dir/?api=1&destination=13+Advantage+Drive%2C+Dandenong+South+VIC+3175";
+// No-API-key "share > embed a map" iframe URL -- works without any Google
+// Cloud credentials, unlike the Places/Maps JS APIs.
+export const GOOGLE_MAPS_EMBED_SRC =
+  "https://www.google.com/maps?q=SSS+Tyres+%26+Wheels+-+Wholesale%2C+13+Advantage+Dr%2C+Dandenong+South+VIC+3175%2C+Australia&output=embed";

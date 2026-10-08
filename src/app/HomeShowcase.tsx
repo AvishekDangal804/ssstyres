@@ -12,7 +12,40 @@ import {
   type CategoryId,
   type WheelGroup,
 } from "@/lib/wheels-data";
+import {
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+  GOOGLE_REVIEWS_URL,
+  GOOGLE_WRITE_REVIEW_URL,
+  GOOGLE_DIRECTIONS_URL,
+  GOOGLE_MAPS_EMBED_SRC,
+} from "@/lib/site";
 import styles from "./HomeShowcase.module.css";
+
+// Official Google "G" mark (per Google's brand guidelines for identifying
+// content as coming from Google) -- not a stand-in icon.
+function GoogleG({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 48 48" aria-hidden="true">
+      <path
+        fill="#EA4335"
+        d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+      />
+      <path
+        fill="#4285F4"
+        d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.9-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+      />
+      <path
+        fill="#34A853"
+        d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+      />
+    </svg>
+  );
+}
 
 // Plain-fact strip. Only things that are true of the business and already
 // stated elsewhere on the site — no counts, ratings or years.
@@ -571,6 +604,117 @@ export default function HomeShowcase() {
               </div>
             </Link>
           ))}
+        </div>
+      </section>
+
+      <section className={styles.reviewsSection} aria-labelledby="home-reviews">
+        <div className={styles.reviewsInner}>
+          <div className={styles.reviewsCopy}>
+            <div className={styles.kickerRow}>
+              <span className={styles.bar} />
+              Trusted by the trade
+            </div>
+            <h2 id="home-reviews" className={styles.sectionH2}>
+              What the trade says
+            </h2>
+            <p className={styles.reviewsBody}>
+              Workshops, fleets and resellers across Victoria order from us —
+              and tell us about it on Google.
+            </p>
+            <div className={styles.reviewsCtas}>
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnRed}
+              >
+                Read our reviews <span>→</span>
+              </a>
+              <a
+                href={GOOGLE_WRITE_REVIEW_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnOutlineDark}
+              >
+                Write a review
+              </a>
+            </div>
+          </div>
+          <div className={styles.reviewsBadge}>
+            <GoogleG className={styles.googleG} />
+            <div className={styles.reviewsStars} aria-hidden="true">
+              ★★★★★
+            </div>
+            <div className={styles.reviewsRating}>{GOOGLE_RATING}</div>
+            <div className={styles.reviewsRatedLabel}>
+              Rated on Google · {GOOGLE_REVIEW_COUNT} reviews
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.locationSection} aria-labelledby="home-location">
+        <div className={styles.locationInner}>
+          <div className={styles.locationCopy}>
+            <div className={styles.kickerRow}>
+              <span className={styles.bar} />
+              Warehouse &amp; pickup
+            </div>
+            <h2 id="home-location" className={styles.sectionH2}>
+              Find us in Dandenong South
+            </h2>
+            <p className={styles.locationBody}>
+              Trade pickups and deliveries from our Melbourne warehouse.
+            </p>
+            <dl className={styles.locationFacts}>
+              <div>
+                <dt>Address</dt>
+                <dd>13 Advantage Drive, Dandenong South VIC 3175</dd>
+              </div>
+              <div>
+                <dt>Phone</dt>
+                <dd>
+                  <a href="tel:0391165787">03 9116 5787</a> · Mon–Fri
+                  8:00–5:00 · Sat 8:30–12:30
+                </dd>
+              </div>
+              <div>
+                <dt>Email</dt>
+                <dd>
+                  <a href="mailto:info@ssswheels.com.au">
+                    info@ssswheels.com.au
+                  </a>
+                </dd>
+              </div>
+            </dl>
+            <div className={styles.locationCtas}>
+              <a
+                href={GOOGLE_DIRECTIONS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnRed}
+              >
+                Get directions <span>→</span>
+              </a>
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnOutlineDark}
+              >
+                View on Google Maps
+              </a>
+            </div>
+          </div>
+          <div className={styles.locationMapWrap}>
+            <iframe
+              src={GOOGLE_MAPS_EMBED_SRC}
+              title="SSS Wheels & Tyres location on Google Maps"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              className={styles.locationMap}
+            />
+          </div>
         </div>
       </section>
     </div>

@@ -17,6 +17,9 @@ const csp = [
   `img-src 'self' data:`,
   `font-src 'self'`,
   `connect-src 'self'`,
+  // The warehouse location embed is a plain Google Maps iframe -- no API key,
+  // so no script/connect host needs opening, just the frame itself.
+  `frame-src https://www.google.com`,
   `form-action 'self'`,
   `frame-ancestors 'none'`,
   `base-uri 'self'`,
