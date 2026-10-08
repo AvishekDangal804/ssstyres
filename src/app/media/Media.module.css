@@ -114,7 +114,7 @@
     position: absolute;
     inset: 0 0 auto 0;
     height: min(66.667vw, 62vh);
-    background: linear-gradient(180deg, rgba(43, 46, 49, 0) 65%, var(--black-deep) 100%);
+    background: linear-gradient(180deg, rgba(47, 47, 49, 0) 65%, var(--black-deep) 100%);
     pointer-events: none;
   }
 
@@ -271,7 +271,7 @@
 .tileScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(36, 39, 42, 0) 32%, rgba(36, 39, 42, 0.8) 100%);
+  background: linear-gradient(180deg, rgba(47, 47, 49, 0) 32%, rgba(47, 47, 49, 0.8) 100%);
   pointer-events: none;
 }
 

@@ -1,26 +1,27 @@
 :root {
-  --red: #da020b;
-  --red-hover: #b80008;
-  /* Premium charcoal identity (not nar-black): --black/--black-deep are the
-     primary dark neutral (headings, chrome, hero/section fills); --charcoal/
-     --panel are the secondary dark neutral used for nested dark cards, so a
-     card reads as a step lighter than the section it sits in. Kept the
-     original token names so every existing consumer picks this up without
-     being touched. */
-  --black: #24272a;
-  --black-deep: #2b2e31;
-  --charcoal: #34373b;
-  --panel: #34373b;
-  --panel-active: linear-gradient(160deg, #3c3f43, #2b2e31);
-  --graphite: #62666b;
-  --ink: #62666b;
-  --ink-2: #3f4245;
-  --ink-3: #7a7d81;
-  --off-white: #f5f5f3;
-  --light-gray: #ececea;
-  --border-gray: #dcdcd8;
-  --line: #dcdcd8;
-  --surface-2: #e3e3e0;
+  --red: #e3261b;
+  --red-hover: #c91d15;
+  /* Editorial navy + charcoal identity: --black is the primary dark neutral
+     (headings, nav, small solid fills) and is literally navy, not black;
+     --black-deep is the secondary dark neutral for large section/hero fills
+     and photo scrims; --charcoal/--panel are a step lighter again, for
+     nested dark cards sitting on a --black-deep section. Kept the original
+     token names so every existing consumer picks this up without being
+     touched. */
+  --black: #172536;
+  --black-deep: #2f2f31;
+  --charcoal: #3a3a3d;
+  --panel: #3a3a3d;
+  --panel-active: linear-gradient(160deg, #46464a, #2f2f31);
+  --graphite: #6f7072;
+  --ink: #6f7072;
+  --ink-2: #2c3642;
+  --ink-3: #8a8b8d;
+  --off-white: #f5f4f1;
+  --light-gray: #fbfaf7;
+  --border-gray: #dddcd8;
+  --line: #dddcd8;
+  --surface-2: #efece6;
   --on-dark: #d4d4d4;
   --on-dark-2: #bdbdbd;
   --white: #ffffff;

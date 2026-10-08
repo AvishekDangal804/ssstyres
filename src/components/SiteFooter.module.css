@@ -29,10 +29,10 @@
   inset: 0;
   background: linear-gradient(
     100deg,
-    rgba(36, 39, 42, 0.92) 0%,
-    rgba(36, 39, 42, 0.78) 34%,
-    rgba(36, 39, 42, 0.4) 60%,
-    rgba(36, 39, 42, 0.1) 82%
+    rgba(47, 47, 49, 0.92) 0%,
+    rgba(47, 47, 49, 0.78) 34%,
+    rgba(47, 47, 49, 0.4) 60%,
+    rgba(47, 47, 49, 0.1) 82%
   );
   z-index: 1;
   pointer-events: none;
@@ -225,7 +225,7 @@
 }
 
 .dark {
-  background: var(--black);
+  background: var(--black-deep);
   color: var(--on-dark-2);
 }
 

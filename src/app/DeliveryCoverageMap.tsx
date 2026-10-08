@@ -9,7 +9,7 @@ import styles from "./DeliveryCoverageMap.module.css";
 
 // Matches the site's --red token. Leaflet needs a literal colour string, not
 // a CSS var, since it paints onto a canvas/SVG layer outside React's tree.
-const RED = "#da020b";
+const RED = "#e3261b";
 const WAREHOUSE: [number, number] = [-38.0335, 145.204];
 
 interface ZonePoint {
@@ -152,7 +152,7 @@ export default function DeliveryCoverageMap() {
         L.divIcon({
           className: "",
           iconSize: [0, 0],
-          html: `<div class="${styles.pointLabel}"><span class="${styles.pointDot}" style="background:${strong ? RED : "#24272a"}"></span><span class="${styles.pointText}">${text}</span></div>`,
+          html: `<div class="${styles.pointLabel}"><span class="${styles.pointDot}" style="background:${strong ? RED : "#172536"}"></span><span class="${styles.pointText}">${text}</span></div>`,
         });
 
       const built = ZONES.map((z) => {
