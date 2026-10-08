@@ -14,7 +14,6 @@ import {
 } from "@/lib/wheels-data";
 import {
   GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
   GOOGLE_REVIEWS_URL,
   GOOGLE_WRITE_REVIEW_URL,
   GOOGLE_DIRECTIONS_URL,
@@ -609,46 +608,38 @@ export default function HomeShowcase() {
 
       <section className={styles.reviewsSection} aria-labelledby="home-reviews">
         <div className={styles.reviewsInner}>
-          <div className={styles.reviewsCopy}>
-            <div className={styles.kickerRow}>
-              <span className={styles.bar} />
-              Trusted by the trade
+          <div className={styles.reviewsText}>
+            <div className={styles.reviewsTop}>
+              <GoogleG className={styles.googleG} />
+              <span className={styles.reviewsStars} aria-hidden="true">
+                ★★★★★
+              </span>
             </div>
-            <h2 id="home-reviews" className={styles.sectionH2}>
-              What the trade says
+            <h2 id="home-reviews" className={styles.reviewsHeading}>
+              {GOOGLE_RATING} rated on Google
             </h2>
             <p className={styles.reviewsBody}>
-              Workshops, fleets and resellers across Victoria order from us —
-              and tell us about it on Google.
+              By the workshops, panel shops and fleets we supply across
+              Melbourne.
             </p>
-            <div className={styles.reviewsCtas}>
-              <a
-                href={GOOGLE_REVIEWS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnRed}
-              >
-                Read our reviews <span>→</span>
-              </a>
-              <a
-                href={GOOGLE_WRITE_REVIEW_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnOutlineDark}
-              >
-                Write a review
-              </a>
-            </div>
           </div>
-          <div className={styles.reviewsBadge}>
-            <GoogleG className={styles.googleG} />
-            <div className={styles.reviewsStars} aria-hidden="true">
-              ★★★★★
-            </div>
-            <div className={styles.reviewsRating}>{GOOGLE_RATING}</div>
-            <div className={styles.reviewsRatedLabel}>
-              Rated on Google · {GOOGLE_REVIEW_COUNT} reviews
-            </div>
+          <div className={styles.reviewsCtas}>
+            <a
+              href={GOOGLE_REVIEWS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnRed}
+            >
+              Read our reviews <span>→</span>
+            </a>
+            <a
+              href={GOOGLE_WRITE_REVIEW_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.btnOutlineDark}
+            >
+              Write a review <span>→</span>
+            </a>
           </div>
         </div>
       </section>
@@ -658,24 +649,16 @@ export default function HomeShowcase() {
           <div className={styles.locationCopy}>
             <div className={styles.kickerRow}>
               <span className={styles.bar} />
-              Warehouse &amp; pickup
+              Get in touch
             </div>
             <h2 id="home-location" className={styles.sectionH2}>
-              Find us in Dandenong South
+              Melbourne
             </h2>
-            <p className={styles.locationBody}>
-              Trade pickups and deliveries from our Melbourne warehouse.
-            </p>
             <dl className={styles.locationFacts}>
-              <div>
-                <dt>Address</dt>
-                <dd>13 Advantage Drive, Dandenong South VIC 3175</dd>
-              </div>
               <div>
                 <dt>Phone</dt>
                 <dd>
-                  <a href="tel:0391165787">03 9116 5787</a> · Mon–Fri
-                  8:00–5:00 · Sat 8:30–12:30
+                  <a href="tel:0391165787">03 9116 5787</a>
                 </dd>
               </div>
               <div>
@@ -686,25 +669,27 @@ export default function HomeShowcase() {
                   </a>
                 </dd>
               </div>
+              <div>
+                <dt>Address</dt>
+                <dd>
+                  13 Advantage Drive
+                  <br />
+                  Dandenong South, Victoria 3175
+                </dd>
+              </div>
+              <div>
+                <dt>Hours</dt>
+                <dd>Mon–Fri, business hours — call to confirm</dd>
+              </div>
             </dl>
-            <div className={styles.locationCtas}>
-              <a
-                href={GOOGLE_DIRECTIONS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnRed}
-              >
-                Get directions <span>→</span>
-              </a>
-              <a
-                href={GOOGLE_REVIEWS_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnOutlineDark}
-              >
-                View on Google Maps
-              </a>
-            </div>
+            <a
+              href={GOOGLE_DIRECTIONS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.locationDirections}
+            >
+              Get directions <span>→</span>
+            </a>
           </div>
           <div className={styles.locationMapWrap}>
             <iframe
