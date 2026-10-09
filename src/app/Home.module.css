@@ -9,7 +9,7 @@
 .heroSplit {
   display: flex;
   flex-wrap: wrap;
-  min-height: min(100vh, 1000px);
+  min-height: min(75vh, 750px);
   overflow: hidden;
 }
 
@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 40px;
-  padding: clamp(48px, 6vw, 96px) clamp(20px, 4vw, 72px);
+  gap: 28px;
+  padding: clamp(36px, 4.5vw, 72px) clamp(20px, 4vw, 72px);
   box-sizing: border-box;
   position: relative;
   z-index: 3;
@@ -311,19 +311,19 @@
 .heroH1 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(44px, 7vw, 92px);
+  font-size: clamp(33px, 5.3vw, 69px);
   line-height: 0.94;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  margin: 0 0 20px;
+  margin: 0 0 15px;
 }
 
 .heroBody {
-  font-size: clamp(15px, 1.2vw, 18px);
-  line-height: 1.6;
+  font-size: clamp(14px, 1.1vw, 16px);
+  line-height: 1.55;
   color: var(--on-dark);
   max-width: 520px;
-  margin: 0 0 30px;
+  margin: 0 0 22px;
 }
 
 .ctaRow {
@@ -336,8 +336,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  height: 50px;
-  padding: 0 26px;
+  height: 44px;
+  padding: 0 24px;
   border: 1.5px solid var(--white);
   border-radius: 10px;
   background: var(--white);
@@ -360,8 +360,8 @@
 .btnGhostLight {
   display: inline-flex;
   align-items: center;
-  height: 50px;
-  padding: 0 26px;
+  height: 44px;
+  padding: 0 24px;
   border: 1.5px solid rgba(255, 255, 255, 0.7);
   border-radius: 10px;
   color: var(--white);

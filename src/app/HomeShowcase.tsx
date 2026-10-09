@@ -359,6 +359,15 @@ export default function HomeShowcase() {
           {wheelGroups.map((g) => (
             <RangeCard key={g.key} group={g} />
           ))}
+          <Link href="/wheels" className={styles.rangeMoreCard}>
+            <span className={styles.rangeMoreIcon} aria-hidden="true">
+              →
+            </span>
+            <span className={styles.rangeMoreTitle}>See every fitment</span>
+            <span className={styles.rangeMoreSub}>
+              All sizes, PCDs and finishes
+            </span>
+          </Link>
         </div>
         <div className={styles.sliderControls}>
           <button

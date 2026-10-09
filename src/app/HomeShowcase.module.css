@@ -111,17 +111,17 @@
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(45px, 4.9vw, 86px) var(--gutter) clamp(43px, 4.8vw, 84px);
+  padding: clamp(14px, 1.4vw, 22px) var(--gutter) clamp(12px, 1.3vw, 20px);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  row-gap: 40px;
+  row-gap: 18px;
   column-gap: clamp(0px, 1vw, 24px);
   width: 100%;
   box-sizing: border-box;
 }
 
 .statCell {
-  padding: 4px 32px;
+  padding: 2px 32px;
 }
 
 .statCell:not(:first-child) {
@@ -138,21 +138,26 @@
 .statIcon {
   display: block;
   color: var(--white);
-  margin-bottom: 14px;
+  margin-bottom: 8px;
+}
+
+.statIcon svg {
+  width: 18px;
+  height: 18px;
 }
 
 .statBar {
   display: block;
-  width: 44px;
-  height: 3px;
+  width: 30px;
+  height: 2px;
   background: var(--red);
-  margin-bottom: 22px;
+  margin-bottom: 12px;
 }
 
 .statNum {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(32px, 3.2vw, 46px);
+  font-size: clamp(22px, 2vw, 30px);
   line-height: 1;
   letter-spacing: -0.02em;
   color: var(--white);
@@ -160,12 +165,12 @@
 }
 
 .statLabel {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--on-dark);
-  margin-top: 14px;
+  margin-top: 8px;
 }
 
 /* Statement: SSS wheels in five settings, cross-fading behind the copy */
@@ -391,11 +396,69 @@
 }
 
 .slideCard {
-  flex: 0 0 min(clamp(240px, 15.2vw, 300px), calc(100vw - 2 * var(--gutter)));
+  flex: 0 0 min(clamp(320px, 23vw, 460px), calc(100vw - 2 * var(--gutter)));
   scroll-snap-align: start;
   display: flex;
   flex-direction: column;
   position: relative;
+}
+
+/* Trailing tile after the real model cards -- the slider only ever has 2-3
+   real models, so a wide viewport leaves a lot of empty track. This gives
+   that space an honest CTA back into the full catalogue instead of either
+   padding out the row with invented products or leaving it visibly empty. */
+.rangeMoreCard {
+  flex: 0 0 min(clamp(320px, 23vw, 460px), calc(100vw - 2 * var(--gutter)));
+  scroll-snap-align: start;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+  box-sizing: border-box;
+  border: 1.5px dashed var(--line);
+  border-radius: 4px;
+  color: var(--black);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.rangeMoreCard:hover {
+  border-color: var(--red);
+  background: var(--off-white);
+}
+
+.rangeMoreIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.rangeMoreCard:hover .rangeMoreIcon {
+  border-color: var(--red);
+  background: var(--red);
+  color: var(--white);
+}
+
+.rangeMoreTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(18px, 1.3vw, 22px);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+}
+
+.rangeMoreSub {
+  font-size: 13px;
+  color: var(--ink-3);
 }
 
 .slideImgLink {
