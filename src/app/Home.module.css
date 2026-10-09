@@ -9,7 +9,7 @@
 .heroSplit {
   display: flex;
   flex-wrap: wrap;
-  min-height: min(75vh, 750px);
+  min-height: min(58vh, 580px);
   overflow: hidden;
 }
 
@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 28px;
-  padding: clamp(36px, 4.5vw, 72px) clamp(20px, 4vw, 72px);
+  gap: 20px;
+  padding: clamp(26px, 3.4vw, 52px) clamp(20px, 4vw, 72px);
   box-sizing: border-box;
   position: relative;
   z-index: 3;
@@ -311,19 +311,19 @@
 .heroH1 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(33px, 5.3vw, 69px);
-  line-height: 0.94;
+  font-size: clamp(26px, 4.3vw, 54px);
+  line-height: 0.96;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  margin: 0 0 15px;
+  margin: 0 0 12px;
 }
 
 .heroBody {
-  font-size: clamp(14px, 1.1vw, 16px);
-  line-height: 1.55;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.5;
   color: var(--on-dark);
   max-width: 520px;
-  margin: 0 0 22px;
+  margin: 0 0 18px;
 }
 
 .ctaRow {
