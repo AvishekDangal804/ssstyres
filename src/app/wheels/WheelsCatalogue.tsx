@@ -13,6 +13,77 @@ import {
 import { useScrollProgress } from "@/lib/useScrollProgress";
 import styles from "./Wheels.module.css";
 
+// Rounds the card's photo box AND its image to whole device pixels together
+// in one pass. Fixes a reproducible Chromium bug: a flex-centred image
+// whose box resolves to a fractional pixel size (routine in a fluid,
+// clamp()-sized grid, and still fractional even after rounding the photo
+// box alone, since 80% of a rounded integer is usually fractional again)
+// can render flush against 2-3 edges with all its margin shoved onto the
+// remaining side -- confirmed in isolation with byte-identical source
+// images, independent of whether the image is painted via <img>,
+// object-fit or a CSS background. Re-measures on resize, since the fluid
+// grid's layout changes with viewport width.
+function useCardImgSnap() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const wrap = ref.current;
+    if (!wrap) return;
+    let raf = 0;
+    const snap = () => {
+      raf = 0;
+      // Clear this snap's own previous width/height/transform first -- re-
+      // measuring without doing this reads the box *after* that correction
+      // was already applied, usually lands back on (or very near) a whole
+      // pixel, computes a near-zero delta and overwrites the transform with
+      // it, silently erasing the original correction. That's what made the
+      // bug intermittently reappear on a second snap (e.g. the image's
+      // "load" firing after the initial mount snap).
+      wrap.style.width = "";
+      wrap.style.height = "";
+      wrap.style.transform = "";
+      const r = wrap.getBoundingClientRect();
+      const w = Math.round(r.width);
+      const h = Math.round(r.height);
+      const dx = Math.round(r.left) - r.left;
+      const dy = Math.round(r.top) - r.top;
+      wrap.style.width = `${w}px`;
+      wrap.style.height = `${h}px`;
+      wrap.style.transform = `translate(${dx}px, ${dy}px)`;
+      const img = wrap.querySelector<HTMLImageElement>(`.${styles.cardImgInset}`);
+      if (img) {
+        const side = `${Math.round(w * 0.8)}px`;
+        img.style.maxWidth = side;
+        img.style.maxHeight = side;
+      }
+      // Forces layout to flush synchronously. Without this, Chromium can
+      // leave the image painted against its pre-snap (fractional) box even
+      // though the computed styles above are already correct -- reading
+      // any geometry (even one already known) is enough to make it repaint
+      // correctly; skipping this step is what left the bug intermittently
+      // reproducible after the style writes above.
+      void wrap.offsetHeight;
+    };
+    const onResize = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(snap);
+    };
+    snap();
+    // A lazy-loaded <img> can still be mid-decode on mount; once it loads,
+    // the browser resolves its real intrinsic size and can relayout the
+    // max-width-constrained box on its own, independent of this snap --
+    // re-snapping on load re-asserts the rounded pixel size against that.
+    const img = wrap.querySelector<HTMLImageElement>(`.${styles.cardImgInset}`);
+    img?.addEventListener("load", onResize);
+    window.addEventListener("resize", onResize);
+    return () => {
+      img?.removeEventListener("load", onResize);
+      window.removeEventListener("resize", onResize);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+  return ref;
+}
+
 export default function WheelsCatalogue() {
   // One card per real fitment (size + PCD), so "17x8 6x139.7" is its own
   // card and a swatch there picks between the real colours manager actually
@@ -96,6 +167,7 @@ function WheelCard({ group }: { group: WheelGroup }) {
   // with a non-default swatch already selected throws reading `undefined.cat`.
   const w = group.variants[active] ?? group.variants[0];
   const model = MODELS.find((m) => m.id === w.model);
+  const imgWrapRef = useCardImgSnap();
 
   return (
     <div className={styles.card}>
@@ -105,16 +177,17 @@ function WheelCard({ group }: { group: WheelGroup }) {
         tabIndex={-1}
         aria-hidden="true"
       >
-        <div className={styles.cardImgWrap}>
-          <div className={styles.cardImgInset}>
-            <Image
-              src={w.img}
-              alt={`${w.name} ${w.size} in ${w.variant}`}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1100px) 33vw, 25vw"
-              className={styles.cardPhoto}
-            />
-          </div>
+        <div ref={imgWrapRef} className={styles.cardImgWrap}>
+          {/* eslint-disable-next-line @next/next/no-img-element -- plain
+              img, flex-centred and sized via max-width/max-height; see
+              .cardImgWrap comment in Wheels.module.css for why this
+              avoids next/image's fill+object-fit here. */}
+          <img
+            src={w.img}
+            alt={`${w.name} ${w.size} in ${w.variant}`}
+            className={styles.cardImgInset}
+            loading="lazy"
+          />
         </div>
       </Link>
 
