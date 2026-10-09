@@ -185,7 +185,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(56px, 6.3vw, 98px) 28px;
+  padding: clamp(40px, 4.4vw, 64px) 28px;
 }
 
 .statementBg {
@@ -366,7 +366,7 @@
 
 /* Wheel slider */
 .sliderSection {
-  padding: clamp(67px, 7.4vw, 130px) 0 0;
+  padding: clamp(44px, 5vw, 72px) 0 0;
   width: 100%;
   overflow: hidden;
 }
@@ -494,7 +494,7 @@
 }
 
 .slideName:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .slideFit {
@@ -532,7 +532,8 @@
 }
 
 .sizeChip:hover {
-  border-color: #aaa;
+  /* #aaa measured 2.3:1 on white, under the 3:1 non-text minimum. */
+  border-color: var(--ink-3);
   transform: translateY(-2px);
 }
 
@@ -594,7 +595,9 @@
   position: absolute;
   top: 0;
   height: 100%;
-  background: #b5b5b5;
+  /* #b5b5b5 measured 1.96:1 against the track's --light-gray, under the
+     3:1 UI-component minimum (WCAG 1.4.11). */
+  background: var(--ink-3);
   border-radius: 2px;
 }
 
@@ -1013,7 +1016,7 @@
 .vehiclesSection {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(67px, 7.4vw, 130px) var(--gutter) clamp(73px, 8vw, 140px);
+  padding: clamp(44px, 5vw, 72px) var(--gutter) clamp(48px, 5.2vw, 76px);
   width: 100%;
   box-sizing: border-box;
 }
@@ -1178,7 +1181,7 @@
 .reviewsStars {
   font-size: 15px;
   letter-spacing: 2px;
-  color: var(--red);
+  color: var(--red-on-light);
   line-height: 1;
 }
 

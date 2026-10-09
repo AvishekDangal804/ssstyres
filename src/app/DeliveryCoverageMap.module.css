@@ -6,7 +6,7 @@
 .inner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(56px, 6vw, 104px) var(--gutter);
+  padding: clamp(40px, 4.8vw, 64px) var(--gutter);
   display: flex;
   flex-direction: column;
   gap: 48px;
@@ -38,7 +38,7 @@
   font-size: 13px;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .kickerDot {
@@ -353,7 +353,8 @@
 }
 
 .zoneCardActive .zoneMeta {
-  color: var(--red);
+  /* Active card is var(--charcoal), not a light surface. */
+  color: var(--red-on-dark);
 }
 
 .zoneDetailWrap {
@@ -426,7 +427,7 @@
 }
 
 .helpLine a {
-  color: var(--red);
+  color: var(--red-on-light);
   font-weight: 700;
   text-decoration: none;
 }

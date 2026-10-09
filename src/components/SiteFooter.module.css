@@ -43,7 +43,7 @@
   z-index: 2;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(60px, 7vw, 110px) var(--gutter);
+  padding: clamp(42px, 4.8vw, 68px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }
@@ -281,11 +281,11 @@
 }
 
 .colLinks a:hover {
-  color: var(--red);
+  color: var(--red-on-dark);
 }
 
 .faded {
-  color: #8c8c8c !important;
+  color: var(--on-dark-2) !important;
 }
 
 .colLinks a.white {
@@ -305,7 +305,7 @@
   gap: 16px;
   flex-wrap: wrap;
   font-size: 13px;
-  color: #8c8c8c;
+  color: var(--on-dark-2);
   width: 100%;
   box-sizing: border-box;
 }
@@ -316,7 +316,7 @@
 }
 
 .bottomLinks a:hover {
-  color: var(--red);
+  color: var(--red-on-dark);
 }
 
 @media (max-width: 900px) {

@@ -32,7 +32,11 @@
 .heroStagePane {
   flex: 7 1 560px;
   position: relative;
-  min-height: clamp(360px, 56vw, 1000px);
+  /* Capped to match .heroSplit's own min(58vh,580px) -- the old 1000px max
+     fought that cap on wide viewports and silently re-inflated the whole
+     hero back to full height, since a flex row stretches to its tallest
+     child regardless of the row's own min-height. */
+  min-height: clamp(320px, 42vw, 580px);
   overflow: hidden;
   -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000 14%);
   mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000 14%);
@@ -74,7 +78,11 @@
 .sceneTruck {
   left: 50%;
   bottom: 4%;
-  width: 118%;
+  /* Width-driven (height:auto on the image), so this doesn't automatically
+     respond to .heroStagePane getting shorter -- recalculated down from
+     118% (sized for the old ~1000px-tall stage) to fit the current
+     min(58vh,580px) cap without the image overflowing/clipping. */
+  width: 80%;
   transform: translate3d(-50%, 14%, 0);
 }
 
@@ -194,7 +202,8 @@
 }
 
 .heroDot {
-  color: var(--red);
+  /* Sits on the dark hero, not a light surface -- needs the dark-bg variant. */
+  color: var(--red-on-dark);
 }
 
 .heroLine {
@@ -438,7 +447,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-on-light);
   margin-bottom: 14px;
 }
 
@@ -446,7 +455,7 @@
 .supplySection {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(56px, 6vw, 96px) var(--gutter);
+  padding: clamp(40px, 4.4vw, 64px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }
@@ -503,7 +512,7 @@
 
 .supplyCard:hover .supplyName,
 .supplyCard:focus-visible .supplyName {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .supplyName {
@@ -543,7 +552,7 @@
 .tradeInner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(56px, 6vw, 96px) var(--gutter);
+  padding: clamp(40px, 4.4vw, 64px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }
@@ -634,7 +643,7 @@
 .warehouseSection {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(56px, 6vw, 96px) var(--gutter) clamp(73px, 8vw, 140px);
+  padding: clamp(40px, 4.4vw, 64px) var(--gutter) clamp(48px, 5.2vw, 76px);
   width: 100%;
   box-sizing: border-box;
   display: grid;

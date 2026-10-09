@@ -65,7 +65,7 @@
   font-weight: 800;
   font-size: 20px;
   letter-spacing: 0.06em;
-  color: var(--red);
+  color: var(--red-on-light);
   margin-bottom: 10px;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .inlineLink:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .facts {
@@ -142,7 +142,7 @@
 }
 
 .facts a:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .links {
@@ -239,7 +239,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-on-light);
   margin-bottom: 18px;
 }
 
@@ -302,7 +302,7 @@
 }
 
 .big:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .cardSub {
@@ -320,7 +320,7 @@
 }
 
 .mail:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .notes {

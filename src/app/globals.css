@@ -13,10 +13,14 @@
   --charcoal: #3a3a3d;
   --panel: #3a3a3d;
   --panel-active: linear-gradient(160deg, #46464a, #2f2f31);
-  --graphite: #6f7072;
-  --ink: #6f7072;
+  /* Darkened from the editorial-palette brief's literal values -- #6f7072
+     and #8a8b8d measured 3.1-4.2:1 against the site's various light
+     surfaces (white/off-white/soft-grey/surface-2), under the 4.5:1 WCAG AA
+     minimum for normal-size text. These pass >=4.5:1 against all of them. */
+  --graphite: #5f6063;
+  --ink: #5f6063;
   --ink-2: #2c3642;
-  --ink-3: #8a8b8d;
+  --ink-3: #65666a;
   --off-white: #f5f4f1;
   --light-gray: #fbfaf7;
   --border-gray: #dddcd8;
@@ -29,6 +33,13 @@
      --red fails contrast at small sizes there. Was redefined ad hoc as
      --red-text in a few page modules; consolidated here. */
   --red-on-dark: #ff6b71;
+  /* Mirrors --red-on-dark, for the opposite problem: plain --red as a TEXT
+     colour (kickers, links, labels) measures 3.9-4.6:1 against the site's
+     light surfaces -- under 4.5:1 AA for normal text. --red itself is left
+     untouched for buttons/icons/borders, where it's a large/graphic element
+     and the more lenient 3:1 non-text threshold already applies. Reuses
+     --red-hover's existing hex rather than inventing a new one. */
+  --red-on-light: #c91d15;
 
   /* Shared type scale. H1/H2 are sentence case (see body{} below) — weight
      and size carry the hierarchy, not shouting in caps. H3 and labels stay
@@ -50,8 +61,10 @@
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --gutter: clamp(20px, 3vw, 56px);
   --container: min(1600px, 94vw);
-  --section-pad-lg: clamp(67px, 7.4vw, 130px);
-  --section-pad-header: clamp(39px, 4.3vw, 76px);
+  /* Trimmed to the 48-72px desktop / ~32-48px mobile section-spacing range --
+     130px max was well past "premium breathing room" into dead space. */
+  --section-pad-lg: clamp(44px, 5vw, 72px);
+  --section-pad-header: clamp(32px, 3.6vw, 56px);
 }
 
 html {

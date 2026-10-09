@@ -225,7 +225,7 @@
 }
 
 .cardName:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .sizeRow {

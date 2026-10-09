@@ -117,13 +117,13 @@
 }
 
 .navItem:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 /* The current page's nav item, red underline. */
 .navActive {
   color: var(--black);
-  border-bottom-color: var(--red);
+  border-bottom-color: var(--red-on-light);
 }
 
 .navMenu {
@@ -148,12 +148,12 @@
 }
 
 .navButton:hover {
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .caret {
   font-size: 11px;
-  color: var(--red);
+  color: var(--red-on-light);
   display: inline-block;
   transition: transform 0.2s;
 }
@@ -225,7 +225,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #8a8a8a;
+  color: var(--on-dark-2);
 }
 
 .dropdownDivider {

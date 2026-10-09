@@ -40,7 +40,7 @@
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(62px, 6.8vw, 119px) var(--gutter);
+  padding: clamp(42px, 4.8vw, 68px) var(--gutter);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 48px;
@@ -96,7 +96,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--red-on-light);
   margin-bottom: 14px;
 }
 
@@ -222,7 +222,7 @@
 .finishSection {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(62px, 6.8vw, 119px) var(--gutter) var(--section-pad-lg);
+  padding: clamp(42px, 4.8vw, 68px) var(--gutter) var(--section-pad-lg);
   width: 100%;
   box-sizing: border-box;
 }

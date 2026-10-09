@@ -191,7 +191,7 @@
 .formError {
   font-size: 14px;
   font-weight: 600;
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .submitBtn {
@@ -252,6 +252,6 @@
 }
 
 .successBody a {
-  color: var(--red);
+  color: var(--red-on-light);
   font-weight: 700;
 }

@@ -47,7 +47,7 @@
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
   font-size: 20px;
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .entryTitle {
@@ -70,6 +70,6 @@
 }
 
 .entryBody a {
-  color: var(--red);
+  color: var(--red-on-light);
   font-weight: 600;
 }

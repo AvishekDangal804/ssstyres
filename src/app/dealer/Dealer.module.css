@@ -164,7 +164,7 @@
 .formError {
   font-size: 14px;
   font-weight: 600;
-  color: var(--red);
+  color: var(--red-on-light);
 }
 
 .submitBtn {
@@ -198,7 +198,7 @@
 }
 
 .legalLine a {
-  color: var(--red);
+  color: var(--red-on-light);
   font-weight: 600;
 }
 
@@ -242,6 +242,6 @@
 }
 
 .successSub a {
-  color: var(--red);
+  color: var(--red-on-light);
   font-weight: 700;
 }

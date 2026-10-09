@@ -62,7 +62,7 @@
 }
 
 .statNum span {
-  color: var(--red);
+  color: var(--red-on-light);
   font-size: 22px;
 }
 
@@ -77,7 +77,7 @@
 .tilesSection {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(50px, 5.5vw, 97px) var(--gutter) var(--section-pad-lg);
+  padding: clamp(38px, 4.2vw, 64px) var(--gutter) var(--section-pad-lg);
   width: 100%;
   box-sizing: border-box;
   flex: 1;
