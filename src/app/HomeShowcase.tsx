@@ -658,6 +658,20 @@ function RangeCard({ group }: { group: WheelGroup }) {
   // leave it pointing past the end.
   const w = group.variants[active] ?? group.variants[0];
 
+  // One swatch per distinct colour, not one per SKU: a model stocked in 6
+  // colours across 3 sizes has 18 variants, but showing all 18 as swatches
+  // is 3 visually-identical thumbnails per colour. Falls back to every
+  // variant when there's only one real colour (e.g. D-Hole), since there the
+  // swatches are the only way to reach its other sizes at all.
+  const swatchIndexes = useMemo(() => {
+    const firstOfEach = new Map<string, number>();
+    group.variants.forEach((v, i) => {
+      if (!firstOfEach.has(v.variant)) firstOfEach.set(v.variant, i);
+    });
+    const unique = [...firstOfEach.values()];
+    return unique.length > 1 ? unique : group.variants.map((_, i) => i);
+  }, [group.variants]);
+
   return (
     <div className={styles.slideCard}>
       <Link
@@ -683,24 +697,27 @@ function RangeCard({ group }: { group: WheelGroup }) {
           {w.size} · {w.pcd} · {w.offset}
         </div>
 
-        {group.variants.length > 1 && (
-          <div className={styles.sizeChips} role="radiogroup" aria-label="Size and bolt pattern">
-            {group.variants.map((v, i) => (
-              <button
-                key={v.id}
-                type="button"
-                role="radio"
-                aria-checked={i === active}
-                aria-label={`${v.size} · ${v.pcd}`}
-                title={`${v.size} · ${v.pcd}`}
-                className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
-                onMouseEnter={() => setActive(i)}
-                onFocus={() => setActive(i)}
-                onClick={() => setActive(i)}
-              >
-                <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
-              </button>
-            ))}
+        {swatchIndexes.length > 1 && (
+          <div className={styles.sizeChips} role="radiogroup" aria-label="Finish">
+            {swatchIndexes.map((i) => {
+              const v = group.variants[i];
+              return (
+                <button
+                  key={v.id}
+                  type="button"
+                  role="radio"
+                  aria-checked={i === active}
+                  aria-label={v.variant}
+                  title={v.variant}
+                  className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                >
+                  <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
