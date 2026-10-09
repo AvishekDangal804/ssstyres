@@ -107,24 +107,6 @@ function StatIcon({ id }: { id: FactIcon }) {
   }
 }
 
-const SIZE_DEFS = [
-  {
-    size: "15",
-    kicker: "Compact & trailer",
-    fits: "Jimny · trailers · light utes",
-  },
-  { size: "16", kicker: "Fleet & touring", fits: "HiAce · HiLux · Prado" },
-  { size: "17", kicker: "4x4 off-road", fits: "Ranger · HiLux · RAV4" },
-] as const;
-
-function prevalentImg(size: string) {
-  return WHEELS.find((w) => w.size.startsWith(size))?.img ?? WHEELS[0].img;
-}
-
-function sizeCount(size: string) {
-  return WHEELS.filter((w) => w.size.startsWith(size)).length;
-}
-
 // Statement band backdrop: SSS wheels in five settings, cross-fading. Decorative.
 const STATEMENT_SLIDES = [
   "/assets/statement/s1.jpg",
@@ -158,7 +140,6 @@ export default function HomeShowcase() {
   const featImgWrapRef = useRef<HTMLDivElement | null>(null);
   const sliderRef = useRef<HTMLDivElement | null>(null);
 
-  const [hoverCat, setHoverCat] = useState<string | null>(null);
   const [activeCat, setActiveCat] = useState<CategoryId>("offroad");
   const [feat, setFeat] = useState(0);
   const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
@@ -395,64 +376,6 @@ export default function HomeShowcase() {
           >
             →
           </button>
-        </div>
-      </section>
-
-      <section className={styles.collectionsSection} aria-labelledby="home-collections">
-        <div className={styles.sectionHead}>
-          <h2 id="home-collections" className={styles.sectionH2}>
-            Wheel collections
-          </h2>
-          <Link href="/collections" className={styles.btnOutlineDark}>
-            All collections <span>→</span>
-          </Link>
-        </div>
-        <div className={styles.collectionsGrid}>
-          {SIZE_DEFS.map((sd) => {
-            const key = `size${sd.size}`;
-            const on = hoverCat === key;
-            const n = sizeCount(sd.size);
-            return (
-              <Link
-                key={sd.size}
-                href={`/wheels?size=${sd.size}`}
-                onMouseEnter={() => setHoverCat(key)}
-                onMouseLeave={() => setHoverCat(null)}
-                onFocus={() => setHoverCat(key)}
-                onBlur={() => setHoverCat(null)}
-                className={`${styles.collCard} ${on ? styles.on : ""}`}
-              >
-                <div aria-hidden="true" className={styles.collBig}>
-                  {sd.size}&quot;
-                </div>
-                <div className={styles.collRing} />
-                <div className={styles.collImg} aria-hidden="true">
-                  <Image
-                    src={prevalentImg(sd.size)}
-                    alt=""
-                    fill
-                    sizes="(max-width: 720px) 70vw, 24vw"
-                    className={styles.contain}
-                  />
-                </div>
-                <div className={styles.collTopText}>
-                  <span className={styles.collKicker}>{sd.kicker}</span>
-                  <span className={styles.collSize}>{sd.size}&quot;</span>
-                </div>
-                <div className={styles.collBottomRow}>
-                  <div className={styles.collFits}>
-                    <span>{sd.fits}</span>
-                    <span>
-                      {n} {n === 1 ? "fitment" : "fitments"}
-                    </span>
-                  </div>
-                  <span className={styles.collArrow} aria-hidden="true">
-                    →
-                  </span>
-                </div>
-              </Link>
-            );
-          })}
         </div>
       </section>
 
