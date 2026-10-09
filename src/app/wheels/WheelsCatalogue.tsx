@@ -6,7 +6,7 @@ import Link from "next/link";
 import {
   MODELS,
   WHEELS,
-  groupWheelsByFinish,
+  groupWheelsBySize,
   defaultVariantIndex,
   type WheelGroup,
 } from "@/lib/wheels-data";
@@ -14,9 +14,11 @@ import { useScrollProgress } from "@/lib/useScrollProgress";
 import styles from "./Wheels.module.css";
 
 export default function WheelsCatalogue() {
-  // One card per real finish (not per model) -- shows every distinct colourway
-  // as its own card instead of burying them in one model card's swatch grid.
-  const groups = useMemo(() => groupWheelsByFinish(WHEELS), []);
+  // One card per real fitment (size + PCD), so "17x8 6x139.7" is its own
+  // card and a swatch there picks between the real colours manager actually
+  // stocks that fitment in -- not every card gets swatches, since most sizes
+  // only come in one real colour.
+  const groups = useMemo(() => groupWheelsBySize(WHEELS), []);
 
   const heroRef = useScrollProgress<HTMLDivElement>((p, el) => {
     const img = el.querySelector<HTMLElement>("[data-hero-img]");
@@ -140,22 +142,21 @@ function WheelCard({ group }: { group: WheelGroup }) {
       <div className={styles.cardSwatchBlock}>
         <span className={styles.finishLabel}>{w.variant}</span>
         {group.variants.length > 1 && (
-          <div className={styles.sizeChips} role="radiogroup" aria-label="Size and bolt pattern">
+          <div className={styles.colourDots} role="radiogroup" aria-label="Finish">
             {group.variants.map((v, i) => (
               <button
                 key={v.id}
                 type="button"
                 role="radio"
                 aria-checked={i === active}
-                aria-label={`${v.size} · ${v.pcd}`}
-                title={`${v.size} · ${v.pcd}`}
-                className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
+                aria-label={v.variant}
+                title={v.variant}
+                className={`${styles.colourDot} ${i === active ? styles.colourDotActive : ""}`}
+                style={{ background: v.hex }}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
-              >
-                <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
-              </button>
+              />
             ))}
           </div>
         )}

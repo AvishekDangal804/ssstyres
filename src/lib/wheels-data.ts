@@ -154,10 +154,21 @@ export function groupWheels(list: Wheel[]): WheelGroup[] {
 // Grouped by model + finish, so each real finish gets its own card instead of
 // collapsing every colour into one card per model. Every variant in a group
 // therefore already shares a hex — a swatch here can only change size/PCD,
-// never colour. Used by the /wheels catalogue grid, which wants one visually
-// distinct card per finish rather than one per model.
+// never colour.
 export function groupWheelsByFinish(list: Wheel[]): WheelGroup[] {
   return groupBy(list, (w) => `${w.model}::${w.variant}`);
+}
+
+// Grouped by model + size + PCD, so each real physical fitment is one card
+// and a swatch changes colour (never size/PCD, since that's what defines the
+// group). Most fitments only come in one real colour and show no swatches at
+// all -- only the ones manager actually stocks in several finishes do. Used
+// by the /wheels catalogue grid: shows every fitment as its own card (not
+// just 2 per model) while still letting the ones with real colour options
+// show them, matching the "pick a wheel, then pick its finish" pattern
+// manager asked for.
+export function groupWheelsBySize(list: Wheel[]): WheelGroup[] {
+  return groupBy(list, (w) => `${w.model}::${w.size}::${w.pcd}`);
 }
 
 // Leads with a non-black finish where the wheel actually comes in one.

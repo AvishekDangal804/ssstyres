@@ -167,37 +167,32 @@
   transform: scale(1.07);
 }
 
-.sizeChips {
+.colourDots {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
-.sizeChip {
+.colourDot {
   position: relative;
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
   border: 1.5px solid var(--line);
-  background: var(--surface-2);
-  overflow: hidden;
   padding: 0;
   box-sizing: border-box;
   cursor: pointer;
-  transition: border-color 0.15s, transform 0.15s;
+  transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 
-.sizeChip:hover {
+.colourDot:hover {
   transform: translateY(-2px);
 }
 
-.sizeChipActive {
+.colourDotActive {
   border-color: var(--red);
+  box-shadow: 0 0 0 2px var(--white), 0 0 0 3.5px var(--red);
   transform: translateY(-2px);
-}
-
-.sizeChipImg {
-  object-fit: contain;
 }
 
 .cardTextBlock {
