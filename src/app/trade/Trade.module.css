@@ -38,13 +38,18 @@
 .block {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(48px, 5.5vw, 88px) var(--gutter);
+  padding: clamp(22px, 2.6vw, 40px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
-  gap: clamp(28px, 4vw, 64px);
-  align-items: center;
+  gap: clamp(16px, 2.2vw, 28px);
+  /* Top-aligned, not centered -- the aside card is often much shorter than
+     the text (e.g. the "Contact us" card vs. a 3-paragraph column), and
+     centering it just splits that leftover height into blank space above
+     AND below the card. Starting both columns at the same top edge keeps
+     the card grounded next to the heading instead of floating. */
+  align-items: start;
   border-bottom: 1px solid var(--line);
 }
 
@@ -66,7 +71,7 @@
   font-size: 20px;
   letter-spacing: 0.06em;
   color: var(--red-on-light);
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .h2 {
@@ -75,7 +80,7 @@
   font-size: var(--h2-size);
   line-height: var(--h2-line);
   letter-spacing: var(--h2-tracking);
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 
 .lead {
@@ -83,7 +88,7 @@
   line-height: 1.45;
   font-weight: 600;
   color: var(--ink);
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   max-width: 560px;
 }
 
@@ -91,7 +96,7 @@
   font-size: 16px;
   line-height: 1.65;
   color: var(--ink);
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   max-width: 560px;
 }
 
@@ -106,9 +111,9 @@
 }
 
 .facts {
-  margin: 20px 0 0;
+  margin: 14px 0 0;
   display: grid;
-  gap: 12px;
+  gap: 10px;
   max-width: 560px;
 }
 
@@ -116,7 +121,7 @@
   display: grid;
   grid-template-columns: 110px 1fr;
   gap: 12px;
-  padding-top: 12px;
+  padding-top: 10px;
   border-top: 1px solid var(--line);
   font-size: 15px;
   line-height: 1.5;
@@ -149,7 +154,7 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  margin-top: 26px;
+  margin-top: 20px;
 }
 
 .btnDark,
@@ -221,7 +226,7 @@
 .darkCard,
 .lightCard {
   border-radius: 22px;
-  padding: clamp(24px, 2.8vw, 40px);
+  padding: clamp(20px, 2.2vw, 32px);
 }
 
 .darkCard {
@@ -240,7 +245,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--red-on-light);
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .darkCard .cardLabel {
@@ -252,7 +257,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 22px;
+  gap: 16px;
 }
 
 .step {
