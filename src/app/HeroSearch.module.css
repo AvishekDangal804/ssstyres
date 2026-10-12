@@ -1,15 +1,9 @@
-/* Sits right after the hero. Only the card overlaps the hero's bottom
-   edge (a modest amount -- the hero here tops out at 580px, nowhere near
-   tall enough to also fit the badge row inside the overlap without
-   colliding with the hero's own copy). The badge row sits in normal flow
-   on the page background below, so it's styled light, not the dark
-   on-photo treatment a deeper overlap would need. */
+/* Sits in normal flow below the hero -- no overlap onto it. */
 .wrap {
   position: relative;
-  z-index: 20;
   max-width: var(--container);
-  margin: clamp(-64px, -6vw, -48px) auto 0;
-  padding: 0 var(--gutter);
+  margin: 0 auto;
+  padding: clamp(28px, 3.6vw, 48px) var(--gutter) 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -201,10 +195,6 @@
 }
 
 @media (max-width: 640px) {
-  .wrap {
-    margin-top: clamp(-32px, -6vw, -20px);
-  }
-
   .helpLink {
     margin-left: 0;
     width: 100%;
