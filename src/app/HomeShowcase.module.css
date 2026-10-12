@@ -852,6 +852,34 @@
   color: var(--white);
 }
 
+.panelCtaRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.panelCtaGhost {
+  display: inline-flex;
+  align-items: center;
+  height: 46px;
+  padding: 0 22px;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 10px;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.panelCtaGhost:hover {
+  background: var(--white);
+  border-color: var(--white);
+  color: var(--black);
+}
+
 @media (max-width: 1040px) {
   .typesStrip {
     flex-direction: column;

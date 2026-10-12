@@ -439,13 +439,22 @@ export default function HomeShowcase() {
                         </span>
                       ))}
                     </div>
-                    <Link
-                      href={`/wheels?cat=${c.id}`}
-                      className={styles.panelCta}
-                      tabIndex={on ? 0 : -1}
-                    >
-                      View {c.name} wheels <span>→</span>
-                    </Link>
+                    <div className={styles.panelCtaRow}>
+                      <Link
+                        href={`/wheels?cat=${c.id}`}
+                        className={styles.panelCta}
+                        tabIndex={on ? 0 : -1}
+                      >
+                        View {c.name} wheels <span>→</span>
+                      </Link>
+                      <Link
+                        href="/fitment"
+                        className={styles.panelCtaGhost}
+                        tabIndex={on ? 0 : -1}
+                      >
+                        Fitment guide
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );
