@@ -109,6 +109,34 @@
   flex: 1;
 }
 
+.filterBanner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  background: var(--surface-2);
+  border-radius: 10px;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+.filterBanner strong {
+  color: var(--black);
+}
+
+.filterClear {
+  margin-left: auto;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.filterClear:hover {
+  color: var(--red-on-light);
+}
+
 .grid {
   display: grid;
   /* Fixed 3 columns, not auto-fill -- with exactly 6 fitment cards today,

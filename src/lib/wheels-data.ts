@@ -190,3 +190,30 @@ export function defaultVariantIndex(variants: Wheel[]): number {
 export const byId = (id: string): Wheel => WHEELS.find((w) => w.id === id) ?? WHEELS[0];
 export const catName = (id: string): string => CATEGORIES.find((c) => c.id === id)?.name ?? '';
 export const modelName = (id: string): string => MODELS.find((m) => m.id === id)?.name ?? '';
+
+export interface Fitment {
+  size: string;
+  pcd: string;
+}
+
+// Every real (size, PCD) combination actually in stock, derived from WHEELS
+// rather than hand-listed, so the home-page size search can never drift out
+// of sync with what /wheels actually carries. Order follows WHEELS itself
+// (D-Locker fitments first, then D-Hole).
+export const FITMENTS: Fitment[] = (() => {
+  const seen = new Set<string>();
+  const out: Fitment[] = [];
+  for (const w of WHEELS) {
+    const key = `${w.size}::${w.pcd}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ size: w.size, pcd: w.pcd });
+  }
+  return out;
+})();
+
+export const FITMENT_SIZES: string[] = [...new Set(FITMENTS.map((f) => f.size))];
+
+export function pcdsForSize(size: string): string[] {
+  return FITMENTS.filter((f) => f.size === size).map((f) => f.pcd);
+}

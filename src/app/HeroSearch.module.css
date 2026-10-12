@@ -1,0 +1,212 @@
+/* Sits right after the hero. Only the card overlaps the hero's bottom
+   edge (a modest amount -- the hero here tops out at 580px, nowhere near
+   tall enough to also fit the badge row inside the overlap without
+   colliding with the hero's own copy). The badge row sits in normal flow
+   on the page background below, so it's styled light, not the dark
+   on-photo treatment a deeper overlap would need. */
+.wrap {
+  position: relative;
+  z-index: 20;
+  max-width: var(--container);
+  margin: clamp(-64px, -6vw, -48px) auto 0;
+  padding: 0 var(--gutter);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(20px, 2.4vw, 32px);
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  padding: clamp(20px, 2.6vw, 32px);
+  width: 100%;
+  max-width: 920px;
+  box-sizing: border-box;
+}
+
+.cardHeading {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(17px, 1.6vw, 20px);
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--black);
+  margin: 0 0 16px;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 180px;
+  min-width: 150px;
+}
+
+.fieldLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.select {
+  height: 50px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border-gray);
+  border-radius: 10px;
+  background: var(--light-gray);
+  color: var(--black);
+  font-family: inherit;
+  font-size: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.15s;
+}
+
+.select:focus-visible {
+  border-color: var(--black);
+}
+
+.select:disabled {
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.searchBtn {
+  flex: 0 0 auto;
+  height: 50px;
+  padding: 0 28px;
+  border-radius: 10px;
+  border: 1.5px solid var(--red);
+  background: var(--red);
+  color: var(--white);
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.searchBtn:hover:not(:disabled) {
+  background: var(--red-hover);
+  border-color: var(--red-hover);
+}
+
+.searchBtn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.popularRow {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.popularLabel {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: 2px;
+}
+
+.chip {
+  height: 34px;
+  padding: 0 14px;
+  border: 1.5px solid var(--border-gray);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.chip:hover {
+  border-color: var(--red-on-light);
+  color: var(--red-on-light);
+}
+
+.helpLink {
+  margin-left: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.helpLink:hover {
+  color: var(--red-on-light);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(10px, 1.6vw, 18px);
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 18px;
+  background: var(--surface-2);
+  border-radius: 999px;
+}
+
+.badgeIcon {
+  display: flex;
+  flex: none;
+  color: var(--red-on-light);
+}
+
+.badgeIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.badgeText {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.badgeText strong {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    margin-top: clamp(-32px, -6vw, -20px);
+  }
+
+  .helpLink {
+    margin-left: 0;
+    width: 100%;
+  }
+}

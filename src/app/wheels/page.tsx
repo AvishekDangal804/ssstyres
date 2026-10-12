@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import WheelsCatalogue from "./WheelsCatalogue";
 import { pageMetadata } from "@/lib/site";
 
@@ -9,5 +10,11 @@ export const metadata = pageMetadata({
 });
 
 export default function WheelsPage() {
-  return <WheelsCatalogue />;
+  // WheelsCatalogue reads ?size=&pcd= (from the home page's size search)
+  // via useSearchParams, which requires a Suspense boundary.
+  return (
+    <Suspense>
+      <WheelsCatalogue />
+    </Suspense>
+  );
 }

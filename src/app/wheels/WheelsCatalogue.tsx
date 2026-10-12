@@ -1,6 +1,7 @@
 "use client";
 
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -89,7 +90,24 @@ export default function WheelsCatalogue() {
   // card and a swatch there picks between the real colours manager actually
   // stocks that fitment in -- not every card gets swatches, since most sizes
   // only come in one real colour.
-  const groups = useMemo(() => groupWheelsBySize(WHEELS), []);
+  const allGroups = useMemo(() => groupWheelsBySize(WHEELS), []);
+
+  // ?size=&pcd= arrive from the home page's size search. Matched against
+  // each group's own fitment rather than parsed out of the group key, so
+  // this doesn't care which model the size belongs to.
+  const searchParams = useSearchParams();
+  const filterSize = searchParams.get("size");
+  const filterPcd = searchParams.get("pcd");
+  const matched = useMemo(() => {
+    if (!filterSize || !filterPcd) return null;
+    return allGroups.filter(
+      (g) => g.variants[0].size === filterSize && g.variants[0].pcd === filterPcd
+    );
+  }, [allGroups, filterSize, filterPcd]);
+  // Falls back to the full range if the filter matched nothing (a stale or
+  // hand-edited URL) rather than ever showing an empty grid.
+  const groups = matched && matched.length > 0 ? matched : allGroups;
+  const isFiltered = matched !== null && matched.length > 0;
 
   const heroRef = useScrollProgress<HTMLDivElement>((p, el) => {
     const img = el.querySelector<HTMLElement>("[data-hero-img]");
@@ -97,6 +115,7 @@ export default function WheelsCatalogue() {
   });
 
   const gridRef = useRef<HTMLDivElement | null>(null);
+  const gridSectionRef = useRef<HTMLDivElement | null>(null);
   const [revealed, setRevealed] = useState(false);
   useEffect(() => {
     const el = gridRef.current;
@@ -112,6 +131,15 @@ export default function WheelsCatalogue() {
     );
     io.observe(el);
     return () => io.disconnect();
+  }, []);
+
+  // Arriving with a size search already picked -- jump straight to the
+  // result (banner included) instead of leaving it below the hero for the
+  // user to scroll to.
+  useEffect(() => {
+    if (isFiltered) gridSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    // Only on arrival with a filter, not on every re-render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -145,7 +173,17 @@ export default function WheelsCatalogue() {
         </div>
       </section>
 
-      <section className={styles.gridSection}>
+      <section ref={gridSectionRef} className={styles.gridSection}>
+        {isFiltered && (
+          <div className={styles.filterBanner}>
+            <span>
+              Showing <strong>{filterSize} · {filterPcd}</strong>
+            </span>
+            <Link href="/wheels" className={styles.filterClear}>
+              Clear filter — view all {allGroups.length} fitments
+            </Link>
+          </div>
+        )}
         <div ref={gridRef} className={`${styles.grid} ${revealed ? styles.revealed : ""}`}>
           {groups.map((g) => (
             <WheelCard key={g.key} group={g} />
