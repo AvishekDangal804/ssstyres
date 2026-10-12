@@ -111,8 +111,24 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 18vw, 340px), 1fr));
+  /* Fixed 3 columns, not auto-fill -- with exactly 6 fitment cards today,
+     auto-fill was packing 4 into row one and only 2 into row two, leaving
+     a lopsided gap on the right. 3 columns splits evenly into two full
+     rows with equal gaps on both axes. */
+  grid-template-columns: repeat(3, 1fr);
   gap: clamp(18px, 1.4vw, 28px);
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .card {
