@@ -13,7 +13,12 @@ import {
   type CategoryId,
   type WheelGroup,
 } from "@/lib/wheels-data";
-import { GOOGLE_RATING, GOOGLE_REVIEWS_URL, GOOGLE_WRITE_REVIEW_URL } from "@/lib/site";
+import {
+  GOOGLE_RATING,
+  GOOGLE_REVIEW_COUNT,
+  GOOGLE_REVIEWS_URL,
+  GOOGLE_WRITE_REVIEW_URL,
+} from "@/lib/site";
 import styles from "./HomeShowcase.module.css";
 
 // Leaflet touches window/document on import, so it can only ever run on the
@@ -47,6 +52,15 @@ function GoogleG({ className }: { className?: string }) {
   );
 }
 
+// The same three customer types already named in the reviews section's own
+// body copy ("workshops, panel shops and fleets") -- not a new claim, just
+// that sentence rendered as icons too.
+const REVIEW_TYPES = [
+  { label: "Workshops", icon: "wrench" as const },
+  { label: "Panel shops", icon: "spray" as const },
+  { label: "Fleets", icon: "fleet" as const },
+];
+
 // Plain-fact strip. Only things that are true of the business and already
 // stated elsewhere on the site — no counts, ratings or years.
 const FACTS = [
@@ -56,7 +70,7 @@ const FACTS = [
   { title: "Dealer Portal", label: "Online trade ordering", icon: "portal" as const },
 ];
 
-type FactIcon = (typeof FACTS)[number]["icon"];
+type FactIcon = (typeof FACTS)[number]["icon"] | "wrench" | "spray" | "fleet";
 
 function StatIcon({ id }: { id: FactIcon }) {
   const common = {
@@ -102,6 +116,29 @@ function StatIcon({ id }: { id: FactIcon }) {
           <rect x="2.5" y="4.5" width="19" height="13" rx="1.5" />
           <path d="M2.5 15h19" />
           <path d="M9 20h6" />
+        </svg>
+      );
+    case "wrench":
+      return (
+        <svg {...common}>
+          <path d="M14.7 6.3a4 4 0 0 0-5.4 4.6L3 17.2V21h3.8l6.3-6.3a4 4 0 0 0 4.6-5.4l-2.8 2.8-2.1-2.1 2.9-2.8Z" />
+        </svg>
+      );
+    case "spray":
+      return (
+        <svg {...common}>
+          <rect x="5" y="8" width="8" height="13" rx="1.4" />
+          <path d="M9 8V5.5a2 2 0 0 1 2-2h1" />
+          <path d="M14.5 3.5h2M16 6.5h3M15 9.5h2.5" />
+        </svg>
+      );
+    case "fleet":
+      return (
+        <svg {...common}>
+          <rect x="1.5" y="9" width="11" height="8" rx="1" />
+          <path d="M12.5 11.5h3.2l2.8 2.8V17h-6z" />
+          <circle cx="5.6" cy="17.6" r="1.6" />
+          <circle cx="16.4" cy="17.6" r="1.6" />
         </svg>
       );
   }
@@ -556,6 +593,9 @@ export default function HomeShowcase() {
               <span className={styles.reviewsStars} aria-hidden="true">
                 ★★★★★
               </span>
+              <span className={styles.reviewsCount}>
+                {GOOGLE_REVIEW_COUNT} reviews
+              </span>
             </div>
             <h2 id="home-reviews" className={styles.reviewsHeading}>
               {GOOGLE_RATING} rated on Google
@@ -564,6 +604,16 @@ export default function HomeShowcase() {
               By the workshops, panel shops and fleets we supply across
               Melbourne.
             </p>
+            <ul className={styles.reviewsTypes}>
+              {REVIEW_TYPES.map((t) => (
+                <li key={t.label} className={styles.reviewsType}>
+                  <span className={styles.reviewsTypeIcon} aria-hidden="true">
+                    <StatIcon id={t.icon} />
+                  </span>
+                  {t.label}
+                </li>
+              ))}
+            </ul>
           </div>
           <div className={styles.reviewsCtas}>
             <a
