@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CATEGORIES,
+  MODELS,
   WHEELS,
   VEHICLES,
   groupWheels,
@@ -69,6 +70,10 @@ const STATEMENT_SLIDES = [
 const SLIDE_MS = 4200;
 const LAST_SLIDE = STATEMENT_SLIDES.length - 1;
 
+function uniqueInOrder(values: string[]): string[] {
+  return [...new Set(values)];
+}
+
 const REDUCED_MOTION = "(prefers-reduced-motion: reduce)";
 function useReducedMotion() {
   return useSyncExternalStore(
@@ -89,13 +94,11 @@ export default function HomeShowcase() {
   const stmtCopyRef = useRef<HTMLDivElement | null>(null);
   const featRef = useRef<HTMLElement | null>(null);
   const featImgWrapRef = useRef<HTMLDivElement | null>(null);
-  const sliderRef = useRef<HTMLDivElement | null>(null);
 
   const [activeCat, setActiveCat] = useState<CategoryId>("offroad");
   const [feat, setFeat] = useState(0);
-  const [track, setTrack] = useState({ sp: 0, sw: 0.3 });
-  // One card per model, with every colour as a swatch inside it -- the Home
-  // slider wants a few rich cards you flip through, not one card per finish.
+  // One card per model, with every colour as a swatch inside it -- there are
+  // only ever 2-3 real models, so this is a short static row, not a carousel.
   const wheelGroups = useMemo(() => groupWheels(WHEELS), []);
 
   // Statement slideshow. `reach` is the highest slide mounted so far: slides
@@ -175,34 +178,6 @@ export default function HomeShowcase() {
     };
   }, []);
 
-  // Slider progress thumb
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-    const measure = () => {
-      const max = el.scrollWidth - el.clientWidth;
-      const sw = el.scrollWidth ? Math.min(1, el.clientWidth / el.scrollWidth) : 1;
-      const sp = max > 0 ? Math.min(1, el.scrollLeft / max) : 0;
-      setTrack((cur) =>
-        Math.abs(sw - cur.sw) > 0.002 || Math.abs(sp - cur.sp) > 0.002
-          ? { sp, sw }
-          : cur
-      );
-    };
-    measure();
-    const t = setTimeout(measure, 300);
-    el.addEventListener("scroll", measure);
-    window.addEventListener("resize", measure);
-    return () => {
-      clearTimeout(t);
-      el.removeEventListener("scroll", measure);
-      window.removeEventListener("resize", measure);
-    };
-  }, []);
-
-  const slideBy = (dx: number) =>
-    sliderRef.current?.scrollBy({ left: dx, behavior: "smooth" });
-
   const featList = VEHICLES.filter((v) => v.img);
   const fv = featList[feat % featList.length] ?? featList[0];
   const gridVehicles = VEHICLES.slice(0, 4);
@@ -264,53 +239,53 @@ export default function HomeShowcase() {
 
       <section className={styles.sliderSection} aria-labelledby="home-range">
         <div className={styles.sectionHead}>
-          <h2 id="home-range" className={styles.sectionH2}>
-            Wheel range
-          </h2>
+          <div className={styles.rangeHeadText}>
+            <div className={styles.kickerRow}>
+              <span className={styles.bar} />
+              The SSS range
+            </div>
+            <h2 id="home-range" className={styles.sectionH2}>
+              Wheel range
+            </h2>
+            <p className={styles.rangeHeadBody}>
+              Two models, engineered for Australian utes, vans, 4x4s and
+              trailers. Pick a finish to preview it.
+            </p>
+          </div>
           <Link href="/wheels" className={styles.btnOutlineDark}>
             All wheels <span>→</span>
           </Link>
         </div>
-        <div ref={sliderRef} className={styles.slider}>
-          {wheelGroups.map((g) => (
-            <RangeCard key={g.key} group={g} />
-          ))}
-          <Link href="/wheels" className={styles.rangeMoreCard}>
-            <span className={styles.rangeMoreIcon} aria-hidden="true">
-              →
-            </span>
-            <span className={styles.rangeMoreTitle}>See every fitment</span>
-            <span className={styles.rangeMoreSub}>
-              All sizes, PCDs and finishes
-            </span>
-          </Link>
-        </div>
-        <div className={styles.sliderControls}>
-          <button
-            type="button"
-            aria-label="Previous wheels"
-            className={styles.arrowBtn}
-            onClick={() => slideBy(-384)}
-          >
-            ←
-          </button>
-          <div className={styles.track} aria-hidden="true">
-            <div
-              className={styles.thumb}
-              style={{
-                width: `${(track.sw * 100).toFixed(2)}%`,
-                left: `${(track.sp * (1 - track.sw) * 100).toFixed(2)}%`,
-              }}
-            />
+        <div className={styles.rangeInner}>
+          <div className={styles.rangeGrid}>
+            {wheelGroups.map((g, i) => (
+              <RangeCard key={g.key} group={g} index={i} total={wheelGroups.length} />
+            ))}
           </div>
-          <button
-            type="button"
-            aria-label="Next wheels"
-            className={styles.arrowBtn}
-            onClick={() => slideBy(384)}
-          >
-            →
-          </button>
+          <div className={styles.fitmentStrip}>
+            <Link href="/wheels" className={styles.fitmentStripMain}>
+              <span className={styles.fitmentStripIcon} aria-hidden="true">
+                →
+              </span>
+              <span className={styles.fitmentStripText}>
+                <span className={styles.fitmentStripTitle}>See every fitment</span>
+                <span className={styles.fitmentStripSub}>
+                  All sizes, PCDs and finishes in one place
+                </span>
+              </span>
+            </Link>
+            <nav className={styles.fitmentStripCats} aria-label="Browse by wheel type">
+              {CATEGORIES.map((c) => (
+                <Link
+                  key={c.id}
+                  href={`/wheels?cat=${c.id}`}
+                  className={styles.fitmentCatPill}
+                >
+                  {c.name}
+                </Link>
+              ))}
+            </nav>
+          </div>
         </div>
       </section>
 
@@ -543,13 +518,22 @@ export default function HomeShowcase() {
   );
 }
 
-function RangeCard({ group }: { group: WheelGroup }) {
+function RangeCard({
+  group,
+  index,
+  total,
+}: {
+  group: WheelGroup;
+  index: number;
+  total: number;
+}) {
   const initial = useMemo(() => defaultVariantIndex(group.variants), [group.variants]);
   const [active, setActive] = useState(initial);
   // See the same guard in WheelsCatalogue.tsx's WheelCard: `active` is state
   // keyed on the group, so a shorter variants array for the same key can
   // leave it pointing past the end.
   const w = group.variants[active] ?? group.variants[0];
+  const model = MODELS.find((m) => m.id === w.model);
 
   // One swatch per distinct colour, not one per SKU: a model stocked in 6
   // colours across 3 sizes has 18 variants, but showing all 18 as swatches
@@ -565,37 +549,56 @@ function RangeCard({ group }: { group: WheelGroup }) {
     return unique.length > 1 ? unique : group.variants.map((_, i) => i);
   }, [group.variants]);
 
-  return (
-    <div className={styles.slideCard}>
-      <Link
-        href={`/wheels?model=${w.model}`}
-        className={styles.slideImgLink}
-        tabIndex={-1}
-        aria-hidden="true"
-      >
-        {w.img ? (
-          <Image
-            src={w.img}
-            alt=""
-            fill
-            sizes="(max-width: 720px) 80vw, 300px"
-            className={styles.contain}
-          />
-        ) : (
-          <ImagePlaceholder label={`${w.name} ${w.variant} — photo coming soon`} />
-        )}
-      </Link>
-      <div className={styles.slideInfo}>
-        <Link href={`/wheels?model=${w.model}`} className={styles.slideName}>
-          {w.name}
-        </Link>
-        <div className={styles.slideFinish}>{w.variant}</div>
-        <div className={styles.slideFit}>
-          {w.size} · {w.pcd} · {w.offset}
-        </div>
+  // Model-level facts (every size/PCD/offset it's offered in and the full
+  // load range, not just the active swatch's own fitment) -- a swatch only
+  // ever changes which colour/fitment photo is previewed, never what the
+  // model as a whole is rated for.
+  const sizes = useMemo(() => uniqueInOrder(group.variants.map((v) => v.size)), [group.variants]);
+  const pcds = useMemo(() => uniqueInOrder(group.variants.map((v) => v.pcd)), [group.variants]);
+  const offsets = useMemo(() => uniqueInOrder(group.variants.map((v) => v.offset)), [group.variants]);
 
+  const loadRating = useMemo(() => {
+    const loads = group.variants
+      .map((v) => parseInt(v.load, 10))
+      .filter((n) => !Number.isNaN(n));
+    const min = Math.min(...loads);
+    const max = Math.max(...loads);
+    return min === max ? `${min} kg` : `${min}–${max} kg`;
+  }, [group.variants]);
+
+  const position = `0${index + 1} / 0${total}`;
+
+  return (
+    <article className={styles.rangeCard}>
+      <div className={styles.rangeImgWrap}>
+        <div className={styles.rangeImgOverlay}>
+          {model && <span className={styles.rangeTag}>{model.tag}</span>}
+          <span className={styles.rangePos}>{position}</span>
+        </div>
+        <Link
+          href={`/wheels?model=${w.model}`}
+          className={styles.rangeImgLink}
+          tabIndex={-1}
+          aria-hidden="true"
+        >
+          {w.img ? (
+            <Image
+              key={w.img}
+              src={w.img}
+              alt=""
+              fill
+              sizes="(max-width: 720px) 80vw, 300px"
+              className={styles.contain}
+            />
+          ) : (
+            <ImagePlaceholder label={`${w.name} ${w.variant} — photo coming soon`} />
+          )}
+        </Link>
+      </div>
+
+      <div className={styles.rangeSwatchBar}>
         {swatchIndexes.length > 1 && (
-          <div className={styles.sizeChips} role="radiogroup" aria-label="Finish">
+          <div className={styles.rangeSwatches} role="radiogroup" aria-label="Finish">
             {swatchIndexes.map((i) => {
               const v = group.variants[i];
               return (
@@ -606,13 +609,13 @@ function RangeCard({ group }: { group: WheelGroup }) {
                   aria-checked={i === active}
                   aria-label={v.variant}
                   title={v.variant}
-                  className={`${styles.sizeChip} ${i === active ? styles.sizeChipActive : ""}`}
+                  className={`${styles.rangeSwatch} ${i === active ? styles.rangeSwatchActive : ""}`}
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
                 >
                   {v.img ? (
-                    <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
+                    <Image src={v.img} alt="" fill sizes="48px" className={styles.rangeSwatchImg} />
                   ) : (
                     <ImagePlaceholder label={`${v.variant} — photo coming soon`} showLabel={false} compact />
                   )}
@@ -621,7 +624,44 @@ function RangeCard({ group }: { group: WheelGroup }) {
             })}
           </div>
         )}
+        <span className={styles.rangeFinishLabel}>
+          <span className={styles.rangeFinishCaption}>Finish</span>
+          <span className={styles.rangeFinishName}>{w.variant}</span>
+        </span>
       </div>
-    </div>
+
+      <div className={styles.rangeContent}>
+        <Link href={`/wheels?model=${w.model}`} className={styles.rangeName}>
+          {w.name}
+        </Link>
+        {model && <p className={styles.rangeBlurb}>{model.blurb}</p>}
+        <dl className={styles.rangeStats}>
+          <div className={styles.rangeStat}>
+            <dt>Sizes</dt>
+            <dd>{sizes.join(" · ")}</dd>
+          </div>
+          <div className={styles.rangeStat}>
+            <dt>PCD</dt>
+            <dd>{pcds.join(" · ")}</dd>
+          </div>
+          <div className={styles.rangeStat}>
+            <dt>Offset</dt>
+            <dd>{offsets.join(" · ")}</dd>
+          </div>
+          <div className={styles.rangeStat}>
+            <dt>Load rating</dt>
+            <dd>{loadRating}</dd>
+          </div>
+        </dl>
+        <div className={styles.rangeCtaRow}>
+          <Link href={`/wheels?model=${w.model}`} className={styles.btnRed}>
+            View {model?.short ?? w.name} <span>→</span>
+          </Link>
+          <Link href="/fitment" className={styles.btnOutlineDark}>
+            Check fitment
+          </Link>
+        </div>
+      </div>
+    </article>
   );
 }

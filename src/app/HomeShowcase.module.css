@@ -287,7 +287,6 @@
 .sliderSection {
   padding: clamp(44px, 5vw, 72px) 0 0;
   width: 100%;
-  overflow: hidden;
 }
 
 .sliderSection .sectionHead {
@@ -296,228 +295,327 @@
   padding: 0 var(--gutter);
   width: 100%;
   box-sizing: border-box;
+  align-items: flex-end;
 }
 
-.slider {
-  display: flex;
-  gap: clamp(18px, 1.6vw, 30px);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  padding: 0 var(--gutter) 6px calc((100% - var(--container)) / 2 + var(--gutter));
-  scroll-padding-inline: calc((100% - var(--container)) / 2 + var(--gutter));
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.slider::-webkit-scrollbar {
-  display: none;
-}
-
-.slideCard {
-  flex: 0 0 min(clamp(320px, 23vw, 460px), calc(100vw - 2 * var(--gutter)));
-  scroll-snap-align: start;
+.rangeHeadText {
   display: flex;
   flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+}
+
+.rangeHeadText .kickerRow {
+  margin-bottom: 0;
+}
+
+.rangeHeadBody {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.rangeInner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rangeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr));
+  gap: 24px;
+}
+
+.rangeCard {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.rangeImgWrap {
   position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(48px, 6vw, 64px) 32px 28px;
+  background: radial-gradient(60% 55% at 50% 48%, var(--white) 0%, var(--surface-2) 72%);
 }
 
-/* Trailing tile after the real model cards -- the slider only ever has 2-3
-   real models, so a wide viewport leaves a lot of empty track. This gives
-   that space an honest CTA back into the full catalogue instead of either
-   padding out the row with invented products or leaving it visibly empty. */
-.rangeMoreCard {
-  flex: 0 0 min(clamp(320px, 23vw, 460px), calc(100vw - 2 * var(--gutter)));
-  scroll-snap-align: start;
-  aspect-ratio: 1;
+.rangeImgOverlay {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
-  text-align: center;
-  padding: 24px;
-  box-sizing: border-box;
-  border: 1.5px dashed var(--line);
-  border-radius: 4px;
-  color: var(--black);
-  transition: border-color 0.2s, background 0.2s;
+  justify-content: space-between;
+  gap: 12px;
 }
 
-.rangeMoreCard:hover {
-  border-color: var(--red);
+.rangeTag {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: 3px;
+  background: var(--black);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rangePos {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.rangeImgLink {
+  position: relative;
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+}
+
+.rangeSwatchBar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 14px 28px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
   background: var(--off-white);
 }
 
-.rangeMoreIcon {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1.5px solid var(--line);
+.rangeSwatches {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
-}
-
-.rangeMoreCard:hover .rangeMoreIcon {
-  border-color: var(--red);
-  background: var(--red);
-  color: var(--white);
-}
-
-.rangeMoreTitle {
-  font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: clamp(18px, 1.3vw, 22px);
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-}
-
-.rangeMoreSub {
-  font-size: 13px;
-  color: var(--ink-3);
-}
-
-.slideImgLink {
-  position: relative;
-  display: block;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: var(--white);
-  transition: box-shadow 0.25s;
-}
-
-/* Lifts with a shadow rather than zooming the photo — zooming a contain-fit
-   image inside its clipped box made the wheel look cropped at the edges. */
-.slideImgLink:hover {
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
-}
-
-.slideInfo {
-  padding: 20px 2px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.slideName {
-  font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: clamp(22px, 1.4vw, 26px);
-  line-height: 1;
-  text-transform: uppercase;
-  letter-spacing: -0.015em;
-  color: var(--black);
-}
-
-.slideName:hover {
-  color: var(--red-on-light);
-}
-
-.slideFit {
-  font-size: 15px;
-  color: var(--ink-2);
-  letter-spacing: 0.01em;
-}
-
-.slideFinish {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--ink-2);
-}
-
-.sizeChips {
-  display: flex;
-  gap: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  padding-top: 4px;
 }
 
-.sizeChip {
+.rangeSwatch {
   position: relative;
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
-  border: 2px solid var(--border-gray);
-  background: var(--surface-2);
+  width: 48px;
+  height: 48px;
+  padding: 3px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--white);
   overflow: hidden;
-  padding: 0;
   box-sizing: border-box;
   cursor: pointer;
   transition: border-color 0.15s, transform 0.15s;
 }
 
-.sizeChip:hover {
+.rangeSwatch:hover {
   /* #aaa measured 2.3:1 on white, under the 3:1 non-text minimum. */
   border-color: var(--ink-3);
   transform: translateY(-2px);
 }
 
-.sizeChipActive {
+.rangeSwatchActive {
   border-color: var(--red);
   transform: translateY(-2px);
 }
 
-.sizeChipImg {
+.rangeSwatchImg {
   object-fit: contain;
-}
-
-.sliderControls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin-top: 24px;
-}
-
-.arrowBtn {
-  position: relative;
-  width: 38px;
-  height: 38px;
   border-radius: 50%;
-  border: 1.5px solid var(--border-gray);
-  background: var(--white);
-  cursor: pointer;
-  color: var(--black);
-  font-size: 15px;
+}
+
+.rangeFinishLabel {
+  margin-left: auto;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+
+.rangeFinishCaption {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.rangeFinishName {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.rangeContent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px 28px 28px;
+}
+
+.rangeName {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--black);
+}
+
+.rangeName:hover {
+  color: var(--red-on-light);
+}
+
+.rangeBlurb {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.rangeStats {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.rangeStat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rangeStat dt {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.rangeStat dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--black);
+}
+
+.rangeCtaRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Replaces the old trailing "See every fitment" slide -- a full-width dark
+   strip so it reads as a destination in its own right, not a leftover slot
+   in the card row. */
+.fitmentStrip {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s, background 0.2s, color 0.2s;
-}
-
-.arrowBtn::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-}
-
-.arrowBtn:hover {
-  border-color: var(--black);
+  gap: 20px 32px;
+  padding: 28px 32px;
+  border-radius: 6px;
   background: var(--black);
   color: var(--white);
 }
 
-.track {
-  position: relative;
-  width: min(460px, 60%);
-  height: 4px;
-  background: var(--light-gray);
-  border-radius: 2px;
-  overflow: hidden;
+.fitmentStripMain {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  color: var(--white);
 }
 
-.thumb {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  /* #b5b5b5 measured 1.96:1 against the track's --light-gray, under the
-     3:1 UI-component minimum (WCAG 1.4.11). */
-  background: var(--ink-3);
-  border-radius: 2px;
+.fitmentStripIcon {
+  flex: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--red);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: var(--white);
+  transition: background 0.2s;
+}
+
+.fitmentStripMain:hover .fitmentStripIcon {
+  background: var(--red-hover);
+}
+
+.fitmentStripText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fitmentStripTitle {
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.fitmentStripSub {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.fitmentStripCats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.fitmentCatPill {
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.fitmentCatPill:hover {
+  border-color: var(--red);
+  color: var(--white);
+  background: rgba(226, 35, 26, 0.12);
+}
+
+@media (max-width: 700px) {
+  .rangeStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .fitmentStripCats {
+    margin-left: 0;
+  }
 }
 
 /* Types of wheels */
