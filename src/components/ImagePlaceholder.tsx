@@ -8,12 +8,20 @@ import styles from "./ImagePlaceholder.module.css";
 export default function ImagePlaceholder({
   label,
   showLabel = true,
+  compact = false,
 }: {
   label: string;
   showLabel?: boolean;
+  /** Icon-only, no padding/label -- for small contexts like a 56px swatch
+      where the standard icon+label treatment would overflow. */
+  compact?: boolean;
 }) {
   return (
-    <div className={styles.placeholder} role="img" aria-label={label}>
+    <div
+      className={`${styles.placeholder} ${compact ? styles.compact : ""}`}
+      role="img"
+      aria-label={label}
+    >
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -26,7 +34,7 @@ export default function ImagePlaceholder({
         <circle cx="9" cy="10" r="1.75" />
         <path d="M21 16l-5.5-5.5a1.5 1.5 0 0 0-2.12 0L4 19" />
       </svg>
-      {showLabel && <span className={styles.label}>{label}</span>}
+      {showLabel && !compact && <span className={styles.label}>{label}</span>}
     </div>
   );
 }

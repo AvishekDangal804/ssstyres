@@ -8,6 +8,11 @@ const R = {
   twoTone: '/assets/wheels/r6.png',
   hole: '/assets/wheels/r3.png',
   holeAlt: '/assets/wheels/r1.png',
+  // The real SSS D-Hole photo (a classic pressed-steel wheel) -- hole/holeAlt
+  // above are D-Locker renders that were standing in for D-Hole everywhere
+  // it appeared. D-Hole only has a real photo for its Black finish; White
+  // and Silver are real stock but have no photo yet (img: null below).
+  holeBlack: '/assets/wheels/d-hole-black.png',
 } as const;
 
 export type CategoryId = 'steel' | 'offroad' | 'beadlock' | 'street' | 'commercial' | 'trailer';
@@ -22,12 +27,12 @@ export interface Category {
 }
 
 export const CATEGORIES: Category[] = [
-  { id: 'steel', name: 'Steel', tag: 'Durable and repairable.', blurb: 'Pressed-steel construction that takes a hit and keeps rolling — repairable, rated for real loads, finished to shrug off kerbs, gravel and salt.', img: R.hole, bullets: ['Repairable construction', 'High load ratings', 'Classic D-hole design', 'Load ratings to 1250 kg'] },
+  { id: 'steel', name: 'Steel', tag: 'Durable and repairable.', blurb: 'Pressed-steel construction that takes a hit and keeps rolling — repairable, rated for real loads, finished to shrug off kerbs, gravel and salt.', img: R.holeBlack, bullets: ['Repairable construction', 'High load ratings', 'Classic D-hole design', 'Load ratings to 1250 kg'] },
   { id: 'offroad', name: 'Off Road', tag: 'Engineered for off-road use.', blurb: 'The SSS D-Locker in zero and negative offsets for dual cabs, wagons and touring builds — aggressive stance, solid construction.', img: R.twoTone, bullets: ['1250 kg load rating', 'Negative offset fitments', 'Bolted beadlock-style ring', '16x8 and 17x8 sizes'] },
   { id: 'beadlock', name: 'Beadlocks', tag: 'Beadlock-style strength.', blurb: "The D-Locker's bolted beadlock-style ring gives comp-inspired looks — the styling tourers ask for. Check your state's rules on modified wheels before fitting.", img: R.silverGold, bullets: ['Simulated beadlock ring', 'Hub-centric fitment', 'Comp-inspired styling', '3 finishes available'] },
   { id: 'street', name: 'Street', tag: 'Clean. Every day.', blurb: 'Machined-silver D-Locker fitments for SUVs and daily drivers such as the RAV4, with OEM-friendly offsets.', img: R.silver, bullets: ['OEM-friendly offsets', 'Hub-centric fitment', 'Machined silver finish', '2 machined finishes'] },
-  { id: 'commercial', name: 'Commercial', tag: 'Built for fleet use.', blurb: 'The SSS D-Hole for vans, utes and fleets — high load ratings, a finish that hides kerb rash, and volume supply for fleet accounts.', img: R.holeAlt, bullets: ['Fleet volume supply', 'HiAce and LT fitments', 'Gloss black finish', '15x7 and 16x7 sizes'] },
-  { id: 'trailer', name: 'Trailer', tag: 'Tow with confidence.', blurb: 'D-Hole fitments for box, boat and camper trailers — the common PCDs, with a corrosion-resistant coating.', img: R.hole, bullets: ['15"–16" fitments', 'Multi-PCD options', 'Corrosion-resistant finish', '1000 kg load rating'] },
+  { id: 'commercial', name: 'Commercial', tag: 'Built for fleet use.', blurb: 'The SSS D-Hole for vans, utes and fleets — high load ratings, a finish that hides kerb rash, and volume supply for fleet accounts.', img: R.holeBlack, bullets: ['Fleet volume supply', 'HiAce and LT fitments', 'Black, white and silver', '15x7 and 16x7 sizes'] },
+  { id: 'trailer', name: 'Trailer', tag: 'Tow with confidence.', blurb: 'D-Hole fitments for box, boat and camper trailers — the common PCDs, with a corrosion-resistant coating.', img: R.holeBlack, bullets: ['15"–16" fitments', 'Multi-PCD options', 'Corrosion-resistant finish', '1000 kg load rating'] },
 ];
 
 export type ModelId = 'd-locker' | 'd-hole';
@@ -35,7 +40,8 @@ export type ModelId = 'd-locker' | 'd-hole';
 export interface Finish {
   name: string;
   hex: string;
-  img: string;
+  /** null where the finish is real stock but has no photo yet. */
+  img: string | null;
   front: string;
 }
 
@@ -68,10 +74,14 @@ export const MODELS: Model[] = [
   },
   {
     id: 'd-hole', name: 'SSS D-Hole', short: 'D-Hole', cat: 'steel', tag: 'Classic steel', sizes: ['15"', '16"'],
-    blurb: 'The classic D-hole wheel, done properly. Gloss black, high load ratings and the common PCDs for utes, vans, fleets and trailers.',
+    blurb: 'The classic D-hole wheel, done properly. Black, white and silver, with high load ratings and the common PCDs for utes, vans, fleets and trailers.',
     lifestyle: null,
     finishes: [
-      { name: 'Gloss Black', hex: '#0E0E0E', img: R.hole, front: R.holeAlt },
+      // White and Silver are real stock without a photo yet -- img: null
+      // renders a placeholder rather than a made-up or borrowed picture.
+      { name: 'Black', hex: '#0E0E0E', img: R.holeBlack, front: R.holeBlack },
+      { name: 'White', hex: '#F2F1ED', img: null, front: R.holeBlack },
+      { name: 'Silver', hex: '#B8BCC2', img: null, front: R.holeBlack },
     ],
   },
 ];
@@ -89,7 +99,8 @@ export interface Wheel {
   offset: string;
   build: string;
   load: string;
-  img: string;
+  /** null where the finish is real stock but has no photo yet. */
+  img: string | null;
 }
 
 export const WHEELS: Wheel[] = [
@@ -111,9 +122,17 @@ export const WHEELS: Wheel[] = [
   { id: 'dl-17x8-6x139-ms', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined Silver', hex: '#B6BAC0', cat: 'street', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.hole },
   { id: 'dl-17x8-6x139-bm', model: 'd-locker', name: 'SSS D-Locker', variant: 'Black & Machined', hex: '#2E3136', cat: 'beadlock', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.holeAlt },
   { id: 'dl-17x8-6x139-gold', model: 'd-locker', name: 'SSS D-Locker', variant: 'Machined · Gold Bolt', hex: '#C9A23A', cat: 'beadlock', cat2: 'offroad', size: '17x8', pcd: '6x139.7', offset: 'ET0', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.silverGold },
-  { id: 'dh-15x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.hole },
-  { id: 'dh-15x7-5x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'trailer', size: '15x7', pcd: '5x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.holeAlt },
-  { id: 'dh-16x7-6x139', model: 'd-hole', name: 'SSS D-Hole', variant: 'Gloss Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: R.hole },
+  // White and Silver are real stock without a photo yet -- img: null renders
+  // a placeholder rather than a made-up or borrowed picture.
+  { id: 'dh-15x7-6x139-b', model: 'd-hole', name: 'SSS D-Hole', variant: 'Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.holeBlack },
+  { id: 'dh-15x7-6x139-w', model: 'd-hole', name: 'SSS D-Hole', variant: 'White', hex: '#F2F1ED', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: null },
+  { id: 'dh-15x7-6x139-s', model: 'd-hole', name: 'SSS D-Hole', variant: 'Silver', hex: '#B8BCC2', cat: 'steel', cat2: 'commercial', size: '15x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: null },
+  { id: 'dh-15x7-5x139-b', model: 'd-hole', name: 'SSS D-Hole', variant: 'Black', hex: '#0E0E0E', cat: 'steel', cat2: 'trailer', size: '15x7', pcd: '5x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: R.holeBlack },
+  { id: 'dh-15x7-5x139-w', model: 'd-hole', name: 'SSS D-Hole', variant: 'White', hex: '#F2F1ED', cat: 'steel', cat2: 'trailer', size: '15x7', pcd: '5x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: null },
+  { id: 'dh-15x7-5x139-s', model: 'd-hole', name: 'SSS D-Hole', variant: 'Silver', hex: '#B8BCC2', cat: 'steel', cat2: 'trailer', size: '15x7', pcd: '5x139.7', offset: 'ET0', build: 'Pressed steel', load: '1000 kg', img: null },
+  { id: 'dh-16x7-6x139-b', model: 'd-hole', name: 'SSS D-Hole', variant: 'Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: R.holeBlack },
+  { id: 'dh-16x7-6x139-w', model: 'd-hole', name: 'SSS D-Hole', variant: 'White', hex: '#F2F1ED', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: null },
+  { id: 'dh-16x7-6x139-s', model: 'd-hole', name: 'SSS D-Hole', variant: 'Silver', hex: '#B8BCC2', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: null },
 ];
 
 export interface Vehicle {
@@ -131,8 +150,8 @@ export const VEHICLES: Vehicle[] = [
   { make: 'Ford', model: 'Ranger', pcd: '6x139.7', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Matte Black', img: '/assets/vehicles/ranger.png' },
   { make: 'Toyota', model: 'HiAce', pcd: '6x139.7', wheel: 'd-locker', wheelShort: 'D-Locker 16x8', wheelName: 'SSS D-Locker 16x8 Matte Black', img: '/assets/vehicles/hiace.png' },
   { make: 'Toyota', model: 'RAV4', pcd: '5x114.3', wheel: 'd-locker', wheelShort: 'D-Locker 17x8', wheelName: 'SSS D-Locker 17x8 Full Machined', img: '/assets/vehicles/rav4.png' },
-  { make: 'Suzuki', model: 'Jimny JB74', pcd: '5x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 15x7', wheelName: 'SSS D-Hole 15x7 Gloss Black', img: null },
-  { make: 'Toyota', model: 'LandCruiser Prado 150', pcd: '6x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 16x7', wheelName: 'SSS D-Hole 16x7 Gloss Black', img: null },
+  { make: 'Suzuki', model: 'Jimny JB74', pcd: '5x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 15x7', wheelName: 'SSS D-Hole 15x7 Black', img: null },
+  { make: 'Toyota', model: 'LandCruiser Prado 150', pcd: '6x139.7', wheel: 'd-hole', wheelShort: 'D-Hole 16x7', wheelName: 'SSS D-Hole 16x7 Black', img: null },
 ];
 
 export interface WheelGroup {
@@ -183,8 +202,17 @@ export function groupWheelsBySize(list: Wheel[]): WheelGroup[] {
 
 // Leads with a non-black finish where the wheel actually comes in one.
 export function defaultVariantIndex(variants: Wheel[]): number {
-  const idx = variants.findIndex((v) => !/black/i.test(v.variant));
-  return idx >= 0 ? idx : 0;
+  // Prefers a non-black variant that actually has a photo (the usual case).
+  // Falls back to whichever variant has a photo at all -- otherwise a group
+  // where only the black variant has one (e.g. D-Hole's White/Silver are
+  // real stock with no photo yet) would default to a placeholder instead of
+  // the one real picture it has.
+  const nonBlackWithPhoto = variants.findIndex((v) => !/black/i.test(v.variant) && v.img);
+  if (nonBlackWithPhoto >= 0) return nonBlackWithPhoto;
+  const anyWithPhoto = variants.findIndex((v) => v.img);
+  if (anyWithPhoto >= 0) return anyWithPhoto;
+  const nonBlack = variants.findIndex((v) => !/black/i.test(v.variant));
+  return nonBlack >= 0 ? nonBlack : 0;
 }
 
 export const byId = (id: string): Wheel => WHEELS.find((w) => w.id === id) ?? WHEELS[0];

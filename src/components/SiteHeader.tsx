@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { PORTAL, CATEGORIES, MODELS } from "@/lib/wheels-data";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 import styles from "./SiteHeader.module.css";
 
 // Groups of routes that fall under one nav item, for the "you are here" red
@@ -156,8 +157,15 @@ export default function SiteHeader() {
             >
               <div className={styles.tileGrid}>
                 {MODELS.map((m) => {
+                  // Prefer a non-black finish, but only if it actually has a
+                  // photo -- otherwise a model whose only real picture is on
+                  // its black finish (e.g. D-Hole's White/Silver are real
+                  // stock with no photo yet) would show a placeholder here
+                  // instead of the one real picture it has.
                   const finish =
-                    m.finishes.find((f) => !/black/i.test(f.name)) ?? m.finishes[0];
+                    m.finishes.find((f) => !/black/i.test(f.name) && f.img) ??
+                    m.finishes.find((f) => f.img) ??
+                    m.finishes[0];
                   return (
                     <Link
                       key={m.id}
@@ -165,7 +173,11 @@ export default function SiteHeader() {
                       className={styles.tile}
                     >
                       <span className={styles.tileImg}>
-                        <Image src={finish.img} alt="" fill sizes="90px" />
+                        {finish.img ? (
+                          <Image src={finish.img} alt="" fill sizes="90px" />
+                        ) : (
+                          <ImagePlaceholder label={m.name} showLabel={false} compact />
+                        )}
                       </span>
                       <span className={styles.tileLabel}>{m.name}</span>
                     </Link>

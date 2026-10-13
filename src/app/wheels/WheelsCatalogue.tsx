@@ -12,6 +12,7 @@ import {
   type WheelGroup,
 } from "@/lib/wheels-data";
 import { useScrollProgress } from "@/lib/useScrollProgress";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 import styles from "./Wheels.module.css";
 
 // Rounds the card's photo box AND its image to whole device pixels together
@@ -216,16 +217,20 @@ function WheelCard({ group }: { group: WheelGroup }) {
         aria-hidden="true"
       >
         <div ref={imgWrapRef} className={styles.cardImgWrap}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- plain
-              img, flex-centred and sized via max-width/max-height; see
-              .cardImgWrap comment in Wheels.module.css for why this
-              avoids next/image's fill+object-fit here. */}
-          <img
-            src={w.img}
-            alt={`${w.name} ${w.size} in ${w.variant}`}
-            className={styles.cardImgInset}
-            loading="lazy"
-          />
+          {w.img ? (
+            // Plain img, flex-centred and sized via max-width/max-height;
+            // see .cardImgWrap comment in Wheels.module.css for why this
+            // avoids next/image's fill+object-fit here.
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={w.img}
+              alt={`${w.name} ${w.size} in ${w.variant}`}
+              className={styles.cardImgInset}
+              loading="lazy"
+            />
+          ) : (
+            <ImagePlaceholder label={`${w.name} ${w.variant} — photo coming soon`} />
+          )}
         </div>
       </Link>
 
@@ -267,7 +272,11 @@ function WheelCard({ group }: { group: WheelGroup }) {
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
               >
-                <Image src={v.img} alt="" fill sizes="56px" className={styles.colourDotImg} />
+                {v.img ? (
+                  <Image src={v.img} alt="" fill sizes="56px" className={styles.colourDotImg} />
+                ) : (
+                  <ImagePlaceholder label={`${v.variant} — photo coming soon`} showLabel={false} compact />
+                )}
               </button>
             ))}
           </div>

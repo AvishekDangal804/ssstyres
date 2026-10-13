@@ -20,6 +20,7 @@ import {
   GOOGLE_WRITE_REVIEW_URL,
 } from "@/lib/site";
 import { GoogleG, StatIcon } from "@/components/BrandIcons";
+import ImagePlaceholder from "@/components/ImagePlaceholder";
 import styles from "./HomeShowcase.module.css";
 
 // Leaflet touches window/document on import, so it can only ever run on the
@@ -572,13 +573,17 @@ function RangeCard({ group }: { group: WheelGroup }) {
         tabIndex={-1}
         aria-hidden="true"
       >
-        <Image
-          src={w.img}
-          alt=""
-          fill
-          sizes="(max-width: 720px) 80vw, 300px"
-          className={styles.contain}
-        />
+        {w.img ? (
+          <Image
+            src={w.img}
+            alt=""
+            fill
+            sizes="(max-width: 720px) 80vw, 300px"
+            className={styles.contain}
+          />
+        ) : (
+          <ImagePlaceholder label={`${w.name} ${w.variant} — photo coming soon`} />
+        )}
       </Link>
       <div className={styles.slideInfo}>
         <Link href={`/wheels?model=${w.model}`} className={styles.slideName}>
@@ -606,7 +611,11 @@ function RangeCard({ group }: { group: WheelGroup }) {
                   onFocus={() => setActive(i)}
                   onClick={() => setActive(i)}
                 >
-                  <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
+                  {v.img ? (
+                    <Image src={v.img} alt="" fill sizes="64px" className={styles.sizeChipImg} />
+                  ) : (
+                    <ImagePlaceholder label={`${v.variant} — photo coming soon`} showLabel={false} compact />
+                  )}
                 </button>
               );
             })}

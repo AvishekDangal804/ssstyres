@@ -19,6 +19,17 @@
   color: #8a8a8a;
 }
 
+.compact {
+  gap: 0;
+  padding: 0;
+  border-style: solid;
+}
+
+.compact .icon {
+  width: 40%;
+  height: 40%;
+}
+
 .label {
   font-size: 12px;
   font-weight: 600;

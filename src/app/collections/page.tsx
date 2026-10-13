@@ -122,13 +122,17 @@ export default function CollectionsPage() {
                 className={styles.finishCard}
               >
                 <div className={styles.finishImg}>
-                  <Image
-                    src={f.img}
-                    alt={`${f.name} in ${f.finish}`}
-                    fill
-                    sizes="(max-width: 500px) 45vw, 220px"
-                    className={styles.contain}
-                  />
+                  {f.img ? (
+                    <Image
+                      src={f.img}
+                      alt={`${f.name} in ${f.finish}`}
+                      fill
+                      sizes="(max-width: 500px) 45vw, 220px"
+                      className={styles.contain}
+                    />
+                  ) : (
+                    <ImagePlaceholder label={`${f.name} ${f.finish} — photo coming soon`} compact />
+                  )}
                 </div>
                 <div>
                   <div className={styles.finishName}>{f.name}</div>
