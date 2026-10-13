@@ -970,8 +970,18 @@
 
 .vehiclesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  /* Fixed 2 columns, not auto-fit -- with exactly 4 vehicle cards, auto-fit
+     was resolving to 3 columns at wide viewports, wrapping the 4th card
+     alone onto its own row with two empty column slots beside it. 2
+     columns splits 4 cards into two full rows with no empty cells. */
+  grid-template-columns: repeat(2, 1fr);
   gap: clamp(20px, 1.6vw, 32px);
+}
+
+@media (max-width: 700px) {
+  .vehiclesGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .vehCard {
