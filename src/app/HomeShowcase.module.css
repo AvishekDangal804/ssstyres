@@ -1096,7 +1096,12 @@
    one-line blurb) beside the two CTAs, plain on a white section with no
    card/border/shadow. Not a big boxed "trust badge". */
 .reviewsSection {
-  background: var(--white);
+  /* Off-white, not pure white -- matching the sections elsewhere on the
+     site (Guide, Types) that break up the page's otherwise-white rhythm.
+     With less content in this section now, plain white read as a flat,
+     empty block next to the equally-white Delivery Coverage section
+     right below it. */
+  background: var(--off-white);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
