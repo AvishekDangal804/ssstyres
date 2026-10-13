@@ -1104,12 +1104,12 @@
 .reviewsInner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(40px, 4.5vw, 64px) var(--gutter);
+  padding: clamp(28px, 3.4vw, 44px) var(--gutter);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 48px;
+  gap: clamp(24px, 3vw, 40px);
   width: 100%;
   box-sizing: border-box;
 }
@@ -1180,7 +1180,7 @@
 .reviewsBadges {
   max-width: var(--container);
   margin: 0 auto;
-  padding: 0 var(--gutter) clamp(32px, 4vw, 56px);
+  padding: 0 var(--gutter) clamp(20px, 2.6vw, 36px);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
