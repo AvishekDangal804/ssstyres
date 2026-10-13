@@ -4,30 +4,7 @@ import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FITMENTS, FITMENT_SIZES, pcdsForSize } from "@/lib/wheels-data";
-import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT } from "@/lib/site";
-import { GoogleG, StatIcon } from "@/components/BrandIcons";
 import styles from "./HeroSearch.module.css";
-
-// Real facts already stated elsewhere on the site (Google rating, warehouse,
-// trade-only supply) -- not new claims, just surfaced here too since this is
-// the first thing after the hero.
-const BADGES = [
-  {
-    icon: "google" as const,
-    title: `${GOOGLE_RATING} on Google`,
-    label: `${GOOGLE_REVIEW_COUNT} reviews`,
-  },
-  {
-    icon: "warehouse" as const,
-    title: "Own warehouse",
-    label: "Dandenong South",
-  },
-  {
-    icon: "truck" as const,
-    title: "Trade only",
-    label: "Wholesale supply",
-  },
-];
 
 export default function HeroSearch() {
   const router = useRouter();
@@ -109,20 +86,6 @@ export default function HeroSearch() {
             Need help finding your size?
           </Link>
         </div>
-      </div>
-
-      <div className={styles.badges}>
-        {BADGES.map((b) => (
-          <div key={b.title} className={styles.badge}>
-            <span className={styles.badgeIcon} aria-hidden="true">
-              {b.icon === "google" ? <GoogleG /> : <StatIcon id={b.icon} />}
-            </span>
-            <span className={styles.badgeText}>
-              <strong>{b.title}</strong>
-              {b.label}
-            </span>
-          </div>
-        ))}
       </div>
     </section>
   );

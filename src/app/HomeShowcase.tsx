@@ -37,6 +37,26 @@ const REVIEW_TYPES = [
   { label: "Fleets", icon: "fleet" as const },
 ];
 
+// Real facts already stated elsewhere on the site (Google rating, warehouse,
+// trade-only supply) -- not new claims.
+const TRUST_BADGES = [
+  {
+    icon: "google" as const,
+    title: `${GOOGLE_RATING} on Google`,
+    label: `${GOOGLE_REVIEW_COUNT} reviews`,
+  },
+  {
+    icon: "warehouse" as const,
+    title: "Own warehouse",
+    label: "Dandenong South",
+  },
+  {
+    icon: "truck" as const,
+    title: "Trade only",
+    label: "Wholesale supply",
+  },
+];
+
 // Statement band backdrop: SSS wheels in five settings, cross-fading. Decorative.
 const STATEMENT_SLIDES = [
   "/assets/statement/s1.jpg",
@@ -465,15 +485,6 @@ export default function HomeShowcase() {
       <section className={styles.reviewsSection} aria-labelledby="home-reviews">
         <div className={styles.reviewsInner}>
           <div className={styles.reviewsText}>
-            <div className={styles.reviewsTop}>
-              <GoogleG className={styles.googleG} />
-              <span className={styles.reviewsStars} aria-hidden="true">
-                ★★★★★
-              </span>
-              <span className={styles.reviewsCount}>
-                {GOOGLE_REVIEW_COUNT} reviews
-              </span>
-            </div>
             <h2 id="home-reviews" className={styles.reviewsHeading}>
               {GOOGLE_RATING} rated on Google
             </h2>
@@ -510,6 +521,19 @@ export default function HomeShowcase() {
               Write a review <span>→</span>
             </a>
           </div>
+        </div>
+        <div className={styles.reviewsBadges}>
+          {TRUST_BADGES.map((b) => (
+            <div key={b.title} className={styles.reviewsBadge}>
+              <span className={styles.reviewsBadgeIcon} aria-hidden="true">
+                {b.icon === "google" ? <GoogleG /> : <StatIcon id={b.icon} />}
+              </span>
+              <span className={styles.reviewsBadgeText}>
+                <strong>{b.title}</strong>
+                {b.label}
+              </span>
+            </div>
+          ))}
         </div>
       </section>
 
