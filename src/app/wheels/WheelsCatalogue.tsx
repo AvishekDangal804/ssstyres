@@ -263,11 +263,12 @@ function WheelCard({ group }: { group: WheelGroup }) {
                 aria-label={v.variant}
                 title={v.variant}
                 className={`${styles.colourDot} ${i === active ? styles.colourDotActive : ""}`}
-                style={{ background: v.hex }}
                 onMouseEnter={() => setActive(i)}
                 onFocus={() => setActive(i)}
                 onClick={() => setActive(i)}
-              />
+              >
+                <Image src={v.img} alt="" fill sizes="56px" className={styles.colourDotImg} />
+              </button>
             ))}
           </div>
         )}
