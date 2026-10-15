@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { pageMetadata } from "@/lib/site";
 import HomeHero from "./HomeHero";
+import HomeTrustBar from "./HomeTrustBar";
 import HomeShowcase from "./HomeShowcase";
 import styles from "./Home.module.css";
 
@@ -38,6 +39,7 @@ export default function Home() {
   return (
     <>
       <HomeHero />
+      <HomeTrustBar />
 
       <div className={styles.content}>
         <HomeShowcase />

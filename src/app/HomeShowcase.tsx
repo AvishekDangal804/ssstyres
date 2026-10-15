@@ -9,13 +9,6 @@ import {
   VEHICLES,
   type CategoryId,
 } from "@/lib/wheels-data";
-import {
-  GOOGLE_RATING,
-  GOOGLE_REVIEW_COUNT,
-  GOOGLE_REVIEWS_URL,
-  GOOGLE_WRITE_REVIEW_URL,
-} from "@/lib/site";
-import { GoogleG, StatIcon } from "@/components/BrandIcons";
 import styles from "./HomeShowcase.module.css";
 
 // Leaflet touches window/document on import, so it can only ever run on the
@@ -23,35 +16,6 @@ import styles from "./HomeShowcase.module.css";
 const DeliveryCoverageMap = dynamic(() => import("./DeliveryCoverageMap"), {
   ssr: false,
 });
-
-// The same three customer types already named in the reviews section's own
-// body copy ("workshops, panel shops and fleets") -- not a new claim, just
-// that sentence rendered as icons too.
-const REVIEW_TYPES = [
-  { label: "Workshops", icon: "wrench" as const },
-  { label: "Panel shops", icon: "spray" as const },
-  { label: "Fleets", icon: "fleet" as const },
-];
-
-// Real facts already stated elsewhere on the site (Google rating, warehouse,
-// trade-only supply) -- not new claims.
-const TRUST_BADGES = [
-  {
-    icon: "google" as const,
-    title: `${GOOGLE_RATING} on Google`,
-    label: `${GOOGLE_REVIEW_COUNT} reviews`,
-  },
-  {
-    icon: "warehouse" as const,
-    title: "Own warehouse",
-    label: "Dandenong South",
-  },
-  {
-    icon: "truck" as const,
-    title: "Trade only",
-    label: "Wholesale supply",
-  },
-];
 
 // Statement band backdrop: SSS wheels in five settings, cross-fading. Decorative.
 const STATEMENT_SLIDES = [
@@ -349,61 +313,6 @@ export default function HomeShowcase() {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className={styles.reviewsSection} aria-labelledby="home-reviews">
-        <div className={styles.reviewsInner}>
-          <div className={styles.reviewsText}>
-            <h2 id="home-reviews" className={styles.reviewsHeading}>
-              {GOOGLE_RATING} rated on Google
-            </h2>
-            <p className={styles.reviewsBody}>
-              By the workshops, panel shops and fleets we supply across
-              Melbourne.
-            </p>
-            <ul className={styles.reviewsTypes}>
-              {REVIEW_TYPES.map((t) => (
-                <li key={t.label} className={styles.reviewsType}>
-                  <span className={styles.reviewsTypeIcon} aria-hidden="true">
-                    <StatIcon id={t.icon} />
-                  </span>
-                  {t.label}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.reviewsCtas}>
-            <a
-              href={GOOGLE_REVIEWS_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnRed}
-            >
-              Read our reviews <span>→</span>
-            </a>
-            <a
-              href={GOOGLE_WRITE_REVIEW_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnOutlineDark}
-            >
-              Write a review <span>→</span>
-            </a>
-          </div>
-        </div>
-        <div className={styles.reviewsBadges}>
-          {TRUST_BADGES.map((b) => (
-            <div key={b.title} className={styles.reviewsBadge}>
-              <span className={styles.reviewsBadgeIcon} aria-hidden="true">
-                {b.icon === "google" ? <GoogleG /> : <StatIcon id={b.icon} />}
-              </span>
-              <span className={styles.reviewsBadgeText}>
-                <strong>{b.title}</strong>
-                {b.label}
-              </span>
-            </div>
-          ))}
         </div>
       </section>
 

@@ -1,0 +1,128 @@
+/* Floating card just below the hero, same "white card over a dark hero"
+   treatment the old below-hero search card used. */
+.wrap {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: clamp(24px, 3.2vw, 44px) var(--gutter) 0;
+  box-sizing: border-box;
+}
+
+.card {
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.16);
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: clamp(18px, 2vw, 26px) clamp(16px, 2vw, 28px);
+  border-left: 1px solid var(--line);
+  box-sizing: border-box;
+}
+
+.item:first-child {
+  border-left: 0;
+}
+
+.iconWrap {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(227, 38, 27, 0.08);
+  color: var(--red);
+}
+
+.iconWrap svg {
+  width: 22px;
+  height: 22px;
+}
+
+.text {
+  min-width: 0;
+}
+
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  color: var(--black);
+}
+
+.stars {
+  color: var(--red);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.main {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.sub {
+  font-size: 13px;
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+.link {
+  color: var(--red-on-light);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 1040px) {
+  .item {
+    flex: 1 1 50%;
+    width: 50%;
+    border-left: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+  }
+
+  .item:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .item:nth-child(-n + 2) {
+    border-top: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .item {
+    flex: 1 1 100%;
+    width: 100%;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .item:first-child {
+    border-top: 0;
+  }
+}

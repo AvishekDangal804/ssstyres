@@ -34,7 +34,9 @@ export type StatIconId =
   | "portal"
   | "wrench"
   | "spray"
-  | "fleet";
+  | "fleet"
+  | "star"
+  | "people";
 
 export function StatIcon({ id }: { id: StatIconId }) {
   const common = {
@@ -103,6 +105,21 @@ export function StatIcon({ id }: { id: StatIconId }) {
           <path d="M12.5 11.5h3.2l2.8 2.8V17h-6z" />
           <circle cx="5.6" cy="17.6" r="1.6" />
           <circle cx="16.4" cy="17.6" r="1.6" />
+        </svg>
+      );
+    case "star":
+      return (
+        <svg {...common}>
+          <path d="M12 3.2 14.5 9l6.3.5-4.8 4.1 1.5 6.2L12 16.7 6.5 19.8l1.5-6.2-4.8-4.1L9.5 9 12 3.2Z" />
+        </svg>
+      );
+    case "people":
+      return (
+        <svg {...common}>
+          <circle cx="8.5" cy="7.5" r="3" />
+          <path d="M2.5 20v-1.5a5 5 0 0 1 5-5h2a5 5 0 0 1 5 5V20" />
+          <path d="M16 4.3a3 3 0 0 1 0 5.9" />
+          <path d="M18.5 13.1a5 5 0 0 1 3 4.6V20" />
         </svg>
       );
   }
