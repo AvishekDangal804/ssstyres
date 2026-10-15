@@ -141,30 +141,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-
-        <section className={styles.warehouseSection}>
-          <div className={styles.warehousePhoto}>
-            <Image
-              src="/assets/lifestyle/silver-boxes.png"
-              alt="SSS Wheels-branded boxes stacked in a warehouse, with a machined-silver beadlock-style wheel displayed in front"
-              fill
-              sizes="(max-width: 720px) 100vw, 50vw"
-              className={styles.warehousePhotoImg}
-            />
-          </div>
-          <div className={styles.warehouseContent}>
-            <div className={styles.trustKicker}>Warehouse &amp; distribution</div>
-            <h2 className={styles.sectionH2}>Stocked in Melbourne</h2>
-            <p className={styles.warehouseBody}>
-              Our Melbourne warehouse is at 13 Advantage Drive, Dandenong
-              South VIC 3175. Sydney, Brisbane and Adelaide are opening
-              soon.
-            </p>
-            <Link href="/contact" className={styles.btnOutlineDark}>
-              Get in touch <span>→</span>
-            </Link>
-          </div>
-        </section>
       </div>
     </>
   );

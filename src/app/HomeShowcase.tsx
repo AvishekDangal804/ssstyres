@@ -167,7 +167,6 @@ export default function HomeShowcase() {
 
   const featList = VEHICLES.filter((v) => v.img);
   const fv = featList[feat % featList.length] ?? featList[0];
-  const gridVehicles = VEHICLES.slice(0, 4);
 
   return (
     <div className={styles.showcase}>
@@ -350,46 +349,6 @@ export default function HomeShowcase() {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className={styles.vehiclesSection} aria-labelledby="home-vehicles">
-        <div className={styles.sectionHead}>
-          <h2 id="home-vehicles" className={styles.sectionH2}>
-            Vehicle fitments
-          </h2>
-          <Link href="/fitment" className={styles.btnOutlineDark}>
-            Guide <span>→</span>
-          </Link>
-        </div>
-        <div className={styles.vehiclesGrid}>
-          {gridVehicles.map((v) => (
-            <Link
-              key={`${v.make}-${v.model}`}
-              href={`/wheels?model=${v.wheel}`}
-              className={styles.vehCard}
-            >
-              {v.img && (
-                <Image
-                  src={v.img}
-                  alt=""
-                  fill
-                  sizes="(max-width: 900px) 100vw, 50vw"
-                  className={styles.vehImg}
-                />
-              )}
-              <div className={styles.vehScrim} />
-              <div className={styles.vehRow}>
-                <div className={styles.vehText}>
-                  <span className={styles.vehMake}>{v.make}</span>
-                  <span className={styles.vehModel}>{v.model}</span>
-                </div>
-                <span className={styles.vehPill}>
-                  {v.wheelShort} <span aria-hidden="true">→</span>
-                </span>
-              </div>
-            </Link>
-          ))}
         </div>
       </section>
 

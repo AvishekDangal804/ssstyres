@@ -441,16 +441,6 @@
   color: var(--white);
 }
 
-/* Section kicker (warehouse block) */
-.trustKicker {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--red-on-light);
-  margin-bottom: 14px;
-}
-
 /* Who We Supply */
 .supplySection {
   max-width: var(--container);
@@ -637,38 +627,4 @@
   line-height: 1.55;
   color: var(--on-dark);
   margin: 0;
-}
-
-/* Warehouse */
-.warehouseSection {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: clamp(40px, 4.4vw, 64px) var(--gutter) clamp(48px, 5.2vw, 76px);
-  width: 100%;
-  box-sizing: border-box;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: 48px;
-  align-items: center;
-}
-
-.warehousePhoto {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border-radius: 22px;
-  overflow: hidden;
-  background: var(--black-deep);
-}
-
-.warehousePhotoImg {
-  object-fit: cover;
-  object-position: center 42%;
-}
-
-.warehouseBody {
-  font-size: 16px;
-  line-height: 1.6;
-  color: var(--ink-2);
-  margin: 0 0 24px;
-  max-width: 420px;
 }
