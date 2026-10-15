@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { pageMetadata } from "@/lib/site";
 import HomeHero from "./HomeHero";
-import HeroSearch from "./HeroSearch";
 import HomeShowcase from "./HomeShowcase";
 import styles from "./Home.module.css";
 
@@ -73,7 +72,6 @@ export default function Home() {
   return (
     <>
       <HomeHero />
-      <HeroSearch />
 
       <div className={styles.content}>
         <HomeShowcase />

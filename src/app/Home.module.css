@@ -19,7 +19,18 @@
   flex-direction: column;
   justify-content: center;
   gap: 20px;
-  padding: clamp(26px, 3.4vw, 52px) clamp(20px, 4vw, 72px);
+  padding-top: clamp(26px, 3.4vw, 52px);
+  padding-bottom: clamp(26px, 3.4vw, 52px);
+  padding-right: clamp(20px, 4vw, 72px);
+  /* Left inset matches every other page's shared container edge
+     (margin:auto centering + --gutter) instead of its own clamp(), so the
+     H1 lines up with every inner page's heading at every viewport width —
+     the two formulas happened to nearly match at mid widths but diverged
+     by 28px+ on wide desktop screens. */
+  padding-left: max(
+    clamp(20px, 4vw, 72px),
+    calc((100vw - var(--container)) / 2 + var(--gutter))
+  );
   box-sizing: border-box;
   position: relative;
   z-index: 3;
@@ -386,6 +397,131 @@
 .btnGhostLight:hover {
   background: var(--white);
   color: var(--black);
+}
+
+/* Compact wheel-size search, inline in the hero copy column -- replaces the
+   old full-width card that used to sit below the hero so the product shot
+   stays unobstructed and the search is visible without scrolling. */
+.heroSearch {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 560px;
+}
+
+.heroSearchLabel {
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--on-dark-2);
+}
+
+.heroSearchBar {
+  display: flex;
+  flex-wrap: wrap;
+  background: rgba(20, 20, 22, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.heroSearchSelect {
+  flex: 1 1 130px;
+  height: 46px;
+  padding: 0 28px 0 14px;
+  border: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: transparent;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='white' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  color: var(--white);
+  font-family: var(--font-barlow), sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-sizing: border-box;
+  appearance: none;
+  cursor: pointer;
+}
+
+.heroSearchSelect:disabled {
+  color: rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+}
+
+.heroSearchSelect option {
+  color: var(--black);
+}
+
+.heroSearchBtn {
+  flex: 0 0 auto;
+  height: 46px;
+  padding: 0 22px;
+  border: 0;
+  background: var(--red);
+  color: var(--white);
+  font-family: var(--font-barlow-condensed), sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.heroSearchBtn:hover:not(:disabled) {
+  background: var(--red-hover);
+}
+
+.heroSearchBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.heroSearchChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.heroSearchChip {
+  height: 26px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--on-dark);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.heroSearchChip:hover {
+  border-color: var(--red-on-dark);
+  color: var(--white);
+}
+
+.heroSearchHelp {
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--on-dark-2);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.heroSearchHelp:hover {
+  color: var(--white);
+}
+
+@media (max-width: 420px) {
+  .heroSearchBtn {
+    flex: 1 1 100%;
+  }
 }
 
 .content {

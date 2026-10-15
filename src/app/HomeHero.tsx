@@ -1,8 +1,10 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
+import { FITMENTS, FITMENT_SIZES, pcdsForSize } from "@/lib/wheels-data";
 import styles from "./Home.module.css";
 
 // Split hero: copy pane cycles alongside a stage of three studio scenes.
@@ -41,14 +43,35 @@ const COPY_SWAP = 480;
 const FIRST = 350;
 
 export default function HomeHero() {
+  const router = useRouter();
   const [cur, setCur] = useState(0);
   const [prev, setPrev] = useState(-1);
   const [started, setStarted] = useState(false);
   const [copyHidden, setCopyHidden] = useState(false);
   const [copyIdx, setCopyIdx] = useState(0);
+  const [size, setSize] = useState("");
+  const [pcd, setPcd] = useState("");
   const curRef = useRef(0);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const copyTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const pcdOptions = useMemo(() => (size ? pcdsForSize(size) : []), [size]);
+
+  const goToFitment = useCallback(
+    (s: string, p: string) => {
+      router.push(`/wheels?size=${encodeURIComponent(s)}&pcd=${encodeURIComponent(p)}`);
+    },
+    [router]
+  );
+
+  const onSearchSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (!size || !pcd) return;
+      goToFitment(size, pcd);
+    },
+    [size, pcd, goToFitment]
+  );
 
   const goTo = useCallback((n: number) => {
     setPrev(curRef.current);
@@ -68,6 +91,12 @@ export default function HomeHero() {
       goTo((curRef.current + 1) % SCENES.length);
     }, INTERVAL);
   }, [goTo]);
+
+  // Stops the slide rotating while someone's mid-pick in the wheel-size
+  // search, so an open PCD dropdown doesn't get yanked out from under them.
+  const pauseTimer = useCallback(() => {
+    if (timerRef.current) clearInterval(timerRef.current);
+  }, []);
 
   const handleDot = useCallback(
     (n: number) => {
@@ -135,6 +164,64 @@ export default function HomeHero() {
               </Link>
               <Link href="/dealer" className={styles.btnGhostLight}>
                 Become a dealer
+              </Link>
+            </div>
+          </div>
+
+          <div
+            className={styles.heroSearch}
+            onMouseEnter={pauseTimer}
+            onMouseLeave={startTimer}
+          >
+            <span className={styles.heroSearchLabel}>Find your wheel size</span>
+            <form className={styles.heroSearchBar} onSubmit={onSearchSubmit}>
+              <select
+                className={styles.heroSearchSelect}
+                aria-label="Wheel size"
+                value={size}
+                onChange={(e) => {
+                  setSize(e.target.value);
+                  setPcd("");
+                }}
+              >
+                <option value="">Size</option>
+                {FITMENT_SIZES.map((s) => (
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
+                ))}
+              </select>
+              <select
+                className={styles.heroSearchSelect}
+                aria-label="Bolt pattern (PCD)"
+                value={pcd}
+                onChange={(e) => setPcd(e.target.value)}
+                disabled={!size}
+              >
+                <option value="">{size ? "PCD" : "Size first"}</option>
+                {pcdOptions.map((p) => (
+                  <option key={p} value={p}>
+                    {p}
+                  </option>
+                ))}
+              </select>
+              <button type="submit" className={styles.heroSearchBtn} disabled={!size || !pcd}>
+                Search
+              </button>
+            </form>
+            <div className={styles.heroSearchChips}>
+              {FITMENTS.map((f) => (
+                <button
+                  key={`${f.size}-${f.pcd}`}
+                  type="button"
+                  className={styles.heroSearchChip}
+                  onClick={() => goToFitment(f.size, f.pcd)}
+                >
+                  {f.size} · {f.pcd}
+                </button>
+              ))}
+              <Link href="/fitment" className={styles.heroSearchHelp}>
+                Need help?
               </Link>
             </div>
           </div>
