@@ -277,7 +277,8 @@
   display: block;
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 18px;
+  font-size: var(--h3-size);
+  line-height: var(--h3-line);
   letter-spacing: 0.3px;
   text-transform: uppercase;
   color: var(--black);
