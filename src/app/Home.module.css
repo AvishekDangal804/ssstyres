@@ -538,13 +538,16 @@
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 36px;
+  margin-bottom: 23px;
 }
 
 .sectionH2 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
-  font-size: var(--h2-size);
+  /* Scoped smaller than the shared --h2-size token (per-manager feedback,
+     this section read as too big) -- don't touch the token itself, it's
+     used by every other page's H2. */
+  font-size: clamp(19px, 2vw, 29px);
   line-height: var(--h2-line);
   letter-spacing: var(--h2-tracking);
   margin: 0;
@@ -562,7 +565,7 @@
 .tradeInner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(40px, 4.4vw, 64px) var(--gutter);
+  padding: clamp(26px, 2.9vw, 42px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }
@@ -570,7 +573,7 @@
 .tradeGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+  gap: 10px;
 }
 
 .tradeCard {
@@ -593,7 +596,7 @@
 .tradeMore {
   display: inline-block;
   margin-top: auto;
-  padding-top: 14px;
+  padding-top: 9px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -606,8 +609,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  height: 46px;
-  padding: 0 24px;
+  height: 40px;
+  padding: 0 20px;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 10px;
   font-size: 13px;
@@ -626,25 +629,25 @@
 
 .tradeBar {
   display: block;
-  width: 32px;
+  width: 21px;
   height: 3px;
   background: var(--red);
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .tradeName {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 18px;
+  font-size: 15px;
   text-transform: uppercase;
   letter-spacing: -0.005em;
   color: var(--white);
-  margin-bottom: 8px;
+  margin-bottom: 5px;
 }
 
 .tradeBody {
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--on-dark);
   margin: 0;
 }
