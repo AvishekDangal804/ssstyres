@@ -81,27 +81,9 @@ export default function DeliveryCoverageMap() {
   const mapElRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletNS.Map | null>(null);
   const showZoneRef = useRef<((i: number, animate: boolean) => void) | null>(null);
-  const sectionRef = useRef<HTMLElement | null>(null);
   const [zone, setZone] = useState(0);
   const [cycling, setCycling] = useState(true);
   const [cycleKey, setCycleKey] = useState(0);
-  const [revealed, setRevealed] = useState(false);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setRevealed(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -235,8 +217,8 @@ export default function DeliveryCoverageMap() {
   };
 
   return (
-    <section ref={sectionRef} className={styles.section} aria-labelledby="home-delivery">
-      <div className={`${styles.inner} ${revealed ? styles.revealed : ""}`}>
+    <section className={styles.section} aria-labelledby="home-delivery">
+      <div className={styles.inner}>
         <div className={styles.headText}>
           <div className={styles.kicker}>
             <span className={styles.kickerDot} />

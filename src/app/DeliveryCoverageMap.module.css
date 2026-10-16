@@ -19,14 +19,6 @@
   flex-direction: column;
   gap: 14px;
   max-width: 820px;
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.revealed .headText {
-  opacity: 1;
-  transform: none;
 }
 
 .kicker {
@@ -84,14 +76,6 @@
   border: 1px solid var(--line);
   overflow: hidden;
   background: var(--light-gray);
-  opacity: 0;
-  transform: translateX(-28px);
-  transition: opacity 0.9s ease 0.1s, transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.1s;
-}
-
-.revealed .mapPanel {
-  opacity: 1;
-  transform: none;
 }
 
 .mapEl {
@@ -261,23 +245,7 @@
   overflow: hidden;
   background: var(--white);
   border: 1px solid var(--line);
-  opacity: 0;
-  transform: translateX(28px);
-  transition: background 0.35s, border-color 0.35s, box-shadow 0.3s,
-    opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.revealed .zoneCard {
-  opacity: 1;
-  transform: none;
-}
-
-.revealed .zoneCard:nth-child(2) {
-  transition-delay: 0.1s;
-}
-
-.revealed .zoneCard:nth-child(3) {
-  transition-delay: 0.2s;
+  transition: background 0.35s, border-color 0.35s, box-shadow 0.3s;
 }
 
 .zoneCard:hover {
