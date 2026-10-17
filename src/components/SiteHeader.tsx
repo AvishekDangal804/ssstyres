@@ -8,12 +8,7 @@ import { PORTAL, CATEGORIES, MODELS } from "@/lib/wheels-data";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
 import styles from "./SiteHeader.module.css";
 
-// Groups of routes that fall under one nav item, for the "you are here" red
-// underline. Home is deliberately exact-match only — every path starts with
-// "/", so a prefix match there would light up on every page.
-const MORE_ROUTES = ["/about", "/trade", "/legal", "/contact"];
-
-type Menu = "wheels" | "more" | null;
+type Menu = "wheels" | null;
 
 // Touchscreens (and touch-emulated browsers) synthesize mouseenter/mouseleave
 // around a tap, which fights with hover-to-open and closes the dropdown
@@ -212,44 +207,6 @@ export default function SiteHeader() {
           <Link href="/media" className={navCls(pathname === "/media")}>
             Media
           </Link>
-
-          <div
-            className={styles.navMenu}
-            onMouseEnter={hoverOpen("more")}
-            onMouseLeave={hoverClose}
-            onKeyDown={escapeClose("more")}
-          >
-            <button
-              ref={(el) => {
-                menuBtns.current.more = el;
-              }}
-              type="button"
-              className={navBtnCls(MORE_ROUTES.includes(pathname))}
-              onClick={() => toggle("more")}
-              aria-haspopup="true"
-              aria-expanded={menu === "more"}
-              aria-controls="menu-more"
-            >
-              More{" "}
-              <span
-                className={`${styles.caret} ${menu === "more" ? styles.caretOpen : ""}`}
-              >
-                ▼
-              </span>
-            </button>
-            <div
-              className={`${styles.dropdown} ${styles.right} ${menu === "more" ? styles.dropdownOpen : ""}`}
-              id="menu-more"
-              role="menu"
-            >
-              <Link href="/about">About Us</Link>
-              <Link href="/trade">Built for the Trade</Link>
-              <Link href="/legal#terms">Terms &amp; Conditions</Link>
-              <Link href="/legal#warranty">Warranty &amp; Returns</Link>
-              <Link href="/legal#privacy">Privacy Policy</Link>
-              <Link href="/contact">Contact Us</Link>
-            </div>
-          </div>
 
           {/* Phones hide the header buttons to keep the bar to one row, so
               both live at the foot of the menu there instead. */}

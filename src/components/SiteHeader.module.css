@@ -193,12 +193,6 @@
   transform: none;
 }
 
-.dropdown.right {
-  left: auto;
-  right: -10px;
-  min-width: 250px;
-}
-
 .dropdown a {
   display: block;
   color: var(--on-dark);
@@ -473,8 +467,7 @@
   }
 
   /* Inline in the stacked list, not an overlay: shown/hidden, not faded. */
-  .dropdown,
-  .dropdown.right {
+  .dropdown {
     position: static;
     margin: 8px 0;
     left: auto;
