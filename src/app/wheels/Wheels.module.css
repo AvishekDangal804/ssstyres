@@ -137,34 +137,49 @@
   color: var(--red-on-light);
 }
 
+/* Flex + wrap + center, not CSS grid -- a plain 4-column grid leaves a short
+   last row (e.g. today's 6 cards = 4 + 2) stuck to the left with a lopsided
+   gap on the right. Centering the wrapped row reads as "a couple of
+   featured items" instead of "where did the rest of the grid go". */
 .grid {
-  display: grid;
-  /* Fixed 3 columns, not auto-fill -- with exactly 6 fitment cards today,
-     auto-fill was packing 4 into row one and only 2 into row two, leaving
-     a lopsided gap on the right. 3 columns splits evenly into two full
-     rows with equal gaps on both axes. */
-  grid-template-columns: repeat(3, 1fr);
-  gap: clamp(18px, 1.4vw, 28px);
-}
-
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 560px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+  --grid-gap: clamp(18px, 1.4vw, 28px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--grid-gap);
 }
 
 .card {
   display: flex;
   flex-direction: column;
+  flex: 1 1 calc(25% - var(--grid-gap) * 3 / 4);
+  max-width: calc(25% - var(--grid-gap) * 3 / 4);
+  min-width: 240px;
   opacity: 0;
   transform: translateY(22px);
   transition: opacity 0.6s cubic-bezier(0.2, 0.7, 0.3, 1), transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+@media (max-width: 1100px) {
+  .card {
+    flex-basis: calc(33.333% - var(--grid-gap) * 2 / 3);
+    max-width: calc(33.333% - var(--grid-gap) * 2 / 3);
+  }
+}
+
+@media (max-width: 900px) {
+  .card {
+    flex-basis: calc(50% - var(--grid-gap) / 2);
+    max-width: calc(50% - var(--grid-gap) / 2);
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 560px) {
+  .card {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
 
 .grid.revealed .card {
@@ -172,15 +187,19 @@
   transform: none;
 }
 
-.grid.revealed .card:nth-child(2) {
+.grid.revealed .card:nth-child(4n+1) {
+  transition-delay: 0ms;
+}
+
+.grid.revealed .card:nth-child(4n+2) {
   transition-delay: 70ms;
 }
 
-.grid.revealed .card:nth-child(3) {
+.grid.revealed .card:nth-child(4n+3) {
   transition-delay: 140ms;
 }
 
-.grid.revealed .card:nth-child(4) {
+.grid.revealed .card:nth-child(4n+4) {
   transition-delay: 210ms;
 }
 
@@ -225,14 +244,18 @@
 .colourDots {
   display: flex;
   gap: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .colourDot {
   position: relative;
-  width: 56px;
-  height: 56px;
-  border-radius: 8px;
+  flex: 0 1 39px;
+  width: auto;
+  height: auto;
+  aspect-ratio: 1;
+  min-width: 0;
+  border-radius: 6px;
   border: 2px solid var(--border-gray);
   background: var(--surface-2);
   overflow: hidden;
