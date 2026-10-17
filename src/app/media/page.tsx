@@ -1,42 +1,22 @@
-import FullVehicleImage from "@/components/FullVehicleImage";
+import PageHeader from "@/components/PageHeader";
 import MediaGallery from "./MediaGallery";
-import styles from "./Media.module.css";
 import { pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
   title: "Media | SSS Wheels & Tyres",
   description:
-    "Wheel finishes, vehicle fitment imagery and warehouse photography from SSS Wheels & Tyres.",
+    "Wholesale operations, tyre and wheel ranges, and the people and processes behind SSS Wheels & Tyres' trade supply business.",
   path: "/media",
 });
 
 export default function MediaPage() {
   return (
     <>
-      <section className={styles.hero}>
-        <div className={styles.heroImg}>
-          <FullVehicleImage
-            src="/assets/vehicles/ranger.png"
-            alt="Ford Ranger fitted with SSS wheels on a lakeside gravel track"
-            sizes="(max-width: 1100px) 100vw, 60vw"
-            preload
-          />
-        </div>
-        <div className={styles.heroScrim} />
-        <div className={styles.heroInner}>
-          <div className={styles.heroText}>
-            <div className={styles.kickerRow}>
-              <span className={styles.bar} />
-              Media
-            </div>
-            <h1 className={styles.heroH1}>Product &amp; fitment gallery</h1>
-            <p className={styles.heroBody}>
-              Wheel finishes, vehicle fitment imagery and warehouse
-              photography.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        kicker="Media"
+        title="Inside SSS Wheels & Tyres"
+        body="Explore our wholesale operations, tyre and wheel ranges, and the people and processes behind our trade supply business."
+      />
 
       <MediaGallery />
     </>
