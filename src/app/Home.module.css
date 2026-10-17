@@ -538,7 +538,7 @@
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: 23px;
+  margin-bottom: 14px;
 }
 
 .sectionH2 {
@@ -547,7 +547,7 @@
   /* Scoped smaller than the shared --h2-size token (per-manager feedback,
      this section read as too big) -- don't touch the token itself, it's
      used by every other page's H2. */
-  font-size: clamp(19px, 2vw, 29px);
+  font-size: clamp(14px, 1.5vw, 22px);
   line-height: var(--h2-line);
   letter-spacing: var(--h2-tracking);
   margin: 0;
@@ -565,7 +565,7 @@
 .tradeInner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(26px, 2.9vw, 42px) var(--gutter);
+  padding: clamp(16px, 1.75vw, 25px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }
@@ -573,13 +573,13 @@
 .tradeGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
+  gap: 6px;
 }
 
 .tradeCard {
   display: flex;
   flex-direction: column;
-  padding: 4px 0;
+  padding: 2px 0;
   color: inherit;
 }
 
@@ -596,7 +596,7 @@
 .tradeMore {
   display: inline-block;
   margin-top: auto;
-  padding-top: 9px;
+  padding-top: 5px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -609,8 +609,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  height: 40px;
-  padding: 0 20px;
+  height: 34px;
+  padding: 0 16px;
   border: 1.5px solid rgba(255, 255, 255, 0.55);
   border-radius: 10px;
   font-size: 13px;
@@ -629,25 +629,25 @@
 
 .tradeBar {
   display: block;
-  width: 21px;
+  width: 13px;
   height: 3px;
   background: var(--red);
-  margin-bottom: 12px;
+  margin-bottom: 7px;
 }
 
 .tradeName {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 15px;
+  font-size: 13px;
   text-transform: uppercase;
   letter-spacing: -0.005em;
   color: var(--white);
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
 
 .tradeBody {
-  font-size: 13px;
-  line-height: 1.5;
+  font-size: 12px;
+  line-height: 1.45;
   color: var(--on-dark);
   margin: 0;
 }
