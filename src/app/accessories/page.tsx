@@ -194,10 +194,11 @@ export default function AccessoriesPage() {
                   <div className={styles.kicker}>{t.kicker}</div>
                   <h2 className={styles.title}>{t.title}</h2>
                   <p className={styles.sub}>{t.sub}</p>
-                  <div className={styles.cta}>
-                    {t.cta ?? "Order via portal"}{" "}
-                    <span className={styles.arrow}>→</span>
-                  </div>
+                  {t.cta && (
+                    <div className={styles.cta}>
+                      {t.cta} <span className={styles.arrow}>→</span>
+                    </div>
+                  )}
                 </div>
               </CardLink>
             </div>
@@ -213,16 +214,8 @@ export default function AccessoriesPage() {
             </p>
           </div>
           <div className={styles.ctaBtns}>
-            <a
-              href={PORTAL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={styles.btnRed}
-            >
-              Order via portal <span>→</span>
-            </a>
-            <Link href="/contact" className={styles.btnGhost}>
-              Enquire
+            <Link href="/contact" className={styles.btnRed}>
+              Enquire <span>→</span>
             </Link>
           </div>
         </div>

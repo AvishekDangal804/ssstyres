@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
-import { MODELS, WHEELS, PORTAL } from "@/lib/wheels-data";
+import { MODELS, WHEELS } from "@/lib/wheels-data";
 import styles from "./Collections.module.css";
 import { pageMetadata } from "@/lib/site";
 
@@ -93,14 +93,6 @@ export default function CollectionsPage() {
                   <Link href={`/wheels?model=${c.id}`} className={styles.btnPrimary}>
                     View fitments <span>→</span>
                   </Link>
-                  <a
-                    href={PORTAL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.btnSecondary}
-                  >
-                    Order via portal
-                  </a>
                 </div>
               </div>
             </div>
