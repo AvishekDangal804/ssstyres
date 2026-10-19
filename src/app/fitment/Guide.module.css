@@ -761,14 +761,18 @@
 .careImg {
   position: relative;
   width: 100%;
-  aspect-ratio: 3.8 / 1;
+  /* The source photo's own native ratio (1672x941) -- anything flatter than
+     this crops real content out of frame instead of just saving space. */
+  aspect-ratio: 16 / 9;
   border-radius: 22px;
   overflow: hidden;
   background: var(--black-deep);
 }
 
 .careShot {
-  object-fit: cover;
+  /* contain, not cover -- guarantees the full photo always shows even if
+     the container and the image's native ratio ever drift apart slightly. */
+  object-fit: contain;
 }
 
 .figCaption {
