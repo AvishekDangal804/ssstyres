@@ -46,8 +46,11 @@ const ALL_TILES: Tile[] = [
   {
     category: "Delivery & Logistics",
     label: "Delivery fleet",
-    sub: "Photo coming soon",
-    fit: "contain",
+    // Not a photo of SSS's actual vans -- illustrative only, same convention
+    // as the Guide page's care-products shot, until a real one is supplied.
+    sub: "Illustrative image",
+    img: "/assets/lifestyle/delivery-fleet.png",
+    fit: "cover",
     href: "/#home-delivery",
   },
 
