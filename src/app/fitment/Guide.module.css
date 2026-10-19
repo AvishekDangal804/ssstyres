@@ -45,7 +45,7 @@
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(46px, 5.4vw, 76px) var(--gutter);
+  padding: clamp(20px, 2.4vw, 34px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
   animation: fadeUp 0.7s ease-out both;
@@ -70,7 +70,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 7px;
 }
 
 .bar {
@@ -86,21 +86,21 @@
   font-size: var(--h1-size);
   line-height: var(--h1-line);
   letter-spacing: var(--h1-tracking);
-  margin: 0 0 18px;
+  margin: 0 0 8px;
   max-width: 860px;
 }
 
 .heroBody {
-  font-size: clamp(15px, 1.2vw, 18px);
-  line-height: 1.6;
+  font-size: clamp(13px, 1vw, 15px);
+  line-height: 1.45;
   color: var(--on-dark);
   max-width: 580px;
-  margin: 0 0 30px;
+  margin: 0 0 10px;
 }
 
 .heroCtas {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
@@ -108,8 +108,8 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  height: 50px;
-  padding: 0 26px;
+  height: 38px;
+  padding: 0 18px;
   border: 1.5px solid var(--white);
   border-radius: 10px;
   background: var(--white);
@@ -133,8 +133,8 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  padding: 0 26px;
+  height: 38px;
+  padding: 0 18px;
   border: 1.5px solid rgba(255, 255, 255, 0.6);
   border-radius: 10px;
   color: var(--white);
@@ -154,15 +154,15 @@
 
 .heroStats {
   display: flex;
-  gap: clamp(24px, 4vw, 64px);
+  gap: clamp(16px, 2.4vw, 36px);
   flex-wrap: wrap;
-  margin-top: clamp(36px, 4vw, 56px);
+  margin-top: clamp(8px, 1vw, 14px);
 }
 
 .heroStatNum {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(28px, 3vw, 40px);
+  font-size: clamp(19px, 2vw, 26px);
   line-height: 1;
   color: var(--white);
 }
@@ -189,18 +189,21 @@
 .h2 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
-  font-size: var(--h2-size);
+  /* Scoped smaller than the shared --h2-size token -- this page repeats an
+     H2 four times (one per "Part"), so the full site-wide size added up
+     fast across a long page. Don't touch the token itself. */
+  font-size: clamp(21px, 2.2vw, 31px);
   line-height: var(--h2-line);
   letter-spacing: var(--h2-tracking);
   margin: 0;
 }
 
 .lead {
-  font-size: 16px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
   color: var(--ink);
   max-width: 660px;
-  margin: 12px 0 0;
+  margin: 8px 0 0;
 }
 
 .inlineLink {
@@ -215,14 +218,14 @@
 
 .sectionHead,
 .sectionHeadTight {
-  margin-bottom: clamp(28px, 3vw, 44px);
+  margin-bottom: clamp(6px, 0.8vw, 10px);
 }
 
 /* Part 1 — Anatomy */
 .anatomy {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(40px, 4.8vw, 64px) var(--gutter) 0;
+  padding: clamp(8px, 1vw, 14px) var(--gutter) 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -230,14 +233,14 @@
 .anatomyGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
-  gap: clamp(24px, 3vw, 52px);
+  gap: clamp(14px, 1.7vw, 26px);
   align-items: center;
 }
 
 .wheelStage {
   position: relative;
   aspect-ratio: 1;
-  max-width: 560px;
+  max-width: 260px;
   width: 100%;
   margin: 0 auto;
   background: radial-gradient(circle at 50% 46%, var(--off-white), var(--light-gray));
@@ -296,20 +299,20 @@
 .anatomySide {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 }
 
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 6px;
 }
 
 .chip {
   cursor: pointer;
   border-radius: 999px;
-  padding: 0 16px;
-  height: 40px;
+  padding: 0 12px;
+  height: 30px;
   font-family: inherit;
   font-size: 12px;
   font-weight: 700;
@@ -331,8 +334,8 @@
   background: var(--charcoal);
   color: var(--white);
   border-radius: 20px;
-  padding: clamp(24px, 2.6vw, 36px);
-  min-height: 220px;
+  padding: clamp(10px, 1.1vw, 15px);
+  min-height: 105px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -341,16 +344,16 @@
 .detailHead {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 14px;
+  gap: 10px;
+  margin-bottom: 7px;
 }
 
 .detailNum {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 22px;
-  width: 44px;
-  height: 44px;
+  font-size: 16px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--red);
   display: flex;
@@ -378,8 +381,8 @@
 }
 
 .detailBody {
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 12.5px;
+  line-height: 1.45;
   color: var(--on-dark);
   margin: 0;
 }
@@ -387,17 +390,17 @@
 .specExample {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
   background: var(--off-white);
   border-radius: 16px;
-  padding: 16px 20px;
+  padding: 7px 11px;
   flex-wrap: wrap;
 }
 
 .specNums {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(22px, 2.2vw, 30px);
+  font-size: clamp(16px, 1.6vw, 21px);
   color: var(--black);
   letter-spacing: -0.01em;
   white-space: nowrap;
@@ -417,7 +420,7 @@
 .sizes {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(40px, 4.8vw, 64px) var(--gutter) 0;
+  padding: clamp(8px, 1vw, 14px) var(--gutter) 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -428,11 +431,11 @@
   justify-content: space-between;
   gap: 20px;
   flex-wrap: wrap;
-  margin-bottom: clamp(28px, 3vw, 44px);
+  margin-bottom: clamp(6px, 0.8vw, 10px);
 }
 
 .sizesNote {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--ink-3);
   max-width: 360px;
   text-align: right;
@@ -441,15 +444,15 @@
 .sizeGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: clamp(14px, 1.4vw, 22px);
+  gap: clamp(12px, 1.2vw, 18px);
 }
 
 .sizeCard {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  padding: clamp(22px, 2.2vw, 32px);
-  min-height: clamp(300px, 26vw, 360px);
+  padding: clamp(10px, 1vw, 13px);
+  min-height: clamp(140px, 11vw, 165px);
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
@@ -552,7 +555,7 @@
 .sizeNum {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(48px, 5vw, 72px);
+  font-size: clamp(30px, 3.2vw, 44px);
   line-height: 0.9;
   letter-spacing: -0.03em;
   color: var(--black);
@@ -563,12 +566,12 @@
 }
 
 .sizeTag {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--red-on-light);
-  margin: 8px 0 14px;
+  margin: 4px 0 7px;
 }
 
 .sizeDark .sizeTag {
@@ -576,10 +579,10 @@
 }
 
 .sizeBody {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 12.5px;
+  line-height: 1.4;
   color: var(--ink);
-  margin: 0 0 18px;
+  margin: 0 0 8px;
 }
 
 .sizeDark .sizeBody {
@@ -590,16 +593,16 @@
   margin: auto 0 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .sizeFacts > div {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  font-size: 13px;
+  font-size: 12px;
   border-top: 1px solid var(--line);
-  padding-top: 10px;
+  padding-top: 7px;
 }
 
 .sizeDark .sizeFacts > div {
@@ -631,14 +634,14 @@
 
 /* Part 3 — Find your own fitment */
 .finder {
-  margin-top: clamp(40px, 4.8vw, 64px);
+  margin-top: clamp(8px, 1vw, 14px);
   background: var(--surface-2);
 }
 
 .finderInner {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(48px, 5vw, 88px) var(--gutter);
+  padding: clamp(12px, 1.4vw, 20px) var(--gutter);
   width: 100%;
   box-sizing: border-box;
 }
@@ -646,13 +649,13 @@
 .stepGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
-  gap: clamp(14px, 1.4vw, 22px);
+  gap: clamp(12px, 1.2vw, 18px);
 }
 
 .step {
   background: var(--white);
   border-radius: 20px;
-  padding: clamp(24px, 2.4vw, 34px);
+  padding: clamp(10px, 1vw, 13px);
   display: flex;
   flex-direction: column;
 }
@@ -660,16 +663,16 @@
 .stepNum {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 20px;
-  width: 44px;
-  height: 44px;
+  font-size: 15px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background: var(--black);
   color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 18px;
+  margin-bottom: 6px;
 }
 
 .stepTitle {
@@ -679,21 +682,21 @@
   line-height: var(--h3-line);
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  margin: 0 0 10px;
+  margin: 0 0 4px;
 }
 
 .stepBody {
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 12.5px;
+  line-height: 1.45;
   color: var(--ink);
   margin: 0;
 }
 
 .stepTip {
   margin-top: auto;
-  padding-top: 16px;
-  font-size: 13px;
-  line-height: 1.55;
+  padding-top: 5px;
+  font-size: 12px;
+  line-height: 1.4;
   color: var(--ink-3);
 }
 
@@ -704,13 +707,13 @@
 }
 
 .rule {
-  margin-top: clamp(18px, 2vw, 28px);
+  margin-top: clamp(8px, 0.9vw, 12px);
   background: var(--white);
   border-radius: 20px;
-  padding: clamp(20px, 2.2vw, 30px) clamp(24px, 2.6vw, 36px);
+  padding: clamp(9px, 1vw, 13px) clamp(14px, 1.5vw, 19px);
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -724,8 +727,8 @@
 }
 
 .ruleText {
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 13px;
+  line-height: 1.5;
   color: var(--ink);
 }
 
@@ -733,7 +736,7 @@
 .care {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(40px, 4.8vw, 64px) var(--gutter) 0;
+  padding: clamp(8px, 1vw, 14px) var(--gutter) 0;
   width: 100%;
   box-sizing: border-box;
 }
@@ -742,9 +745,9 @@
 .careTop {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: clamp(24px, 3vw, 52px);
+  gap: clamp(14px, 1.7vw, 26px);
   align-items: center;
-  margin-bottom: clamp(28px, 3vw, 44px);
+  margin-bottom: clamp(10px, 1.1vw, 16px);
 }
 
 .careTop .sectionHeadTight {
@@ -758,7 +761,7 @@
 .careImg {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 3.8 / 1;
   border-radius: 22px;
   overflow: hidden;
   background: var(--black-deep);
@@ -769,21 +772,21 @@
 }
 
 .figCaption {
-  margin-top: 10px;
-  font-size: 12px;
+  margin-top: 6px;
+  font-size: 11px;
   color: var(--ink-3);
 }
 
 .careGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: clamp(14px, 1.4vw, 22px);
+  gap: clamp(12px, 1.2vw, 18px);
 }
 
 .careCard {
   border: 1.5px solid var(--border-gray);
   border-radius: 20px;
-  padding: clamp(22px, 2.2vw, 32px);
+  padding: clamp(10px, 1vw, 13px);
   display: flex;
   flex-direction: column;
   transition: border-color 0.2s, transform 0.3s;
@@ -795,12 +798,12 @@
 }
 
 .careTag {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--red-on-light);
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .careTitle {
@@ -810,12 +813,12 @@
   line-height: var(--h3-line);
   text-transform: uppercase;
   letter-spacing: 0.01em;
-  margin: 0 0 10px;
+  margin: 0 0 4px;
 }
 
 .careBody {
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 12.5px;
+  line-height: 1.45;
   color: var(--ink);
   margin: 0;
 }
@@ -824,7 +827,7 @@
 .ask {
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(40px, 4.8vw, 64px) var(--gutter) clamp(44px, 5vw, 72px);
+  padding: clamp(8px, 1vw, 14px) var(--gutter) clamp(12px, 1.4vw, 20px);
   width: 100%;
   box-sizing: border-box;
   flex: 1;
@@ -834,11 +837,11 @@
   background: var(--charcoal);
   color: var(--white);
   border-radius: 22px;
-  padding: clamp(28px, 3vw, 48px);
+  padding: clamp(11px, 1.2vw, 17px);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -847,34 +850,35 @@
 }
 
 .askEyebrow {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--red-on-dark);
-  margin-bottom: 12px;
+  margin-bottom: 5px;
 }
 
 .askTitle {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
-  font-size: var(--h2-size);
+  /* Scoped smaller than --h2-size, same reasoning as .h2 above. */
+  font-size: clamp(21px, 2.2vw, 31px);
   line-height: var(--h2-line);
   letter-spacing: var(--h2-tracking);
-  margin: 0 0 12px;
+  margin: 0 0 5px;
 }
 
 .askBody {
-  font-size: 16px;
+  font-size: 13px;
   color: var(--on-dark);
-  line-height: 1.6;
+  line-height: 1.45;
   margin: 0;
 }
 
 .askBtns {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   flex: none;
 }
 
@@ -883,8 +887,8 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  height: 50px;
-  padding: 0 26px;
+  height: 38px;
+  padding: 0 18px;
   border-radius: 10px;
   background: var(--red);
   color: var(--white);
