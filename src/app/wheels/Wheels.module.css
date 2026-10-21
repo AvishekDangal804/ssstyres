@@ -152,8 +152,9 @@
 .card {
   display: flex;
   flex-direction: column;
-  flex: 1 1 calc(25% - var(--grid-gap) * 3 / 4);
-  max-width: calc(25% - var(--grid-gap) * 3 / 4);
+  /* 5 columns, not 4 -- a straight 20% size cut per manager feedback. */
+  flex: 1 1 calc(20% - var(--grid-gap) * 4 / 5);
+  max-width: calc(20% - var(--grid-gap) * 4 / 5);
   min-width: 240px;
   opacity: 0;
   transform: translateY(22px);

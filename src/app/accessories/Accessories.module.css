@@ -157,8 +157,9 @@
 }
 
 .tileWrap {
-  flex: 1 1 calc(25% - var(--grid-gap) * 3 / 4);
-  max-width: calc(25% - var(--grid-gap) * 3 / 4);
+  /* 5 columns, not 4 -- matches Wheels' 20% size cut exactly. */
+  flex: 1 1 calc(20% - var(--grid-gap) * 4 / 5);
+  max-width: calc(20% - var(--grid-gap) * 4 / 5);
   min-width: 220px;
   animation: fadeUp 0.55s var(--ease) both;
   animation-delay: calc(var(--i, 0) * 0.06s);
