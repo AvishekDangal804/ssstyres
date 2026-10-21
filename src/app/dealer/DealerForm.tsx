@@ -1,12 +1,19 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { submitDealerApplication, type DealerApplicationState } from "./actions";
+import {
+  cleanText,
+  isValidAbn,
+  isValidEmail,
+  isValidPhone,
+  submitToWeb3Forms,
+  FORM_FAILURE_MESSAGE,
+} from "@/lib/form-validation";
 import { BUSINESS_TYPES } from "./constants";
 import styles from "./Dealer.module.css";
 
-const initialState: DealerApplicationState = { status: "idle" };
+type Status = "idle" | "pending" | "success" | "error";
 
 type Values = {
   businessName: string;
@@ -29,21 +36,82 @@ const emptyValues: Values = {
 };
 
 export default function DealerForm() {
-  const [state, formAction, isPending] = useActionState(
-    submitDealerApplication,
-    initialState
-  );
-  // Kept in client state (not just uncontrolled inputs) because React clears
-  // uncontrolled fields after any non-throwing form action — including our
-  // validation-error state — which would force a re-type on every mistake.
   const [values, setValues] = useState<Values>(emptyValues);
+  const [status, setStatus] = useState<Status>("idle");
+  const [message, setMessage] = useState("");
+  const [botcheck, setBotcheck] = useState("");
 
   const field =
     (key: keyof Values) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setValues((v) => ({ ...v, [key]: e.target.value }));
 
-  if (state.status === "success") {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    // Honeypot: real visitors never fill this hidden field.
+    if (botcheck !== "") {
+      setStatus("success");
+      return;
+    }
+
+    const businessName = cleanText(values.businessName, 120);
+    const abn = cleanText(values.abn, 20);
+    const businessType = cleanText(values.businessType, 60);
+    const contactName = cleanText(values.contactName, 100);
+    const phone = cleanText(values.phone, 30);
+    const email = cleanText(values.email, 254);
+    const notes = cleanText(values.notes, 2000);
+
+    if (!businessName || !contactName) {
+      setStatus("error");
+      setMessage("Please fill in all required fields.");
+      return;
+    }
+    if (!isValidAbn(abn)) {
+      setStatus("error");
+      setMessage("That ABN doesn't check out — double-check the 11 digits.");
+      return;
+    }
+    if (!BUSINESS_TYPES.includes(businessType as (typeof BUSINESS_TYPES)[number])) {
+      setStatus("error");
+      setMessage("Select a business type.");
+      return;
+    }
+    if (!isValidPhone(phone)) {
+      setStatus("error");
+      setMessage("Enter a valid phone number.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setStatus("error");
+      setMessage("Enter a valid email address.");
+      return;
+    }
+
+    setStatus("pending");
+    const result = await submitToWeb3Forms(
+      `Dealer application — ${businessName}`,
+      email,
+      {
+        "Business name": businessName,
+        ABN: abn,
+        "Business type": businessType,
+        "Contact name": contactName,
+        Phone: phone,
+        Email: email,
+        Notes: notes || "—",
+      }
+    );
+    if (!result.ok) {
+      setStatus("error");
+      setMessage(FORM_FAILURE_MESSAGE);
+      return;
+    }
+    setStatus("success");
+  }
+
+  if (status === "success") {
     return (
       <div className={styles.successWrap}>
         <div className={styles.successIcon}>✓</div>
@@ -61,14 +129,16 @@ export default function DealerForm() {
   return (
     <>
       <h2 className={styles.formTitle}>Trade account application</h2>
-      <form action={formAction} className={styles.form}>
+      <form onSubmit={handleSubmit} className={styles.form}>
         <input
           type="text"
-          name="company_website"
+          name="botcheck"
           tabIndex={-1}
           autoComplete="off"
           className={styles.honeypot}
           aria-hidden="true"
+          value={botcheck}
+          onChange={(e) => setBotcheck(e.target.value)}
         />
         <label className={styles.field}>
           Business name
@@ -158,13 +228,17 @@ export default function DealerForm() {
             onChange={field("notes")}
           />
         </label>
-        {state.status === "error" && (
+        {status === "error" && (
           <div className={styles.formError} role="alert">
-            {state.message}
+            {message}
           </div>
         )}
-        <button type="submit" disabled={isPending} className={styles.submitBtn}>
-          {isPending ? "Submitting…" : "Submit application"}
+        <button
+          type="submit"
+          disabled={status === "pending"}
+          className={styles.submitBtn}
+        >
+          {status === "pending" ? "Submitting…" : "Submit application"}
         </button>
         <div className={styles.legalLine}>
           By applying you agree to our{" "}
