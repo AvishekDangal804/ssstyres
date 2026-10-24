@@ -81,7 +81,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: clamp(40px, 4.4vw, 64px) 28px;
+  /* Was a hardcoded 28px, independent of --gutter -- fell out of step with
+     every other section's side inset once --gutter grew. */
+  padding: clamp(40px, 4.4vw, 64px) var(--gutter);
 }
 
 .statementBg {

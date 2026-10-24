@@ -157,10 +157,10 @@
 }
 
 .tileWrap {
-  /* Matches Wheels' sizing exactly: 5-column base (20%), scaled down a
-     further 10% per manager feedback. */
-  flex: 1 1 calc((20% - var(--grid-gap) * 4 / 5) * 0.9);
-  max-width: calc((20% - var(--grid-gap) * 4 / 5) * 0.9);
+  /* Matches Wheels' sizing exactly: back to 4 columns (25% base), keeping
+     the separate 10% trim on top. */
+  flex: 1 1 calc((25% - var(--grid-gap) * 3 / 4) * 0.9);
+  max-width: calc((25% - var(--grid-gap) * 3 / 4) * 0.9);
   min-width: 198px;
   animation: fadeUp 0.55s var(--ease) both;
   animation-delay: calc(var(--i, 0) * 0.06s);

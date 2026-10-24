@@ -152,10 +152,10 @@
 .card {
   display: flex;
   flex-direction: column;
-  /* 5-column base width (20%), scaled down a further 10% per manager
-     feedback -- 28% smaller than the original 4-column size overall. */
-  flex: 1 1 calc((20% - var(--grid-gap) * 4 / 5) * 0.9);
-  max-width: calc((20% - var(--grid-gap) * 4 / 5) * 0.9);
+  /* Back to 4 columns (25% base) per manager feedback -- 5 was too small.
+     Keeps the separate 10% trim on top of that base. */
+  flex: 1 1 calc((25% - var(--grid-gap) * 3 / 4) * 0.9);
+  max-width: calc((25% - var(--grid-gap) * 3 / 4) * 0.9);
   min-width: 216px;
   opacity: 0;
   transform: translateY(22px);
