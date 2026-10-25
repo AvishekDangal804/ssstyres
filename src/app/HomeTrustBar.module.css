@@ -4,7 +4,10 @@
   position: relative;
   max-width: var(--container);
   margin: 0 auto;
-  padding: clamp(10px, 1.4vw, 18px) var(--gutter) 0;
+  /* Deliberately narrower than the shared --gutter (which grew a lot
+     recently) -- this card is meant to float wide across the hero, not
+     sit inset as far as ordinary page content. */
+  padding: clamp(10px, 1.4vw, 18px) clamp(20px, 3vw, 56px) 0;
   box-sizing: border-box;
 }
 
