@@ -268,21 +268,50 @@
   color: var(--white);
 }
 
+/* Flex + wrap + center, not CSS grid's auto-fill -- auto-fill left a short
+   last row (9 cards = 5 + 4) stuck to the left with an empty column on the
+   right instead of centering it. Same fix as the Wheels/Accessories grids. */
 .finishGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 14px;
+  --grid-gap: clamp(14px, 1.2vw, 20px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--grid-gap);
 }
 
 .finishCard {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex: 1 1 calc(20% - var(--grid-gap) * 4 / 5);
+  max-width: calc(20% - var(--grid-gap) * 4 / 5);
+  min-width: 170px;
   padding: 18px;
   border-radius: 18px;
   background: var(--surface-2);
   color: var(--black);
   transition: background 0.25s, transform 0.25s;
+}
+
+@media (max-width: 1100px) {
+  .finishCard {
+    flex-basis: calc(33.333% - var(--grid-gap) * 2 / 3);
+    max-width: calc(33.333% - var(--grid-gap) * 2 / 3);
+  }
+}
+
+@media (max-width: 760px) {
+  .finishCard {
+    flex-basis: calc(50% - var(--grid-gap) / 2);
+    max-width: calc(50% - var(--grid-gap) / 2);
+  }
+}
+
+@media (max-width: 420px) {
+  .finishCard {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
 
 .finishCard:hover {

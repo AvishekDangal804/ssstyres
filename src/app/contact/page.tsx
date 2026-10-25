@@ -1,6 +1,4 @@
-import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
-import { PORTAL } from "@/lib/wheels-data";
 import ContactForm from "./ContactForm";
 import styles from "./Contact.module.css";
 import { pageMetadata } from "@/lib/site";
@@ -47,26 +45,6 @@ export default function ContactPage() {
               Dandenong South VIC 3175
             </div>
             <div className={styles.infoSub}>Sydney, Brisbane &amp; Adelaide opening soon</div>
-          </div>
-          <div className={styles.dealersCard}>
-            <div className={styles.dealersLabel}>Dealers</div>
-            <div className={styles.dealersBody}>
-              Order through the wholesale portal, or apply for a trade
-              account.
-            </div>
-            <div className={styles.dealersCtas}>
-              <a
-                href={PORTAL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.btnRed}
-              >
-                Wholesale Login
-              </a>
-              <Link href="/dealer" className={styles.btnGhostDark}>
-                Become a dealer
-              </Link>
-            </div>
           </div>
         </div>
         <div className={styles.formCard}>

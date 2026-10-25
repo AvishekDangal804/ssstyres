@@ -781,10 +781,15 @@
   color: var(--ink-3);
 }
 
+/* Flex + wrap + center, not CSS grid's auto-fit -- auto-fit left the 4th
+   card (3 + 1) stuck on the left instead of centering it on its own row.
+   Same fix as the Wheels/Accessories/collections-finish grids. */
 .careGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
-  gap: clamp(12px, 1.2vw, 18px);
+  --grid-gap: clamp(12px, 1.2vw, 18px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--grid-gap);
 }
 
 .careCard {
@@ -793,7 +798,24 @@
   padding: clamp(10px, 1vw, 13px);
   display: flex;
   flex-direction: column;
+  flex: 1 1 calc(33.333% - var(--grid-gap) * 2 / 3);
+  max-width: calc(33.333% - var(--grid-gap) * 2 / 3);
+  min-width: 260px;
   transition: border-color 0.2s, transform 0.3s;
+}
+
+@media (max-width: 900px) {
+  .careCard {
+    flex-basis: calc(50% - var(--grid-gap) / 2);
+    max-width: calc(50% - var(--grid-gap) / 2);
+  }
+}
+
+@media (max-width: 560px) {
+  .careCard {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
 
 .careCard:hover {
