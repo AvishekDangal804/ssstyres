@@ -59,8 +59,9 @@
   --nav-tracking: 0.08em;
 
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  /* +50% on manager feedback (2026-10-24) -- side margins felt too tight. */
-  --gutter: clamp(30px, 4.5vw, 84px);
+  /* +50% on 2026-10-24, then +40% more on manager feedback (2026-10-27) --
+     side margins felt too tight both times. */
+  --gutter: clamp(42px, 6.3vw, 118px);
   --container: min(1600px, 94vw);
   /* Trimmed to the 48-72px desktop / ~32-48px mobile section-spacing range --
      130px max was well past "premium breathing room" into dead space. */
