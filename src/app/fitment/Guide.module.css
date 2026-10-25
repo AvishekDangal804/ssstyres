@@ -129,53 +129,6 @@
   color: var(--white);
 }
 
-.btnGhostLight {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 38px;
-  padding: 0 18px;
-  border: 1.5px solid rgba(255, 255, 255, 0.6);
-  border-radius: 10px;
-  color: var(--white);
-  font-family: var(--font-barlow-condensed), sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  box-sizing: border-box;
-  transition: background 0.2s, color 0.2s;
-}
-
-.btnGhostLight:hover {
-  background: var(--white);
-  color: var(--black);
-}
-
-.heroStats {
-  display: flex;
-  gap: clamp(16px, 2.4vw, 36px);
-  flex-wrap: wrap;
-  margin-top: clamp(8px, 1vw, 14px);
-}
-
-.heroStatNum {
-  font-family: var(--font-barlow), sans-serif;
-  font-weight: 800;
-  font-size: clamp(19px, 2vw, 26px);
-  line-height: 1;
-  color: var(--white);
-}
-
-.heroStatLabel {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--on-dark-2);
-  margin-top: 4px;
-}
-
 /* Shared section headings */
 .eyebrow {
   font-size: 12px;
@@ -190,8 +143,7 @@
   font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
   /* Scoped smaller than the shared --h2-size token -- this page repeats an
-     H2 four times (one per "Part"), so the full site-wide size added up
-     fast across a long page. Don't touch the token itself. */
+     H2 four times across its four sections. Don't touch the token itself. */
   font-size: clamp(21px, 2.2vw, 31px);
   line-height: var(--h2-line);
   letter-spacing: var(--h2-tracking);
@@ -206,22 +158,12 @@
   margin: 8px 0 0;
 }
 
-.inlineLink {
-  color: var(--ink);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-
-.inlineLink:hover {
-  color: var(--red-on-light);
-}
-
 .sectionHead,
 .sectionHeadTight {
   margin-bottom: clamp(6px, 0.8vw, 10px);
 }
 
-/* Part 1 — Anatomy */
+/* Measurements */
 .anatomy {
   max-width: var(--container);
   margin: 0 auto;
@@ -416,7 +358,7 @@
   line-height: 1.4;
 }
 
-/* Part 2 — Sizing */
+/* Wheel sizes */
 .sizes {
   max-width: var(--container);
   margin: 0 auto;
@@ -441,10 +383,15 @@
   text-align: right;
 }
 
+/* Flex + wrap + center, not CSS grid's auto-fit -- with exactly 3 cards,
+   auto-fit left the 3rd card stuck on the left on its own row at tablet
+   width instead of centering it. Same fix as the other grids on this page. */
 .sizeGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
-  gap: clamp(12px, 1.2vw, 18px);
+  --grid-gap: clamp(12px, 1.2vw, 18px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--grid-gap);
 }
 
 .sizeCard {
@@ -456,9 +403,26 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  flex: 1 1 calc(33.333% - var(--grid-gap) * 2 / 3);
+  max-width: calc(33.333% - var(--grid-gap) * 2 / 3);
+  min-width: 240px;
   border: 1.5px solid var(--border-gray);
   background: var(--white);
   transition: transform 0.4s var(--ease), box-shadow 0.4s, border-color 0.25s;
+}
+
+@media (max-width: 900px) {
+  .sizeCard {
+    flex-basis: calc(50% - var(--grid-gap) / 2);
+    max-width: calc(50% - var(--grid-gap) / 2);
+  }
+}
+
+@media (max-width: 560px) {
+  .sizeCard {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
 }
 
 .sizeDark {
@@ -632,7 +596,7 @@
   background: rgba(11, 12, 14, 0.6);
 }
 
-/* Part 3 — Find your own fitment */
+/* Check your fitment */
 .finder {
   margin-top: clamp(8px, 1vw, 14px);
   background: var(--surface-2);
@@ -692,163 +656,6 @@
   margin: 0;
 }
 
-.stepTip {
-  margin-top: auto;
-  padding-top: 5px;
-  font-size: 12px;
-  line-height: 1.4;
-  color: var(--ink-3);
-}
-
-.stepTipLabel {
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--red-on-light);
-}
-
-.rule {
-  margin-top: clamp(8px, 0.9vw, 12px);
-  background: var(--white);
-  border-radius: 20px;
-  padding: clamp(9px, 1vw, 13px) clamp(14px, 1.5vw, 19px);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-
-.ruleLabel {
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--red-on-light);
-  flex: none;
-}
-
-.ruleText {
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--ink);
-}
-
-/* Part 4 — Fitting & aftercare */
-.care {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: clamp(8px, 1vw, 14px) var(--gutter) 0;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Part 4 heading on the left, the care-products picture on the right. */
-.careTop {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
-  gap: clamp(14px, 1.7vw, 26px);
-  align-items: center;
-  margin-bottom: clamp(10px, 1.1vw, 16px);
-}
-
-.careTop .sectionHeadTight {
-  margin-bottom: 0;
-}
-
-.careFig {
-  margin: 0;
-}
-
-.careImg {
-  position: relative;
-  width: 100%;
-  /* The source photo's own native ratio (1672x941) -- anything flatter than
-     this crops real content out of frame instead of just saving space. */
-  aspect-ratio: 16 / 9;
-  border-radius: 22px;
-  overflow: hidden;
-  background: var(--black-deep);
-}
-
-.careShot {
-  /* contain, not cover -- guarantees the full photo always shows even if
-     the container and the image's native ratio ever drift apart slightly. */
-  object-fit: contain;
-}
-
-.figCaption {
-  margin-top: 6px;
-  font-size: 11px;
-  color: var(--ink-3);
-}
-
-/* Flex + wrap + center, not CSS grid's auto-fit -- auto-fit left the 4th
-   card (3 + 1) stuck on the left instead of centering it on its own row.
-   Same fix as the Wheels/Accessories/collections-finish grids. */
-.careGrid {
-  --grid-gap: clamp(12px, 1.2vw, 18px);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--grid-gap);
-}
-
-.careCard {
-  border: 1.5px solid var(--border-gray);
-  border-radius: 20px;
-  padding: clamp(10px, 1vw, 13px);
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 calc(33.333% - var(--grid-gap) * 2 / 3);
-  max-width: calc(33.333% - var(--grid-gap) * 2 / 3);
-  min-width: 260px;
-  transition: border-color 0.2s, transform 0.3s;
-}
-
-@media (max-width: 900px) {
-  .careCard {
-    flex-basis: calc(50% - var(--grid-gap) / 2);
-    max-width: calc(50% - var(--grid-gap) / 2);
-  }
-}
-
-@media (max-width: 560px) {
-  .careCard {
-    flex-basis: 100%;
-    max-width: 100%;
-  }
-}
-
-.careCard:hover {
-  border-color: var(--black);
-  transform: translateY(-4px);
-}
-
-.careTag {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--red-on-light);
-  margin-bottom: 5px;
-}
-
-.careTitle {
-  font-family: var(--font-barlow), sans-serif;
-  font-weight: 700;
-  font-size: var(--h3-size);
-  line-height: var(--h3-line);
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  margin: 0 0 4px;
-}
-
-.careBody {
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: var(--ink);
-  margin: 0;
-}
-
 /* Closing card */
 .ask {
   max-width: var(--container);
@@ -873,15 +680,6 @@
 
 .askText {
   max-width: 660px;
-}
-
-.askEyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--red-on-dark);
-  margin-bottom: 5px;
 }
 
 .askTitle {

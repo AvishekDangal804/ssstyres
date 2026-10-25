@@ -6,50 +6,24 @@ import SizesGrid from "./SizesGrid";
 import styles from "./Guide.module.css";
 
 export const metadata = pageMetadata({
-  title: "Guide | SSS Wheels & Tyres",
+  title: "Wheel Fitment Guide | SSS Wheels & Tyres",
   description:
-    "How to read a wheel spec, popular wheel sizes and how to find your own fitment — plain-language guidance before you order SSS wheels.",
+    "The essential wheel measurements, popular sizes and how to check your fitment before you order SSS wheels.",
   path: "/fitment",
 });
 
 const STEPS = [
   {
     title: "Check the tyre placard",
-    body: "Open the driver's door and look at the placard on the door jamb (or in the owner's manual). It lists the factory rim size, tyre size and recommended pressures — your safe starting point.",
-    tip: "The placard shows the original factory fitment. If the vehicle's tyres or wheels have been changed since it left the factory, what's actually fitted may not match it.",
+    body: "Find it on the driver's door jamb or in the owner's manual — it lists the factory rim size, tyre size and recommended pressures.",
   },
   {
-    title: "Count studs & measure PCD",
-    body: "Count the wheel studs. For an even count (6), measure centre-to-centre across two opposite studs. For 5-stud, measure from the back of one hole to the centre of the second one along. That's your bolt pattern, e.g. 6x139.7.",
-    tip: 'A 6-stud pattern is also written 6x5.5" (same spacing, imperial). Most Australian dual cabs and 4x4 wagons run 6x139.7; many SUVs and passenger cars run 5x114.3 — useful to sanity-check your measurement against.',
+    title: "Record your current specs",
+    body: "Note your existing wheel size, bolt pattern and offset so we can match them exactly.",
   },
   {
-    title: "Read the back of the wheel",
-    body: "Most wheels are stamped on the inner barrel or spoke with the size and offset — look for markings like 17x8 and ET0 (or +0). Note them down along with your bolt pattern and you have a full spec.",
-    tip: "Can't find a stamp? It's sometimes on a sticker instead, or hidden behind the tyre bead. Call us with what you can read and we'll help confirm the rest.",
-  },
-];
-
-const CARE = [
-  {
-    tag: "Torque",
-    title: "Tighten to spec, in a star pattern",
-    body: "Use a torque wrench and the manufacturer's figure for your vehicle — never a rattle gun by feel. Tighten opposite studs in a criss-cross pattern so the wheel seats evenly on the hub.",
-  },
-  {
-    tag: "Re-torque",
-    title: "Re-check after the first 100 km",
-    body: "New wheels bed in as they're driven. Re-torque every wheel after roughly 100 km (and after any tyre rotation) — skipping this step is a common cause of loose wheels.",
-  },
-  {
-    tag: "Beadlock",
-    title: "Inspect ring hardware regularly",
-    body: "On beadlock-style wheels, check the ring bolts are at the correct torque before serious off-road use and re-inspect after airing down. Keep the mating surfaces clean and free of grit.",
-  },
-  {
-    tag: "Finish care",
-    title: "Wash warm, never harsh chemicals",
-    body: "Clean with mild car soap and water and dry with a soft cloth. Avoid acidic or high-alkaline wheel cleaners on machined and painted finishes — harsh chemicals can dull or corrode the finish, and that damage isn't covered by the warranty.",
+    title: "Confirm with our team",
+    body: "Send us what you've got and we'll confirm it's compatible before you order.",
   },
 ];
 
@@ -71,31 +45,17 @@ export default function GuidePage() {
         <div className={styles.heroInner}>
           <div className={styles.kickerRow}>
             <span className={styles.bar} />
-            The SSS guide
+            SSS guide
           </div>
-          <h1 className={styles.heroH1}>Know your wheels. Order with confidence.</h1>
+          <h1 className={styles.heroH1}>Wheel Fitment Guide</h1>
           <p className={styles.heroBody}>
-            Learn to read a wheel spec, find the right size for your vehicle,
-            and check the fitment — everything you need before you place an
-            order, in plain language.
+            The measurements, sizes and steps to order the right SSS wheel
+            the first time.
           </p>
           <div className={styles.heroCtas}>
-            <a href="#anatomy" className={styles.btnWhite}>
-              How to read a wheel <span>↓</span>
-            </a>
-            <a href="#finder" className={styles.btnGhostLight}>
-              Find my fitment
-            </a>
-          </div>
-          <div className={styles.heroStats}>
-            <div>
-              <div className={styles.heroStatNum}>3</div>
-              <div className={styles.heroStatLabel}>Numbers to know</div>
-            </div>
-            <div>
-              <div className={styles.heroStatNum}>15–17&quot;</div>
-              <div className={styles.heroStatLabel}>Size range</div>
-            </div>
+            <Link href="/contact" className={styles.btnWhite}>
+              Enquire About Fitment
+            </Link>
           </div>
         </div>
       </section>
@@ -105,7 +65,7 @@ export default function GuidePage() {
       <section className={styles.sizes} aria-labelledby="guide-sizes">
         <div className={styles.sizesHead}>
           <div>
-            <div className={styles.eyebrow}>Part 2 — Sizing</div>
+            <div className={styles.eyebrow}>Wheel sizes</div>
             <h2 id="guide-sizes" className={styles.h2}>
               Popular wheel sizes
             </h2>
@@ -118,15 +78,11 @@ export default function GuidePage() {
         <SizesGrid />
       </section>
 
-      <section id="finder" className={styles.finder}>
+      <section className={styles.finder}>
         <div className={styles.finderInner}>
           <div className={styles.sectionHeadTight}>
-            <div className={styles.eyebrow}>Part 3 — Find your own fitment</div>
-            <h2 className={styles.h2}>Read it straight off your vehicle</h2>
-            <p className={styles.lead}>
-              Your current setup already carries every number you need.
-              Here&apos;s where to find each one before you order.
-            </p>
+            <div className={styles.eyebrow}>Check your fitment</div>
+            <h2 className={styles.h2}>How to check your fitment</h2>
           </div>
           <div className={styles.stepGrid}>
             {STEPS.map((st, i) => (
@@ -134,86 +90,25 @@ export default function GuidePage() {
                 <div className={styles.stepNum}>{i + 1}</div>
                 <h3 className={styles.stepTitle}>{st.title}</h3>
                 <p className={styles.stepBody}>{st.body}</p>
-                <div className={styles.stepTip}>
-                  <span className={styles.stepTipLabel}>Tip —</span> {st.tip}
-                </div>
               </div>
             ))}
           </div>
-          <div className={styles.rule}>
-            <span className={styles.ruleLabel}>Golden rule</span>
-            <span className={styles.ruleText}>
-              Bolt pattern and centre bore must match exactly. Size and offset
-              can change within legal limits — but if you&apos;re lifting,
-              going wider or unsure of the law in your state, confirm with us
-              first.
-            </span>
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.care} aria-labelledby="guide-care">
-        <div className={styles.careTop}>
-          <div className={styles.sectionHeadTight}>
-            <div className={styles.eyebrow}>Part 4 — Fitting &amp; aftercare</div>
-            <h2 id="guide-care" className={styles.h2}>
-              Fit them right, keep them right
-            </h2>
-            <p className={styles.lead}>
-              A wheel is only as good as its fitting. These steps apply to
-              every SSS wheel and line up with the conditions in our{" "}
-              <Link href="/legal#warranty" className={styles.inlineLink}>
-                warranty terms
-              </Link>
-              .
-            </p>
-          </div>
-          <figure className={styles.careFig}>
-            <div className={styles.careImg}>
-              <Image
-                src="/assets/lifestyle/care-products.jpg"
-                alt="Black car-care bottles — engine oil, wheel cleaner, interior detailer, car shampoo and tyre dressing — with a detailing brush, a sponge and microfibre towels"
-                fill
-                sizes="(max-width: 900px) 94vw, 620px"
-                className={styles.careShot}
-              />
-            </div>
-            <figcaption className={styles.figCaption}>
-              Illustrative image.
-            </figcaption>
-          </figure>
-        </div>
-        <div className={styles.careGrid}>
-          {CARE.map((c) => (
-            <div key={c.tag} className={styles.careCard}>
-              <div className={styles.careTag}>{c.tag}</div>
-              <h3 className={styles.careTitle}>{c.title}</h3>
-              <p className={styles.careBody}>{c.body}</p>
-            </div>
-          ))}
         </div>
       </section>
 
       <section className={styles.ask}>
         <div className={styles.askCard}>
           <div className={styles.askText}>
-            <div className={styles.askEyebrow}>Still not sure?</div>
-            <h2 className={styles.askTitle}>
-              Send us your details — we&apos;ll confirm it.
-            </h2>
+            <h2 className={styles.askTitle}>Need Help Confirming Fitment?</h2>
             <p className={styles.askBody}>
-              Give us your vehicle, rego or current wheel spec and our team
-              will confirm the exact fitment, load rating and the legal offset
-              range for your state before you order.
+              Give us your vehicle or current wheel spec and we&apos;ll
+              confirm the exact fitment before you order.
             </p>
           </div>
           <div className={styles.askBtns}>
             <Link href="/contact" className={styles.btnRed}>
-              Ask our team <span>→</span>
+              Enquire About Fitment <span>→</span>
             </Link>
-            <a href="tel:0391165787" className={styles.btnGhostLight}>
-              Call 03 9116 5787
-            </a>
           </div>
         </div>
       </section>

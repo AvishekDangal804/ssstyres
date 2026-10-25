@@ -11,35 +11,35 @@ const PARTS = [
     example: '17"',
     x: 50,
     y: 7,
-    body: 'The height of the wheel across the middle, in inches. A 17" wheel needs a tyre with a 17" inner diameter. Go up in diameter and the tyre gets lower-profile; go down and you gain sidewall to soak up corrugations.',
+    body: 'The height of the wheel across the middle, in inches — it must match your tyre\'s inner diameter.',
   },
   {
     title: "Width",
     example: '8"',
     x: 90,
     y: 50,
-    body: "How wide the rim is, front to back, in inches. A wider wheel spreads the tyre for more grip and a planted stance — but a rim that's too wide for the tyre pinches its profile.",
+    body: "How wide the rim is, front to back, in inches — wider spreads the tyre for a more planted stance.",
   },
   {
     title: "Bolt pattern (PCD)",
     example: "6x139.7",
     x: 50,
     y: 50,
-    body: "The number of studs and the diameter of the circle they sit on, in millimetres. 6x139.7 means six studs on a 139.7 mm circle — the standard for most Australian dual cabs and 4x4 wagons. It must match your hubs exactly.",
+    body: "The stud count and the circle they sit on, in millimetres — e.g. 6x139.7 — and it must match your hubs exactly.",
   },
   {
     title: "Offset (ET)",
     example: "ET0",
     x: 50,
     y: 88,
-    body: "How far the mounting face sits from the wheel's centreline, in millimetres. Lower or negative offset pushes the wheel outward for a wider track and aggressive look; too far can rub or exceed your state's legal limit.",
+    body: "How far the mounting face sits from the wheel's centreline, in millimetres — lower offset pushes the wheel outward.",
   },
   {
     title: "Centre bore",
     example: "Hub-centric",
     x: 15,
     y: 50,
-    body: "The hole in the middle that locates on your hub. A hub-centric wheel has a bore that matches the hub, so it sits dead-centre without the studs carrying the load; where the bore is larger, a hub-centric ring fills the gap.",
+    body: "The hole in the middle that locates on your hub, so the wheel sits dead-centre without the studs carrying the load.",
   },
 ];
 
@@ -50,11 +50,10 @@ export default function WheelAnatomy() {
   return (
     <section id="anatomy" className={styles.anatomy}>
       <div className={styles.sectionHead}>
-        <div className={styles.eyebrow}>Part 1 — Anatomy</div>
-        <h2 className={styles.h2}>How to read a wheel</h2>
+        <div className={styles.eyebrow}>Measurements</div>
+        <h2 className={styles.h2}>Essential wheel measurements</h2>
         <p className={styles.lead}>
-          Tap a marker to see what each part of the wheel means. Every wheel
-          is described by the same handful of measurements.
+          Tap a marker to see what each measurement means.
         </p>
       </div>
 
