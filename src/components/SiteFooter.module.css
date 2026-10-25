@@ -237,7 +237,11 @@
   margin: 0 auto;
   padding: clamp(36px, 4vw, 70px) var(--gutter) clamp(31px, 3.4vw, 59px);
   display: grid;
-  grid-template-columns: 1.3fr repeat(3, minmax(150px, 1fr));
+  /* The 3 link/address columns no longer stretch to 1fr -- at wide
+     viewports that left a lot of dead space to the right of their short
+     content. They now size to their own content (with a safety floor)
+     and the brand column absorbs the leftover width instead. */
+  grid-template-columns: minmax(280px, 1.3fr) repeat(3, minmax(150px, auto));
   gap: 32px;
   width: 100%;
   box-sizing: border-box;
