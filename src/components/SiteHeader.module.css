@@ -1,12 +1,6 @@
-/* Only the main navbar stays pinned: the header sticks once the contact bar
-   above it (34px + its 1px border) has scrolled out of view. This is a
-   deliberate departure from the manager's navbar file (which pins the whole
-   header including the contact bar) — the manager separately approved this
-   exact "contact bar scrolls away, nav bar stays" behaviour by screenshot. */
 .wrap {
-  --topbar-h: 35px;
   position: sticky;
-  top: calc(var(--topbar-h) * -1);
+  top: 0;
   z-index: 50;
   background: rgba(255, 255, 255, 0.58);
   backdrop-filter: blur(24px) saturate(1.8);
@@ -27,44 +21,6 @@
   .wrap {
     background: rgba(255, 255, 255, 0.94);
   }
-
-  .topbar {
-    background: rgba(47, 47, 49, 0.92);
-  }
-}
-
-.topbar {
-  background: rgba(47, 47, 49, 0.78);
-  color: var(--on-dark);
-  font-size: 13px;
-  backdrop-filter: blur(24px) saturate(1.8);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.topbarInner {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 0 var(--gutter);
-  /* Fixed single line, so the pin offset above is always exact. */
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.topbarLinks {
-  display: flex;
-  gap: 18px;
-  align-items: center;
-}
-
-.topbarLinks a {
-  color: var(--white);
 }
 
 .mainbar {
@@ -389,15 +345,6 @@
     order: 2;
     margin-left: auto;
     flex-wrap: wrap;
-  }
-}
-
-@media (max-width: 900px) {
-  /* The address is repeated in the footer and on the contact page. Below this
-     width it no longer fits on one line beside the phone and email, and the
-     contact bar must stay a single line (the navbar pins beneath it). */
-  .topbarAddress {
-    display: none;
   }
 }
 

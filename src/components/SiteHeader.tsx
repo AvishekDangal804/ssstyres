@@ -67,18 +67,6 @@ export default function SiteHeader() {
       ref={headerRef}
       className={`${styles.wrap} ${mobileOpen ? styles.wrapOpen : ""}`}
     >
-      <div className={styles.topbar}>
-        <div className={styles.topbarInner}>
-          <span className={styles.topbarAddress}>
-            Melbourne — 13 Advantage Drive, Dandenong South · Sydney,
-            Brisbane &amp; Adelaide opening soon
-          </span>
-          <div className={styles.topbarLinks}>
-            <a href="tel:0391165787">03 9116 5787</a>
-            <a href="mailto:info@ssswheels.com.au">info@ssswheels.com.au</a>
-          </div>
-        </div>
-      </div>
       <div className={styles.mainbar}>
         <Link href="/" className={styles.logo}>
           <Image
