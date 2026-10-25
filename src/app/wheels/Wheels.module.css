@@ -209,13 +209,15 @@
   position: relative;
   display: block;
   overflow: hidden;
-  background: var(--surface-2);
+  /* White, matching Accessories' .panel -- was --surface-2 (cream), which
+     made the two product grids look inconsistent side by side. */
+  background: var(--white);
 }
 
 .cardImgWrap {
   position: relative;
   aspect-ratio: 1 / 1;
-  background: var(--surface-2);
+  background: var(--white);
   /* Flex-centres a naturally-sized <img> instead of using object-fit or a
      background-image, both of which showed the same reproducible
      Chromium bug here: in this fluid, clamp()-sized grid, the same
