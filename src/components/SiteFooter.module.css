@@ -225,7 +225,10 @@
 }
 
 .dark {
-  background: var(--black-deep);
+  /* Navy, matching the brand's dark neutral used elsewhere (header, nav),
+     not the flat charcoal grey this used to be -- reads as branded and
+     deliberate rather than a generic dark footer. */
+  background: var(--black);
   color: var(--on-dark-2);
 }
 
@@ -238,6 +241,34 @@
   gap: 32px;
   width: 100%;
   box-sizing: border-box;
+}
+
+/* Vertical dividers between columns, matching the same treatment already
+   used for the trade-specs row in the band above this. */
+.grid > div {
+  position: relative;
+}
+
+.grid > div:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: -16px;
+  top: 2px;
+  bottom: 2px;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+@media (max-width: 900px) {
+  .grid > div:nth-child(3)::before {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid > div::before {
+    display: none;
+  }
 }
 
 .grid img {
@@ -261,12 +292,23 @@
 }
 
 .colTitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--white);
   margin-bottom: 14px;
+}
+
+.colTitle span {
+  width: 16px;
+  height: 2px;
+  background: var(--red);
+  display: inline-block;
+  flex: none;
 }
 
 .colLinks {

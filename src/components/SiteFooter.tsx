@@ -120,7 +120,10 @@ export default function SiteFooter() {
             </p>
           </div>
           <div>
-            <h2 className={styles.colTitle}>Wheels</h2>
+            <h2 className={styles.colTitle}>
+              <span />
+              Wheels
+            </h2>
             <div className={styles.colLinks}>
               <Link href="/wheels?cat=steel">Steel</Link>
               <Link href="/wheels?cat=offroad">Off Road</Link>
@@ -132,7 +135,10 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <h2 className={styles.colTitle}>Company</h2>
+            <h2 className={styles.colTitle}>
+              <span />
+              Company
+            </h2>
             <div className={styles.colLinks}>
               <Link href="/dealer">Become a Dealer</Link>
               <Link href="/trade">Built for the Trade</Link>
@@ -144,7 +150,10 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <h2 className={styles.colTitle}>Warehouse</h2>
+            <h2 className={styles.colTitle}>
+              <span />
+              Warehouse
+            </h2>
             <div className={styles.colLinks}>
               <span>
                 13 Advantage Drive
