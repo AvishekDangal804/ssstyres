@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import styles from "./Guide.module.css";
 
 const SIZES = [
@@ -11,7 +10,6 @@ const SIZES = [
     tyre: '30–31"',
     suits: "Jimny · trailers",
     body: "The budget-friendly workhorse size. Maximum sidewall for airing down off-road, cheap to replace, and the go-to for box, boat and camper trailers.",
-    img: "/assets/wheels/r3.png",
     dark: false,
   },
   {
@@ -20,7 +18,6 @@ const SIZES = [
     tyre: '32–33"',
     suits: "HiAce · Prado",
     body: "The tourer's sweet spot. Enough sidewall to survive outback corrugations, light-truck load ratings, and a size most 4x4 tyres are made in.",
-    img: "/assets/wheels/r7.png",
     dark: true,
   },
   {
@@ -29,7 +26,6 @@ const SIZES = [
     tyre: '32–34"',
     suits: "Ranger · HiLux · RAV4",
     body: "A very common size on Australian dual cabs. Balances an aggressive look with real off-road sidewall.",
-    img: "/assets/wheels/r4.png",
     dark: true,
   },
 ];
@@ -62,15 +58,6 @@ export default function SizesGrid() {
           className={`${styles.sizeCard} ${s.dark ? styles.sizeDark : ""}`}
         >
           <div className={styles.sizeGlow} aria-hidden="true" />
-          <div className={styles.sizeArt} aria-hidden="true">
-            <Image
-              src={s.img}
-              alt=""
-              fill
-              sizes="220px"
-              className={styles.contain}
-            />
-          </div>
           <div className={styles.sizeInner}>
             <div className={styles.sizeNum}>{s.size}</div>
             <div className={styles.sizeTag}>{s.tag}</div>
