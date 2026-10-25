@@ -246,7 +246,10 @@
 
 .photo {
   position: absolute;
-  inset: 10%;
+  /* 18% inset = the image occupies 64% of the panel, a 20% size cut from
+     the previous 80% (10% inset) -- the parts looked larger than Wheels'
+     product shots because of how tightly the source photos were framed. */
+  inset: 18%;
   z-index: 1;
   transition: transform 0.6s var(--ease);
 }
