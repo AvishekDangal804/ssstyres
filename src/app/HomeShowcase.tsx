@@ -193,10 +193,6 @@ export default function HomeShowcase() {
         <div className={styles.typesInner}>
           <div className={styles.typesHead}>
             <div>
-              <div className={styles.typesKicker}>
-                <span className={styles.bar} />
-                Know your wheels
-              </div>
               <h2 id="home-types" className={styles.sectionH2}>
                 Types of wheels
               </h2>

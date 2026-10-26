@@ -315,18 +315,6 @@
   margin-bottom: 14px;
 }
 
-.typesKicker {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--red-text);
-  margin-bottom: 14px;
-}
-
 /* List + stage: a selectable list of all 6 types (every wheel visible at
    once, no rotated labels) next to a fixed-size detail stage for whichever
    is selected -- replaces an accordion whose collapsed panels showed mostly
