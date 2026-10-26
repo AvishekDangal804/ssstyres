@@ -414,7 +414,7 @@
 .typeStageImgWrap {
   position: relative;
   flex: 1 1 260px;
-  min-height: 280px;
+  min-height: 240px;
   background: var(--black-deep);
 }
 
@@ -427,8 +427,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 14px;
-  padding: clamp(28px, 3vw, 44px);
+  gap: 10px;
+  padding: clamp(18px, 2vw, 30px);
   box-sizing: border-box;
 }
 
@@ -468,7 +468,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  height: 36px;
+  height: 30px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   font-size: 13px;
   color: var(--white);
