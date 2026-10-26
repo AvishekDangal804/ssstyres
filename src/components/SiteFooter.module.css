@@ -225,11 +225,11 @@
 }
 
 .dark {
-  /* White, per manager feedback -- the navy/charcoal treatment didn't land.
-     Keeps the same structure (kicker bars, dividers, column layout), just
-     light instead of dark. */
-  background: var(--white);
-  color: var(--ink);
+  /* Back to dark navy per the provided Footer Fix design -- white felt
+     wrong once seen live. Uses the brand's existing navy token, same as
+     the header/nav, not a new one-off colour. */
+  background: var(--black);
+  color: var(--on-dark-2);
 }
 
 .grid {
@@ -247,34 +247,6 @@
   box-sizing: border-box;
 }
 
-/* Vertical dividers between columns, matching the same treatment already
-   used for the trade-specs row in the band above this. */
-.grid > div {
-  position: relative;
-}
-
-.grid > div:not(:first-child)::before {
-  content: "";
-  position: absolute;
-  left: -16px;
-  top: 2px;
-  bottom: 2px;
-  width: 1px;
-  background: var(--line);
-}
-
-@media (max-width: 900px) {
-  .grid > div:nth-child(3)::before {
-    display: none;
-  }
-}
-
-@media (max-width: 560px) {
-  .grid > div::before {
-    display: none;
-  }
-}
-
 .grid img {
   height: 32px;
   width: auto;
@@ -289,7 +261,7 @@
 }
 
 .tagline {
-  color: var(--black) !important;
+  color: var(--white) !important;
   font-weight: 700;
   letter-spacing: 0.02em;
   margin-bottom: 8px !important;
@@ -303,7 +275,7 @@
   font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--white);
   margin-bottom: 14px;
 }
 
@@ -323,23 +295,23 @@
 
 .colLinks a,
 .colLinks span {
-  color: var(--ink);
+  color: var(--on-dark-2);
 }
 
 .colLinks a:hover {
-  color: var(--red-on-light);
+  color: var(--red-on-dark);
 }
 
 .faded {
-  color: var(--ink-3) !important;
+  color: var(--on-dark-2) !important;
 }
 
 .colLinks a.white {
-  color: var(--black);
+  color: var(--white);
 }
 
 .bottom {
-  border-top: 1px solid var(--line);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .bottomInner {
@@ -351,7 +323,7 @@
   gap: 16px;
   flex-wrap: wrap;
   font-size: 13px;
-  color: var(--ink-3);
+  color: var(--on-dark-2);
   width: 100%;
   box-sizing: border-box;
 }
@@ -362,7 +334,7 @@
 }
 
 .bottomLinks a:hover {
-  color: var(--red-on-light);
+  color: var(--red-on-dark);
 }
 
 @media (max-width: 900px) {
