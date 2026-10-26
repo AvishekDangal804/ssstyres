@@ -105,7 +105,7 @@ export default function SiteFooter() {
         <div className={styles.grid}>
           <div>
             <Image
-              src="/assets/logo-white.png"
+              src="/assets/logo.png"
               alt="SSS Wheels & Tyres"
               width={208}
               height={32}
