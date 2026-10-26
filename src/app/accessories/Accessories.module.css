@@ -285,6 +285,12 @@
   flex: 1;
   padding: 15px 0 0;
   border-top: 2px solid var(--black);
+  transition: border-top-width 0.2s var(--ease);
+}
+
+.card:hover .body,
+.card:focus-visible .body {
+  border-top-width: 5px;
 }
 
 .kicker {

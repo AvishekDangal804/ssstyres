@@ -191,9 +191,7 @@ export default function AccessoriesPage() {
                   )}
                 </div>
                 <div className={styles.body}>
-                  <div className={styles.kicker}>{t.kicker}</div>
                   <h2 className={styles.title}>{t.title}</h2>
-                  <p className={styles.sub}>{t.sub}</p>
                   {t.cta && (
                     <div className={styles.cta}>
                       {t.cta} <span className={styles.arrow}>→</span>
