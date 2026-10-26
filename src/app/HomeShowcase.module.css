@@ -266,8 +266,11 @@
 .types {
   background: var(--black-deep);
   color: var(--white);
-  margin-top: 38px;
-  padding: 34px 0 38px;
+  /* No top margin or bottom padding -- the sections immediately before
+     (.statement) and after (.feat) are the same dark background, so any
+     margin/padding here either showed the white page background through
+     as a seam, or just left dead space before the next section starts. */
+  padding: 34px 0 0;
   position: relative;
   overflow: hidden;
 }
