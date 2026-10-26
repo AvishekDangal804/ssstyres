@@ -133,6 +133,12 @@ export const WHEELS: Wheel[] = [
   { id: 'dh-16x7-6x139-b', model: 'd-hole', name: 'SSS D-Hole', variant: 'Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: R.holeBlack },
   { id: 'dh-16x7-6x139-w', model: 'd-hole', name: 'SSS D-Hole', variant: 'White', hex: '#F2F1ED', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: null },
   { id: 'dh-16x7-6x139-s', model: 'd-hole', name: 'SSS D-Hole', variant: 'Silver', hex: '#B8BCC2', cat: 'steel', cat2: 'commercial', size: '16x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: null },
+  // TEMPORARY fill, added to preview a full 8-card grid (2x4 rows) per
+  // manager request -- reuses existing photos (no new photography) and
+  // plausible-but-unconfirmed specs. Replace with verified fitment data
+  // (or remove) before this is treated as real stock.
+  { id: 'dl-17x9-6x139-b', model: 'd-locker', name: 'SSS D-Locker', variant: 'Matte Black', hex: '#1C1C1C', cat: 'offroad', cat2: 'beadlock', size: '17x9', pcd: '6x139.7', offset: 'ET-15', build: 'Cast alloy · beadlock style', load: '1250 kg', img: R.black },
+  { id: 'dh-17x7-6x139-b', model: 'd-hole', name: 'SSS D-Hole', variant: 'Black', hex: '#0E0E0E', cat: 'steel', cat2: 'commercial', size: '17x7', pcd: '6x139.7', offset: 'ET0', build: 'Pressed steel', load: '1250 kg', img: R.holeBlack },
 ];
 
 export interface Vehicle {
