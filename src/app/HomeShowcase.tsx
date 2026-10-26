@@ -205,68 +205,84 @@ export default function HomeShowcase() {
               Wheel guide <span>→</span>
             </Link>
           </div>
-          <div className={styles.typesStrip}>
-            {CATEGORIES.map((c, i) => {
-              const on = activeCat === c.id;
-              const num = String(i + 1).padStart(2, "0");
+          <div className={styles.typesPanel}>
+            <div className={styles.typesList}>
+              {CATEGORIES.map((c, i) => {
+                const on = activeCat === c.id;
+                const num = String(i + 1).padStart(2, "0");
+                if (on) {
+                  return (
+                    <div
+                      key={c.id}
+                      className={`${styles.typeRow} ${styles.typeRowActive}`}
+                    >
+                      <span className={styles.typeRowNum}>{num}</span>
+                      <span className={styles.typeRowName}>{c.name}</span>
+                      <div className={styles.typeRowImg} aria-hidden="true">
+                        <Image src={c.img} alt="" fill sizes="48px" className={styles.contain} />
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <button
+                    key={c.id}
+                    type="button"
+                    onMouseEnter={() => setActiveCat(c.id)}
+                    onFocus={() => setActiveCat(c.id)}
+                    onClick={() => setActiveCat(c.id)}
+                    className={styles.typeRow}
+                  >
+                    <span className={styles.typeRowNum}>{num}</span>
+                    <span className={styles.typeRowName}>{c.name}</span>
+                    <div className={styles.typeRowImg} aria-hidden="true">
+                      <Image src={c.img} alt="" fill sizes="48px" className={styles.contain} />
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            {(() => {
+              const curIndex = CATEGORIES.findIndex((c) => c.id === activeCat);
+              const cur = CATEGORIES[curIndex] ?? CATEGORIES[0];
+              const num = String(curIndex + 1).padStart(2, "0");
               return (
-                <div
-                  key={c.id}
-                  role="group"
-                  aria-label={c.name}
-                  tabIndex={0}
-                  onMouseEnter={() => setActiveCat(c.id)}
-                  onFocus={() => setActiveCat(c.id)}
-                  onClick={() => setActiveCat(c.id)}
-                  className={`${styles.panel} ${on ? styles.active : ""}`}
-                >
-                  <div className={styles.panelGlow} />
-                  <div className={styles.panelImg} aria-hidden="true">
+                <div className={styles.typeStage}>
+                  <div className={styles.typeStageImgWrap}>
                     <Image
-                      src={c.img}
-                      alt=""
+                      src={cur.img}
+                      alt={`${cur.name} wheel`}
                       fill
-                      sizes="(max-width: 1040px) 60vw, 520px"
+                      sizes="(max-width: 760px) 90vw, 420px"
                       className={styles.contain}
                     />
                   </div>
-                  <div className={styles.panelLabel} aria-hidden="true">
-                    <span className={styles.panelLabelNum}>{num}</span>
-                    <span className={styles.panelLabelName}>{c.name}</span>
-                  </div>
-                  <div className={styles.panelBody}>
-                    <div className={styles.panelBodyKicker}>
-                      {num} — {c.tag}
+                  <div className={styles.typeStageBody}>
+                    <div className={styles.typeStageKicker}>
+                      {num} — {cur.tag}
                     </div>
-                    <h3 className={styles.panelBodyName}>{c.name}</h3>
-                    <p className={styles.panelBlurb}>{c.blurb}</p>
-                    <div className={styles.panelChips}>
-                      {c.bullets.map((b) => (
-                        <span key={b} className={styles.panelChip}>
+                    <h3 className={styles.typeStageName}>{cur.name}</h3>
+                    <p className={styles.typeStageBlurb}>{cur.blurb}</p>
+                    <div className={styles.typeStageFeats}>
+                      {cur.bullets.map((b) => (
+                        <div key={b} className={styles.typeStageFeat}>
+                          <span aria-hidden="true" />
                           {b}
-                        </span>
+                        </div>
                       ))}
                     </div>
                     <div className={styles.panelCtaRow}>
-                      <Link
-                        href={`/wheels?cat=${c.id}`}
-                        className={styles.panelCta}
-                        tabIndex={on ? 0 : -1}
-                      >
-                        View {c.name} wheels <span>→</span>
+                      <Link href={`/wheels?cat=${cur.id}`} className={styles.panelCta}>
+                        View {cur.name} wheels <span>→</span>
                       </Link>
-                      <Link
-                        href="/fitment"
-                        className={styles.panelCtaGhost}
-                        tabIndex={on ? 0 : -1}
-                      >
+                      <Link href="/fitment" className={styles.panelCtaGhost}>
                         Fitment guide
                       </Link>
                     </div>
                   </div>
                 </div>
               );
-            })}
+            })()}
           </div>
         </div>
       </section>

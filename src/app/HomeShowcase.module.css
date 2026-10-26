@@ -324,169 +324,202 @@
   margin-bottom: 14px;
 }
 
-.typesStrip {
+/* List + stage: a selectable list of all 6 types (every wheel visible at
+   once, no rotated labels) next to a fixed-size detail stage for whichever
+   is selected -- replaces an accordion whose collapsed panels showed mostly
+   empty space with the wheel cropped off, and whose open panel still cropped
+   the wheel at the edge. */
+.typesPanel {
   display: flex;
-  gap: 12px;
-  height: clamp(240px, 16.8vw, 312px);
-}
-
-.panel {
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
+  flex-wrap: wrap;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-radius: 20px;
-  background: var(--panel);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  transition: flex 0.7s var(--ease), height 0.6s var(--ease), background 0.4s, border-color 0.4s;
-  flex: 1 1 0;
+  overflow: hidden;
 }
 
-.panel.active {
-  background: var(--panel-active);
-  border-color: rgba(255, 255, 255, 0.14);
-  flex: 4.2 1 0;
-}
-
-.panelGlow {
-  position: absolute;
-  right: -10%;
-  bottom: -20%;
-  width: 70%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(218, 2, 11, 0.45), rgba(218, 2, 11, 0) 65%);
-  transition: opacity 0.6s;
-  pointer-events: none;
-  opacity: 0;
-}
-
-.panel.active .panelGlow {
-  opacity: 1;
-}
-
-.panelImg {
-  position: absolute;
-  right: 50%;
-  bottom: -18px;
-  width: 66px;
-  aspect-ratio: 1;
-  opacity: 0.28;
-  transform: translateX(50%) rotate(-24deg) scale(0.9);
-  filter: drop-shadow(0 40px 50px rgba(0, 0, 0, 0.7));
-  transition: opacity 0.6s, transform 0.8s var(--ease);
-  pointer-events: none;
-}
-
-.panel.active .panelImg {
-  right: -4%;
-  bottom: -6%;
-  width: min(48%, 228px);
-  opacity: 1;
-  transform: rotate(0deg) scale(1);
-}
-
-.panelLabel {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: auto;
-  top: auto;
+.typesList {
+  flex: 1 1 280px;
   display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.typeRow {
+  display: grid;
+  grid-template-columns: 30px 1fr 44px;
   align-items: center;
-  justify-content: flex-end;
-  gap: 14px;
-  padding: 26px 0;
-  width: 100%;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-  transition: opacity 0.35s;
-  opacity: 1;
+  gap: 12px;
+  height: 64px;
+  padding: 0 18px;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: var(--on-dark-2);
+  font-family: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s, color 0.2s;
 }
 
-.panel.active .panelLabel {
-  opacity: 0;
-  pointer-events: none;
+.typeRow:last-child {
+  border-bottom: 0;
 }
 
-.panelLabelNum {
+.typeRow:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--white);
+}
+
+.typeRowActive {
+  background: var(--panel);
+  color: var(--white);
+  box-shadow: inset 0 -3px 0 var(--red);
+  cursor: default;
+}
+
+.typeRowNum {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.1em;
   color: var(--red-text);
 }
 
-.panelLabelName {
+.typeRowName {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: 22px;
+  font-size: 16px;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
-.panelBody {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  padding: 14px 19px 14px;
-  max-width: 560px;
-  opacity: 0;
-  transform: translateY(16px);
-  pointer-events: none;
-  transition: opacity 0.5s 0.15s, transform 0.6s var(--ease) 0.1s;
-}
-
-.panel.active .panelBody {
+.typeRowImg {
   position: relative;
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
+  width: 44px;
+  height: 44px;
+  opacity: 0.65;
 }
 
-.panelBodyKicker {
+.typeRowActive .typeRowImg {
+  opacity: 1;
+}
+
+.typeStage {
+  flex: 999 1 460px;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--panel);
+}
+
+.typeStageImgWrap {
+  position: relative;
+  flex: 1 1 260px;
+  min-height: 280px;
+  background: var(--black-deep);
+}
+
+.typeStageBody {
+  flex: 1 1 300px;
+  /* Flex items default to min-width:auto, so without this a long button
+     label's min-content width can force this (and .typeStage above it)
+     wider than the viewport on narrow screens. */
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  padding: clamp(28px, 3vw, 44px);
+  box-sizing: border-box;
+}
+
+.typeStageKicker {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--red-text);
-  margin-bottom: 4px;
 }
 
-.panelBodyName {
+.typeStageName {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
-  font-size: clamp(22px, 2.6vw, 34px);
+  font-size: clamp(28px, 3vw, 40px);
   line-height: 0.95;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  margin: 0 0 4px;
+  margin: 0;
 }
 
-.panelBlurb {
-  font-size: 13px;
-  line-height: 1.4;
+.typeStageBlurb {
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--on-dark);
-  margin: 0 0 6px;
-  max-width: 400px;
+  margin: 0;
+  max-width: 48ch;
 }
 
-.panelChips {
+.typeStageFeats {
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-  max-width: 460px;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
-.panelChip {
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 999px;
-  padding: 5px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.typeStageFeat {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 36px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
   color: var(--white);
+}
+
+.typeStageFeat span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  flex: none;
+}
+
+@media (max-width: 760px) {
+  .typesPanel {
+    flex-direction: column;
+    /* The desktop rule's flex-wrap:wrap, combined with the column direction
+       here, produces multi-column wrapping instead of a simple top-to-
+       bottom stack -- that's what was blowing both children out to an
+       unconstrained content width instead of the panel's actual width. */
+    flex-wrap: nowrap;
+  }
+
+  .typesList {
+    /* Was 1 1 280px from the desktop rule -- once .typesPanel switches to a
+       column, that flex-grows the list vertically to fill the column
+       instead of sizing to its own row content, leaving a tall empty gap
+       above the stage. */
+    flex: none;
+    flex-direction: row;
+    overflow-x: auto;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .typeRow {
+    flex: 0 0 auto;
+    width: 150px;
+    height: 56px;
+    border-bottom: 0;
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .typeRow:last-child {
+    border-right: 0;
+  }
+
+  .typeStageImgWrap {
+    min-height: 220px;
+  }
 }
 
 .panelCta {
@@ -539,39 +572,6 @@
   background: var(--white);
   border-color: var(--white);
   color: var(--black);
-}
-
-@media (max-width: 1040px) {
-  .typesStrip {
-    flex-direction: column;
-    gap: 10px;
-    height: auto;
-  }
-
-  /* flex-basis would otherwise win over height in a column and collapse the
-     panels to slivers. */
-  .panel {
-    flex: none;
-    height: 52px;
-  }
-
-  .panel.active {
-    flex: none;
-    height: 370px;
-  }
-
-  .panelLabel {
-    writing-mode: initial;
-    transform: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: auto;
-    right: auto;
-    justify-content: flex-start;
-    padding: 14px 20px;
-    width: auto;
-  }
 }
 
 /* Featured vehicle */
