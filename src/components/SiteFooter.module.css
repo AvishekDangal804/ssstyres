@@ -27,13 +27,19 @@
 .bandScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    100deg,
-    rgba(32, 54, 75, 0.92) 0%,
-    rgba(32, 54, 75, 0.78) 34%,
-    rgba(32, 54, 75, 0.4) 60%,
-    rgba(32, 54, 75, 0.1) 82%
-  );
+  /* Two layers: the original left-to-right darkening (for the copy's
+     legibility) plus a bottom-edge fade to navy, so the band blends into
+     the footer below instead of cutting straight from raw photo to flat
+     colour on whichever side the horizontal gradient left undarkened. */
+  background:
+    linear-gradient(180deg, rgba(32, 54, 75, 0) 72%, rgba(32, 54, 75, 0.96) 100%),
+    linear-gradient(
+      100deg,
+      rgba(32, 54, 75, 0.92) 0%,
+      rgba(32, 54, 75, 0.78) 34%,
+      rgba(32, 54, 75, 0.4) 60%,
+      rgba(32, 54, 75, 0.1) 82%
+    );
   z-index: 1;
   pointer-events: none;
 }
