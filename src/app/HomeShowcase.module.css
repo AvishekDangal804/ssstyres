@@ -262,15 +262,14 @@
   inset: -7px;
 }
 
-/* Types of wheels */
+/* Types of wheels -- light, not a dark fill: no photo sits behind this
+   section, so there's no legibility reason for it to be dark. The active
+   list row and the detail stage stay navy on purpose (selective emphasis,
+   not a wholesale dark section). */
 .types {
-  background: var(--black-deep);
-  color: var(--white);
-  /* No top margin or bottom padding -- the sections immediately before
-     (.statement) and after (.feat) are the same dark background, so any
-     margin/padding here either showed the white page background through
-     as a seam, or just left dead space before the next section starts. */
-  padding: 34px 0 0;
+  background: var(--off-white);
+  color: var(--black);
+  padding: 34px 0;
   position: relative;
   overflow: hidden;
 }
@@ -282,18 +281,7 @@
   width: 520px;
   height: 520px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(218, 2, 11, 0.38), rgba(218, 2, 11, 0) 68%);
-  pointer-events: none;
-}
-
-.typesGlowWhite {
-  position: absolute;
-  right: -80px;
-  bottom: -200px;
-  width: 520px;
-  height: 520px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 68%);
+  background: radial-gradient(circle, rgba(218, 2, 11, 0.18), rgba(218, 2, 11, 0) 68%);
   pointer-events: none;
 }
 
@@ -323,7 +311,7 @@
 .typesPanel {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--line);
   border-radius: 20px;
   overflow: hidden;
 }
@@ -332,7 +320,8 @@
   flex: 1 1 280px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-right: 1px solid var(--line);
+  background: var(--white);
 }
 
 .typeRow {
@@ -343,9 +332,9 @@
   height: 64px;
   padding: 0 18px;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid var(--line);
   background: transparent;
-  color: var(--on-dark-2);
+  color: var(--ink-3);
   font-family: inherit;
   cursor: pointer;
   text-align: left;
@@ -357,8 +346,8 @@
 }
 
 .typeRow:hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--white);
+  background: var(--off-white);
+  color: var(--black);
 }
 
 .typeRowActive {
@@ -372,6 +361,10 @@
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
+  color: var(--red-on-light);
+}
+
+.typeRowActive .typeRowNum {
   color: var(--red-text);
 }
 
@@ -400,6 +393,10 @@
   display: flex;
   flex-wrap: wrap;
   background: var(--panel);
+  /* The rest of .types is light now; this stage stays navy on purpose
+     (selective emphasis), so it needs its own explicit white text instead
+     of inheriting .types' new dark text colour. */
+  color: var(--white);
 }
 
 .typeStageImgWrap {
@@ -597,7 +594,7 @@
 .featScrim1 {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(47, 47, 49, 0) 0%, rgba(47, 47, 49, 0) 55%, rgba(47, 47, 49, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(32, 54, 75, 0) 0%, rgba(32, 54, 75, 0) 55%, rgba(32, 54, 75, 0.6) 100%);
 }
 
 .featScrim2 {
@@ -606,7 +603,7 @@
   bottom: 0;
   width: min(760px, 100%);
   height: 62%;
-  background: radial-gradient(ellipse at 18% 100%, rgba(47, 47, 49, 0.82), rgba(47, 47, 49, 0.5) 45%, rgba(47, 47, 49, 0) 75%);
+  background: radial-gradient(ellipse at 18% 100%, rgba(32, 54, 75, 0.82), rgba(32, 54, 75, 0.5) 45%, rgba(32, 54, 75, 0) 75%);
   pointer-events: none;
 }
 

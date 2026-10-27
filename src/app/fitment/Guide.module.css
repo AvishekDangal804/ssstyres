@@ -37,7 +37,7 @@
 .heroScrim {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, var(--black-deep) 42%, rgba(47, 47, 49, 0.6) 65%, rgba(47, 47, 49, 0) 100%);
+  background: linear-gradient(90deg, var(--black-deep) 42%, rgba(32, 54, 75, 0.6) 65%, rgba(32, 54, 75, 0) 100%);
   pointer-events: none;
 }
 

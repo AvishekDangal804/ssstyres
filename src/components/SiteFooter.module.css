@@ -29,10 +29,10 @@
   inset: 0;
   background: linear-gradient(
     100deg,
-    rgba(47, 47, 49, 0.92) 0%,
-    rgba(47, 47, 49, 0.78) 34%,
-    rgba(47, 47, 49, 0.4) 60%,
-    rgba(47, 47, 49, 0.1) 82%
+    rgba(32, 54, 75, 0.92) 0%,
+    rgba(32, 54, 75, 0.78) 34%,
+    rgba(32, 54, 75, 0.4) 60%,
+    rgba(32, 54, 75, 0.1) 82%
   );
   z-index: 1;
   pointer-events: none;

@@ -189,7 +189,6 @@ export default function HomeShowcase() {
 
       <section className={styles.types} aria-labelledby="home-types">
         <div className={styles.typesGlowRed} />
-        <div className={styles.typesGlowWhite} />
         <div className={styles.typesInner}>
           <div className={styles.typesHead}>
             <div>

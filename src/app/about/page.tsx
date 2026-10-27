@@ -62,7 +62,7 @@ export default function AboutPage() {
 
       <section className={styles.tilesSection}>
         <div className={styles.tilesGrid}>
-          <div className={`${styles.tile} ${styles.dark}`}>
+          <div className={`${styles.tile} ${styles.light}`}>
             <div className={styles.tileTitle}>Who we supply</div>
             <p className={styles.tileBody}>
               Panel shops, mechanical workshops, taxi and rideshare fleets,

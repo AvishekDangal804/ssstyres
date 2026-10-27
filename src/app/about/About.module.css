@@ -98,6 +98,16 @@
   color: var(--white);
 }
 
+.tile.light {
+  background: var(--off-white);
+  color: var(--black);
+  border: 1px solid var(--line);
+}
+
+.tile.light .tileBody {
+  color: var(--ink);
+}
+
 .tile.red {
   background: var(--red);
   color: var(--white);

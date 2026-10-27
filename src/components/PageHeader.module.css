@@ -1,6 +1,8 @@
 .header {
-  background: var(--black-deep);
-  color: var(--white);
+  /* Light, not a dark fill -- this banner has no photo behind it, so there's
+     no legibility reason for it to be dark. Soft neutral + navy text. */
+  background: var(--off-white);
+  color: var(--black);
   position: relative;
   overflow: hidden;
 }
@@ -32,7 +34,7 @@
   font-weight: 700;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: var(--on-dark-2);
+  color: var(--red-on-light);
   margin-bottom: 10px;
 }
 
@@ -56,12 +58,12 @@
 .body {
   font-size: 17px;
   line-height: 1.6;
-  color: var(--on-dark);
+  color: var(--ink);
   max-width: 620px;
   margin: 0;
 }
 
 .meta {
   font-size: 14px;
-  color: var(--on-dark-2);
+  color: var(--ink-3);
 }
