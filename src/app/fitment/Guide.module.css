@@ -323,7 +323,7 @@
 }
 
 .detailBody {
-  font-size: 12.5px;
+  font-size: var(--small-size);
   line-height: 1.45;
   color: var(--on-dark);
   margin: 0;
@@ -412,7 +412,7 @@
 }
 
 .stepBody {
-  font-size: 12.5px;
+  font-size: var(--small-size);
   line-height: 1.45;
   color: var(--ink);
   margin: 0;

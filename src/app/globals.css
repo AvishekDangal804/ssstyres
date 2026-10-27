@@ -25,11 +25,14 @@
   --ink: #465363;
   --ink-2: #20364b;
   --ink-3: #687789;
-  --off-white: #f4f6f8;
+  /* Refined to the brief's 3-tier light scale (2026-10-30): off-white and
+     soft-grey are now genuinely distinct, so alternating sections actually
+     alternate instead of repeating the same flat tone. */
+  --off-white: #f7f8fa;
   --light-gray: #fafbfc;
-  --border-gray: #e2e7ec;
-  --line: #e2e7ec;
-  --surface-2: #f4f6f8;
+  --border-gray: #dce2e8;
+  --line: #dce2e8;
+  --surface-2: #eef1f4;
   --on-dark: #e4e9ee;
   --on-dark-2: #c7d1da;
   --white: #ffffff;
@@ -56,7 +59,7 @@
   --body-line: 1.6;
   --small-size: 13px;
   --eyebrow-tracking: 0.2em;
-  --nav-tracking: 0.08em;
+  --nav-tracking: 0.1em;
 
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   /* +50% on 2026-10-24, +40% more on 2026-10-27, then +20% more on manager

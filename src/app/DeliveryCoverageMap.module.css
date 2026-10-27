@@ -42,12 +42,15 @@
 
 .heading {
   margin: 0;
-  font-family: var(--font-barlow-condensed), sans-serif;
+  /* Was condensed font + uppercase + a positive letter-spacing -- the only
+     H2 on the site built that way, with no comment explaining the
+     divergence. Aligned to the shared H2 treatment every other section
+     heading uses. */
+  font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
-  text-transform: uppercase;
-  font-size: clamp(22px, 2.8vw, 34px);
-  line-height: 1.05;
-  letter-spacing: 0.005em;
+  font-size: var(--h2-size);
+  line-height: var(--h2-line);
+  letter-spacing: var(--h2-tracking);
   color: var(--black);
 }
 

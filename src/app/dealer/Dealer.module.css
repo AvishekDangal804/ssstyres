@@ -47,8 +47,13 @@
 }
 
 .stepTitle {
+  /* Was 17px/700 -- much smaller and lighter than the identical "numbered
+     step" pattern elsewhere (Trade's is 22px/800, Fitment's uses the H3
+     token). Brought in line with the shared H3 treatment. */
+  font-family: var(--font-barlow), sans-serif;
   font-weight: 700;
-  font-size: 17px;
+  font-size: var(--h3-size);
+  line-height: var(--h3-line);
   margin-bottom: 4px;
 }
 

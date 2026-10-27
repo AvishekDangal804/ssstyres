@@ -86,7 +86,9 @@
 .lead {
   font-size: clamp(18px, 1.6vw, 22px);
   line-height: 1.45;
-  font-weight: 600;
+  /* Was 600 -- the only bold lead-paragraph on the site; Fitment's .lead
+     (the same "intro line after an eyebrow" role) is regular weight. */
+  font-weight: 400;
   color: var(--ink);
   margin: 0 0 10px;
   max-width: 560px;

@@ -81,12 +81,16 @@
   display: inline-block;
 }
 
+/* Uppercase flagship-statement treatment, same rationale as Home's hero H1
+   (a product-page banner, not a generic PageHeader). Was a stray positive
+   px letter-spacing -- every other heading on the site (including Home's
+   other uppercase H1) uses a tight negative em value; matched that. */
 .heroH1 {
   font-family: var(--font-barlow), sans-serif;
   font-weight: 800;
   font-size: clamp(32px, 5vw, 60px);
   line-height: 1.02;
-  letter-spacing: 0.3px;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   color: var(--white);
   margin: 0;
