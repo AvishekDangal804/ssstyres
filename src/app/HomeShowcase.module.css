@@ -574,7 +574,7 @@
 
 .featInner {
   position: relative;
-  min-height: clamp(380px, 52vh, 620px);
+  aspect-ratio: 3 / 2;
   display: flex;
   align-items: flex-end;
 }
@@ -587,7 +587,7 @@
 }
 
 .featImg {
-  object-fit: contain;
+  object-fit: cover;
   object-position: center;
 }
 
@@ -691,4 +691,36 @@
   color: var(--white);
 }
 
+@media (max-width: 640px) {
+  /* The fitment image is now locked to the photos' 3:2 ratio (so the
+     vehicle always shows in full with no letterboxing) -- that leaves
+     less height on narrow phones than the old vh-based box, so the
+     overlay content below switches to a single scrollable tab row
+     instead of wrapping, to avoid clipping against the image top. */
+  .featContent {
+    padding-bottom: 20px;
+    gap: 12px;
+  }
+
+  .kickerRow {
+    margin-bottom: 8px;
+  }
+
+  .featSub {
+    margin-top: 6px;
+  }
+
+  .featTabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .featTab,
+  .featCta {
+    flex: none;
+    height: 40px;
+  }
+}
 
