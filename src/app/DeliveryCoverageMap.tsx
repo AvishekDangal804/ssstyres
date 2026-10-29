@@ -156,6 +156,11 @@ export default function DeliveryCoverageMap() {
       const pin = L.marker(WAREHOUSE, {
         zIndexOffset: 1000,
         interactive: false,
+        // Leaflet still makes markers keyboard-focusable by default even
+        // when non-interactive, leaving an unlabelled stop in the tab
+        // order. This pin is decorative (the warehouse address is already
+        // text elsewhere on the page), so drop it from the tab order too.
+        keyboard: false,
         icon: pinIcon(),
       }).addTo(map);
 

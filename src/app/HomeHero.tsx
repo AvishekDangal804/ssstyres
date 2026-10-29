@@ -233,7 +233,7 @@ export default function HomeHero() {
                 type="button"
                 role="tab"
                 aria-selected={started && i === cur}
-                aria-label={`Scene ${i + 1}: ${s.a}`}
+                aria-label={`0${i + 1}: ${s.a}`}
                 className={styles.heroTabBtn}
                 onClick={() => handleDot(i)}
               >
