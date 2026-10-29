@@ -574,7 +574,7 @@
 
 .featInner {
   position: relative;
-  min-height: clamp(560px, 88vh, 1040px);
+  min-height: clamp(380px, 52vh, 620px);
   display: flex;
   align-items: flex-end;
 }
@@ -587,8 +587,8 @@
 }
 
 .featImg {
-  object-fit: cover;
-  object-position: center 60%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .featScrim1 {
