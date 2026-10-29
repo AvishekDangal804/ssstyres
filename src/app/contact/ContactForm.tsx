@@ -1,16 +1,11 @@
 "use client";
 
-import { useState } from "react";
-import {
-  cleanText,
-  isValidEmail,
-  submitToWeb3Forms,
-  FORM_FAILURE_MESSAGE,
-} from "@/lib/form-validation";
+import { useActionState, useState } from "react";
+import { submitContactEnquiry, type ContactEnquiryState } from "./actions";
 import { ENQUIRY_TOPICS } from "./constants";
 import styles from "./Contact.module.css";
 
-type Status = "idle" | "pending" | "success" | "error";
+const initialState: ContactEnquiryState = { status: "idle" };
 
 type Values = {
   name: string;
@@ -29,69 +24,20 @@ const emptyValues: Values = {
 };
 
 export default function ContactForm() {
+  const [state, formAction, isPending] = useActionState(
+    submitContactEnquiry,
+    initialState
+  );
+  // Controlled, not uncontrolled: React clears uncontrolled fields after any
+  // non-throwing form action, including our own validation-error responses.
   const [values, setValues] = useState<Values>(emptyValues);
-  const [status, setStatus] = useState<Status>("idle");
-  const [message, setMessage] = useState("");
-  const [botcheck, setBotcheck] = useState("");
 
   const field =
     (key: keyof Values) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
       setValues((v) => ({ ...v, [key]: e.target.value }));
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    // Honeypot: real visitors never fill this hidden field.
-    if (botcheck !== "") {
-      setStatus("success");
-      return;
-    }
-
-    const name = cleanText(values.name, 100);
-    const phone = cleanText(values.phone, 30);
-    const email = cleanText(values.email, 254);
-    const topic = cleanText(values.topic, 60);
-    const msg = cleanText(values.message, 5000);
-
-    if (!name) {
-      setStatus("error");
-      setMessage("Please enter your name.");
-      return;
-    }
-    if (!isValidEmail(email)) {
-      setStatus("error");
-      setMessage("Enter a valid email address.");
-      return;
-    }
-    if (!ENQUIRY_TOPICS.includes(topic as (typeof ENQUIRY_TOPICS)[number])) {
-      setStatus("error");
-      setMessage("Select what your enquiry is about.");
-      return;
-    }
-    if (!msg) {
-      setStatus("error");
-      setMessage("Enter a message.");
-      return;
-    }
-
-    setStatus("pending");
-    const result = await submitToWeb3Forms(`Contact enquiry — ${topic} — ${name}`, email, {
-      Name: name,
-      Phone: phone || "—",
-      Email: email,
-      Topic: topic,
-      Message: msg,
-    });
-    if (!result.ok) {
-      setStatus("error");
-      setMessage(FORM_FAILURE_MESSAGE);
-      return;
-    }
-    setStatus("success");
-  }
-
-  if (status === "success") {
+  if (state.status === "success") {
     return (
       <div className={styles.successWrap}>
         <div className={styles.successIcon}>✓</div>
@@ -107,16 +53,14 @@ export default function ContactForm() {
   return (
     <>
       <h2 className={styles.formTitle}>Send an enquiry</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form action={formAction} className={styles.form}>
         <input
           type="text"
-          name="botcheck"
+          name="company_website"
           tabIndex={-1}
           autoComplete="off"
           className={styles.honeypot}
           aria-hidden="true"
-          value={botcheck}
-          onChange={(e) => setBotcheck(e.target.value)}
         />
         <div className={styles.row2}>
           <label className={styles.field}>
@@ -177,17 +121,13 @@ export default function ContactForm() {
             onChange={field("message")}
           />
         </label>
-        {status === "error" && (
+        {state.status === "error" && (
           <div className={styles.formError} role="alert">
-            {message}
+            {state.message}
           </div>
         )}
-        <button
-          type="submit"
-          disabled={status === "pending"}
-          className={styles.submitBtn}
-        >
-          {status === "pending" ? "Sending…" : "Send enquiry"}
+        <button type="submit" disabled={isPending} className={styles.submitBtn}>
+          {isPending ? "Sending…" : "Send enquiry"}
         </button>
       </form>
     </>

@@ -45,33 +45,45 @@ On phones the header is a single row (logo + menu button); "Become a Dealer" and
 
 ## Form delivery (Dealer + Contact)
 
-Both forms validate client-side (ABN checksum, email/phone format, length limits, honeypot) and then submit straight to Web3Forms from the browser — there's no server step. Set this in Vercel (see `.env.example`):
+Both forms validate server-side (ABN checksum, email/phone format, length limits, honeypot) and then email the submission via the Resend REST API. Set these in Vercel (see `.env.example`):
 
-- `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`
+- `RESEND_API_KEY`
+- `LEAD_TO_EMAIL` (comma-separate for several recipients)
+- `LEAD_FROM_EMAIL` (must be on a domain verified in Resend)
 
-It's `NEXT_PUBLIC_` on purpose: Web3Forms' free tier only supports client-side submission (server-to-server needs a paid plan + IP whitelisting, which doesn't fit Vercel's serverless IPs), so the key ships in the browser bundle. Restrict it to this site's domain from the Web3Forms dashboard so it can't be reused elsewhere. If it's missing, the forms show a "please call or email us" message rather than pretending the submission worked.
+If any are missing in **production**, the forms show a "please call or email us" message rather than pretending the submission worked. Previews and local dev log the submission and show success so the flow can still be exercised.
 
-Each submission becomes one email to whatever inbox the Web3Forms access key is configured to deliver to, with the submitter's address as Reply-To (so "Reply" answers them).
+Each submission is one plain-text email to `LEAD_TO_EMAIL`, with the submitter's address as Reply-To (so "Reply" answers them). Transient provider failures (5xx, per-second rate limit, timeout) are retried once with the same `Idempotency-Key`, so a lost response can't put the same lead in the inbox twice. Anything else fails straight away and the visitor sees the "call or email us" message.
 
 ### Setup
 
-1. Create a Web3Forms account (https://web3forms.com) with the inbox that should receive leads (e.g. `info@ssswheels.com.au`) and copy the access key it gives you.
-2. In the Web3Forms dashboard, restrict that key to this site's production domain.
-3. In Vercel (Project → Settings → Environment Variables, Production) add `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`.
-4. **Redeploy** (Deployments → ⋯ → Redeploy). Variables only apply to deployments made after they were saved — and since this one is baked into the client bundle at build time, a redeploy is required even more strictly than for a server-only variable.
-5. Submit the Contact form and the Dealer form once on the live site and check the inbox arrives and Reply goes to the submitter.
+1. Create a Resend account (https://resend.com).
+2. **Domains → Add Domain.** Resend recommends a sending subdomain (e.g. `mail.ssswheels.com.au`) so it stays separate from your normal mailboxes. Add the SPF, DKIM and return-path records it shows at whoever hosts DNS for the domain, exactly as given. Verification usually takes ~15 minutes (DNS can take up to 72 hours).
+3. **API Keys → Create**, with *Sending access* limited to that domain. Copy it — it's shown once.
+4. In Vercel (Project → Settings → Environment Variables, Production) add `RESEND_API_KEY`, `LEAD_TO_EMAIL` (e.g. `info@ssswheels.com.au`) and `LEAD_FROM_EMAIL` (e.g. `SSS Website <website@mail.ssswheels.com.au>`).
+5. **Redeploy** (Deployments → ⋯ → Redeploy). Variables only apply to deployments made after they were saved.
+6. Submit the Contact form and the Dealer form once on the live site and check the inbox arrives and Reply goes to the submitter.
 
-To try it locally, put the same line in `.env.local` and run `npm run dev`.
+To try it before DNS is ready: until a domain is verified Resend only lets you send test emails to your own account address, so use that as `LEAD_TO_EMAIL` and Resend's test sender (`onboarding@resend.dev`) as `LEAD_FROM_EMAIL`. Locally, put the same three variables in `.env.local` and run `npm run dev`.
 
 ### When a submission fails
 
-Open the browser console on the live site — failed submissions log to `[web3forms]` with the response Web3Forms returned (status + body), which is the fastest way to see what's wrong (bad/missing access key, rate limit, etc.). Nothing here goes through server logs since the request never touches the server.
+Vercel → Deployments → the deployment → Logs, search for `lead-delivery`. Applicant details are never written to the logs (anything email-shaped in a provider error is replaced with `[email]`).
 
-Form flooding can use up the Web3Forms plan's monthly submission quota. The forms have a honeypot (`botcheck`, Web3Forms' own convention) and client-side validation; if spam shows up, Web3Forms has its own spam filtering options on paid plans, or add a rate-limit rule in the Vercel Firewall for the `/dealer` and `/contact` routes before reaching for a CAPTCHA.
+| Log line | Meaning |
+| --- | --- |
+| `missing RESEND_API_KEY, …` | That variable isn't set for Production, or you haven't redeployed since setting it. |
+| `403 validation_error — … domain is not verified` | The DNS records haven't verified yet, or `LEAD_FROM_EMAIL` is on a different domain than the one you verified. |
+| `403 validation_error — … only send testing emails to your own email address` | No verified domain yet: `LEAD_TO_EMAIL` must be your Resend account address until it is. |
+| `401 …` | Wrong, revoked or wrongly-scoped API key. |
+| `422 validation_error` | An address in `LEAD_TO_EMAIL` / `LEAD_FROM_EMAIL` is malformed. |
+| `429 daily_quota_exceeded` / `monthly_quota_exceeded` | Plan sending limit reached. |
+
+Form flooding can use up that quota. The forms have a honeypot and server-side validation; if spam shows up, add a rate-limit rule in the Vercel Firewall for the `/dealer` and `/contact` routes (if your plan includes it) before reaching for a CAPTCHA.
 
 ### What has been tested
 
-Build and typecheck pass. The actual Web3Forms round trip (browser → API → inbox) has **not** yet been run against a live access key — do the real test submission in step 5 once a key is set.
+The whole path (both forms → server action → provider request → success/failure message) was exercised in a browser against a scriptable local stand-in for Resend: request shape, recipients, Reply-To, plain-text body, success, one retry on 500 / rate limit / timeout with the same idempotency key, no retry on 403 / quota, honest failure message, and that provider error text is scrubbed of email addresses before logging. It has **not** been run against live Resend — do the real test submission in step 6.
 
 ## Images
 
