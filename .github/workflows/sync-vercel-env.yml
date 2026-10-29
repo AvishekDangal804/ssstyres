@@ -9,6 +9,9 @@ jobs:
   sync-env:
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
       - name: Install Vercel CLI
         run: npm install --global vercel
 
