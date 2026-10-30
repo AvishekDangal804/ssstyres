@@ -574,7 +574,12 @@
 
 .featInner {
   position: relative;
-  aspect-ratio: 3 / 2;
+  /* Slightly shorter than the photos' native 3:2 -- trims the empty sky
+     at the top (verified safe against the roofline on all 4 vehicle
+     photos, HiAce's van roof being the tightest) without ever touching
+     the bottom, where some of the photos (RAV4) have almost no ground
+     margin below the tyres. */
+  aspect-ratio: 1.61 / 1;
   display: flex;
   align-items: flex-end;
 }
@@ -588,7 +593,7 @@
 
 .featImg {
   object-fit: cover;
-  object-position: center;
+  object-position: center bottom;
 }
 
 .featScrim1 {
