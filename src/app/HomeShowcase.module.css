@@ -579,13 +579,6 @@
   align-items: flex-end;
 }
 
-@media (min-width: 641px) {
-  .featInner {
-    width: 70%;
-    margin: 0 auto;
-  }
-}
-
 .featImgWrap {
   position: absolute;
   inset: 0;
