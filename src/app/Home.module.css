@@ -439,7 +439,9 @@
   background-position: right 12px center;
   color: var(--white);
   font-family: var(--font-barlow), sans-serif;
-  font-size: 14px;
+  /* 16px, not 14 -- anything smaller makes iOS Safari auto-zoom the whole
+     page when this is focused, which is jarring on a primary hero control. */
+  font-size: 16px;
   font-weight: 500;
   box-sizing: border-box;
   appearance: none;
