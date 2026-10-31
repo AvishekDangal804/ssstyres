@@ -121,6 +121,11 @@ export default function WheelsCatalogue() {
   useEffect(() => {
     const el = gridRef.current;
     if (!el) return;
+    // threshold is a fraction of the GRID's own height, not the viewport --
+    // on mobile the grid is a single tall column (one card per row), so 15%
+    // of it can be taller than the whole screen and never intersect enough
+    // to fire. rootMargin fires as soon as the grid's top edge is on
+    // approach instead, regardless of how tall the grid ends up being.
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -128,7 +133,7 @@ export default function WheelsCatalogue() {
           io.disconnect();
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
