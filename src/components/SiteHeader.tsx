@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { PORTAL, CATEGORIES, MODELS } from "@/lib/wheels-data";
 import ImagePlaceholder from "@/components/ImagePlaceholder";
+import { PhoneIcon } from "@/components/BrandIcons";
 import styles from "./SiteHeader.module.css";
 
 type Menu = "wheels" | null;
@@ -79,18 +80,23 @@ export default function SiteHeader() {
           />
         </Link>
 
-        <button
-          type="button"
-          className={`${styles.burger} ${mobileOpen ? styles.burgerOpen : ""}`}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          aria-controls="site-nav"
-          onClick={() => setMobileOpen((v) => !v)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className={styles.mobileIcons}>
+          <a href="tel:0391165787" aria-label="Call 03 9116 5787" className={styles.callBtn}>
+            <PhoneIcon />
+          </a>
+          <button
+            type="button"
+            className={`${styles.burger} ${mobileOpen ? styles.burgerOpen : ""}`}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="site-nav"
+            onClick={() => setMobileOpen((v) => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
 
         <nav
           id="site-nav"

@@ -295,11 +295,33 @@
   background: var(--red-hover);
 }
 
-/* Glass pill; the three bars morph into a close (✕) when open. */
-.burger {
+.mobileIcons {
   display: none;
   order: 2;
   margin-left: auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.callBtn {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1.5px solid rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+  color: var(--black);
+}
+
+.callBtn:hover {
+  color: var(--red-on-light);
+}
+
+/* Glass pill; the three bars morph into a close (✕) when open. */
+.burger {
+  display: flex;
   background: rgba(255, 255, 255, 0.5);
   border: 1.5px solid rgba(0, 0, 0, 0.15);
   border-radius: 999px;
@@ -310,6 +332,7 @@
   justify-content: center;
   flex-direction: column;
   gap: 5px;
+  flex: none;
 }
 
 .burger span {
@@ -437,7 +460,11 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .burger {
+  .mobileIcons {
+    display: flex;
+  }
+
+  .callBtn {
     display: flex;
   }
 }

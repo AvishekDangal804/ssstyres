@@ -124,3 +124,22 @@ export function StatIcon({ id }: { id: StatIconId }) {
       );
   }
 }
+
+export function PhoneIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M4.5 4h3.5l1.5 4.5-2 1.5a12 12 0 0 0 5.5 5.5l1.5-2 4.5 1.5V18a2 2 0 0 1-2 2C9.5 20 4 14.5 4 7.5a2 2 0 0 1 .5-1.5Z" />
+    </svg>
+  );
+}
