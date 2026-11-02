@@ -1,4 +1,4 @@
-export const PORTAL = 'https://orders.ssswheels.com.au/WebOrder';
+export const PORTAL = 'https://portal.ssswheels.com.au/login';
 
 const R = {
   black: '/assets/wheels/r7.png',
