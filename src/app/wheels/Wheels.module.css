@@ -182,9 +182,21 @@
 }
 
 @media (max-width: 560px) {
+  /* 2 columns, not 1 -- matches the mobile design reference's denser
+     product grid instead of one huge card per row and a very long scroll. */
+  .gridSection {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .grid {
+    --grid-gap: 12px;
+  }
+
   .card {
-    flex-basis: 100%;
-    max-width: 100%;
+    flex-basis: calc(50% - var(--grid-gap) / 2);
+    max-width: calc(50% - var(--grid-gap) / 2);
+    min-width: 0;
   }
 }
 
