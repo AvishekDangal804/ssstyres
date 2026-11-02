@@ -50,6 +50,18 @@ export default function SiteHeader() {
       }
     };
 
+  // The open mobile menu is a full-screen takeover -- lock background scroll
+  // so a swipe that runs past the end of the nav list can't bleed through to
+  // the page behind it.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   // Clicking anywhere outside the header closes an open dropdown (the mobile
   // menu itself, opened by the burger, is untouched by this).
   useEffect(() => {

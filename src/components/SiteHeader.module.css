@@ -372,6 +372,21 @@
 }
 
 @media (max-width: 719px) {
+  /* Full-screen takeover while open: the whole bar (icon row + nav list)
+     becomes one fixed, scrollable panel instead of an inline dropdown that
+     just expanded the sticky bar in place. .mainbar's own layout (icons on
+     one wrapped line, nav on the next) is unchanged -- .wrap just pins and
+     scrolls the combined result as a single unit, which avoids relying on a
+     nested scroll area sized against a wrapped flex row's content height
+     (not reliably boundable without a fixed pixel header height to subtract). */
+  .wrapOpen {
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
   .nav {
     order: 5;
     display: none;
@@ -379,26 +394,22 @@
     align-items: stretch;
     column-gap: 0;
     row-gap: 0;
-    padding: 10px 0 16px;
+    /* Horizontal inset already comes from .mainbar's own padding. */
+    padding: 10px 0 24px;
   }
 
   .nav.open {
     display: flex;
     flex-wrap: nowrap;
-    /* The header is pinned, so a long menu must scroll inside itself rather
-       than run off the bottom of a short screen. */
-    max-height: calc(100vh - 100px);
-    max-height: calc(100dvh - 100px);
-    overflow-y: auto;
-    overscroll-behavior: contain;
   }
 
   .navButton,
   .navItem {
-    padding: 16px 0;
+    padding: 18px 0;
     border-bottom: 1px solid var(--line);
     width: 100%;
     justify-content: space-between;
+    font-size: 19px;
   }
 
   .navActive {
