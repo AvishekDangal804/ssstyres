@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import { CATEGORIES } from "@/lib/wheels-data";
+import TypesAccordion from "./TypesAccordion";
 import styles from "./Types.module.css";
 import { pageMetadata } from "@/lib/site";
 
@@ -35,44 +35,7 @@ export default function TypesPage() {
             Illustrative image of wheel styles.
           </figcaption>
         </figure>
-        {CATEGORIES.map((c, i) => {
-          const num = String(i + 1).padStart(2, "0");
-          return (
-            <div key={c.id} className={styles.row}>
-              <div className={`${styles.imgWrap} ${i % 2 ? styles.second : ""}`}>
-                <div className={styles.img}>
-                  <Image
-                    src={c.img}
-                    alt={`SSS ${c.name} series wheel`}
-                    fill
-                    sizes="(max-width: 700px) 100vw, 440px"
-                    className={styles.photo}
-                  />
-                </div>
-              </div>
-              <div>
-                <div className={styles.numRow}>
-                  <span className={styles.num}>{num}</span>
-                  <span className={styles.series}>SSS {c.name} Series</span>
-                </div>
-                <h2 className={styles.title}>{c.name} wheels</h2>
-                <div className={styles.tag}>{c.tag}</div>
-                <p className={styles.blurb}>{c.blurb}</p>
-                <div className={styles.bullets}>
-                  {c.bullets.map((b) => (
-                    <div key={b} className={styles.bullet}>
-                      <span className={styles.bulletMark} />
-                      {b}
-                    </div>
-                  ))}
-                </div>
-                <Link href={`/wheels?cat=${c.id}`} className={styles.cta}>
-                  Browse {c.name} range
-                </Link>
-              </div>
-            </div>
-          );
-        })}
+        <TypesAccordion categories={CATEGORIES} />
       </section>
     </>
   );

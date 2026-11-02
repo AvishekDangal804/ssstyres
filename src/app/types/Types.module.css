@@ -34,13 +34,22 @@
   color: var(--ink-3);
 }
 
-.row {
+/* Two separate row blocks per category (see TypesAccordion.tsx): .desktopRow
+   is the original always-expanded layout, unchanged, hidden below 720px.
+   .mobileRow is a compact tap-to-expand accordion, shown only below 720px --
+   matches the mobile design reference's scannable type list instead of one
+   very long scroll of six fully-expanded rows. */
+.desktopRow {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
   gap: 40px;
   align-items: center;
   padding: 52px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.mobileRow {
+  display: none;
 }
 
 .imgWrap {
@@ -158,4 +167,100 @@
 
 .cta:hover {
   background: var(--red);
+}
+
+/* Heading wraps the toggle button (WAI-ARIA disclosure pattern). */
+.summaryHeading {
+  margin: 0;
+}
+
+.summaryBtn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 16px 0;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.thumb {
+  position: relative;
+  width: 56px;
+  height: 56px;
+  flex: none;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--off-white);
+}
+
+.summaryText {
+  flex: 1;
+  min-width: 0;
+}
+
+.numRowSmall {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-bottom: 2px;
+}
+
+.titleSmall {
+  display: block;
+  font-family: var(--font-barlow), sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+
+.chevron {
+  flex: none;
+  font-size: 18px;
+  color: var(--ink-3);
+  transition: transform 0.2s;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.mobileDetail {
+  display: none;
+  padding: 0 0 24px;
+}
+
+.mobileDetail[data-open="true"] {
+  display: grid;
+  gap: 20px;
+}
+
+.mobileDetail .imgWrap {
+  max-width: 280px;
+  order: 0 !important;
+}
+
+@media (max-width: 719px) {
+  .desktopRow {
+    display: none;
+  }
+
+  .mobileRow {
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
 }
